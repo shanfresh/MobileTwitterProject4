@@ -1,0 +1,85 @@
+package com.ict.twitter.analyser;
+
+import java.util.Vector;
+
+import org.jsoup.nodes.Element;
+import com.ict.twitter.analyser.beans.*;
+import com.ict.twitter.tools.DbOperation;
+
+public class FollowingPageAnalyser extends Analyser{
+
+	public String followType;
+	public Vector<UserRelationship> allUser;
+	
+	
+	public void doAnalyse() {
+		// TODO Auto-generated method stub
+		if(this.doc==null){
+			System.out.println("doc尚未初始化");
+			return;
+		}else{
+			System.out.println("用户Following分析开始");
+		}
+		try{
+			AnalyseUsers();
+	
+		}catch (Exception e){
+			e.printStackTrace();
+			System.out.println("页面错误，分析结束");
+		}
+	}
+	public void AnalyseUsers() throws Exception{
+		
+		DbOperation dbOper=new DbOperation();
+		
+		allUser=new Vector<UserRelationship>();   
+		//获取user a
+		UserRelationship userRel;
+		Element userAthor=doc.getElementsByClass("timeline-user-status").first();
+		String auth;
+		if(userAthor!=null){	
+			auth=userAthor.select("span a").first().ownText();
+		}else{			
+			auth=doc.getElementsByClass("user-screen-name").first().getElementsByTag("strong").first().text();
+		}
+		
+		for(Element ele:doc.getElementsByClass("list-tweet")){
+			try{
+			String name=ele.select("div div strong a").first().text();
+			//String link=ele.select("a[href]").first().attr("href");
+			//String aliasName=ele.select("div div:has(strong)").last().ownText();
+			userRel=new UserRelationship();
+			userRel.setUser_A(auth);
+			userRel.setUser_B(name);
+			userRel.setLinkType(followType);
+			
+			allUser.add(userRel);
+			
+			System.out.println();
+			String sqlStr=userRel.getString();
+			dbOper.insert(sqlStr);
+			
+			}
+			
+			catch(NullPointerException e){
+				e.printStackTrace();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		dbOper.closeConn();
+		dbOper.closeStmt();
+		
+		
+	}
+	public Vector<UserRelationship> getAllUser() {
+		return allUser;
+	}
+	
+	public void SetFollowType(String followType)
+	{
+		this.followType=followType;
+	}
+
+}

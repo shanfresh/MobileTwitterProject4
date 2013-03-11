@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/Twitter/!svn/ver/9/src/com/ict/twitter
+END
+Console.java
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/Twitter/!svn/ver/2/src/com/ict/twitter/Console.java
+END
+ConsoleTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/ConsoleTest.java
+END
+LoginManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/LoginManager.java
+END
+ClientManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/ClientManager.java
+END
+MainSearch.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/Twitter/!svn/ver/9/src/com/ict/twitter/MainSearch.java
+END
+MainSearchForFacebook.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/Twitter/!svn/ver/2/src/com/ict/twitter/MainSearchForFacebook.java
+END
+WebOperation.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/Twitter/!svn/ver/3/src/com/ict/twitter/WebOperation.java
+END

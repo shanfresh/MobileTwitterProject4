@@ -1,0 +1,164 @@
+package com.ict.twitter.Server;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Vector;
+
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.ReadTxtFile;
+import com.ict.twitter.tools.SaveTxtFile;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
+import com.ict.twitter.*;
+public class ServerBean {
+	public static boolean isFirstChuizhi=true;
+	public static SaveTxtFile tmpKeyId=new SaveTxtFile("UsefulFile\\tmpKeyIDs.txt");
+	public static SaveTxtFile tmpNormalId=new SaveTxtFile("UsefulFile\\NormalIDs.txt");
+	UserList<NormalUser> normalUserList=new UserList<NormalUser>();
+	UserList<NormalUser> keyUsers=new UserList<NormalUser>();	
+	Comparator<NormalUser> comparator=new Comparator<NormalUser>(){
+		public int compare(NormalUser user1, NormalUser user2) {
+			// TODO Auto-generated method stub
+			if(user1.sum>=user2.sum)
+				return 0;
+			else
+				return 1;
+		}		
+	};
+	
+	//初始化关键词搜索
+	public void InitSearch(String file,Server server){
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"utf-8"));
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			String t;
+			int i=0;
+			while((t=br.readLine())!=null){
+				Task task=new Task();
+				task.setOwnType(TaskType.Search);
+				task.setTargetString(t);
+				server.addTask(task);				
+				i++;
+			}
+			System.out.println("【Server】总共新加的关键词数"+i+"个");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//准备初始垂直采集的任务加入
+	public void InitChuizhi(String file,Server server,boolean isFirst){
+		Vector<String> res=new Vector<String>();
+		int i=0;
+		if(isFirst){
+			server.isFirstChuiZhi=false;
+			ReadTxtFile rxf=new ReadTxtFile(file);
+			res=rxf.read();			
+		}else{
+			for(NormalUser nu:keyUsers){
+				res.add(nu.userID);
+			}			
+		}
+		for(String t:res){
+			Task task=new Task();
+			task.setOwnType(TaskType.TimeLine);
+			task.setTargetString(t);
+			server.addTask(task);				
+			i++;			
+		}
+		System.out.println("总共的关键种子数【Timeline Search】"+i+"个");
+		for(String t:res){
+			Task task=new Task();
+			task.setOwnType(TaskType.Following);
+			task.setTargetString(t);
+			server.addTask(task);				
+			i++;			
+		}
+		System.out.println("总共的关键种子数【Following&Follower Search】"+i+"个");	
+		
+	}
+	
+	//初始化并行采集
+	public void InitBingxing(Server server){
+		int i=0;
+		for(NormalUser nu:normalUserList){
+			Task task=new Task();
+			task.setTargetString(nu.userID);
+			task.setOwnType(TaskType.TimeLine);
+			server.addTask(task);
+			task.setOwnType(TaskType.Following);
+			server.addTask(task);
+			task.setOwnType(TaskType.Followers);
+			server.addTask(task);
+		}
+		System.out.println("【Server】总共新加并行搜索用户数"+i+"个");
+		
+	}//initBingxing() Ends
+	
+	public void addNormalUser(NormalUser user){
+		//如果种子用户列表中已经存在。
+		if(keyUsers.contains(user)){
+			return ;
+		}		
+		normalUserList.add(user);
+		tmpNormalId.Append(user.userID+":"+user.sum+"\r\n");
+		tmpNormalId.flush();
+		Collections.sort(normalUserList,comparator);
+		if(normalUserList.size()>=2000){
+			NormalUser normalUser=normalUserList.remove(0);
+			//如果影响力足够大的话就变为种子用户。
+			if(normalUser.sum>200)
+				keyUsers.add(normalUser);
+		}
+		
+	} 
+	public void showNormalUserList(){
+		for(NormalUser u:normalUserList){
+			System.out.print(u.userID+":"+u.sum+"\t");
+		}
+		System.out.println();
+	}
+	
+	public void addKeyUser(NormalUser user){
+		//如果种子用户列表中已经存在。
+		if(keyUsers.contains(user)){
+			return ;
+		}
+		tmpKeyId.Append(user.userID+":"+user.sum+"\r\n");
+		tmpKeyId.flush();		
+		keyUsers.add(user);
+		
+		
+	} 
+	
+	
+	public static void main(String[] args){
+
+	}
+
+	public static void addKeyUser(ServerBean sb, NormalUser nu) {
+		sb.addKeyUser(nu);
+		
+	}
+	
+}

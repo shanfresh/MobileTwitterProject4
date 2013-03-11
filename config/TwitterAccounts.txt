@@ -1,0 +1,6 @@
+#USERCOUNT           PASSWORD  USEFUL
+networktest1@126.com 290749970 YES
+networktest2@126.com 290749970 YES
+networktest3@126.com 290749970 YES
+networktest4@126.com 290749970 YES
+networktest5@126.com 290749970 YES

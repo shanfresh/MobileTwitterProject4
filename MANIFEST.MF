@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: com.ict.twitter.Server.runServer
+Class-Path: commons-codec-1.4.jar commons-logging-1.1.1.jar httpclient-4.1.3.jar httpclient-cache-4.1.3.jar httpcore-4.4.4.jar httpmime-4.4.3.jar jsoup-1.6.1.jar activemq-all-5.4.3.jar mysql-connector-java-5.1.7-bin.jar

@@ -1,0 +1,22 @@
+package com.ict.twitter.Node;
+
+import com.ict.twitter.MessageBus.Receiver;
+import com.ict.twitter.MessageBus.Sender;
+
+public class test {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Receiver cr=new Receiver("CONTROLS2C", true);
+		Sender sender=new Sender("CONTROLS2C",true);
+		while(true){
+			//sender.Send("XXXXXXXXXXXXXXXXX");
+			System.out.print(".");
+		}
+	}
+
+}

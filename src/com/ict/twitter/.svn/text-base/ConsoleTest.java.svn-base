@@ -1,0 +1,11 @@
+package com.ict.twitter;
+
+import junit.framework.TestCase;
+
+public class ConsoleTest extends TestCase {
+
+	public void testMain() {
+	
+	}
+
+}

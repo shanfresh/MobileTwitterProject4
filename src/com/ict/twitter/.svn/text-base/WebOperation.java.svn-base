@@ -1,0 +1,113 @@
+package com.ict.twitter;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
+
+import org.apache.http.Header;
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+
+import com.ict.twitter.tools.SaveTxtFile;
+
+public class WebOperation {
+
+	/**
+	 * @param args
+	 */
+	public static final String logFileBase="UsefulFile\\Testdata\\";
+	public static String logFile="OpenLinkBuffer.txt";
+	
+	public static void main(String[] args){
+		ClientManager cm;
+		cm=new ClientManager();
+		DefaultHttpClient httpclient=cm.getClientNoProxy();
+		
+		String linkAddress="/searches?page=1&q='山  东'";
+
+		
+		//openLink(httpclient,"https://mobile.twitter.com//search?q=山东");
+	}
+	
+	//"/searches?page=1&q='"+targetString+"'";
+	public static String openLink(DefaultHttpClient httpclient,String linkAddress){
+		URI uri=null;
+		HttpGet httpget=null;
+		int questIndex=linkAddress.indexOf('?');
+		if(questIndex!=-1){
+			try {
+				String path=linkAddress.substring(0,linkAddress.indexOf('?'));
+				String query=linkAddress.substring(linkAddress.indexOf('q'),linkAddress.length());
+				
+				uri=new URI(null,null,path,query,null);
+				System.out.println(uri.toString());
+				httpget= new HttpGet(uri);
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				System.out.println("语法错误");			
+				e.printStackTrace();
+			}			
+		}else{
+			httpget=new HttpGet(linkAddress);
+		}				
+		httpget.getParams().setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET,"utf-8");
+		httpget.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION,HttpVersion.HTTP_1_0);
+		httpget.getParams().setParameter(CoreProtocolPNames.USER_AGENT,"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)");
+		//HttpGet httpget = new HttpGet("/#!/");		
+		SaveTxtFile saveTxtFile=new SaveTxtFile(logFileBase+logFile);
+		HttpHost targetHost = new HttpHost("mobile.twitter.com", 443, "https");
+		BasicHttpContext localcontext = new BasicHttpContext();
+		httpclient.getParams().setParameter(HTTP.CONTENT_ENCODING, "utf-8");
+		StringBuffer sb=new StringBuffer();
+		try {
+			HttpResponse response = httpclient.execute(targetHost, httpget, localcontext);
+			BufferedReader in = new BufferedReader(	new InputStreamReader(response.getEntity().getContent(),"utf-8"));
+			String inputLine = null;
+			while ((inputLine = in.readLine()) != null) {
+				saveTxtFile.Append(inputLine);
+				saveTxtFile.Append("\n\r");
+				//System.out.println(inputLine);
+				sb.append(inputLine+"\t\n");
+			}
+			in.close();
+			EntityUtils.consume(response.getEntity());
+			
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			saveTxtFile.close();			
+			
+		}
+		return sb.toString();
+		
+	}
+	
+	
+	//	
+	public static String getLogFile() {
+		return logFile;
+	}
+
+	public static void setLogFile(String logFile) {
+		WebOperation.logFile = logFile;
+	}
+
+
+}

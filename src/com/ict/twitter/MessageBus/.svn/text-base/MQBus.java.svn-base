@@ -1,0 +1,157 @@
+package com.ict.twitter.MessageBus;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+
+import javax.jms.JMSException;
+import javax.jms.TextMessage;
+
+import com.ict.twitter.tools.FileTool;
+
+
+//本类主要是实现对于MessageBus的管理
+public class MQBus {
+	public  static final String ErrorString = null;
+	public static String WINDOWS_DIR = "C:\\WINDOWS\\system32\\";
+	public static String batSourceFile="c:\\BackUp.bat";
+	public static String basePath="ActiveMQ\\bin\\win32\\";
+	public static String successStr="Started SelectChannelConnelConnectoror@0.0.0.0";
+	
+	public HashSet<String> set=new HashSet<String>(10);
+	
+	
+	
+	public String busname;
+	public Sender sender;
+	public Receiver receiver;
+	public MQBus(){
+		
+	}
+	
+	public MQBus(String _busname){
+		this.busname=_busname;
+		
+		
+		sender=new Sender(busname);
+		receiver=new Receiver(busname);
+	}
+	public void send(String t){
+		if(!set.contains(t)){
+			sender.Send(t);
+			set.add(t);
+		}else{
+			System.out.println("重复值出现--"+t);
+		}
+		
+	}
+	public String recieve(){
+		return receiver.Receive();
+	}
+	public void Exit(){
+		sender.Exit();
+		receiver.Exit();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static void main(String[] args){
+		Sender ss=new Sender("mq");
+		ss.Send("哈哈1");
+		ss.Send("哈哈2");
+		Receiver rs=new Receiver("mq");
+		String t=rs.Receive();
+		System.out.println("收到"+t);
+		Receiver rs2=new Receiver("mq");
+		String t2=rs2.Receive();
+		System.out.println("收到"+t2);
+		while (true) { 
+            String t3=rs.Receive(); 
+            try{
+            	Thread.sleep(2000);
+            }catch(InterruptedException e){
+            	e.printStackTrace();
+            }
+            System.out.println("正在接受~");
+            if (null != t3) 
+                    System.out.println("收到消息：" + t3); 
+            else {
+                   break ; 
+            }
+            
+		}
+		try {
+			ss.connection.close();
+			rs.connection.close();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public  boolean doStart() {//实际执行启动activeMq 的地方		
+		if (FileTool.isExistFile(basePath+"activemq.bat")) {
+			File f = new File(basePath+"activemq.bat");
+			f=f.getAbsoluteFile();
+			String path=f.getAbsolutePath();
+			BufferedReader bReader=null;
+	        InputStreamReader sReader=null;
+			try {				
+				Process p = Runtime.getRuntime().exec("cmd.exe /c start "+path);				
+				sReader = new InputStreamReader(p.getInputStream(),"GBK");
+				bReader=new BufferedReader(sReader);				
+				String str=null;
+				while( (str=bReader.readLine()) !=null){
+					System.out.println("--------");
+					if(str.indexOf(successStr)!=-1){
+						System.out.println("启动成功");
+						return true;
+					}
+				}				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}		
+		}
+		return false;
+	}
+	
+	//判断服务器是否已经启动
+	public boolean isStart(){
+		
+		
+		
+		return false;
+	}
+	
+	
+}
+

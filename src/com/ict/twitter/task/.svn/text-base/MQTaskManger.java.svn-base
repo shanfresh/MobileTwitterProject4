@@ -1,0 +1,199 @@
+package com.ict.twitter.task;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.Vector;
+
+import com.ict.twitter.MessageBus.MQBus;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.SimpleXmlAnalyser;
+
+public class MQTaskManger {
+	
+	//用户账户密码总线
+	public MQBus MQcountID;
+	public MQBus Keywords;
+	public MQBus KeyIDs;
+	public MQBus NormalIDs;
+	public MQBus ProxyInfos;	
+	public MQBus Tasks;
+	
+	
+	
+	
+	
+	/**
+	 * @param args
+	 */
+	//初试化，5条总线
+	public MQTaskManger(){
+		MQcountID=new MQBus("MQcountID");
+		Keywords=new MQBus("Keywords");
+		KeyIDs=new MQBus("KeyIDs");
+		NormalIDs=new MQBus("NormalIDs");
+		ProxyInfos=new MQBus("ProxyInfos");
+		Tasks=new MQBus("Tasks");		
+		System.out.print("【OK】| 队列管理器启动完成");
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+
+	}
+	//具体完成总线消息分配的工作
+	public void allot(){
+	
+	}
+	public void addTask(Task task){
+		Tasks.send(task.TaskTOString());		
+	}
+	public Task getTask(){
+		Task t=new Task();
+		String str=Tasks.recieve();
+		System.out.println("【从总线接受到】"+str);
+		if(str==null){			
+			System.out.println("没有任务可以工作了");
+			return null;
+		}
+		SimpleXmlAnalyser simxml=new SimpleXmlAnalyser(str);		
+		String first=simxml.getFirstValueByTag("type");		
+		String valuestr=simxml.getFirstValueByTag("value");
+		t.setOwnType(TaskType.fromString(first));
+		t.setTargetString(valuestr);
+		return t;
+	}
+	
+	
+	
+	public void Init(){
+		
+		MQcountID.send("<uname>networktest1</uname><upass>290749970</upass>");
+		MQcountID.send("<uname>networktest2</uname><upass>290749970</upass>");		
+		Keywords.send("<word>薄熙来</word>");
+		Keywords.send("<word>西红柿</word>");		
+		KeyIDs.send("<keyid>l_wxy</keyid>");
+		KeyIDs.send("<keyid>networktest1</keyid>");
+		NormalIDs.send("<id>networktest2</id>");		
+		ProxyInfos.send("<address>127.0.0.1</address><port>9666</port>");
+		
+		Task t=new Task();
+		t.setOwnType(TaskType.Following);
+		t.setTargetString("networktest1");
+		addTask(t);
+		t=new Task();
+		t.setOwnType(TaskType.Following);
+		t.setTargetString("networktest2");
+		addTask(t);
+		
+		
+		
+		
+	}
+	public void InitSearch(){
+		
+	}
+	public void InitSearch(Vector<String> src){
+		for(String t:src){
+			Task task=new Task();
+			task.setOwnType(TaskType.Search);
+			task.setTargetString(t);
+			this.addTask(task);
+		}
+	}
+	
+	public void InitSearch(String file){
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"utf-8"));
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			String t;
+			int i=0;
+			while((t=br.readLine())!=null){
+				Task task=new Task();
+				task.setOwnType(TaskType.Search);
+				task.setTargetString(t);
+				this.addTask(task);				
+				i++;
+			}
+			System.out.println("总共的种子数"+i+"个");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	//添加账户信息
+	public void addCountInfoStr(String str){
+		MQcountID.send(str);		
+	}
+	public void addCountInfo(String uname,String upass){
+		MQcountID.send("<uname>"+uname+"</uname>"+"<upass>"+upass+"</upass>");
+	}
+	public void addKeyWords(String word){
+		Keywords.send("<word>"+word+"</word>");
+	}
+	
+	
+	//添加种子信息
+	public void addZhongZiID(String id){
+		KeyIDs.send("<keyid>"+id+"</keyid>");		
+	} 
+	//添加普通用户信息
+	public void addNomalUserID(String id){
+		NormalIDs.send("<id>"+id+"</id>");
+	}
+	//添加代理信息
+	public void addProxyInfo(String address,String port){
+		ProxyInfos.send("<address>"+address+"</address><port>"+port+"</port>");
+	}
+	
+	
+	
+	public String getMQcountID() {
+		return MQcountID.recieve();
+	}
+	public String getKeywords() {
+		return Keywords.recieve();
+	}
+	public String getKeyIDs() {
+		return KeyIDs.recieve();
+	}
+	public String getNormalIDs() {
+		return NormalIDs.recieve();
+	}
+	public String getProxyInfos() {
+		return ProxyInfos.recieve();
+	}
+	
+	
+	
+	public void unitTest1(){
+		MQTaskManger mq=new MQTaskManger();
+
+		Task m=mq.getTask();
+		System.out.println(m.toString());
+		m=mq.getTask();
+		System.out.println(m.toString());
+	}
+	
+	
+	
+	
+	
+
+}

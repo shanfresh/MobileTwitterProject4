@@ -1,0 +1,20 @@
+package com.ict.twitter.analyser;
+
+public class AnalyseMain {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		MainPageAnalyser ma=new MainPageAnalyser();
+		boolean initOk=ma.initaiallizeFromFile("F:\\TwitterTest\\HomePage.txt", "utf-8", "http://mobile.twitter.com");
+		if (!initOk){
+			return;
+		}
+		ma.doAnalyse();
+		
+		
+	}
+
+}

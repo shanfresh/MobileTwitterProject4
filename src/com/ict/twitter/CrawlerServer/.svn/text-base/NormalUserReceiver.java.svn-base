@@ -1,0 +1,55 @@
+package com.ict.twitter.Server;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
+
+import com.ict.twitter.MessageBus.*;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.SimpleXmlAnalyser;
+
+public class NormalUserReceiver extends Receiver {
+
+	public NormalUserReceiver(String queue, Server _server, boolean isTopic) {
+		super(queue, _server, isTopic);
+		
+	}
+	public void onMessage(Message resmsg) {
+		if(isNode){
+			System.out.println("【NODE】接收到消息"+resmsg.toString());	
+		}else{
+			System.out.println("【Server】接收到新NormalUserID消息"+resmsg.toString());
+			if(resmsg instanceof TextMessage){
+				try {
+					String str=((TextMessage)resmsg).getText();
+					if(str.startsWith("<count>")){
+						SimpleXmlAnalyser simxml=new SimpleXmlAnalyser(str);		
+						String count=simxml.getFirstValueByTag("count");		
+						String[] users=simxml.getValueByTag("name");
+						String[] sums=simxml.getValueByTag("sum");
+						if(users.length!=sums.length){
+							return;
+						}else{
+							for(int i=0;i<users.length;i++){
+								server.addNormalUser(new NormalUser(users[i],Integer.parseInt(sums[i])));
+							}
+						}
+						
+					}
+					
+					
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return;
+				}
+			}
+			
+			
+			
+			server.addNormalUserByID();
+		}
+		
+	}
+	
+
+}

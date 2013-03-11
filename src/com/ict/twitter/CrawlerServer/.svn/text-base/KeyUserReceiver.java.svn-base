@@ -1,0 +1,52 @@
+package com.ict.twitter.Server;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
+
+import com.ict.twitter.MessageBus.*;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.SimpleXmlAnalyser;
+
+public class KeyUserReceiver extends Receiver {
+
+	public KeyUserReceiver(String queue, Server _server, boolean isTopic) {
+		super(queue, _server, isTopic);
+
+	}
+
+	public void onMessage(Message resmsg) {
+		if (isNode) {
+			System.out.println("【NODE】接收到消息" + resmsg.toString());
+		} else {
+			System.out
+					.println("【Server】接收到新NormalUserID消息" + resmsg.toString());
+			if (resmsg instanceof TextMessage) {
+				try {
+					String str = ((TextMessage) resmsg).getText();
+					if(str==null||str.equals("")){
+						System.out.println("新的普通用户ID列表为空");
+						return;
+					}
+					SimpleXmlAnalyser simxml = new SimpleXmlAnalyser(str);
+					String[] users = simxml.getValueByTag("name");					
+
+					for (int i = 0; i < users.length; i++) {
+						server.addKeyUser(new NormalUser(users[i], Integer.parseInt("1000")));
+					}
+
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return;
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+
+			server.addNormalUserByID();
+		}
+
+	}
+
+}

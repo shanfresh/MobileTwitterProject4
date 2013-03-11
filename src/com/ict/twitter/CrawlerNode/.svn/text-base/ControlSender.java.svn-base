@@ -1,0 +1,12 @@
+package com.ict.twitter.Node;
+
+import com.ict.twitter.MessageBus.Sender;
+
+public class ControlSender extends Sender {
+
+	public ControlSender(String queue, boolean isTopic) {
+		super(queue, isTopic);
+		// TODO Auto-generated constructor stub
+	}
+
+}

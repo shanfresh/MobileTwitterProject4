@@ -1,0 +1,107 @@
+package com.ict.twitter.Node;
+
+import java.util.Vector;
+
+import javax.jms.Message;
+import javax.jms.MessageListener;
+
+import com.ict.twitter.MainSearch;
+import com.ict.twitter.MessageBus.MessageBusNames;
+import com.ict.twitter.MessageBus.Receiver;
+import com.ict.twitter.MessageBus.Sender;
+import com.ict.twitter.task.beans.Task;
+
+public class Node{
+
+	/**
+	 * @对应着节点的控制类。
+	 */
+	//接受和发送从总线来的控制信息
+	Sender controlUpload;	
+	Receiver controlDownload;
+	Receiver taskReceiver;	
+	MainSearch ms = null;
+	Vector<Task> allTask=null;
+	
+	
+	//普通用户信息发送
+	Sender normalUserSender;
+	Sender keyUserSender;
+	
+	public static void main(String[] args) {
+		Node node=new Node();
+		//开机后向Sever发布登录信息
+		node.powerUp();
+		
+
+	}	
+	public Node(){
+		Initiallize();
+	}
+	//节点初始化
+	public void Initiallize(){
+		//创建基于Topic的 MessageReceiver
+		controlUpload=new Sender(MessageBusNames.ControlC2S);
+		controlDownload=new ControlReceiver(MessageBusNames.ControlS2C,this,true);		
+		taskReceiver=new TaskReceiver(MessageBusNames.Task,this);		
+		normalUserSender=new Sender(MessageBusNames.NormalID);
+		keyUserSender=new Sender(MessageBusNames.KeyID);
+		
+		allTask=new Vector<Task>(10);		
+		ms=new MainSearch(this);
+		Thread mainThread=new Thread(ms);
+		mainThread.start();	
+	}
+	
+	
+	
+	//节点启动
+	public void powerUp(){
+		controlUpload.Send("New NODE");
+		System.out.println("OK");		
+	}
+	
+	public void doTask(Task task){
+		//处理任务
+		allTask.add(task);	
+	}
+	public Task getTask(){
+		try{
+			Task t=allTask.get(0);
+			allTask.remove(0);
+			return t;
+		}catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("从队列中取Task失败,返回NULL");
+			return null;
+		}
+	}
+	public boolean CleanTask(){
+		try{
+			allTask.removeAllElements();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}		
+		return true;
+	}
+	public void pause(){
+		ms.pause();
+	}
+	
+	
+	//添加种子ID信息
+	public void addZhongZiID(String id){
+		//KeyIDs.send("<keyid>"+id+"</keyid>");		
+	} 
+	//添加普通用户信息
+	public void addNomalUserIDs(String jms){
+		normalUserSender.Send(jms);
+	}
+	public void addKeyUserIDs(String jms){
+		keyUserSender.Send(jms);
+	}
+
+
+	
+
+}

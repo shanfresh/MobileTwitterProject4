@@ -1,0 +1,100 @@
+package com.ict.twitter;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import junit.framework.TestCase;
+
+import com.ict.twitter.tools.DbOperation;
+import com.ict.twitter.tools.SavitchIn;
+
+public class Console extends TestCase{
+
+	/**
+	 * 项目控制台
+	 * 1:尽快转起来，调试bug等信息。
+	 * 2：
+	 */
+	
+		
+	public static void main(String[] args){
+		//ConsoleDoing();
+	}
+	
+	public static void test(){
+		MainSearch ms = null;	
+		ms=new MainSearch();
+		DbOperation dbo=new DbOperation();
+		dbo.clearDB();			
+	}
+
+	
+	public static void ConsoleDoing() {
+		// TODO Auto-generated method stub
+		System.out.println("----------------系统采集控制控制台----------------");
+		MainSearch ms = null;	
+		showMenu();
+		while(true){
+			try {
+				char t = 0;
+				//String command=SavitchIn.readLine();
+				String command="search";				
+				if(command.equals("start")){
+					System.out.println("开始采集");
+					DbOperation dbo=new DbOperation();
+					dbo.clearDB();
+					ms=new MainSearch();
+					ms.initAnalyse();					
+					Thread mainThread=new Thread(ms);
+					mainThread.start();				
+				}else if(command.equals("stop")){
+					System.out.println("结束采集");
+					ms.stop();
+					break;
+				}else if(command.equals("menu")){
+					showMenu();
+					
+				}else if(command.equals("clear")){//清空数据库
+					DbOperation dbo=new DbOperation();
+					dbo.clearDB();
+					System.out.println("数据库清除完成");
+				}else if(command.equals("search")){
+					DbOperation dbo=new DbOperation();
+					dbo.clearDB();
+					ms=new MainSearch();
+					ms.initSearch();
+					Thread mainThread=new Thread(ms);
+					mainThread.start();	
+					break;
+				}else {
+					System.out.println("命令错误，请重新输入");
+					showMenu();
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}
+		
+		
+	}
+	public static void showMenu(){
+		System.out.println("-------------------------");
+		System.out.println("输入'start',开始采集");
+		System.out.println("输入'clear',清空数据库");
+		System.out.println("输入'stop',结束采集");
+		System.out.println("输入'search',开始搜索任务");
+		System.out.println("-------------------------");
+		System.out.flush();
+	}
+	public static String Ask(String question){
+		System.out.println(question);
+		Scanner in = new Scanner(System.in);
+		String command=in.nextLine();
+		return command;
+	}
+	
+	
+	
+
+}

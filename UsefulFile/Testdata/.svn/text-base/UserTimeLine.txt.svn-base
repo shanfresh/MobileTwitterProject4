@@ -1,0 +1,308 @@
+<html>
+<head>
+<script type="text/javascript">
+//<![CDATA[
+if (window.top !== window.self) {document.write = "";window.top.location = window.self.location; setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
+
+//]]>
+</script>
+<link href="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/base.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/desktop.css" media="screen" rel="stylesheet" type="text/css" />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/apple-touch-icon-114.png' rel='apple-touch-icon-precomposed' />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/ic_fav_alpha_32.png' rel='icon' type='image/png' />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/startup.png' rel='apple-touch-startup-image' />
+<title>
+Twitter
+</title>
+<meta content='True' name='HandheldFriendly' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+</head>
+<body class='  ' data-csrf-token='06c9db76b1f1eb39205a' data-short-url-length-https='21' data-short-url-length='20'>
+<div id='main'>
+<div class='timeline-head'>
+<div></div>
+<a href="https://mobile.twitter.com/"><img alt="Twitter" class="logo" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/logo.gif" /></a>
+<span><a href="https://mobile.twitter.com/" id="home_link">&rarr;Home</a></span>
+</div>
+<br clear='all' id='begin-warning' />
+<div class='timeline-user-friend'>
+<div class='timeline-user-following'></div>
+<a href="https://mobile.twitter.com/l_wxy"><img alt="王晓岩" class="list-tweet-img" lowend_override="true" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png" /></a>
+<div class='inner-w-img'>
+<div class='user-screen-name'>
+<strong>l_wxy</strong>
+(王晓岩)
+</div>
+<div class='timeline-following'>
+<a href="https://mobile.twitter.com/l_wxy/following">Following:1</a>
+&nbsp;
+<a href="https://mobile.twitter.com/l_wxy/followers">Followers:1</a>
+</div>
+</div>
+<div class='friend-actions'>
+<form action="https://mobile.twitter.com/l_wxy/follow" class="user_button" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="06c9db76b1f1eb39205a" /></div>
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/l_wxy" />
+<button class="friend-actions-btn" id="l_wxy" type="submit"><div class="friend-actions-btn-inner"><img alt="Ic_follow" class="button_icon" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_follow.gif" /><span>Follow</span></div></button>
+</form>
+
+<form action="https://mobile.twitter.com/l_wxy/block" class="user_button" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="06c9db76b1f1eb39205a" /></div>
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/l_wxy" />
+<button class="friend-actions-btn" id="" type="submit"><div class="friend-actions-btn-inner"><img alt="Ic_block" class="button_icon" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_block.gif" /><span>Block</span></div></button>
+</form>
+
+</div>
+</div>
+<div class='timeline-header-friend' style='text-align: left'>
+<a href="https://mobile.twitter.com/l_wxy" class="timeline-header-selected">Tweets</a>
+<a href="https://mobile.twitter.com/l_wxy/favorites" class="">Favs</a>
+<a href="https://mobile.twitter.com/l_wxy/messages" class="">Msgs</a>
+<a href="https://mobile.twitter.com/l_wxy/about" class="">About</a>
+</div>
+
+
+<div class='timeline-friend timeline autorefresh'>
+<div id='tweets-list'>
+<div class='list-tweet' id='tweet_172531007197675521'>
+<a href="https://mobile.twitter.com/avb001"><img alt="丁丁猫" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1673037542/1_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<img alt="Ic_retweet_tweet" class="retweet-img" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_retweet_tweet.gif" />
+<strong><a href="https://mobile.twitter.com/avb001">avb001</a></strong>
+<span class="status">这标题，怎么断句？——愿与土共促中东和平稳定 <a rel="nofollow" href="http://t.co/R3T8n55C" target="_top" data-entity-id="172526048657948672" class="twitter_external_link">pic.twitter.com/R3T8n55C</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/avb001/status/172526048653754371" class="status_link">22 days ago</a>
+
+</div>
+<br class='r' />
+<div class='retweet-info'>
+<a href="/avb001/status/172526048653754371" class="status_link">Retweeted by l_wxy</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_172529909296672768'>
+<a href="https://mobile.twitter.com/l_wxy"><img alt="王晓岩" class="list-tweet-img" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/l_wxy">l_wxy</a></strong>
+<span class="status"><a href="/Scswga" class="twitter-atreply"><s>@</s>Scswga</a>  1</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/l_wxy/status/172529909296672768" class="status_link">22 days ago</a>
+<span class="text">&nbsp;</span><a href="/Scswga/status/172524280712667136" class="status_link">in reply to Scswga</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_172529601489281025'>
+<a href="https://mobile.twitter.com/l_wxy"><img alt="王晓岩" class="list-tweet-img" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/l_wxy">l_wxy</a></strong>
+<span class="status"><a href="/l_wxy" class="twitter-atreply"><s>@</s>l_wxy</a> 再测试</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/l_wxy/status/172529601489281025" class="status_link">22 days ago</a>
+<span class="text">&nbsp;</span><a href="/l_wxy/status/172529236417069057" class="status_link">in reply to l_wxy</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_172529236417069057'>
+<a href="https://mobile.twitter.com/l_wxy"><img alt="王晓岩" class="list-tweet-img" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/l_wxy">l_wxy</a></strong>
+<span class="status"><a href="/l_wxy" class="twitter-atreply"><s>@</s>l_wxy</a> 测试</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/l_wxy/status/172529236417069057" class="status_link">22 days ago</a>
+<span class="text">&nbsp;</span><a href="/l_wxy/status/166740666188185601" class="status_link">in reply to l_wxy</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_168995927493840896'>
+<a href="https://mobile.twitter.com/cnbrknews"><img alt="中文新聞" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1092124300/printpic.php2_normal.gif" /></a>
+<div class='inner-w-img'>
+<span>
+<img alt="Ic_retweet_tweet" class="retweet-img" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_retweet_tweet.gif" />
+<strong><a href="https://mobile.twitter.com/cnbrknews">cnbrknews</a></strong>
+<span class="status">憨孫做憨事 偷阿嬤珠寶任友挑 百萬鑽石飛了:  <a rel="nofollow" href="http://t.co/KJcRCRC0" target="_blank" class="twitter_external_link">bit.ly/wtFOBg</a> （中國時報）</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/cnbrknews/status/168990847336058881" class="status_link">about 1 month ago</a>
+
+</div>
+<br class='r' />
+<div class='retweet-info'>
+<a href="/cnbrknews/status/168990847336058881" class="status_link">Retweeted by l_wxy</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_168995896267259905'>
+<a href="https://mobile.twitter.com/dengbot"><img alt="@greendyj's bot" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1696137429/greendyj_RT_normal.png" /></a>
+<div class='inner-w-img'>
+<span>
+<img alt="Ic_retweet_tweet" class="retweet-img" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_retweet_tweet.gif" />
+<strong><a href="https://mobile.twitter.com/dengbot">dengbot</a></strong>
+<span class="status">＞32次 RT <a href="/omySG" class="twitter-atreply"><s>@</s>omySG</a>: 最新消息：凤飞飞在香港病逝　终年60岁 <a rel="nofollow" href="http://t.co/SdwR6Jyw" target="_blank" class="twitter_external_link">fb.me/1FCFMpBq1</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/dengbot/status/168994315769618432" class="status_link">about 1 month ago</a>
+
+</div>
+<br class='r' />
+<div class='retweet-info'>
+<a href="/dengbot/status/168994315769618432" class="status_link">Retweeted by l_wxy</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_168994271532290048'>
+<a href="https://mobile.twitter.com/l_wxy"><img alt="王晓岩" class="list-tweet-img" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/l_wxy">l_wxy</a></strong>
+<span class="status"><a href="/l_wxy" class="twitter-atreply"><s>@</s>l_wxy</a> 回复</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/l_wxy/status/168994271532290048" class="status_link">about 1 month ago</a>
+<span class="text">&nbsp;</span><a href="/l_wxy/status/166740666188185601" class="status_link">in reply to l_wxy</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_168592920188960769'>
+<a href="https://mobile.twitter.com/l_wxy"><img alt="王晓岩" class="list-tweet-img" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/l_wxy">l_wxy</a></strong>
+<span class="status"><a href="/JENNIWOWW" class="twitter-atreply"><s>@</s>JENNIWOWW</a> <a href="/MTV" class="twitter-atreply"><s>@</s>MTV</a> ..</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/l_wxy/status/168592920188960769" class="status_link">about 1 month ago</a>
+<span class="text">&nbsp;</span><a href="/JENNIWOWW/status/167823889559334913" class="status_link">in reply to JENNIWOWW</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_168592371750141952'>
+<a href="https://mobile.twitter.com/omgfacts"><img alt="OMG Facts" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1818054089/OMGWhite200frames_normal.gif" /></a>
+<div class='inner-w-img'>
+<span>
+<img alt="Ic_retweet_tweet" class="retweet-img" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_retweet_tweet.gif" />
+<strong><a href="https://mobile.twitter.com/omgfacts">OMGFacts</a></strong>
+<span class="status">Pop star Ke$ha reportedly has a near genius IQ! Read about it ---&gt; <a rel="nofollow" href="http://t.co/uGpfFrCb" target="_blank" class="twitter_external_link">omgf.ac/ts/5r1</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/omgfacts/status/168590227005390848" class="status_link">about 1 month ago</a>
+
+</div>
+<br class='r' />
+<div class='retweet-info'>
+<a href="/omgfacts/status/168590227005390848" class="status_link">Retweeted by l_wxy</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_166740666188185601'>
+<a href="https://mobile.twitter.com/l_wxy"><img alt="王晓岩" class="list-tweet-img" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/l_wxy">l_wxy</a></strong>
+<span class="status">test</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/l_wxy/status/166740666188185601" class="status_link">about 1 month ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_166740178851999744'>
+<a href="https://mobile.twitter.com/l_wxy"><img alt="王晓岩" class="list-tweet-img" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_0_normal.png" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/l_wxy">l_wxy</a></strong>
+<span class="status"><a href="/l_wxy" class="twitter-atreply"><s>@</s>l_wxy</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/l_wxy/status/166740178851999744" class="status_link">about 1 month ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+<div id='search_footer'>
+<form action="https://mobile.twitter.com/searches" class="search" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="06c9db76b1f1eb39205a" /></div>
+Search Twitter
+<br />
+<input class="search-form" id="search_query" name="search[query]" size="20" type="text" value="" />
+<button class="search-btns" id="" type="submit">Search</button>
+</form>
+<div class='search-middle'>Popular Topics</div>
+<div class='search-trends'>
+<ul id='trend_footer_list'>
+<li><a href="https://mobile.twitter.com/searches?q=%2310days">#10days</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%22Wanna+See+It%22">Wanna See It</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%23hintsthesexisGOOD">#hintsthesexisGOOD</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%23welcomebackyangleader">#welcomebackyangleader</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%22Hey+Nialler%22">Hey Nialler</a></li>
+</ul>
+</div>
+</div>
+
+
+<div class='footer'>
+<strong><a href="/l_wxy?ctx=refresh">Refresh now</a></strong>
+<br />
+<br />
+<div class='geo-status'></div>
+<strong><a href="https://mobile.twitter.com/search/users">Find people</a></strong>
+-
+<strong><a href="http://support.twitter.com/groups/34-mobile">Help</a></strong>
+-
+<strong><a href="https://mobile.twitter.com/session/new?return_to=%2Fl_wxy">Sign in</a></strong>
+<br />
+<br />
+View twitter in:
+<br />
+<strong><a href="https://mobile.twitter.com/settings/change_ui">Standard</a></strong>
+-
+Mobile
+<br />
+<br />
+&copy; 2012 Twitter
+</div>
+<script src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/base.js" type="text/javascript"></script>
+</div>
+<!-- production -->
+</body>
+</html>
+

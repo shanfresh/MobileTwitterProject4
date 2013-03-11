@@ -1,0 +1,53 @@
+package com.ict.twitter.Node;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
+
+import com.ict.twitter.MessageBus.*;
+import com.ict.twitter.Server.Server;
+
+public class ControlReceiver extends Receiver {
+
+	public ControlReceiver(String queue, Node _node,boolean isTopic) {
+		super(queue, _node,isTopic);
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ControlReceiver(String controlC2S, Server server,boolean isTopic) {
+		super(controlC2S, server,isTopic);
+	}
+	
+	
+
+	public void onMessage(Message _resmsg) {
+		TextMessage resmsg=(TextMessage)_resmsg;
+		String msg = null;
+		try {
+			msg = resmsg.getText();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(isNode){
+			System.out.println("【node】从控制总线接收到消息"+msg);				
+			if(msg.equalsIgnoreCase("STOPALL")){
+				System.out.println("客户端清空队列，停止工作");
+				node.CleanTask();
+			}else if(msg.equalsIgnoreCase("STARTALL")){
+				System.out.println("客户端重新启动工作");
+			}
+		}else{
+			server.getNewNode();
+			System.out.println("【server】从控制总线接收到消息"+msg);		
+		}
+		this.commitMessage();
+		
+	}
+
+
+
+
+
+}

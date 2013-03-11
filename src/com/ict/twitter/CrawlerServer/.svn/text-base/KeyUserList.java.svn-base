@@ -1,0 +1,17 @@
+package com.ict.twitter.Server;
+
+import java.util.ArrayList;
+
+import com.ict.twitter.tools.ReadTxtFile;
+
+@Deprecated
+public class KeyUserList {
+	public KeyUserList(){
+		
+	}
+	public ArrayList<String> getUserListByFile(){
+		
+		return null;
+	}
+
+}

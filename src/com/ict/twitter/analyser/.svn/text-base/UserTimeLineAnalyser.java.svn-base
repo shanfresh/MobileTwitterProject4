@@ -1,0 +1,94 @@
+package com.ict.twitter.analyser;
+import java.util.Vector;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import com.ict.twitter.analyser.beans.TimeLine;
+import com.ict.twitter.analyser.beans.MessageRelationship;
+import com.ict.twitter.tools.DbOperation;
+public class UserTimeLineAnalyser extends Analyser{
+
+	public UserTimeLineAnalyser() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
+
+	@Override
+	public void doAnalyse() {
+		if(this.doc==null){
+			System.out.println("doc尚未初始化");
+			return;
+		}else{
+			System.out.println("主页分析开始");
+		}		
+		AnalyseHomeTimeLine();
+
+	}
+	public void AnalyseHomeTimeLine(){
+		Elements HomeTimeLineElement = null;
+		try{
+			HomeTimeLineElement=doc.getElementById("tweets-list").getElementsByClass("list-tweet");
+		}catch(Exception e){
+			System.out.println("没有推文发表");
+			return;
+		}
+		Vector<TimeLine> homeTimeLines=new Vector<TimeLine>();
+		Vector<MessageRelationship> messageRes=new Vector<MessageRelationship>();
+		
+		DbOperation dbOper=new DbOperation();
+		
+		for(Element t:HomeTimeLineElement){
+			
+			TimeLine timelineEle=new TimeLine();
+			MessageRelationship messageReEle=new MessageRelationship();
+			String tweet_id=t.attr("id");
+			timelineEle.setId(tweet_id);
+			timelineEle.setAuthor(t.select("div span strong a").first().text());			
+			timelineEle.setDate(t.select("div.list-tweet-status a").first().text());
+			String str=t.select("div span span ").first().text();
+			timelineEle.setContent(str);										
+			
+			homeTimeLines.add(timelineEle);		
+			
+			String sqlStr=timelineEle.getString();
+			dbOper.insert(sqlStr);
+			
+			Element RTEle=t.select("div.retweet-info a").first();
+			
+			if(RTEle!=null)				
+			{
+				messageReEle.setId_A(RTEle.attr("href"));
+				messageReEle.setId_B(tweet_id);
+				messageReEle.setrelation(RTEle.text());	
+				//messageReEle.show();
+				messageRes.add(messageReEle);				
+				sqlStr=messageReEle.getString();
+				dbOper.insert(sqlStr);
+				
+			}else{
+			
+				Elements Infos=t.getElementsByClass("list-tweet-status").last().getElementsByClass("status_link");
+				if(Infos.size()>=2)
+				{				
+					messageReEle.setId_A(Infos.get(1).attr("href"));
+					messageReEle.setId_B(tweet_id);
+					messageReEle.setrelation(Infos.get(1).text());	
+					messageRes.add(messageReEle);
+					messageReEle.show();
+					
+					sqlStr=messageReEle.getString();
+					dbOper.insert(sqlStr);
+				}
+				//break;
+			}
+			
+		}
+		System.out.println("获取到推文数"+HomeTimeLineElement.size());
+		
+		dbOper.closeConn();
+		dbOper.closeStmt();
+				
+	}	
+	
+}

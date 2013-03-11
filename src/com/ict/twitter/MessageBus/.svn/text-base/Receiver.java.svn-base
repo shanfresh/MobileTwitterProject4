@@ -1,0 +1,122 @@
+package com.ict.twitter.MessageBus;
+
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
+import org.apache.activemq.ActiveMQConnection;
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+import com.ict.twitter.Node.Node;
+import com.ict.twitter.Server.Server;
+
+public class Receiver implements MessageBussConnector,MessageListener{
+	public Session session;
+	Connection connection;
+	Destination destination ;
+	MessageConsumer consumer;
+	public  Node node=null;
+	public Server server=null;
+	public boolean isNode;
+	
+	
+	
+	public Receiver(String queue,Server _server,boolean isTopic){
+		this(queue,isTopic);
+		this.server=_server;
+		isNode=false;
+	}
+	
+	public Receiver(String queue,Node _node,boolean isTopic){		
+		this(queue,isTopic);
+		this.node=_node;
+		isNode=true;
+	}
+	public Receiver(String queue){
+		this(queue,false);
+	}
+	
+	
+	public Receiver(String queue,boolean isTopic){
+		try {
+			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory( 
+                ActiveMQConnection.DEFAULT_USER, 
+                ActiveMQConnection.DEFAULT_PASSWORD, 
+                address); 			
+			connection = connectionFactory.createConnection();
+			connection.start(); 
+	        // Session： 一个发送或接收消息的线程 
+	        session= connection.createSession(Boolean.TRUE, Session.CLIENT_ACKNOWLEDGE);
+	        if(isTopic){
+	        	destination=session.createTopic(queue);
+	        }else{
+	        	destination = session.createQueue(queue);		        
+	        }
+	        consumer= session.createConsumer(destination);
+	        consumer.setMessageListener(this);
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+	public void Exit(){
+		try {			
+			session.close();
+			
+			connection.close();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public String Receive(){
+		try{
+	        TextMessage message = (TextMessage) consumer.receive(1000);
+	        if(message!=null)
+	        	return message.getText();
+	        else
+	        	return null;
+		}catch (Exception e){
+			e.printStackTrace();
+			return null;
+		}
+		
+
+		
+	}
+	@Override
+	public void onMessage(Message resmsg) {
+		if(isNode){
+			System.out.println("【NODE】接收到消息"+resmsg.toString());	
+		}else{
+			System.out.println("【Server】接收到消息"+resmsg.toString());	
+		}
+		
+	}
+	public void commitMessage(){
+		try {
+			session.commit();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public Node getNode() {
+		return node;
+	}
+
+	public void setNode(Node node) {
+		this.node = node;
+	}
+	
+
+}

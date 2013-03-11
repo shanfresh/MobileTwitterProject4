@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="HandheldFriendly" content="True"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link href="https://si0.twimg.com/twitter-mobile/ac9b4cee95cac9610664e07d69c57f2d58f96638/images/ic_favicon.png?1342560774" rel="icon" type="image/png" />
+    <title>Twitter</title>
+    <link href="https://si0.twimg.com/twitter-mobile/ac9b4cee95cac9610664e07d69c57f2d58f96638/assets/as.css?1342560781" media="screen, handheld" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+//<![CDATA[
+if (window.top !== window.self) {document.write = "";window.top.location = window.self.location; setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
+
+//]]>
+</script>
+  </head>
+  <body class="images nojs users-page users-show-page">
+    <div id="container">
+<div id="brand_bar">
+  <table id="top">
+    <tr>
+      <td class="left">
+        <a href="https://mobile.twitter.com/" class="brandmark">
+          <span class="imgsprite_larry_28px_gif" height="28" title="Twitter"></span>
+          
+        </a>
+      </td>
+      <td class="right">
+        <img alt="|" class="divider" height="28" src="https://si0.twimg.com/twitter-mobile/ac9b4cee95cac9610664e07d69c57f2d58f96638/images/brandbar_divider.gif?1342560774" />
+        <a class="search" href="#search">
+          <span class="imgsprite_search_28px_gif" height="28" title="Search"></span>
+          
+        </a>
+        <img alt="|" class="divider" height="28" src="https://si0.twimg.com/twitter-mobile/ac9b4cee95cac9610664e07d69c57f2d58f96638/images/brandbar_divider.gif?1342560774" />
+        <a class="refresh" href="/_yupo_" class="refresh">
+          <span class="imgsprite_refresh_28px_gif" height="28" title="Refresh"></span>
+          
+        </a>
+          <img alt="|" class="divider" height="28" src="https://si0.twimg.com/twitter-mobile/ac9b4cee95cac9610664e07d69c57f2d58f96638/images/brandbar_divider.gif?1342560774" />
+          <a class="signin" href="/session/new"><span>Sign in</span></a>
+          <img alt="|" class="divider" height="28" src="https://si0.twimg.com/twitter-mobile/ac9b4cee95cac9610664e07d69c57f2d58f96638/images/brandbar_divider.gif?1342560774" />
+          <a href="/signup"><span class="signup">Sign up</span></a>
+      </td>
+    </tr>
+  </table>
+</div>
+      <div id="main_content">
+          <div class="profile">
+<table class="profile-details">
+  <tr>
+      <td class="avatar"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></td>
+      <td class="user-info">
+        <div class="fullname">于婆
+          
+          
+        </div>
+        <div class="username"><span>@</span>_yupo_</div>
+        <div class="location">上海</div>
+      </td>
+  </tr>
+  <tr>
+    <td class="details" colspan="2">
+      <div class="bio">人妻，人母。生活推。上海某高校文科博士二年级。</div>
+      <div class="url"><a href="http://blog.sina.com.cn/u/1659542514">http://blog.sina.com.cn/u/1659542514</a></div>
+    </td>
+  </tr>
+</table>
+<table class="profile-stats">
+  <tr>
+    <td class="stat">
+      <div class="statnum">16,631</div>
+      <div class="statlabel">Tweets</div>
+    </td>
+    <td class="stat">
+      <a href="/_yupo_/following">
+        <div class="statnum">1,268</div>
+        <div class="statlabel">Following</div>
+      </a>
+    </td>
+    <td class="stat stat-last">
+      <a href="/_yupo_/followers">
+        <div class="statnum">8,680</div>
+        <div class="statlabel">Followers</div>
+      </a>
+    </td>
+  </tr>
+</table>
+<div class="profile-actions">
+        <form action="/_yupo_/follow" method="post">
+          <div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="f9691115c8bb9f206189" /></div>
+          
+          <span class="w-button-common w-button"><input name="commit" type="submit" value="Follow" /></span>
+        </form>
+        <form action="/_yupo_/favorites" method="get">
+          <span class="w-button-common w-button"><input name="commit" type="submit" value="View favs" /></span>
+        </form>
+</div>
+  </div>
+<div class="timeline">
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225409293854314496" href="/_yupo_/status/225409293854314496">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">233 RT <a href="/yelumine" class="twitter-atreply">@yelumine</a>:  今天在地铁充值，想冲50，把公交卡和50块钱从窗口递过去，充值小伙子做了个手势5，我也做了个手势OK，于是就充了30。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225409293854314496">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225409293854314496" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225409293854314496/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225409293854314496/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225409035048976384" href="/_yupo_/status/225409035048976384">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">一位同学的字太难看难认了，连笔、画圈、字形奇怪，说初中的时候老师给他们介绍并教授狂草，他觉得很帅很酷就学用了，老师教了几节课就结束了，他接下来便自行修炼成这样。擦。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225409035048976384">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225409035048976384" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225409035048976384/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225409035048976384/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225407112627490816" href="/_yupo_/status/225407112627490816">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">。。 RT <a href="/kgreload" class="twitter-atreply">@kgreload</a>:  信息量可以脑补很多。。RT <a href="/OwlDerulo" class="twitter-atreply">@OwlDerulo</a>: 我朋友说我妹子向他表白了……</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225407112627490816">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225407112627490816" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225407112627490816/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225407112627490816/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225404063234269184" href="/_yupo_/status/225404063234269184">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text"><a href="/laoyang945" class="twitter-atreply">@laoyang945</a> 养很大之后抱错了也许会算。这么小如果知道抱错我还是要想办法换回来。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+          <span class="imgsprite_tweet_reply_gif" title="in reply to laoyang945"></span>
+        <a href="/_yupo_/status/225404063234269184">View conversation</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225404063234269184" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225404063234269184/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225404063234269184/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225403375167078400" href="/_yupo_/status/225403375167078400">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text"><a href="/laoyang945" class="twitter-atreply">@laoyang945</a> 我和老公至今连宝宝血型都不知道。。也幻想过抱错了神马的电视剧狗血情节。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+          <span class="imgsprite_tweet_reply_gif" title="in reply to laoyang945"></span>
+        <a href="/_yupo_/status/225403375167078400">View conversation</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225403375167078400" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225403375167078400/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225403375167078400/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225401880560418816" href="/_yupo_/status/225401880560418816">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">找空要体验一下！RT <a href="/ephoenixfy" class="twitter-atreply">@ephoenixfy</a>: 在上下九喝着早茶看那些住在老城区匆匆忙忙的小白领才过瘾呢！"<a href="/_yupo_" class="twitter-atreply">@_yupo_</a>: 早上在KFC坐着优哉游哉吃早餐的人真多啊，相形之下那种在路边摊匆匆买个鸡蛋煎饼边走边吃的日子真不叫生活。"</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225401880560418816">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225401880560418816" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225401880560418816/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225401880560418816/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225400620264325120" href="/_yupo_/status/225400620264325120">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text"><a href="/flyorswim" class="twitter-atreply">@flyorswim</a> 我以前上班时就是匆匆在路边买煎饼边走边吃的人~~那谈不上心情哈，就是填肚子。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+          <span class="imgsprite_tweet_reply_gif" title="in reply to flyorswim"></span>
+        <a href="/_yupo_/status/225400620264325120">View conversation</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225400620264325120" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225400620264325120/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225400620264325120/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/ginoxiao"><img alt="小地主" src="https://si0.twimg.com/profile_images/2092301514/2012-04-08_21.36.15_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/ginoxiao">
+          <strong class="fullname">小地主</strong>
+          <span class="username">
+            <span>@</span>ginoxiao
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225232096736718848" href="/ginoxiao/status/225232096736718848">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">就在一分钟以前，gay室友和我说他买了房子，所以要搬出去住了。现在要招室友，欢迎推友入住，男女不限。坐标世纪大道地铁口的竹园高层，两室一厅一厨一卫，房租1K5，其他平摊，没有电视，宽带10M，入住时间8月31日。房子一人一间。请帮忙RT，谢谢各位。</div>
+          <div class="context">
+              <a href="/_yupo_"><span class="imgsprite_rt_by_gif"></span>Retweeted by _yupo_</a>
+          </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/ginoxiao/status/225232096736718848">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/ginoxiao/reply/225232096736718848" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225232096736718848/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225232096736718848/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225399929772847104" href="/_yupo_/status/225399929772847104">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">验证码里面混合着数字0和字母O的网站是什么水平。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225399929772847104">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225399929772847104" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225399929772847104/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225399929772847104/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225397374602850304" href="/_yupo_/status/225397374602850304">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">各位对Kfc无语的人看过来，这样的早餐才叫生活：RT <a href="/tata507" class="twitter-atreply">@tata507</a>: 肋排！ <a href="http://t.co/voDa2ZXw" class="twitter_external_link" data-url="http://instagr.am/p/NKW28yudgG/" rel="nofollow" target="_blank">instagr.am/p/NKW28yudgG/</a></div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225397374602850304">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225397374602850304" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225397374602850304/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225397374602850304/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225396795616923650" href="/_yupo_/status/225396795616923650">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">厉害。 RT <a href="/liubinyan" class="twitter-atreply">@liubinyan</a>: 每天给自己设定读书量。我用google calendar每天给自己发短信：中文400P/天，英文100P/天 RT: <a href="/_yupo_" class="twitter-atreply">@_yupo_</a>: 曾经希望睡前多看电子书，</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225396795616923650">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225396795616923650" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225396795616923650/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225396795616923650/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225396627525996544" href="/_yupo_/status/225396627525996544">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">kindle好。曾经过于相信自己了，以为电脑和手机和iPad都能看电子书就不需要kindle./(ㄒoㄒ)/~~ RT <a href="/laoyang945" class="twitter-atreply">@laoyang945</a>: 所以我用Kindle咯 RT <a href="/_yupo_" class="twitter-atreply">@_yupo_</a>: 曾经希望睡前多看电子书，结果常常都是刷微博看视频去了   <a href="/slaindev" class="twitter-atreply">@slaindev</a></div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+          <span class="imgsprite_tweet_reply_gif" title="in reply to slaindev"></span>
+        <a href="/_yupo_/status/225396627525996544">View conversation</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225396627525996544" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225396627525996544/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225396627525996544/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225396335430479873" href="/_yupo_/status/225396335430479873">2h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text"><a href="/LoveGates" class="twitter-atreply">@LoveGates</a> 一整天下来睡前那点时间是唯一的闲暇时间好吧。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+          <span class="imgsprite_tweet_reply_gif" title="in reply to LoveGates"></span>
+        <a href="/_yupo_/status/225396335430479873">View conversation</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225396335430479873" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225396335430479873/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225396335430479873/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225395415523139584" href="/_yupo_/status/225395415523139584">3h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">曾经希望睡前多看电子书，也好助眠不是；结果常常都是刷微博看视频去了，还越看越睡不着-_-|||</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225395415523139584">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225395415523139584" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225395415523139584/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225395415523139584/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225394916694573056" href="/_yupo_/status/225394916694573056">3h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">厉害。RT <a href="/yurii_yu" class="twitter-atreply">@yurii_yu</a>: <a href="/_yupo_" class="twitter-atreply">@_yupo_</a> 我刚上班时就在KFC吃早餐，边吃边看，半年时间把Gone with the Wind看完了</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225394916694573056">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225394916694573056" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225394916694573056/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225394916694573056/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225392452314468352" href="/_yupo_/status/225392452314468352">3h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">早上在KFC坐着优哉游哉吃早餐的人真多啊，相形之下那种在路边摊匆匆买个鸡蛋煎饼边走边吃的日子真不叫生活。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225392452314468352">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225392452314468352" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225392452314468352/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225392452314468352/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225152687191228416" href="/_yupo_/status/225152687191228416">19h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">╮(╯▽╰)╭ RT <a href="/zombie023" class="twitter-atreply">@zombie023</a>:  <a href="/_yupo_" class="twitter-atreply">@_yupo_</a> 当年我们研究僧导师的观点是：「我这门课要是到了期末上课的人还超过30%就说明我讲得失败，太浅了。」</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/_yupo_/status/225152687191228416">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225152687191228416" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225152687191228416/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225152687191228416/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225150130721005568" href="/_yupo_/status/225150130721005568">19h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text"><a href="/lhfy" class="twitter-atreply">@lhfy</a> <a href="/shmyd" class="twitter-atreply">@shmyd</a>  <a href="/search?q=%E7%9C%9F%E7%88%B1" class="twitter-hashtag">#真爱</a></div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+          <span class="imgsprite_tweet_reply_gif" title="in reply to lhfy"></span>
+        <a href="/_yupo_/status/225150130721005568">View conversation</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225150130721005568" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225150130721005568/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225150130721005568/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225141087814168577" href="/_yupo_/status/225141087814168577">19h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text"><a href="/shmyd" class="twitter-atreply">@shmyd</a> 其实如果你说了的话大家也会很热情哒~</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+          <span class="imgsprite_tweet_reply_gif" title="in reply to shmyd"></span>
+        <a href="/_yupo_/status/225141087814168577">View conversation</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225141087814168577" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225141087814168577/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225141087814168577/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/_yupo_"><img alt="于婆" src="https://si0.twimg.com/profile_images/335251166/16383_normal.jpg" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/_yupo_">
+          <strong class="fullname">于婆</strong>
+          <span class="username">
+            <span>@</span>_yupo_
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_225136857107795969" href="/_yupo_/status/225136857107795969">20h</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text"><a href="/shmyd" class="twitter-atreply">@shmyd</a> 你在我list里面我天天看你推为神马没有看到你过生日呢？ 难道漏推555</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+          <span class="imgsprite_tweet_reply_gif" title="in reply to shmyd"></span>
+        <a href="/_yupo_/status/225136857107795969">View conversation</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/_yupo_/reply/225136857107795969" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/225136857107795969/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/225136857107795969/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+    <div class="w-button-more"><a href="https://mobile.twitter.com/_yupo_?max_id=225123139330392064">Load older Tweets</a></div>
+</div>
+
+      </div>
+<div id="footer">
+<div class="search-fields">
+    <div class="title">Enter a topic, @name, or fullname</div>
+  <form action="/search" class="search-input" method="get">
+    <table>
+      <tr>
+        <td class="value" id="search"><div><input id="q" name="q" type="text" value=""/></div></td>
+        <td class="button"><input type="image" src="https://si0.twimg.com/twitter-mobile/ac9b4cee95cac9610664e07d69c57f2d58f96638/images/sprites/magnifying_glass.gif?1342560774" alt="Search"/></td>
+      </tr>
+    </table>
+  </form>
+</div>
+    <form action="/session/destroy" method="post">
+      <div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="f9691115c8bb9f206189" /></div>
+      <table class="global-actions">
+        <tr>
+          <td><a href="/settings">Settings</a></td>
+          <td><a href="http://support.twitter.com/"> Help</a></td>
+          <td><span class="w-button-common w-button"><input name="commit" type="submit" value="Sign out" /></span></td>
+        </tr>
+      </table>
+    </form>
+    <div class="view-actions"><a href="#top">Back to top</a> &middot; <a href="/settings/profile_images?return_to=%2F_yupo_">Turn images off</a></div>
+  <div class="copyright">&copy; 2012 Twitter</div>
+</div>
+    </div>
+  </body>
+</html>
+

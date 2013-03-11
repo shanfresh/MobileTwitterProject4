@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/task
+END
+TaskMession.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/task/TaskMession.java
+END
+MQTaskManger.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/task/MQTaskManger.java
+END
+TaskManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/task/TaskManager.java
+END
+InterFaceTaskManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/task/InterFaceTaskManager.java
+END
+MessageBus.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/Twitter/!svn/ver/1/src/com/ict/twitter/task/MessageBus.java
+END

@@ -1,0 +1,244 @@
+package com.ict.twitter;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.Vector;
+
+import org.apache.http.HttpHost;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+
+import com.ict.twitter.Node.Node;
+import com.ict.twitter.analyser.AboutPageAnalyser;
+import com.ict.twitter.analyser.FollowingPageAnalyser;
+import com.ict.twitter.analyser.MainPageAnalyser;
+import com.ict.twitter.analyser.SearchPageAnalyser;
+import com.ict.twitter.analyser.UserTimeLineAnalyser;
+import com.ict.twitter.analyser.beans.TimeLine;
+import com.ict.twitter.analyser.beans.TwiUser;
+import com.ict.twitter.analyser.beans.UserRelationship;
+import com.ict.twitter.task.MQTaskManger;
+import com.ict.twitter.task.TaskManager;
+import com.ict.twitter.task.TaskMession;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.SaveTxtFile;
+import com.ict.twitter.tools.SavitchIn;
+/*
+ * 1：消息队列取得顺序不一致
+ * 2：没有将信息存储下来
+ * 3：循环遍历的方法不正确。 * 
+ * 
+ */
+public class MainSearch implements Runnable {
+	ClientManager cm;
+	DefaultHttpClient httpclient;
+	Node node;
+	boolean working=true;
+	Object lock=new Object();
+	
+	public MainSearch(){
+		cm=new ClientManager();
+		httpclient=cm.getClient();
+		LoginManager lm=new LoginManager(httpclient);
+		//lm.doLogin();
+		//TaskManager 包含初始任务信息。
+		//tm=new MQTaskManger();
+		
+	}
+	public MainSearch(Node _node){
+		this();
+		this.node=_node;
+	}
+
+	
+	
+	
+	public void initAnalyse(){
+//		tm.Init();
+	}
+	
+	
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		working=true;
+		doSearch();		
+	}
+	
+	public void stop(){
+		working=false;
+		try{
+			httpclient.getConnectionManager().shutdown();
+		}catch(Exception e){
+			System.out.println("关闭客户端");
+			e.printStackTrace();
+		}
+	}
+	public void doSearch(){
+		Task one;
+		SaveTxtFile st=new SaveTxtFile("UsefulFile\\Testdata\\Time\\searchTime.txt");	
+		
+		while(working){
+			//从队列中取出一个任务来
+			one=node.getTask();						
+			if(one==null){
+				try {
+					Thread.sleep(10000);
+					continue;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			try {
+				Thread.sleep(5000);
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			boolean flagIsNewCom=false;
+			if(one.ownType==TaskType.About){
+				System.out.println("打开关于页面");
+				WebOperation.setLogFile("UserAbout.txt");	
+				String UserTimeLineResult=WebOperation.openLink(httpclient,one.getURL());
+				AboutPageAnalyser aboutAna=new AboutPageAnalyser();
+				aboutAna.InitiallizeFromString(UserTimeLineResult);
+				//aboutAna.doAnalyse();
+				System.out.println("用户主页分析结束");				
+			}
+			else if(one.ownType==TaskType.TimeLine){
+				System.out.println("打开用户主页");
+				WebOperation.setLogFile("UserTimeLine.txt");
+				System.out.println(one.getURL());
+				String UserTimeLineResult=WebOperation.openLink(httpclient, one.getURL());
+				UserTimeLineAnalyser userAna=new UserTimeLineAnalyser();
+				userAna.InitiallizeFromString(UserTimeLineResult);
+				userAna.doAnalyse();
+				System.out.println("用户主页分析结束");				
+			}else if(one.ownType==TaskType.Following){
+				System.out.println("打开Following");
+				WebOperation.setLogFile("Following.txt");
+				System.out.println(one.getURL());
+				String FloResult=WebOperation.openLink(httpclient, one.getURL());
+				FollowingPageAnalyser followingAna=new FollowingPageAnalyser();				
+				followingAna.InitiallizeFromString(FloResult);				
+				followingAna.SetFollowType("following");				
+				followingAna.doAnalyse();								
+				String urlStr;
+				String InfluResult;
+				String jmsStr=new String("");
+				MainPageAnalyser mainPageAna=new MainPageAnalyser();				
+				for(UserRelationship item:followingAna.getAllUser()){					
+					//node.addNomalUserIDs(item.getUser_B());									
+					//add by wxy  获取存入总线的字符串
+					urlStr="/"+item.getUser_B();
+					WebOperation.setLogFile("ManpageTmp.txt");
+					InfluResult=WebOperation.openLink(httpclient,urlStr);
+					System.out.println("子循环Folloing用户为:"+urlStr);
+					mainPageAna.InitiallizeFromString(InfluResult);
+					mainPageAna.doAnalyse();					
+					mainPageAna.GetUserWithInfluence().setName(item.getUser_B());
+					jmsStr=jmsStr+mainPageAna.GetUserWithInfluence().getString();
+					
+				}
+				String count=Integer.toString(followingAna.getAllUser().size());
+				jmsStr="<count>"+count+"</count>"+jmsStr;
+				System.out.println("向服务器回发"+jmsStr);
+				
+				node.addNomalUserIDs(jmsStr);
+			}else if(one.ownType==TaskType.Followers){
+				System.out.println("打开用户粉丝");
+				WebOperation.setLogFile("Following.txt");	
+				String FlowerResult=WebOperation.openLink(httpclient, one.getURL());
+				FollowingPageAnalyser followerAna2=new FollowingPageAnalyser();
+				followerAna2.InitiallizeFromString(FlowerResult);
+				followerAna2.SetFollowType("follower");
+				followerAna2.doAnalyse();
+				for(UserRelationship item:followerAna2.getAllUser()){
+					node.addNomalUserIDs(item.getUser_B());								
+				}				
+				System.out.println("用户粉丝分析结束");
+				
+			}else if(one.ownType==TaskType.Search){
+				long tstart=System.currentTimeMillis();
+				System.out.println("打开Search");
+				WebOperation.setLogFile("UserSearch.txt");				
+				String searchPageResult=WebOperation.openLink(httpclient,one.getURL());
+				SearchPageAnalyser spa=new SearchPageAnalyser();
+				spa.InitiallizeFromString(searchPageResult);
+				spa.doAnalyse();
+				Vector<TimeLine> res=spa.getRelativeTimeLine();
+				StringBuffer sb=new StringBuffer();
+				for(TimeLine t:res){
+					sb.append("<name>");
+					sb.append(t.getAuthor());
+					sb.append("</name>");
+				}
+				node.addKeyUserIDs(sb.toString());
+				
+				System.out.println("SearchPage分析结束");
+				long tend=System.currentTimeMillis();
+				long timetotal=tend-tstart;
+				long timeSecond=timetotal/1000;
+				st.Append(one.getTargetString()+"  :Time MillSecond:"+timetotal+"  :TimeSecond:"+timeSecond);
+				st.Append("\r\n");
+				st.flush();
+			}
+				
+		}
+		System.out.println("采集结束了");
+				
+	}
+	
+	
+	
+	public void doKeyWordsSearch(){
+		
+	}
+	public static String Ask(String question){
+		System.out.println("【询问】"+question);
+		String command=SavitchIn.readLine();
+		return command;
+	}
+	public void pause() {
+		
+		
+		
+		
+	}
+	@Deprecated
+	public void initSearch(){
+//		System.out.println("禁止用户自定义敏感词列表");
+//		
+//		String file="";
+//		if(Ask("输入Y导入外部敏感词列表,输入N或其他则用户指定敏感词（y/n）?????").equalsIgnoreCase("y")){
+//			String filelocation=Ask("请输入敏感词列表文件地址,直接回车则为默认敏感词列表文件minganci.txt");
+//			if(filelocation==null||filelocation.equals("")){
+//				filelocation="UsefulFile\\minganci.txt";
+//			}
+//			file=filelocation;
+//			tm.InitSearch(filelocation);
+//		}else{
+//			System.out.println("用户指定关键敏感词，请输入后以回车结束，结束输入请输入【END】");
+//			String t;
+//			Vector<String> tmp = new Vector<String>();
+//			while(!(t=SavitchIn.readLine()).equalsIgnoreCase("END")){
+//				tmp.add(t);
+//			}
+//			tm.InitSearch(tmp);			
+//			System.out.println("结束输入");
+//		}
+//		
+	}
+	
+}

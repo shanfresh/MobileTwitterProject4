@@ -1,0 +1,14 @@
+http.proxyHost = 127.0.0.1
+http.proxyPort = 8581
+#http.proxyPort = 9666
+#http.proxyPort = 8000
+#http.proxyPort = 8086
+#http.proxyPort = 8080
+#http.proxyPort = 1234
+#socks5.proxyHost=127.0.0.1
+#http.proxyPort=7070
+http.retryCount = 10
+http.dbusername=root
+http.dbpassword=123456
+http.databasename=http_twitter1105
+http.isProxy=false

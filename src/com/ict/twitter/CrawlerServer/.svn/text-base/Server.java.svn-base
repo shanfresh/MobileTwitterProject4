@@ -1,0 +1,234 @@
+package com.ict.twitter.Server;
+
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.Queue;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
+import org.apache.activemq.ActiveMQConnection;
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+import com.ict.twitter.MessageBus.MessageBusNames;
+import com.ict.twitter.MessageBus.MessageBussConnector;
+import com.ict.twitter.MessageBus.Receiver;
+import com.ict.twitter.MessageBus.Sender;
+import com.ict.twitter.Node.ControlReceiver;
+import com.ict.twitter.Node.ControlSender;
+import com.ict.twitter.Node.TaskReceiver;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.DbOperation;
+import com.ict.twitter.tools.SimpleXmlAnalyser;
+
+public class Server implements MessageBusNames,MessageBussConnector {
+
+	/**
+	 * @param args
+	 */
+	//控制相关
+	Receiver controlReceiver;	
+	ControlSender controlSender;
+	//Task相关
+	Sender sender=new Sender(MessageBusNames.Task);	
+	//NormalUser 相关
+	Receiver NormalReceiver;
+	Receiver KeyUserReceiver;
+	public static long count;
+	public static long TaskID;
+	
+	public boolean isFirstChuiZhi=true;
+
+	public boolean isFirstBingXing=true;
+	
+	
+	public ServerBean sb=new ServerBean();
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Server server=new Server();
+		DbOperation dbo=new DbOperation();
+		//dbo.clearDB();
+		server.dowork();
+	}
+	public Server(){
+		try {
+			System.out.println("--------------Server启动-------------------");
+			System.out.println("清空消息队列总线");
+			ResetMessageBus();				
+			
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		controlReceiver=new ControlReceiver(MessageBusNames.ControlC2S,this,false);
+		controlSender=new ControlSender(MessageBusNames.ControlS2C,true);
+		NormalReceiver=new NormalUserReceiver(MessageBusNames.NormalID,this,false);
+		KeyUserReceiver=new KeyUserReceiver(MessageBusNames.KeyID,this,false);
+	}
+
+		
+	
+	
+	public void dowork(){
+		ChuizhiCaiji();
+				
+
+	
+		while(true){
+			count++;
+			if((count%10000)==0){
+				NormalCaiji();				
+				continue;
+			}
+			if((count%300)==0){
+				System.out.println();
+				TaskID++;
+				KeyWordsSearch();				
+				continue;
+			}
+			if((count%150)==0){
+				System.out.println();
+				TaskID++;
+				NormalCaiji();
+				continue;
+			}
+			
+			if(count%50==0){				
+				System.out.println();
+				TaskID++;
+				ChuizhiCaiji();
+				continue;
+			}			
+			System.out.print(".");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}		
+		
+	}
+	
+	
+	//采集种子用户信息的任务
+	public void ChuizhiCaiji(){
+		System.out.println("【Server】-----------开始垂直采集-----------------");
+		//stopTaskOnAllNode();		
+		//DO somthing();
+		String filelocation="UsefulFile\\KeyIDs.txt";
+		sb.InitChuizhi(filelocation, this,isFirstChuiZhi);		
+		//startTaskOnAllNode();
+		System.out.println("【Server】-----------结束垂直采集-----------------");
+	}
+	
+	
+	public void KeyWordsSearch(){
+		//stopTaskOnAllNode();
+		String filelocation="UsefulFile\\minganci.txt";
+		sb.InitSearch(filelocation, this);
+		//startTaskOnAllNode();
+	}
+	public void NormalCaiji(){
+		System.out.println("【Server】-----------开始并行采集-----------------");
+		//stopTaskOnAllNode();		
+		String filelocation="UsefulFile\\NormalIDs.txt";
+		//准备并行采集的种子信息
+		sb.InitBingxing(this);
+		//startTaskOnAllNode();
+		//System.out.println("【Server】-----------结束并行采集-----------------");
+		
+	}
+	
+	
+
+	
+	public void getNewTask(){
+		
+	}
+	public void addTask(Task task){
+		sender.Send(task.TaskTOString());		
+	}
+	
+	
+	
+	
+	//所有节点停止工作
+	public boolean stopTaskOnAllNode(){
+		System.out.println("通知节点停止工作");
+		controlSender.Send("STOPALL");
+		return true;
+	}
+	public void clearTaskOnAllNode(){
+		
+	}
+	public boolean startTaskOnAllNode(){
+		System.out.println("通知节点启动工作");
+		controlSender.Send("STARTALL");
+		return true;
+	}
+	
+	
+	
+	
+	/*
+	 * 1：清除队列中所有的消息
+	 */
+	public void ResetMessageBus() throws JMSException{
+		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory( 
+                ActiveMQConnection.DEFAULT_USER, 
+                ActiveMQConnection.DEFAULT_PASSWORD, 
+                address); 			
+		Connection connection = connectionFactory.createConnection();
+		Session session = null;
+		for(String t:names){			
+			connection.start(); 
+		        // Session： 一个发送或接收消息的线程 
+		    session = connection.createSession(Boolean.TRUE, Session.CLIENT_ACKNOWLEDGE);
+		    Destination destination= session.createQueue(t);
+		    MessageConsumer consumer = session.createConsumer(destination);
+			Message tmp=null;
+			while((tmp=consumer.receive(500))!=null){
+				System.out.println(((TextMessage)tmp).getText());
+				
+			}
+			session.commit();
+		}		
+		System.out.println("【完成】清空所有的队列消息");
+		session.close();
+		connection.close();
+		
+	}
+
+	public void getNewNode() {
+		// TODO Auto-generated method stub
+		System.out.println("【控制台】接受到新的节点");		
+		
+	}
+	
+	
+	public void addNormalUserByID() {
+		
+		
+	}
+	
+	//添加普通用户
+	public void addNormalUser(NormalUser nu){		
+		sb.addNormalUser(nu);		
+	}
+	
+	public void addKeyUser(NormalUser nu){
+		sb.addKeyUser(nu);
+	}
+	
+	
+	
+
+	
+
+}

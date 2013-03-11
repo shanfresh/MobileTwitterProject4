@@ -1,0 +1,28 @@
+package com.ict.twitter.Server;
+
+import java.util.ArrayList;
+
+
+public class UserList<T> extends ArrayList<T>{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public  int maxSize=1000;
+	public  int minSum=100;
+	@Override
+	public boolean add(T e) {
+		// TODO Auto-generated method stub
+		if(this.contains(e)){
+			System.err.println("ÒÑ¾­´æÔÚ"+e.toString());
+			return false;
+		}
+		return super.add(e);
+	}
+	
+	
+	
+	
+
+}

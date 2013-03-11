@@ -1,0 +1,114 @@
+package com.ict.twitter.MessageBus;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import javax.jms.JMSException;
+import javax.jms.TextMessage;
+
+import com.ict.twitter.tools.FileTool;
+
+
+//本类主要是实现对于MessageBus的启动和相关任务的分配
+public class MessageBus {
+	public  static final String ErrorString = null;
+	public static String WINDOWS_DIR = "C:\\WINDOWS\\system32\\";
+	public static String batSourceFile="c:\\BackUp.bat";
+	public static String basePath="ActiveMQ\\bin\\win32\\";
+	public static String successStr="Started SelectChannelConnelConnectoror@0.0.0.0";
+	
+	
+	
+	public static void main(String[] args){
+		MessageBus mb=new MessageBus();
+		//mb.doStart();
+		Sender ss=new Sender("mq");
+		ss.Send("哈哈1");
+		ss.Send("哈哈2");
+		ss.Send("哈哈3");
+		Receiver rs=new Receiver("mq");
+		String t=rs.Receive();
+		System.out.println("收到"+t);
+		String t2=rs.Receive();
+		System.out.println("收到"+t2);
+		while (true) { 
+            String t3=rs.Receive(); 
+            try{
+            	Thread.sleep(2000);
+            }catch(InterruptedException e){
+            	e.printStackTrace();
+            }
+            System.out.println("正在接受");
+            if (null != t3) 
+                    System.out.println("收到消息：" + t3); 
+            else {
+                   break ; 
+            }
+            
+		}
+		try {
+			ss.connection.close();
+			rs.connection.close();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public  boolean doStart() {//实际执行启动activeMq 的地方		
+		if (FileTool.isExistFile(basePath+"activemq.bat")) {
+			File f = new File(basePath+"activemq.bat");
+			f=f.getAbsoluteFile();
+			String path=f.getAbsolutePath();
+			BufferedReader bReader=null;
+	        InputStreamReader sReader=null;
+			try {				
+				Process p = Runtime.getRuntime().exec("cmd.exe /c start "+path);				
+				sReader = new InputStreamReader(p.getInputStream(),"GBK");
+				bReader=new BufferedReader(sReader);				
+				String str=null;
+				while( (str=bReader.readLine()) !=null){
+					System.out.println("--------");
+					if(str.indexOf(successStr)!=-1){
+						System.out.println("启动成功");
+						return true;
+					}
+				}				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}		
+		}
+		return false;
+	}
+	
+	//判断服务器是否已经启动
+	public boolean isStart(){
+		
+		
+		
+		return false;
+	}
+	
+	
+}
+

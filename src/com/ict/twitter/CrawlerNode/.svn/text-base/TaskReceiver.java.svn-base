@@ -1,0 +1,55 @@
+package com.ict.twitter.Node;
+
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.TextMessage;
+
+import com.ict.twitter.MessageBus.Receiver;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.SimpleXmlAnalyser;
+
+public class TaskReceiver extends Receiver {
+
+	public TaskReceiver(String queue, Node _node) {
+		super(queue, _node,false);
+		// TODO Auto-generated constructor stub
+	}
+	public void onMessage(Message resmsg) {
+		TextMessage txt=(TextMessage)resmsg;
+		try {
+			System.out.println("【NODE】从任务总线接收到消息"+txt.getText());
+			if(isNode){//当前接收方为NODE;
+				Task t=getTask(txt.getText());	
+				node.doTask(t);
+			}else{
+				
+			}
+			
+			
+			
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		commitMessage();
+		
+	}
+	public Task getTask(String mes){
+		Task t=new Task();
+		String str=mes;
+		if(str==null){			
+			System.out.println("没有任务可以工作了");
+			return null;
+		}
+		SimpleXmlAnalyser simxml=new SimpleXmlAnalyser(str);		
+		String first=simxml.getFirstValueByTag("type");		
+		String valuestr=simxml.getFirstValueByTag("value");
+		t.setOwnType(TaskType.fromString(first));
+		t.setTargetString(valuestr);
+		return t;
+	}
+	
+	
+
+}

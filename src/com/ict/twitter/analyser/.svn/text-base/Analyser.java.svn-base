@@ -1,0 +1,35 @@
+package com.ict.twitter.analyser;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+public abstract class Analyser {
+	
+	public Document doc=null;
+	public Analyser(){
+		
+	}
+	public void InitiallizeFromString(String htmlString){		
+		doc=Jsoup.parse(htmlString);	
+	}
+	public boolean initaiallizeFromFile(String string, String charsetName, String baseUri){
+		if (charsetName==""){
+			charsetName="utf-8";
+		}
+		try {
+			File myFile=new File(string);
+			doc=Jsoup.parse(myFile, charsetName, baseUri);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	//实际的分析类
+	public abstract void doAnalyse();
+
+}

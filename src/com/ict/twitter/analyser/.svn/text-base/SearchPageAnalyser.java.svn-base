@@ -1,0 +1,64 @@
+package com.ict.twitter.analyser;
+
+import java.util.Vector;
+
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import com.ict.twitter.analyser.beans.TimeLine;
+import com.ict.twitter.analyser.beans.UserRelationship;
+import com.ict.twitter.tools.DbOperation;
+
+public class SearchPageAnalyser extends Analyser {
+
+	
+
+	Vector<TimeLine> relativeTimeLine;
+	
+	
+	@Override
+	public void doAnalyse() {
+		if(this.doc==null){
+			System.out.println("【doc尚未初始化】");
+			return;
+		}else{
+			System.out.println("【SearchPage分析开始】");
+		}
+		
+		AnalyserSearchPage();
+		System.out.println("【SearchPage分析结束】");
+	}
+	public void AnalyserSearchPage(){
+		DbOperation dbOper=new DbOperation();		
+		relativeTimeLine=new Vector<TimeLine>(10);
+		Elements all=null;
+		try{
+			all=doc.getElementsByClass("list-tweet");
+		}catch(NullPointerException e){
+			e.printStackTrace();
+			return;
+		}
+		for(Element e:all){
+			TimeLine timeline=new TimeLine();
+			String id=e.attr("id");
+			String author=e.select("div span strong a").first().text();
+			String content=e.select("span.status ").first().ownText();
+			String date=e.getElementsByClass("list-tweet-status").first().getElementsByTag("a").first().ownText();
+			timeline.setId(id);
+			timeline.setAuthor(author);
+			timeline.setContent(content);
+			timeline.setDate(date);
+			//timeline.show();
+			String sqlStr=timeline.getString();
+			boolean res=dbOper.insert(sqlStr);
+			if(res){
+				relativeTimeLine.add(timeline);
+			}
+		}
+		System.out.println("本次关键词对应的个数"+all.size());
+	}
+	public Vector<TimeLine> getRelativeTimeLine() {
+		return relativeTimeLine;
+	}
+
+}

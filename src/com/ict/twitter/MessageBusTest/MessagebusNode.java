@@ -1,0 +1,9 @@
+package com.ict.twitter.MessageBusTest;
+
+/**
+ * @author µ•º»œ≤
+ *
+ */
+public interface MessagebusNode {
+
+}
