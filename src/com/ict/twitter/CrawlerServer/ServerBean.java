@@ -74,11 +74,8 @@ public class ServerBean implements Serializable{
 		//加入KeyWordsSearch发现的关键用户		
 		for(NormalUser nu:keyUsers){
 			res.add(nu.userID);
-		}	
-		
-		
-		for(String t:res){
-			
+		}			
+		for(String t:res){			
 			Task task=new Task();
 			task.setOwnType(TaskType.TimeLine);
 			task.setTargetString(t);
