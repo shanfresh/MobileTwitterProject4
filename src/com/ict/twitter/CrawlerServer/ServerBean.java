@@ -81,7 +81,7 @@ public class ServerBean implements Serializable{
 			task.setTargetString(t);
 			server.addTask(task);
 			
-			task=new Task();
+			task=new Task(); 
 			task.setOwnType(TaskType.Following);
 			task.setTargetString(t);
 			server.addTask(task);
@@ -89,7 +89,12 @@ public class ServerBean implements Serializable{
 			task=new Task();
 			task.setOwnType(TaskType.Followers);
 			task.setTargetString(t);
-			server.addTask(task);			
+			server.addTask(task);
+			
+			task=new Task();
+			task.setOwnType(TaskType.About);
+			task.setTargetString(t);
+			server.addTask(task);	
 		}
 		
 		
@@ -122,6 +127,8 @@ public class ServerBean implements Serializable{
 			task.setOwnType(TaskType.Following);
 			server.addTask(task);
 			task.setOwnType(TaskType.Followers);
+			server.addTask(task);
+			task.setOwnType(TaskType.About);
 			server.addTask(task);
 		}
 		int size=normalUserList.size();

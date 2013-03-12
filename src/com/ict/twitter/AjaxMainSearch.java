@@ -48,7 +48,8 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 		AjaxFollowCrawl followerCrawl=new AjaxFollowCrawl(this.httpclient,false);
 		followerCrawl.isFollowing=false;
 		AjaxSearchCrawl searchCrawl=new AjaxSearchCrawl(this.httpclient);
-		AjaxTimeLineCrawl timelineCrawl=new AjaxTimeLineCrawl(this.httpclient);		
+		AjaxTimeLineCrawl timelineCrawl=new AjaxTimeLineCrawl(this.httpclient);	
+		AjaxProfileCrawl profileCrawl = new AjaxProfileCrawl(this.httpclient);
 		MulityInsertDataBase batchdb =  new MulityInsertDataBase();
 		try{
 			while(true){
@@ -77,6 +78,9 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 					case TimeLine:{
 						timelineCrawl.doCrawl(task.getTargetString(),batchdb,users);
 						break;
+					}
+					case About:{
+						profileCrawl.doCrawl(task.getTargetString(), batchdb, users);
 					}
 					default:{
 						LogSys.nodeLogger.error("未知的TaskType数据类型 exit");
