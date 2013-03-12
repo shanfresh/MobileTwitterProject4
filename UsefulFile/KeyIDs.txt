@@ -1,3 +1,0 @@
-networktest1
-networktest2
-l_wxy
