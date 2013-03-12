@@ -3,7 +3,7 @@ package com.ict.twitter.CrawlerNode;
 import java.util.Timer;
 import java.util.Vector;
 
-import com.ict.twitter.MainSearch;
+import com.ict.twitter.AjaxMainSearch;
 import com.ict.twitter.CrawlerMessage.MessageBusComponent;
 import com.ict.twitter.MessageBus.GetAceiveMqConnection;
 import com.ict.twitter.MessageBus.MessageBusNames;
@@ -96,13 +96,8 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 		}
 
 	}
-	protected void startMainSearch(){
-		MainSearch ms=new MainSearch(this,isProxy);
-		Thread mainThread=new Thread(ms);
-		mainThread.setName("MainSearchThread-"+this.NodeName+"");
-		mainThread.start();	
-		
-	}
+	protected abstract void startMainSearch();
+	
 	//添加新的值
 	public void ModifyReportMessageByType(ReportDataType rpt,int count){
 		switch (rpt){
