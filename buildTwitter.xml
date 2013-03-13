@@ -25,7 +25,7 @@
          - - - - - - - - - - - - - - - - - -->
     <target name="depends">
     	<delete dir="${basedir}/build/classes"/>
-    	<delete >
+    	<delete failonerror="false" >
     		<fileset dir="${basedir}/build/lib">
 		    	<include name="*.jar"/>
 		    </fileset>
@@ -33,13 +33,19 @@
     		</fileset>
     		<fileset dir="${basedir}/build/UsefulFile">    			
     		</fileset>
+    		<fileset dir="${basedir}/build/Output">
+    		</fileset>
+    		<fileset dir="${basedir}/build/mainlog">
+    		</fileset>
     	</delete>    	    	
     	<echo message="Clean build Start Build"/>
     	<mkdir dir="${basedir}/build/classes"/> 
     	<mkdir dir="${basedir}/build/mainlog"/>    	
     	<copydir dest="${basedir}/build/config" src="${basedir}/config"></copydir>
     	<copydir dest="${basedir}/build/UsefulFile" src="${basedir}/UsefulFile"></copydir>
-    		<copy file="${basedir}/runNodes.bat" tofile="${basedir}/build/runNodes.bat" />
+    	<copydir dest="${basedir}/build/Output" src="${basedir}/Output"></copydir>
+    	    	
+    	<copy file="${basedir}/runNodes.bat" tofile="${basedir}/build/runNodes.bat" />
     	<copy file="${basedir}/runServer.bat" tofile="${basedir}/build/runServer.bat" />
     </target>
 	<target name="build">
