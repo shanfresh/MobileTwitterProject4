@@ -59,7 +59,6 @@ public class WebOperationAjax {
 	
 	
 	private  static String openLink(DefaultHttpClient httpclient,String linkAddress) throws RuntimeException{
-		String logFileBase=base+"/UsefulFile/Testdata/";
 		URI uri=null;
 		HttpGet httpget=null;
 		int questIndex=linkAddress.indexOf('?');
@@ -92,7 +91,6 @@ public class WebOperationAjax {
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);		
 		StringBuffer sb=new StringBuffer();
-		String result=null;
 		HttpResponse response = null;
 		try {
 			response = httpclient.execute(targetHost, httpget, localcontext);
@@ -209,9 +207,7 @@ public class WebOperationAjax {
 		for(int i=0;i<source.length()-1;i++){
 			if(source.charAt(i)=='\\'&&source.charAt(i+1)=='u'){
 				String t="0x"+source.substring(i+2,i+6);
-				byte bt=Byte.decode(t);
-				
-				
+				byte bt=Byte.decode(t);				
 			}
 		}
 		return temp;

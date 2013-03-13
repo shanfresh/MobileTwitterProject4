@@ -106,10 +106,10 @@ public class JPanelInfo extends JPanel {
 	private JPanel getStatusPanel(int _status){
 		if (zPanel == null) {
 			zPanel=new ZPanel();
-			 String path="UsefulFile/red.jpg";
-			 String red="UsefulFile/red.jpg";
-			 String green="UsefulFile/green.jpg";
-			 String yellow="UsefulFile/yellow.jpg";
+			 String path="UsefulFile/Image/red.jpg";
+			 String red="UsefulFile/Image/red.jpg";
+			 String green="UsefulFile/Image/green.jpg";
+			 String yellow="UsefulFile/Image/yellow.jpg";
 			 switch (_status){
 			 case 0:
 				 path=red;

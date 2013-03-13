@@ -95,7 +95,7 @@ public class TwitterLoginManager {
 			HttpGet httpget = new HttpGet("https://twitter.com/");
 			HttpResponse response = httpclient.execute(httpget);
 	        HttpEntity entity = response.getEntity();
-	        String content=SaveToHtml(entity,"UsefulFile/LogBefore.html");
+	        String content=SaveToHtml(entity,"Output/Twitter/LogBefore.html");
 	        String token=null;
 	        if(content!=null)
 	        	token=this.getToken(content);
@@ -122,7 +122,7 @@ public class TwitterLoginManager {
 
             response = httpclient.execute(httpost);
             entity = response.getEntity();
-            SaveToHtml(entity,"UsefulFile/LogAfter.html");
+            SaveToHtml(entity,"Output/Twitter/LogAfter.html");
             LogSys.nodeLogger.debug("Login form get: " + response.getStatusLine());
             EntityUtils.consume(entity);
             LogSys.nodeLogger.debug("Post logon cookies:");
@@ -147,9 +147,9 @@ public class TwitterLoginManager {
             }
             if(logined){
             	MyCookieStore mycookiestore = (MyCookieStore) httpclient.getCookieStore();
-                mycookiestore.savetofile("UsefulFile/TwitterLoginCookie.dat");
+                mycookiestore.savetofile("Output/Twitter/TwitterLoginCookie.dat");
             }else{
-            	File f =  new File("UsefulFile/TwitterLoginCookie.dat");
+            	File f =  new File("Output/Twitter/TwitterLoginCookie.dat");
             	if(f!=null&&f.exists()&&f.isFile()){
             		f.delete();
             	}
@@ -224,7 +224,7 @@ public class TwitterLoginManager {
 	public boolean reLogin(){
 		try{
 			 MyCookieStore mycookiestore = new MyCookieStore();
-			 mycookiestore.resume("UsefulFile/TwitterLoginCookie.dat");
+			 mycookiestore.resume("Output/Twitter/TwitterLoginCookie.dat");
 			 httpclient.setCookieStore(mycookiestore);
 			 if(this.checkLoginStatus()){
 				 LogSys.nodeLogger.info("»Ö¸´µÇÂ¼×´Ì¬³É¹¦");
@@ -252,7 +252,7 @@ public class TwitterLoginManager {
 			StatusLine state =response.getStatusLine();
 			int stateCode=state.getStatusCode();
 			if(HttpStatus.SC_OK==stateCode){
-				String res=SaveToHtml(response.getEntity(),"UsefulFile\\CheckLogin.html");
+				String res=SaveToHtml(response.getEntity(),"Output/Twitter/CheckLogin.html");
 				if(res.contains("We gotta check... are you human?")||res.contains("Sign in to Twitter")||
 								res.contains("<form action=\"https://twitter.com/sessions\"")
 								){

@@ -31,7 +31,7 @@ public class FBWebOperation {
 	/**
 	 * @param args
 	 */
-	public static final String logFileBase="UsefulFile\\Facebook\\";
+	public static final String logFileBase="Output\\Facebook\\";
 	public static String logFile="chichao.chen.77_timeline_2012_fb_noscript=1.html";
 	public static DefaultHttpClient httpclient = null;
 	public static String openLink(String linkAddress) {

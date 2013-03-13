@@ -34,7 +34,7 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	private boolean ReportNullFlag=false;
 	
 	
-	public SaveTxtFile svt=new SaveTxtFile("UsefulFile/newMinganci.txt",true);
+	public SaveTxtFile svt=new SaveTxtFile("Output/Twitter/newMinganci.txt",true);
 	public ReportData rpdata;
 	//----------------------------------------------------------------------
 	//普通用户信息发送
@@ -120,7 +120,7 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	
 	private void readProperties() throws Exception{
 		String base=BasePath.getBase();
-		ReadTxtFile rxf=new ReadTxtFile(base+"/UsefulFile/myproperties.txt");
+		ReadTxtFile rxf=new ReadTxtFile(base+"/config/clientproperties.ini");
 		Vector<String> pro=rxf.read();
 		for(String t:pro){
 			if(t.startsWith("http.isProxy")){

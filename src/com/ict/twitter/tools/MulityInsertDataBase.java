@@ -249,7 +249,7 @@ public class MulityInsertDataBase {
 			rs.next();
 			InputStream ins=rs.getBinaryStream(1);
 			
-			File f=new File("UsefulFile/Twitter/test.jpg");
+			File f=new File("Output/Twitter/take_picture_fromdatabase.jpg");
 			if(!f.exists())
 				f.createNewFile();
 			FileOutputStream fos=new FileOutputStream(f);

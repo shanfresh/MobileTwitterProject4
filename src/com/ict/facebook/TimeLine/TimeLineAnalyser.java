@@ -16,7 +16,7 @@ public class TimeLineAnalyser {
 	private JSONParser parser=new JSONParser();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ReadTxtFile rtf=new ReadTxtFile("UsefulFile\\Facebook\\TimeLine.html");
+		ReadTxtFile rtf=new ReadTxtFile("UsefulFile/Facebook/TimeLine.html");
 		String src=rtf.read().get(0);
 		TimeLineAnalyser ana=new TimeLineAnalyser();
 		try {

@@ -33,7 +33,7 @@ public class WebOperation {
 	
 	//"/searches?page=1&q='"+targetString+"'";
 	public  static String openLink(DefaultHttpClient httpclient,String linkAddress){
-		String logFileBase=base+"/UsefulFile/Testdata/";
+		String logFileBase=base+"/Output/Twitter/";
 		URI uri=null;
 		HttpGet httpget=null;
 		int questIndex=linkAddress.indexOf('?');

@@ -51,12 +51,5 @@ public class ReadTxtFile {
 		return res;
 	}
 	
-	public static void main(String[] args){
-		ReadTxtFile rxt=new ReadTxtFile("UsefulFile\\KeyIDs.txt");
-		Vector<String> res=rxt.read();
-		for(String t:res){
-			System.out.println(t);
-		}
-	}
 
 }

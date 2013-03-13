@@ -187,7 +187,7 @@ public class CrawlerServer  extends MessageBusComponent implements Runnable,Mess
 		this.TellNodeToPause();
 		//等待确认---miss
 		CrawlerServerDumper crawlerDumper=new CrawlerServerDumper(this);
-		if(crawlerDumper.TaskSaver("UsefulFile\\Facebook\\TaskDump.dat"))
+		if(crawlerDumper.TaskSaver("Output\\Facebook\\TaskDump.dat"))
 			LogSys.crawlerServLogger.info("Success To Save Task To File");
 		else{
 			LogSys.crawlerServLogger.info("Fail To Save Task To File");
@@ -196,7 +196,7 @@ public class CrawlerServer  extends MessageBusComponent implements Runnable,Mess
 		/*保存当前状态
 		 * Status;ServerBean;
 		*/
-		if(crawlerDumper.OtherStatusSaver("UsefulFile\\Facebook\\OtherStatusDump.dat"))
+		if(crawlerDumper.OtherStatusSaver("Output\\Facebook\\OtherStatusDump.dat"))
 			LogSys.crawlerServLogger.info("Success To Save Status To File");
 		else{
 			LogSys.crawlerServLogger.info("Fail To Save Status To File");
@@ -212,13 +212,13 @@ public class CrawlerServer  extends MessageBusComponent implements Runnable,Mess
 		LogSys.crawlerServLogger.info("采集器恢复完成开始运行");
 		this.TellNodeToPause();
 		CrawlerServerDumper crawlerDumper=new CrawlerServerDumper(this);
-		if(crawlerDumper.TaskResume("UsefulFile\\Facebook\\TaskDump.dat"))
+		if(crawlerDumper.TaskResume("Output\\Facebook\\TaskDump.dat"))
 			LogSys.crawlerServLogger.info("Success To Resume Task From File To CrawlServer");
 		else{
 			LogSys.crawlerServLogger.error("Fail To Resume Task From File To CrawlServer");
 			return false;
 		}
-		if(crawlerDumper.OtherStatusResumer("UsefulFile\\Facebook\\OtherStatusDump.dat"))
+		if(crawlerDumper.OtherStatusResumer("Output\\Facebook\\OtherStatusDump.dat"))
 			LogSys.crawlerServLogger.info("Success To Resume Status From File To CrawlServer");		
 		else{
 			LogSys.crawlerServLogger.error("Fail To Resume Status From File To CrawlServer");

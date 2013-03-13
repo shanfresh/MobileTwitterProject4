@@ -25,7 +25,7 @@ public class CrawlerServerDumper {
 	
 	public static void main(String[] args) {
 		CrawlerServerDumper cd =  new CrawlerServerDumper(null);
-		cd.TaskSaver("UsefulFile\\Facebook\\TaskDump.dat");
+		cd.TaskSaver("Output\\Facebook\\TaskDump.dat");
 
 	}
 	public CrawlerServerDumper(CrawlerServer server){
@@ -38,7 +38,7 @@ public class CrawlerServerDumper {
 		Vector<Task> vector=new Vector<Task>();
 		String filePath=fileName;
 		if(filePath==null){
-			filePath="UsefulFile\\Facebook\\TaskDump.dat";
+			filePath="Output\\Facebook\\TaskDump.dat";
 		}
 		FileInputStream fis;
 		ObjectInputStream ois=null;
@@ -99,7 +99,7 @@ public class CrawlerServerDumper {
 		
 		String filePath=fileName;
 		if(filePath==null){
-			filePath="UsefulFile\\Facebook\\TaskDump.dat";
+			filePath="Output\\Facebook\\TaskDump.dat";
 		}
 		LogSys.crawlerServLogger.debug("~~~NE22W~~~");
 		FileOutputStream fos;
@@ -128,7 +128,7 @@ public class CrawlerServerDumper {
 			ex.printStackTrace();
 			return false;
 		}finally{
-			System.out.println("向总线中读取并保存到文件中Task 数目:"+count+"\t"+"FileName:UsefulFile\\Facebook\\TaskDump.dat");
+			LogSys.crawlerServLogger.info("向总线中读取并保存到文件中Task 数目:"+count+"\t"+"FileName:Output\\Facebook\\TaskDump.dat");
 			try {
 				connection.close();
 				oos.flush();
@@ -149,7 +149,7 @@ public class CrawlerServerDumper {
 	
 	public boolean OtherStatusSaver(String filePath){
 		if(filePath==null){
-			filePath="UsefulFile\\Facebook\\OtherStatusDump.dat";
+			filePath="Output\\Facebook\\OtherStatusDump.dat";
 		}
 		FileOutputStream fos;
 		ObjectOutputStream oos=null;
@@ -178,7 +178,7 @@ public class CrawlerServerDumper {
 	}
 	public boolean OtherStatusResumer(String filePath){
 		if(filePath==null){
-			filePath="UsefulFile\\Facebook\\OtherStatusDump.dat";
+			filePath="Output\\Facebook\\OtherStatusDump.dat";
 		}
 		FileInputStream fis;
 		ObjectInputStream ois=null;

@@ -23,8 +23,8 @@ public class ServerBean implements Serializable{
 	private static final long serialVersionUID = -9133824015130047653L;
 	public static String aname="~~~~";
 	public static boolean isFirstChuizhi=true;
-	public static SaveTxtFile tmpKeyId=new SaveTxtFile("UsefulFile/tmpKeyIDs.txt",false);
-	public static SaveTxtFile tmpNormalId=new SaveTxtFile("UsefulFile/NormalIDs.txt",false);
+	public static SaveTxtFile tmpKeyId=new SaveTxtFile("Output/Twitter/tmpKeyIDs.txt",false);
+	public static SaveTxtFile tmpNormalId=new SaveTxtFile("Output/Twitter/NormalIDs.txt",false);
 	List<NormalUser> normalUserList=Collections.synchronizedList(new UserList<NormalUser>());
 	List<NormalUser> keyUsers=Collections.synchronizedList(new UserList<NormalUser>());	
 	boolean isdebug=true;
@@ -191,22 +191,8 @@ public class ServerBean implements Serializable{
 		
 	}
 	
-	public static void main(String [] args){
-		ServerBean sb = new ServerBean();
-		try {
-			ObjectOutputStream oop=new ObjectOutputStream(new FileOutputStream("UsefulFile\\Facebook\\shanjixi.bat"));
-			oop.writeObject(sb);
-			oop.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	private void CreateNewNormalUserFile(int deepth){
-		String filename=String.format("UsefulFile/NormalIDs_deepth_%s.txt", deepth);
+		String filename=String.format("Output/Twitter/NormalIDs_deepth_%s.txt", deepth);
 		tmpNormalId=new SaveTxtFile(filename,false);
 	}
 	

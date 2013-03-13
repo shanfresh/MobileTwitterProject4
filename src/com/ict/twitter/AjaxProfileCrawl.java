@@ -95,7 +95,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 	
 	private void saveByteToImageFile(String fileName,byte[] data){
 		try {
-			FileOutputStream fos = new FileOutputStream(new File("UsefulFile/Twitter/"+fileName));
+			FileOutputStream fos = new FileOutputStream(new File("Output/Twitter/"+fileName));
 			fos.write(data);
 			fos.close();
 		} catch (FileNotFoundException e) {

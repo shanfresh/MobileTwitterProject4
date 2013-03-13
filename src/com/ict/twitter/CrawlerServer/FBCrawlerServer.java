@@ -100,7 +100,7 @@ public class FBCrawlerServer extends CrawlerServer {
 	//采集种子用户信息的任务
 	@Override
 	public void ChuizhiCaiji(){							
-		String filelocation=basepath+"/UsefulFile/FBKeyIDs.txt";
+		String filelocation=basepath+"/UsefulFile/Facebook/FBKeyIDs.txt";
 		sb.InitChuizhi(filelocation, this,isFirstChuiZhi);
 		SleepWithCount(5000);
 		sendNewStep(NodeStep.keyuser_start);		
