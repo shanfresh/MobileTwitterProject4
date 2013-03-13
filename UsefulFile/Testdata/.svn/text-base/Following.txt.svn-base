@@ -1,0 +1,710 @@
+<html>
+<head>
+<script type="text/javascript">
+//<![CDATA[
+if (window.top !== window.self) {document.write = "";window.top.location = window.self.location; setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
+
+//]]>
+</script>
+<link href="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/base.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/desktop.css" media="screen" rel="stylesheet" type="text/css" />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/apple-touch-icon-114.png' rel='apple-touch-icon-precomposed' />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/ic_fav_alpha_32.png' rel='icon' type='image/png' />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/startup.png' rel='apple-touch-startup-image' />
+<title>
+Twitter
+</title>
+<meta content='True' name='HandheldFriendly' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+</head>
+<body class='  ' data-csrf-token='06c9db76b1f1eb39205a' data-short-url-length-https='21' data-short-url-length='20'>
+<div id='main'>
+<div class='timeline-head'>
+<div></div>
+<a href="https://mobile.twitter.com/"><img alt="Twitter" class="logo" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/logo.gif" /></a>
+<span><a href="https://mobile.twitter.com/" id="home_link">&rarr;Home</a></span>
+</div>
+<br clear='all' id='begin-warning' />
+<div class='timeline-user-friend'>
+<div class='timeline-user-following'></div>
+<a href="https://mobile.twitter.com/networktest1"><img alt="赵刚" class="list-tweet-img" lowend_override="true" src="https://si0.twimg.com/profile_images/1816953883/11_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div class='user-screen-name'>
+<strong>networktest1</strong>
+(赵刚)
+</div>
+<div class='timeline-following'>
+<a href="https://mobile.twitter.com/networktest1/following">Following:24</a>
+&nbsp;
+<a href="https://mobile.twitter.com/networktest1/followers">Followers:1</a>
+</div>
+</div>
+<div class='friend-actions'>
+<form action="https://mobile.twitter.com/networktest1/follow" class="user_button" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="06c9db76b1f1eb39205a" /></div>
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn" id="networktest1" type="submit"><div class="friend-actions-btn-inner"><img alt="Ic_follow" class="button_icon" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_follow.gif" /><span>Follow</span></div></button>
+</form>
+
+<form action="https://mobile.twitter.com/networktest1/block" class="user_button" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="06c9db76b1f1eb39205a" /></div>
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn" id="" type="submit"><div class="friend-actions-btn-inner"><img alt="Ic_block" class="button_icon" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_block.gif" /><span>Block</span></div></button>
+</form>
+
+</div>
+</div>
+<div class='timeline-header-friend' style='text-align: left'>
+<a href="https://mobile.twitter.com/networktest1" class="">Tweets</a>
+<a href="https://mobile.twitter.com/networktest1/favorites" class="">Favs</a>
+<a href="https://mobile.twitter.com/networktest1/messages" class="">Msgs</a>
+<a href="https://mobile.twitter.com/networktest1/about" class="">About</a>
+</div>
+
+
+<div class='timeline-friend followers'>
+<div class='list-tweet-head'>
+Who networktest1 follows
+<div class='span' style='float:right;'><a href="https://mobile.twitter.com/search/users">Find people</a></div>
+</div>
+<a name='Adam_WK'></a>
+<div class='list-tweet' id='user_Adam_WK'>
+<a href="https://mobile.twitter.com/adam_wk"><img alt="Adam Kemp" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1183681130/n693005150_6429282_1705188_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/Adam_WK" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/adam_wk">Adam_WK</a></strong>
+<br />
+Adam Kemp
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Turds</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/adam_wk/status/180516480008470528" class="status_link">about 3 hours ago</a>
+</div>
+</div>
+</div>
+<a name='MagicJohnson'></a>
+<div class='list-tweet' id='user_MagicJohnson'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/MagicJohnson" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<br />
+Earvin Magic Johnson
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Good luck to my Spartans tomorrow against LIU Brooklyn.</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180455995846295553" class="status_link">about 7 hours ago</a>
+</div>
+</div>
+</div>
+<a name='JaredAllen69'></a>
+<div class='list-tweet' id='user_JaredAllen69'>
+<a href="https://mobile.twitter.com/jaredallen69"><img alt="Jared Allen" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1511599275/image_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/JaredAllen69" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/jaredallen69">JaredAllen69</a></strong>
+<br />
+Jared Allen
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Howdy everyone, follow my old coach Bruce Barnum @<a href="/coachbarnum69">coachbarnum69</a> . He is the man…</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/jaredallen69/status/175281445433114624" class="status_link">15 days ago</a>
+</div>
+</div>
+</div>
+<a name='MsPotts_ESPN'></a>
+<div class='list-tweet' id='user_MsPotts_ESPN'>
+<a href="https://mobile.twitter.com/mspotts_espn"><img alt="Keri Potts" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1158944224/Copy_of_headshotsmall2_normal.JPG" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/MsPotts_ESPN" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/mspotts_espn">MsPotts_ESPN</a></strong>
+<br />
+Keri Potts
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Anytime, Whit MT @<a href="/whittlz">whittlz</a>: I want @<a href="/MsPotts_ESPN">MsPotts_ESPN</a> to know I picked Cuse in support of her and before I knew Fab was ineligible. thanks, Keri.</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/mspotts_espn/status/180461818458808320" class="status_link">about 7 hours ago</a>
+</div>
+</div>
+</div>
+<a name='stanverrett'></a>
+<div class='list-tweet' id='user_stanverrett'>
+<a href="https://mobile.twitter.com/stanverrett"><img alt="stan verrett" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1640216214/stan_normal.png" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/stanverrett" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/stanverrett">stanverrett</a></strong>
+<br />
+stan verrett
+</div>
+<div class='list-inner-tweet'>
+<span class="status">@<a href="/RealDlHughley">RealDlHughley</a> man I gotta catch you. All your followers say you're killing em right now. I can only imagine you going in on the campaigns</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/stanverrett/status/180560110203047936" class="status_link">35 minutes ago</a>
+</div>
+</div>
+</div>
+<a name='davidpollack47'></a>
+<div class='list-tweet' id='user_davidpollack47'>
+<a href="https://mobile.twitter.com/davidpollack47"><img alt="David Pollack " class="list-tweet-img" src="https://si0.twimg.com/profile_images/1675842018/Your_Boy_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/davidpollack47" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/davidpollack47">davidpollack47</a></strong>
+<br />
+David Pollack 
+</div>
+<div class='list-inner-tweet'>
+<span class="status">"This is pointless,this guy is fried"<br />And his entire team has escaped except him, take a look around &amp; make sure he's alone."<br />#NameThatMovie</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/davidpollack47/status/180476920700485633" class="status_link">about 6 hours ago</a>
+</div>
+</div>
+</div>
+<a name='CassidyHubbarth'></a>
+<div class='list-tweet' id='user_CassidyHubbarth'>
+<a href="https://mobile.twitter.com/cassidyhubbarth"><img alt="Cassidy Hubbarth" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1727786310/image_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/CassidyHubbarth" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/cassidyhubbarth">CassidyHubbarth</a></strong>
+<br />
+Cassidy Hubbarth
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Don't know how far they'll go but Long Beach State, hands down, has the best unis in the tourney. <a href="/searches?q=%23thebeach">#thebeach</a> <a href="/searches?q=%23strong">#strong</a></span>
+</div>
+<div class='list-tweet-status'>
+<a href="/cassidyhubbarth/status/180394029668773888" class="status_link">about 12 hours ago</a>
+</div>
+</div>
+</div>
+<a name='griersonleitch'></a>
+<div class='list-tweet' id='user_griersonleitch'>
+<a href="https://mobile.twitter.com/griersonleitch"><img alt="Grierson &amp; Leitch" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1734629912/Woody_Allen_02_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/griersonleitch" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/griersonleitch">griersonleitch</a></strong>
+<br />
+Grierson &amp; Leitch
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Nobody enjoys the art of the well-played WTF moment more than Will Ferrell. @<a href="/timgrierson">timgrierson</a> on the comic's loopy career: <a href="http://t.co/nEaqntqI" target="_blank">http://t.co/nEaqntqI</a></span>
+</div>
+<div class='list-tweet-status'>
+<a href="/griersonleitch/status/180464793872896002" class="status_link">about 7 hours ago</a>
+</div>
+</div>
+</div>
+<a name='LegsESPN'></a>
+<div class='list-tweet' id='user_LegsESPN'>
+<a href="https://mobile.twitter.com/legsespn"><img alt="Timothy Legler" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1740419694/image_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/LegsESPN" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/legsespn">LegsESPN</a></strong>
+<br />
+Timothy Legler
+</div>
+<div class='list-inner-tweet'>
+<span class="status">@<a href="/Kid_Name_Trey">Kid_Name_Trey</a> he definitely is. Along with Lebron and Durant</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/legsespn/status/180372963470749696" class="status_link">about 13 hours ago</a>
+</div>
+</div>
+</div>
+<a name='DShulman_ESPN'></a>
+<div class='list-tweet' id='user_DShulman_ESPN'>
+<a href="https://mobile.twitter.com/dshulman_espn"><img alt="Dan Shulman" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1283948254/shu11_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/DShulman_ESPN" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/dshulman_espn">DShulman_ESPN</a></strong>
+<br />
+Dan Shulman
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Stuck in an airport, flight delayed, told not to leave gate area, no TV in vicinity. <a href="/searches?q=%23grrr">#grrr</a> <a href="/searches?q=%23marchmadness">#marchmadness</a></span>
+</div>
+<div class='list-tweet-status'>
+<a href="/dshulman_espn/status/180425604053745664" class="status_link">about 10 hours ago</a>
+</div>
+</div>
+</div>
+<a name='LuisPaz001'></a>
+<div class='list-tweet' id='user_LuisPaz001'>
+<a href="https://mobile.twitter.com/luispaz001"><img alt="Luis Pablo" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1887316541/SAM_2524_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/LuisPaz001" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/luispaz001">LuisPaz001</a></strong>
+<br />
+Luis Pablo
+</div>
+<div class='list-inner-tweet'>
+
+</div>
+<div class='list-tweet-status'>
+
+</div>
+</div>
+</div>
+<a name='minzhuqiang'></a>
+<div class='list-tweet' id='user_minzhuqiang'>
+<a href="https://mobile.twitter.com/minzhuqiang"><img alt="yuejing216" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1592352409/______normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/minzhuqiang" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/minzhuqiang">minzhuqiang</a></strong>
+<br />
+yuejing216
+</div>
+<div class='list-inner-tweet'>
+<span class="status">[体育]福布斯排行榜:许家印中国第5 58亿美元地产界居首(03/16 15:37) <a href="http://t.co/p9uCnL1p" target="_blank">http://t.co/p9uCnL1p</a></span>
+</div>
+<div class='list-tweet-status'>
+<a href="/minzhuqiang/status/180563846036078592" class="status_link">20 minutes ago</a>
+</div>
+</div>
+</div>
+<a name='xueming201111'></a>
+<div class='list-tweet' id='user_xueming201111'>
+<a href="https://mobile.twitter.com/xueming201111"><img alt="安静火" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1800268021/NJU__J7Y_M_S_T2LNA_Z7CM_normal.gif" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/xueming201111" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/xueming201111">xueming201111</a></strong>
+<br />
+安静火
+</div>
+<div class='list-inner-tweet'>
+<span class="status">@<a href="/xueming">xueming</a>#qianjin [社会]吸毒者针扎多名儿童 欲散播艾滋谣言被批捕(03/16 14:58) - 　　“针刺传染艾滋”散播谣言
+ 
+ 　　涉嫌危害公共安全嫌疑人被批捕前，城关区检察院提前介入该案侦查
+ 
+ 　　每日甘... <a href="http://t.co/ci5VkIsX" target="_blank">http://t.co/ci5VkIsX</a></span>
+</div>
+<div class='list-tweet-status'>
+<a href="/xueming201111/status/180555407822041090" class="status_link">about 1 hour ago</a>
+</div>
+</div>
+</div>
+<a name='CNNMoney'></a>
+<div class='list-tweet' id='user_CNNMoney'>
+<a href="https://mobile.twitter.com/cnnmoney"><img alt="CNNMoney.com" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1344702851/fb_cnnmoney_new_logo_avatar_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/CNNMoney" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/cnnmoney">CNNMoney</a></strong>
+<br />
+CNNMoney.com
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Hanky Panky is one of very few apparel makers that makes its lingerie in America. Inside the panty factory: <a href="http://t.co/d5gML3Hc" target="_blank">http://t.co/d5gML3Hc</a></span>
+</div>
+<div class='list-tweet-status'>
+<a href="/cnnmoney/status/180488709840453632" class="status_link">about 5 hours ago</a>
+</div>
+</div>
+</div>
+<a name='oreelAP'></a>
+<div class='list-tweet' id='user_oreelAP'>
+<a href="https://mobile.twitter.com/oreelap"><img alt="Orel Aguilar" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1812150177/269553_232722773427737_100000700476282_771132_4635391_n_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/oreelAP" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/oreelap">oreelAP</a></strong>
+<br />
+Orel Aguilar
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Oye ya viste? Que casualidaad -Queeee? -traemos la misma ropa! PENDEJA! Traemos el uniforme de la escuelaa!</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/oreelap/status/180525640397750274" class="status_link">about 3 hours ago</a>
+</div>
+</div>
+</div>
+<a name='ChileTeVe'></a>
+<div class='list-tweet' id='user_ChileTeVe'>
+<a href="https://mobile.twitter.com/chileteve"><img alt="ChileTeVe" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1616690006/chileasastsaddsdsadsa_normal.JPG" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/ChileTeVe" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/chileteve">ChileTeVe</a></strong>
+<br />
+ChileTeVe
+</div>
+<div class='list-inner-tweet'>
+<span class="status">Kike Acuña llorando en <a href="/searches?q=%23MentirasVerdaderas">#MentirasVerdaderas</a> y de fondo suena Sigur Rós... <a href="/searches?q=%23MOTHEROFGOD">#MOTHEROFGOD</a></span>
+</div>
+<div class='list-tweet-status'>
+<a href="/chileteve/status/179773930956001281" class="status_link">2 days ago</a>
+</div>
+</div>
+</div>
+<a name='JaideNichole'></a>
+<div class='list-tweet' id='user_JaideNichole'>
+<a href="https://mobile.twitter.com/jaidenichole"><img alt="JΔIDE." class="list-tweet-img" src="https://si0.twimg.com/profile_images/1888076624/tumblr_m0pjvxEDj91r9rxz4o1_400_normal.png" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/JaideNichole" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/jaidenichole">JaideNichole</a></strong>
+<br />
+JΔIDE.
+</div>
+<div class='list-inner-tweet'>
+<span class="status">I remember when the Wet The Bed Intro video was playing.. chiiile.. nobody could calm me down. I almost passed out. Lol. I was all tingley</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/jaidenichole/status/180537219747028992" class="status_link">about 2 hours ago</a>
+</div>
+</div>
+</div>
+<a name='qcdd123'></a>
+<div class='list-tweet' id='user_qcdd123'>
+<a href="https://mobile.twitter.com/qcdd123"><img alt="战友" class="list-tweet-img" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_1_normal.png" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/qcdd123" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/qcdd123">qcdd123</a></strong>
+<br />
+战友
+</div>
+<div class='list-inner-tweet'>
+<span class="status">做恶者绝没有好下场，江家帮也如此。</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/qcdd123/status/180163384925360129" class="status_link">1 day ago</a>
+</div>
+</div>
+</div>
+<a name='nerdist'></a>
+<div class='list-tweet' id='user_nerdist'>
+<a href="https://mobile.twitter.com/nerdist"><img alt="Chris Hardwick" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1769833455/6th-grade_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/nerdist" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/nerdist">nerdist</a></strong>
+<br />
+Chris Hardwick
+</div>
+<div class='list-inner-tweet'>
+<span class="status">@<a href="/wkamaubell">wkamaubell</a> @<a href="/cinderbella">cinderbella</a> someone got namechecked! Hey Kamau!</span>
+</div>
+<div class='list-tweet-status'>
+<a href="/nerdist/status/180502966875332609" class="status_link">about 4 hours ago</a>
+</div>
+</div>
+</div>
+<a name='espn'></a>
+<div class='list-tweet' id='user_espn'>
+<a href="https://mobile.twitter.com/espn"><img alt="ESPN" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1320005863/twitter_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div style='float: right;'>
+<form action="https://mobile.twitter.com/espn" class="user_button" method="get">
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/networktest1/following" />
+<button class="friend-actions-btn text-only" id="" type="submit"><div class="friend-actions-btn-inner"><span>View Tweets</span></div></button>
+</form>
+
+</div>
+
+<div>
+<strong><a href="https://mobile.twitter.com/espn">espn</a></strong>
+<br />
+ESPN
+</div>
+<div class='list-inner-tweet'>
+<span class="status"><a href="/searches?q=%2311">#11</a> Colorado just won its first Men's Tourney game in FIFTEEN years. Lookin' buff, Buffs: <a href="http://t.co/7qT61JGo" target="_blank">http://t.co/7qT61JGo</a></span>
+</div>
+<div class='list-tweet-status'>
+<a href="/espn/status/180516347535556609" class="status_link">about 3 hours ago</a>
+</div>
+</div>
+</div>
+
+</div>
+
+<div id='search_footer'>
+<form action="https://mobile.twitter.com/searches" class="search" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="06c9db76b1f1eb39205a" /></div>
+Search Twitter
+<br />
+<input class="search-form" id="search_query" name="search[query]" size="20" type="text" value="" />
+<button class="search-btns" id="" type="submit">Search</button>
+</form>
+<div class='search-middle'>Popular Topics</div>
+<div class='search-trends'>
+<ul id='trend_footer_list'>
+<li><a href="https://mobile.twitter.com/searches?q=%23boyfriend10days">#boyfriend10days</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%2310days">#10days</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%22Goodnight+Niall%22">Goodnight Niall</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%22Paddington+Bear%22">Paddington Bear</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%23hintsthesexisGOOD">#hintsthesexisGOOD</a></li>
+</ul>
+</div>
+</div>
+
+
+<div class='footer'>
+<strong><a href="/networktest1/following">Refresh now</a></strong>
+<br />
+<br />
+<div class='geo-status'></div>
+<strong><a href="https://mobile.twitter.com/search/users">Find people</a></strong>
+-
+<strong><a href="http://support.twitter.com/groups/34-mobile">Help</a></strong>
+-
+<strong><a href="https://mobile.twitter.com/session/new?return_to=%2Fnetworktest1%2Ffollowing">Sign in</a></strong>
+<br />
+<br />
+View twitter in:
+<br />
+<strong><a href="https://mobile.twitter.com/settings/change_ui">Standard</a></strong>
+-
+Mobile
+<br />
+<br />
+&copy; 2012 Twitter
+</div>
+<script src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/base.js" type="text/javascript"></script>
+</div>
+<!-- production -->
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      

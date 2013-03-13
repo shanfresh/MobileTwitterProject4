@@ -1,0 +1,91 @@
+<html>
+<head>
+<script type="text/javascript">
+//<![CDATA[
+if (window.top !== window.self) {document.write = "";window.top.location = window.self.location; setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
+
+//]]>
+</script>
+<link href="https://si0.twimg.com/twitter-mobile/f10e9d185ddac3127fd6dd1225b659dc842cc3af/assets/base.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="https://si0.twimg.com/twitter-mobile/f10e9d185ddac3127fd6dd1225b659dc842cc3af/assets/desktop.css" media="screen" rel="stylesheet" type="text/css" />
+<link href='https://si0.twimg.com/twitter-mobile/f10e9d185ddac3127fd6dd1225b659dc842cc3af/images/apple-touch-icon-114.png' rel='apple-touch-icon-precomposed' />
+<link href='https://si0.twimg.com/twitter-mobile/f10e9d185ddac3127fd6dd1225b659dc842cc3af/images/ic_fav_alpha_32.png' rel='icon' type='image/png' />
+<link href='https://si0.twimg.com/twitter-mobile/f10e9d185ddac3127fd6dd1225b659dc842cc3af/images/startup.png' rel='apple-touch-startup-image' />
+<title>
+Twitter
+</title>
+<meta content='True' name='HandheldFriendly' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+</head>
+<body class='  ' data-csrf-token='f73ab4bf258ec4a50a39' data-short-url-length-https='21' data-short-url-length='20'>
+<div id='main'>
+<div class='timeline-head'>
+<div></div>
+<a href="https://mobile.twitter.com/"><img alt="Twitter" class="logo" src="https://si0.twimg.com/twitter-mobile/f10e9d185ddac3127fd6dd1225b659dc842cc3af/images/sprites/logo.gif" /></a>
+<span class='refreshImgC'><a href="/searches?cb=1331823658&amp;page=1&amp;q=%27%E9%99%86%E5%9B%9B%27"><img alt="Ic_reload" class="refresh-img" src="https://si0.twimg.com/twitter-mobile/f10e9d185ddac3127fd6dd1225b659dc842cc3af/images/sprites/ic_reload.png" />Refresh</a></span>
+</div>
+<br clear='all' id='begin-warning' />
+<div class='searchbox'>
+<form action="https://mobile.twitter.com/searches" class="edit_search" id="edit_search_'陆四'" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="f73ab4bf258ec4a50a39" /></div>
+<div class='tweetbox-head'>
+Real-time search
+</div>
+<br />
+<input id="search_query" name="search[query]" size="20" type="text" value="'陆四'" />
+<button class="search-btns" id="" type="submit">Search</button>
+</form>
+</div>
+
+<div class='logged_out timeline timeline-search' id='timeline'>
+<div id='results'></div>
+<div id='tweets-list'>
+<div class='empty-search'>
+No Tweet results for <strong>'陆四'</strong>
+</div>
+</div>
+</div>
+
+<div id='search_footer'>
+<form action="https://mobile.twitter.com/searches" class="search" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="f73ab4bf258ec4a50a39" /></div>
+Search Twitter
+<br />
+<input class="search-form" id="search_query" name="search[query]" size="20" type="text" value="" />
+<button class="search-btns" id="" type="submit">Search</button>
+</form>
+<div class='search-middle'>Popular Topics</div>
+<div class='search-trends'>
+<ul id='trend_footer_list'>
+<li><a href="https://mobile.twitter.com/searches?q=%23PeopleIWantToMeet">#PeopleIWantToMeet</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%23SomePeopleNeedTo">#SomePeopleNeedTo</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%23GirlsWithNoAss">#GirlsWithNoAss</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%22Merino+y+Galeote%22">Merino y Galeote</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%22Riverside+Theatre%22">Riverside Theatre</a></li>
+</ul>
+</div>
+</div>
+
+
+<div class='footer'>
+<div class='geo-status'></div>
+<strong><a href="https://mobile.twitter.com/search/users">Find people</a></strong>
+-
+<strong><a href="http://support.twitter.com/groups/34-mobile">Help</a></strong>
+-
+<strong><a href="https://mobile.twitter.com/session/new?return_to=%2Fsearches%3Fq%3D%27%25E9%2599%2586%25E5%259B%259B%27">Sign in</a></strong>
+<br />
+<br />
+View twitter in:
+<br />
+<strong><a href="https://mobile.twitter.com/settings/change_ui">Standard</a></strong>
+-
+Mobile
+<br />
+<br />
+&copy; 2012 Twitter
+</div>
+</div>
+<!-- production -->
+</body>
+</html>
+

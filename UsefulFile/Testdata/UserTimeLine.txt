@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.1//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="HandheldFriendly" content="True"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link href="https://si0.twimg.com/twitter-mobile/d8ac60c92d594a0e84d3b3e4f7131bb06240bb58/images/ic_favicon.png?1341876025" rel="icon" type="image/png" />
+    <title>Twitter</title>
+    <link href="https://si0.twimg.com/twitter-mobile/d8ac60c92d594a0e84d3b3e4f7131bb06240bb58/assets/as.css?1341876033" media="screen, handheld" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+//<![CDATA[
+if (window.top !== window.self) {document.write = "";window.top.location = window.self.location; setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
+
+//]]>
+</script>
+  </head>
+  <body class="images nojs users-page users-show-page">
+    <div id="container">
+<div id="brand_bar">
+  <table id="top">
+    <tr>
+      <td class="left">
+        <a href="https://mobile.twitter.com/" class="brandmark">
+          <span class="imgsprite_larry_28px_gif" height="28" title="Twitter"></span>
+          
+        </a>
+      </td>
+      <td class="right">
+        <img alt="|" class="divider" height="28" src="https://si0.twimg.com/twitter-mobile/d8ac60c92d594a0e84d3b3e4f7131bb06240bb58/images/brandbar_divider.gif?1341876025" />
+        <a class="search" href="#search">
+          <span class="imgsprite_search_28px_gif" height="28" title="Search"></span>
+          
+        </a>
+        <img alt="|" class="divider" height="28" src="https://si0.twimg.com/twitter-mobile/d8ac60c92d594a0e84d3b3e4f7131bb06240bb58/images/brandbar_divider.gif?1341876025" />
+        <a class="refresh" href="/jiang9005" class="refresh">
+          <span class="imgsprite_refresh_28px_gif" height="28" title="Refresh"></span>
+          
+        </a>
+          <img alt="|" class="divider" height="28" src="https://si0.twimg.com/twitter-mobile/d8ac60c92d594a0e84d3b3e4f7131bb06240bb58/images/brandbar_divider.gif?1341876025" />
+          <a class="signin" href="/session/new"><span>Sign in</span></a>
+          <img alt="|" class="divider" height="28" src="https://si0.twimg.com/twitter-mobile/d8ac60c92d594a0e84d3b3e4f7131bb06240bb58/images/brandbar_divider.gif?1341876025" />
+          <a href="/signup"><span class="signup">Sign up</span></a>
+      </td>
+    </tr>
+  </table>
+</div>
+      <div id="main_content">
+          <div class="profile">
+<table class="profile-details">
+  <tr>
+      <td class="avatar"><img alt="姜维平" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_5_normal.png" /></td>
+      <td class="user-info">
+        <div class="fullname">姜维平
+          
+          
+        </div>
+        <div class="username"><span>@</span>jiang9005</div>
+        <div class="location"></div>
+      </td>
+  </tr>
+  <tr>
+    <td class="details" colspan="2">
+      <div class="bio"></div>
+      <div class="url"><a href=""></a></div>
+    </td>
+  </tr>
+</table>
+<table class="profile-stats">
+  <tr>
+    <td class="stat">
+      <div class="statnum">3</div>
+      <div class="statlabel">Tweets</div>
+    </td>
+    <td class="stat">
+      <a href="/jiang9005/following">
+        <div class="statnum">1</div>
+        <div class="statlabel">Following</div>
+      </a>
+    </td>
+    <td class="stat stat-last">
+      <a href="/jiang9005/followers">
+        <div class="statnum">139</div>
+        <div class="statlabel">Followers</div>
+      </a>
+    </td>
+  </tr>
+</table>
+<div class="profile-actions">
+        <form action="/jiang9005/follow" method="post">
+          <div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="f5097f530048f3d2902c" /></div>
+          
+          <span class="w-button-common w-button"><input name="commit" type="submit" value="Follow" /></span>
+        </form>
+        <form action="/jiang9005/favorites" method="get">
+          <span class="w-button-common w-button"><input name="commit" type="submit" value="View favs" /></span>
+        </form>
+</div>
+  </div>
+<div class="timeline">
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/jiang9005"><img alt="姜维平" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_5_normal.png" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/jiang9005">
+          <strong class="fullname">姜维平</strong>
+          <span class="username">
+            <span>@</span>jiang9005
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_203510622124646400" href="/jiang9005/status/203510622124646400">18 May</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">其实我们早先张望过的梦境并不是遥不可及~做好准备多长点儿心就水到渠成了。</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/jiang9005/status/203510622124646400">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/jiang9005/reply/203510622124646400" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/203510622124646400/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/203510622124646400/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/jiang9005"><img alt="姜维平" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_5_normal.png" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/jiang9005">
+          <strong class="fullname">姜维平</strong>
+          <span class="username">
+            <span>@</span>jiang9005
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_182628286000672770" href="/jiang9005/status/182628286000672770">22 Mar</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">胡大坑最近喜欢拿我的微信勾搭妹子…立此为证，免得哪天出个”啥啥门”的不好解释呀！→_→</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/jiang9005/status/182628286000672770">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/jiang9005/reply/182628286000672770" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/182628286000672770/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/182628286000672770/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+<table class="tweet">
+  <tr class="tweet-header">
+        <td class="avatar" rowspan="3">
+          <a href="/jiang9005"><img alt="姜维平" src="https://si0.twimg.com/sticky/default_profile_images/default_profile_5_normal.png" /></a>
+        </td>
+      <td class="user-info">
+        <a href="/jiang9005">
+          <strong class="fullname">姜维平</strong>
+          <span class="username">
+            <span>@</span>jiang9005
+          </span>
+        </a>
+      </td>
+    <td class="timestamp">
+      <a name="tweet_182319325741465600" href="/jiang9005/status/182319325741465600">21 Mar</a>
+    </td>
+  </tr>
+  <tr class="tweet-container" >
+    <td colspan="2" class="tweet-content">
+      <div class="tweet-text">试试，好不好用~</div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="meta-and-actions">
+      <span class="metadata">
+        <a href="/jiang9005/status/182319325741465600">View details</a>
+        <span class="middot">&middot;</span>
+      </span>
+      <span class="tweet-actions">
+        <a href="/jiang9005/reply/182319325741465600" class="first"><span class="imgsprite_tweet_reply_gif" title="Reply"></span></a>
+          <a href="/statuses/182319325741465600/retweet">
+              <span class="imgsprite_tweet_rt_gif" title="Retweet"></span>
+          </a>
+        <a href="/statuses/182319325741465600/favorite" class="last">
+            <span class="imgsprite_tweet_fav_gif" title="Favorite"></span>
+        </a>
+      </span>
+    </td>
+  </tr>
+</table>
+</div>
+
+      </div>
+<div id="footer">
+<div class="search-fields">
+    <div class="title">Enter a topic, @name, or fullname</div>
+  <form action="/search" class="search-input" method="get">
+    <table>
+      <tr>
+        <td class="value" id="search"><div><input id="q" name="q" type="text" value=""/></div></td>
+        <td class="button"><input type="image" src="https://si0.twimg.com/twitter-mobile/d8ac60c92d594a0e84d3b3e4f7131bb06240bb58/images/sprites/magnifying_glass.gif?1341876025" alt="Search"/></td>
+      </tr>
+    </table>
+  </form>
+</div>
+    <form action="/session/destroy" method="post">
+      <div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="f5097f530048f3d2902c" /></div>
+      <table class="global-actions">
+        <tr>
+          <td><a href="/settings">Settings</a></td>
+          <td><a href="http://support.twitter.com/"> Help</a></td>
+          <td><span class="w-button-common w-button"><input name="commit" type="submit" value="Sign out" /></span></td>
+        </tr>
+      </table>
+    </form>
+    <div class="view-actions"><a href="#top">Back to top</a> &middot; <a href="/settings/profile_images?return_to=%2Fjiang9005">Turn images off</a></div>
+  <div class="copyright">&copy; 2012 Twitter</div>
+</div>
+    </div>
+  </body>
+</html>
+

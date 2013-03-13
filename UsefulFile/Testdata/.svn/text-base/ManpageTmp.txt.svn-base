@@ -1,0 +1,452 @@
+<html>
+<head>
+<script type="text/javascript">
+//<![CDATA[
+if (window.top !== window.self) {document.write = "";window.top.location = window.self.location; setTimeout(function(){document.body.innerHTML='';},1);window.self.onload=function(evt){document.body.innerHTML='';};}
+
+//]]>
+</script>
+<link href="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/base.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/desktop.css" media="screen" rel="stylesheet" type="text/css" />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/apple-touch-icon-114.png' rel='apple-touch-icon-precomposed' />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/ic_fav_alpha_32.png' rel='icon' type='image/png' />
+<link href='https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/startup.png' rel='apple-touch-startup-image' />
+<title>
+Twitter
+</title>
+<meta content='True' name='HandheldFriendly' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+</head>
+<body class='  ' data-csrf-token='7b979ccb90d19832d272' data-short-url-length-https='21' data-short-url-length='20'>
+<div id='main'>
+<div class='timeline-head'>
+<div></div>
+<a href="https://mobile.twitter.com/"><img alt="Twitter" class="logo" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/logo.gif" /></a>
+<span><a href="https://mobile.twitter.com/" id="home_link">&rarr;Home</a></span>
+</div>
+<br clear='all' id='begin-warning' />
+<div class='timeline-user-friend'>
+<div class='timeline-user-following'></div>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" lowend_override="true" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<div class='user-screen-name'>
+<strong>MagicJohnson</strong>
+(Earvin Magic Johnson)
+<div class='verified'>
+<img alt="Ic_verified-account" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_verified-account.gif" />
+<div class='text'>Verified Account</div>
+</div>
+</div>
+<div class='timeline-following'>
+<a href="https://mobile.twitter.com/magicjohnson/following">Following:91</a>
+&nbsp;
+<a href="https://mobile.twitter.com/magicjohnson/followers">Followers:523,131</a>
+</div>
+</div>
+<div class='friend-actions'>
+<form action="https://mobile.twitter.com/magicjohnson/follow" class="user_button" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="7b979ccb90d19832d272" /></div>
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/MagicJohnson" />
+<button class="friend-actions-btn" id="MagicJohnson" type="submit"><div class="friend-actions-btn-inner"><img alt="Ic_follow" class="button_icon" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_follow.gif" /><span>Follow</span></div></button>
+</form>
+
+<form action="https://mobile.twitter.com/magicjohnson/block" class="user_button" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="7b979ccb90d19832d272" /></div>
+<span class='flag' style='display:none'>
+<img src='/images/sprites/ic_followcheck.gif' />
+Following
+</span>
+<input id="last_url" name="last_url" type="hidden" value="/MagicJohnson" />
+<button class="friend-actions-btn" id="" type="submit"><div class="friend-actions-btn-inner"><img alt="Ic_block" class="button_icon" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_block.gif" /><span>Block</span></div></button>
+</form>
+
+</div>
+</div>
+<div class='timeline-header-friend' style='text-align: left'>
+<a href="https://mobile.twitter.com/magicjohnson" class="">Tweets</a>
+<a href="https://mobile.twitter.com/magicjohnson/favorites" class="">Favs</a>
+<a href="https://mobile.twitter.com/magicjohnson/messages" class="">Msgs</a>
+<a href="https://mobile.twitter.com/magicjohnson/about" class="">About</a>
+</div>
+
+
+<div class='timeline-friend timeline autorefresh'>
+<div id='tweets-list'>
+<div class='list-tweet' id='tweet_180455995846295553'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Good luck to my Spartans tomorrow against LIU Brooklyn.</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180455995846295553" class="status_link">about 8 hours ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_180422311453790208'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">So excited to have March Madness underway!</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180422311453790208" class="status_link">about 10 hours ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_180422015386259457'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status"><a href="/NBA" class="twitter-atreply"><s>@</s>NBA</a> trade deadline winners: <a href="/Lakers" class="twitter-atreply"><s>@</s>Lakers</a>, Spurs, Pacers &amp; Clippers.</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180422015386259457" class="status_link">about 10 hours ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_180413859830579200'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Congratulations to the the <a href="/Orlando_Magic" class="twitter-atreply"><s>@</s>Orlando_Magic</a> on keeping <a href="/DwightHoward" class="twitter-atreply"><s>@</s>DwightHoward</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180413859830579200" class="status_link">about 11 hours ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_180412942058127362'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Derek Fisher will remain one of the greatest <a href="/Lakers" class="twitter-atreply"><s>@</s>Lakers</a> leaders of all time.  The city of LA will be forever grateful to him.</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180412942058127362" class="status_link">about 11 hours ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_180411620160307200'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Great job by Jim Buss &amp; Mitch Kupchak on making the <a href="/Lakers" class="twitter-atreply"><s>@</s>Lakers</a> better.  With this younger team, they are now a big threat to OKC.</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180411620160307200" class="status_link">about 11 hours ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_180409096862834688'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Thank you for all the kind words regarding "The Announcement".  In case you missed it, it's on again tonight &amp; see the… <a rel="nofollow" href="http://t.co/wWfvyEra" target="_blank" class="twitter_external_link">say.ly/OPK1Ad6</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180409096862834688" class="status_link">about 11 hours ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_180366758677446656'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">RT <a href="/ArsenioOFFICIAL" class="twitter-atreply"><s>@</s>ArsenioOFFICIAL</a> FRIDAY <a href="/piersmorgan" class="twitter-atreply"><s>@</s>piersmorgan</a> is allowing me to come off the host-bench and get in the game. My guest will … <a rel="nofollow" href="http://t.co/ih8F8Vdl" target="_blank" class="twitter_external_link">say.ly/FCU1A8O</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/180366758677446656" class="status_link">about 14 hours ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_180366628247183360'>
+<a href="https://mobile.twitter.com/itunestv"><img alt="iTunes TV" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1842020905/iTunes_iOS_240x240_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<img alt="Ic_retweet_tweet" class="retweet-img" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_retweet_tweet.gif" />
+<strong><a href="https://mobile.twitter.com/itunestv">iTunesTV</a></strong>
+<span class="status">Nelson George explores the career of <a href="/MagicJohnson" class="twitter-atreply"><s>@</s>MagicJohnson</a> 20 years after his historic announcement. <a href="/espn" class="twitter-atreply"><s>@</s>espn</a> <a href="/searches?q=%23Magic" class="twitter-hashtag"><s>#</s>Magic</a> <a rel="nofollow" href="http://t.co/z3V6D4gl" target="_blank" class="twitter_external_link">tw.itunes.com/owF</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/itunestv/status/180358998426525697" class="status_link">about 14 hours ago</a>
+
+</div>
+<br class='r' />
+<div class='retweet-info'>
+<a href="/itunestv/status/180358998426525697" class="status_link">Retweeted by MagicJohnson</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_179622863916109825'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">RT <a href="/ArsenioOFFICIAL" class="twitter-atreply"><s>@</s>ArsenioOFFICIAL</a> This FRI March 16th, I'm guest hosting for <a href="/piersmorgan" class="twitter-atreply"><s>@</s>piersmorgan</a> ..CNN 9:00 ET/PTMy guest will be <a href="/cjbycookie" class="twitter-atreply"><s>@</s>cjbycookie</a> AND <a href="/MagicJohnson" class="twitter-atreply"><s>@</s>MagicJohnson</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/179622863916109825" class="status_link">3 days ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_179048641527414784'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Thank you to everyone around the world for all the love & support of <a href="/cjbycookie" class="twitter-atreply"><s>@</s>cjbycookie</a> & I.</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/179048641527414784" class="status_link">4 days ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_179048093327687680'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">In the NCAA tournament, you can't overlook any team.</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/179048093327687680" class="status_link">4 days ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_179047707283963906'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">The Spartans had great coaching & tenacious defense & rebounding in their win.  Rest up & get ready for the NCAA tournament!</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/179047707283963906" class="status_link">4 days ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_179047047696097280'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Congratulations to MSU on the Big Ten title & #1 seed!!!</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/179047047696097280" class="status_link">4 days ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_179043399633088512'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Thank you to <a href="/NBA" class="twitter-atreply"><s>@</s>NBA</a> Entertainment for everything they put into "The Announcement"</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/179043399633088512" class="status_link">4 days ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_179042336649654274'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">Thank you <a href="/ESPN_Films" class="twitter-atreply"><s>@</s>ESPN_Films</a> for educating the world on HIV through "The Announcement"</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/179042336649654274" class="status_link">4 days ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_178192716360990721'>
+<a href="https://mobile.twitter.com/comcast"><img alt="Comcast" class="list-tweet-img" src="https://si0.twimg.com/profile_images/551706460/comcastc_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<img alt="Ic_retweet_tweet" class="retweet-img" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_retweet_tweet.gif" />
+<strong><a href="https://mobile.twitter.com/comcast">comcast</a></strong>
+<span class="status">RT <a href="/comcastvoices" class="twitter-atreply"><s>@</s>comcastvoices</a>: Get the latest from <a href="/iamdiddy" class="twitter-atreply"><s>@</s>iamdiddy</a> <a href="/MagicJohnson" class="twitter-atreply"><s>@</s>MagicJohnson</a> <a href="/RobertRdz" class="twitter-atreply"><s>@</s>RobertRdz</a> and <a href="/BabyFirstTV" class="twitter-atreply"><s>@</s>BabyFirstTV</a> on their new networks <a rel="nofollow" href="http://t.co/khJ5eq4v" target="_blank" class="twitter_external_link">ow.ly/9xta0</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/comcast/status/177842144067854337" class="status_link">8 days ago</a>
+
+</div>
+<br class='r' />
+<div class='retweet-info'>
+<a href="/comcast/status/177842144067854337" class="status_link">Retweeted by MagicJohnson</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_178191527221276673'>
+<a href="https://mobile.twitter.com/nba"><img alt="NBA" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1787324427/National-Basketball-Association_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<img alt="Ic_retweet_tweet" class="retweet-img" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_retweet_tweet.gif" />
+<strong><a href="https://mobile.twitter.com/nba">NBA</a></strong>
+<span class="status">ESPN Films & NBA Entertainment present: THE ANNOUNCEMENT - <a href="/MagicJohnson" class="twitter-atreply"><s>@</s>MagicJohnson</a>.. Sunday 3/11 at 9pm/et on <a href="/espn" class="twitter-atreply"><s>@</s>espn</a>. <a rel="nofollow" href="http://t.co/PMmNuHQ1" target="_blank" class="twitter_external_link">twitpic.com/8tmzdg</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/nba/status/177865039875805184" class="status_link">7 days ago</a>
+
+</div>
+<br class='r' />
+<div class='retweet-info'>
+<a href="/nba/status/177865039875805184" class="status_link">Retweeted by MagicJohnson</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_178191367011434496'>
+<a href="https://mobile.twitter.com/sportsguy33"><img alt="Bill Simmons" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1887290966/grogan_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<img alt="Ic_retweet_tweet" class="retweet-img" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/sprites/ic_retweet_tweet.gif" />
+<strong><a href="https://mobile.twitter.com/sportsguy33">sportsguy33</a></strong>
+<span class="status">B.S. Report: Talking hoops with the one + only <a href="/MagicJohnson" class="twitter-atreply"><s>@</s>MagicJohnson</a> (don't forget: "The Announcement," Sun. 9pm ESPN). <a rel="nofollow" href="http://t.co/ZLEtYopg" target="_blank" class="twitter_external_link">es.pn/wADkhP</a>"</span>
+</span>
+<div class='list-tweet-status'>
+<a href="/sportsguy33/status/178129391220572161" class="status_link">7 days ago</a>
+
+</div>
+<br class='r' />
+<div class='retweet-info'>
+<a href="/sportsguy33/status/178129391220572161" class="status_link">Retweeted by MagicJohnson</a>
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+<div class='list-tweet' id='tweet_177823448779857922'>
+<a href="https://mobile.twitter.com/magicjohnson"><img alt="Earvin Magic Johnson" class="list-tweet-img" src="https://si0.twimg.com/profile_images/1239797275/Magic_normal.jpg" /></a>
+<div class='inner-w-img'>
+<span>
+<strong><a href="https://mobile.twitter.com/magicjohnson">MagicJohnson</a></strong>
+<span class="status">My interview w/ <a href="/Equinox" class="twitter-atreply"><s>@</s>Equinox</a> <a rel="nofollow" href="http://t.co/QJ0DzjVe" target="_blank" class="twitter_external_link">say.ly/rxr1xTe</a></span>
+</span>
+<div class='list-tweet-status'>
+<a href="/magicjohnson/status/177823448779857922" class="status_link">8 days ago</a>
+
+</div>
+<div class='list-tweet-actions'>
+</div>
+</div>
+</div>
+
+<div align='center'>
+<div class='list-more'>
+<img alt="Ic_spinner_more" src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/images/ic_spinner_more.gif" /><a href="/MagicJohnson?max_id=177626312696008704" id="more_link">more</a>
+</div>
+</div>
+</div>
+</div>
+<div id='search_footer'>
+<form action="https://mobile.twitter.com/searches" class="search" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="7b979ccb90d19832d272" /></div>
+Search Twitter
+<br />
+<input class="search-form" id="search_query" name="search[query]" size="20" type="text" value="" />
+<button class="search-btns" id="" type="submit">Search</button>
+</form>
+<div class='search-middle'>Popular Topics</div>
+<div class='search-trends'>
+<ul id='trend_footer_list'>
+<li><a href="https://mobile.twitter.com/searches?q=%23JedWeCan">#JedWeCan</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%23NRLstiwst">#NRLstiwst</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%23epsiconf">#epsiconf</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%22Paddington+Bear%22">Paddington Bear</a></li>
+<li><a href="https://mobile.twitter.com/searches?q=%22D%C3%ADa+Mundial+del+Sue%C3%B1o%22">Día Mundial del Sueño</a></li>
+</ul>
+</div>
+</div>
+
+
+<div class='footer'>
+<strong><a href="/MagicJohnson?ctx=refresh">Refresh now</a></strong>
+<br />
+<br />
+<div class='geo-status'></div>
+<strong><a href="https://mobile.twitter.com/search/users">Find people</a></strong>
+-
+<strong><a href="http://support.twitter.com/groups/34-mobile">Help</a></strong>
+-
+<strong><a href="https://mobile.twitter.com/session/new?return_to=%2FMagicJohnson">Sign in</a></strong>
+<br />
+<br />
+View twitter in:
+<br />
+<strong><a href="https://mobile.twitter.com/settings/change_ui">Standard</a></strong>
+-
+Mobile
+<br />
+<br />
+&copy; 2012 Twitter
+</div>
+<script src="https://si0.twimg.com/twitter-mobile/1a0c7e13afd2c8c5409472c4920679e704829126/assets/base.js" type="text/javascript"></script>
+</div>
+<!-- production -->
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
