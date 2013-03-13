@@ -1,230 +1,0 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="Content-Language" content="en-us">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter / ?</title>
-    <link href="//si0.twimg.com/favicons/favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <link rel="stylesheet" href="//si0.twimg.com/errors/fullscreen_errors.css">
-  </head>
-  <body>
-    <div class="topbar js-topbar">
-      <div class="global-nav" data-section-term="top_nav">
-        <div class="global-nav-inner">
-          <div class="container">
-            <ul class="nav js-global-actions">
-              <li class="home">
-                <a class="nav-logo-link" href="//twitter.com">
-                  <i class="bird-topbar-blue"></i>
-                </a>
-              </li>
-            </ul>
-            <div class="pull-right">
-              <ul class="nav secondary-nav">
-                <li><a href="//twitter.com" id="homeLink">Home &rarr;</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="blue-sky">
-      <div class="body-content">
-        <h1>Sorry, that page doesn’t exist!</h1>
-        <p>Thanks for noticing&mdash;we're going to fix it up and have things back to normal soon.</p>
-        <form class="search-404" action="/search" method="get">
-          <label for="search_q" id="search_label">Search for a topic, full name, or @username</label>
-          <input id="search_q" name="q" type="text" placeholder="Search for a topic, full name, or @username">
-          <input class="btn" id="search_submit" type="submit" value="Search">
-        </form>
-        <div class="footer">
-          <ul class="languages">
-            <li><a onclick="displayLanguage('id');return false;" href="#">Bahasa Indonesia</a></li>
-            <li><a onclick="displayLanguage('msa');return false;" href="#">Bahasa Melayu</a></li>
-            <li><a onclick="displayLanguage('de');return false;" href="#">Deutsch</a></li>
-            <li class="first"><a onclick="displayLanguage('en');return false;" href="#">English</a></li>
-            <li><a onclick="displayLanguage('es');return false;" href="#">Español</a></li>
-            <li><a onclick="displayLanguage('fil');return false;" href="#">Filipino</a></li>
-            <li><a onclick="displayLanguage('fr');return false;" href="#">Français</a></li>
-            <li><a onclick="displayLanguage('it');return false;" href="#">Italiano</a></li>
-            <li><a onclick="displayLanguage('nl');return false;" href="#">Nederlands</a></li>
-            <li><a onclick="displayLanguage('pt');return false;" href="#">Português</a></li>
-            <li><a onclick="displayLanguage('tr');return false;" href="#">Türkçe</a></li>
-            <li><a onclick="displayLanguage('ru');return false;" href="#">Русский</a></li>
-            <li><a onclick="displayLanguage('hi');return false;" href="#">हिन्दी</a></li>
-            <li><a onclick="displayLanguage('ja');return false;" href="#">日本語</a></li>
-            <li><a onclick="displayLanguage('zh_cn');return false;" href="#">简体中文</a></li>
-            <li><a onclick="displayLanguage('zh_tw');return false;" href="#">繁體中文</a></li>
-            <li><a onclick="displayLanguage('ko');return false;" href="#">한국어</a></li>
-          </ul>
-          <ul class="links">
-            <li class="first">&copy; 2012 Twitter</li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/help">Help</a></li>
-          <li><a href="http://status.twitter.com/">Status</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- BEGIN google analytics -->
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-30775-6']);
-      _gaq.push(['_trackEvent', 'Error', '404', 'page: ' + document.location.pathname + document.location.search + ' ref: ' + document.referrer ]);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
-    <!-- END google analytics -->
-    <script type="text/javascript">
-    //<![CDATA[
-    var twttr = {};
-
-    twttr.translations = {
-      "ko": {
-        "button": "검색",
-        "title": "죄송합니다, 해당 페이지는 존재하지 않습니다!",
-        "description": "알려주셔서 감사합니다. 곧 정상으로 복구하겠습니다.",
-        "prompt": "주제, 이름, 또는 @아이디로 검색하기",
-        "home": "홈 &rarr;"
-      },
-      "zh_cn": {
-        "button": "搜索",
-        "title": "对不起，这个页面不存在!",
-        "description": "谢谢你的注意——我们将尽快修复并恢复正常",
-        "prompt": "搜索一个话题、全名或 @用户名",
-        "home": "主页 &rarr;"
-      },
-      "ja": {
-        "button": "検索する",
-        "title": "そのページは存在しません。",
-        "description": "お気づきありがとうございます。&mdash;これから解決に向けて取り組みますので、しばらくお待ちください。",
-        "prompt": "トピック、名前または＠ユーザー名を入力してください。",
-        "home": "ホーム &rarr;"
-      },
-      "ru": {
-        "button": "поиск",
-        "title": "К сожалению, такой страницы нет!",
-        "description": "Спасибо за сообщение о неисправности, в ближайшее время мы устраним проблему и приведём систему в рабочее состояние.",
-        "prompt": "Поиск темы, @имени или имени и фамилии",
-        "home": "Главная &rarr;"
-      },
-      "hi": {
-        "button": "खोज",
-        "title": "क्षमा करें, वह पेज मौजूद नहीं है!",
-        "description": "देखने के लिए धन्यवाद, हम इसे ठीक करने के लिए और चीज़ें वापस सामान्य करने के लिए जल्द ही जा रहे हैं.",
-        "prompt": "किसी विषय, पूरा नाम, या @उपयोगकर्ता नाम को खोजें",
-        "home": "मुख पृष्ठ &rarr;"
-      },
-      "nl": {
-        "button": "zoeken",
-        "title": "Sorry, die pagina bestaat niet!",
-        "description": "Bedankt voor het opmerken&mdash;we gaan het zo spoedig mogelijk oplossen.",
-        "prompt": "Zoek naar een onderwerp, volledige naam of @gebruikersnaam",
-        "home": "Startpagina &rarr;"
-      },
-      "en": {
-        "button": "Search",
-        "title": "Sorry, that page doesn’t exist!",
-        "description": "Thanks for noticing&mdash;we're going to fix it up and have things back to normal soon.",
-        "prompt": "Search for a topic, full name, or @username",
-        "home": "Home &rarr;"
-      },
-      "fr": {
-        "button": "rechercher",
-        "title": "Désolé, cette page n'existe pas !",
-        "description": "Merci de l'avoir remarqué&mdash;nous allons le corriger pour un retour le plus rapide possible à la normale.",
-        "prompt": "Recherchez un sujet, un nom, ou un @pseudo",
-        "home": "Accueil &rarr;"
-      },
-      "de": {
-        "button": "Suche",
-        "title": "Entschuldige, diese Seite existiert nicht mehr!",
-        "description": "Danke für den Hinweis; wir werden uns sofort darum kümmern und hoffen, dass alles bald wieder normal läuft.",
-        "prompt": "Suche ein Thema, einen Namen oder @Benutzernamen",
-        "home": "Startseite &rarr;"
-      },
-      "it": {
-        "button": "cerca",
-        "title": "Ci spiace ma questa pagina non esiste!",
-        "description": "Grazie per la segnalazione, risolveremo il problema e riporteremo tutto alla normalità il più presto possibile.",
-        "prompt": "Cerca un argomento, un nome completo o un @nomeutente",
-        "home": "Pagina Iniziale &rarr;"
-      },
-      "msa": {
-        "button": "cari",
-        "title": "Maaf, halaman tersebut tidak wujud!",
-        "description": "",
-        "prompt": "Cari topik, nama penuh, atau @nama-pengguna",
-        "home": "Laman Utama &rarr;"
-      },
-      "es": {
-        "button": "buscar",
-        "title": "Lo sentimos, ¡esa página no existe!",
-        "description": "Gracias por darte cuenta&mdash;vamos a arreglarlo y a tenerlo todo de vuelta a la normalidad pronto.",
-        "prompt": "Busca por tema, nombre o @usuario",
-        "home": "Página de Inicio &rarr;"
-      },
-      "fil": {
-        "button": "hanapin",
-        "title": "Paumanhin, walang ganoong pahina!",
-        "description": "Salamat sa pagpansin&mdash;aayusin namin ito at ibabalik sa normal sa lalong madaling panahon.",
-        "prompt": "Maghanap ng paksa, buong pangalan, o @username",
-        "home": "Home &rarr;"
-      },
-      "pt": {
-        "button": "buscar",
-        "title": "Desculpe, mas esta página não existe!",
-        "description": "Obrigado por avisar&mdash; vamos consertar isto e normalizar as coisas em breve.",
-        "prompt": "Procure um assunto, nome completo ou @usuário",
-        "home": "Página Inicial &rarr;"
-      },
-      "id": {
-        "button": "cari",
-        "title": "Maaf, halaman tersebut tidak ada!",
-        "description": "Terima kasih sudah memberi tahu&mdash;kami akan memperbaikinya dan semuanya akan segera kembali normal.",
-        "prompt": "Cari topik, nama lengkap, atau @namapengguna",
-        "home": "Beranda &rarr;"
-      },
-      "zh_tw": {
-        "button": "搜尋",
-        "title": "抱歉，這個頁面不存在！",
-        "description": "感謝你的察覺&mdash;我們會馬上處理，讓一切盡快恢復正常。",
-        "prompt": "搜尋一個主題、一個人的全名或 @使用者名稱",
-        "home": "首頁 &rarr;"
-      }
-    };
-
-    function displayLanguage(lang) {
-      if (lang && twttr.translations[lang]) {
-        document.getElementsByTagName('h1')[0].innerHTML = twttr.translations[lang].title;
-        document.getElementsByTagName('p')[0].innerHTML = twttr.translations[lang].description;
-        document.getElementById('search_q').placeholder = twttr.translations[lang].prompt;
-        document.getElementById('search_label').placeholder = twttr.translations[lang].prompt;
-        document.getElementById('search_submit').value = twttr.translations[lang].button;
-        document.getElementById('homeLink').innerHTML = twttr.translations[lang].home;
-      }
-    }
-
-    var lang = window.navigator.language ? window.navigator.language.replace(/^(..).*$/, '$1') : undefined;
-    displayLanguage(lang);
-    //]]>
-
-    // populate the search field appropriately
-    var query = window.location.pathname.split('/');
-    if (query.length == 2) {
-      // it was a request like twitter.com/nonexistent_user, not twitter.com/settings/mistyped_page
-      document.getElementById('search_q').value = query[1];
-    }
-
-    </script>
-  </body>
-</html>
-
