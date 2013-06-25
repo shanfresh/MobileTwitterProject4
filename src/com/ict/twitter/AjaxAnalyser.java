@@ -7,7 +7,14 @@ import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxAnalyser {
-	boolean isdebug=System.getProperties().getProperty("isdebug").equals("TRUE");
+	static boolean isdebug=false;
+	static{
+		try{
+			isdebug=System.getProperties().getProperty("isdebug").equals("TRUE");
+		}catch(Exception ex){
+			isdebug=false;
+		}
+	}
 	DbOperation dbo;
 	public MulityInsertDataBase batchdb;
 	public AjaxAnalyser(DbOperation dbo){
