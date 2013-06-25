@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -61,6 +62,13 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 			int index=0;
 			try {
 				map = (Map<String,Object>) parser.parse(content);
+			}catch (ParseException e) {
+				// TODO Auto-generated catch block
+				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID);
+				e.printStackTrace();
+				break;
+			}
+			try{
 				Object hasmore = map.get("has_more_items");
 				String items_html=(String)map.get("items_html");			
 				index=aa.doAnalyse(userID,isFollowing,items_html,RelateUsers);	
@@ -72,18 +80,15 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 						nextCursor=null;
 					}
 				}
-			} catch (ParseException e) {
-				System.out.println(content);
-				// TODO Auto-generated catch block
-				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID);
-				e.printStackTrace();
-				break;
-			}catch (Exception e) {
-				System.out.println(content);
-				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID);
-				e.printStackTrace();
+			}catch(AllHasInsertedException ex){
+				LogSys.nodeLogger.error("当前采集的用户下所有Following采集完毕--"+userID);
 				break;
 			}
+			catch (Exception e) {
+				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID);
+				e.printStackTrace();
+				break;
+			}			
 					
 		}while(hasMoreItems&&nextCursor!=null);
 

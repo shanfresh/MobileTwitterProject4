@@ -2,6 +2,8 @@ package com.ict.twitter;
 
 import java.util.Vector;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -29,7 +31,6 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 
 	}
 	public int doAnalyse(String currentUser,boolean isFollowing,String src,Vector<TwiUser> users) throws AllHasInsertedException{
-		System.out.println(count+"\t content:"+src.substring(0,100));
 		Document doc=Jsoup.parse(src, "/");
 		Elements follows=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item");
 		count+=follows.size();
