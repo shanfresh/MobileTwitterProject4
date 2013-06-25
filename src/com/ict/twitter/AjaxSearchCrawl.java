@@ -70,7 +70,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 				LogSys.nodeLogger.debug(content);
 				LogSys.nodeLogger.error("错误发生时当前采集的关键词是--"+keyWords);
 				e.printStackTrace();				
-				break;				
+				return false;				
 			}
 			has_next=(Boolean)map.get("has_more_items");
 			String html=(String)map.get("items_html");

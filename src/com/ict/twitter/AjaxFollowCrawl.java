@@ -56,7 +56,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 			String content=openLink(httpclient, URL);
 			if(content==null||(content.length())<=20){
 				System.out.println("网页返回为空 采集结束");
-				break;
+				return false;
 			}
 			Map<String, Object> map = null;
 			int index=0;
@@ -87,11 +87,10 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 			catch (Exception e) {
 				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID);
 				e.printStackTrace();
-				break;
+				return false;
 			}			
 					
 		}while(hasMoreItems&&nextCursor!=null);
-
 		return true;
 	}
 	

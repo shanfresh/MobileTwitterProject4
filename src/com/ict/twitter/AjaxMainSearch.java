@@ -6,6 +6,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 import com.ict.twitter.CrawlerNode.AjaxNode;
 import com.ict.twitter.Report.ReportDataType;
+import com.ict.twitter.StatusTrack.MyTracker;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
@@ -14,6 +15,7 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 	boolean test=true;
+	MyTracker tracker=new MyTracker();
 	public AjaxMainSearch(String Name,AjaxNode fatherNode){
 		this.Name=Name;
 		this.node=fatherNode;
@@ -47,6 +49,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 		AjaxFollowCrawl followingCrawl=new AjaxFollowCrawl(this.httpclient,true);
 		AjaxFollowCrawl followerCrawl=new AjaxFollowCrawl(this.httpclient,false);
 		followerCrawl.isFollowing=false;
+		
 		AjaxSearchCrawl searchCrawl=new AjaxSearchCrawl(this.httpclient);
 		AjaxTimeLineCrawl timelineCrawl=new AjaxTimeLineCrawl(this.httpclient);	
 		AjaxProfileCrawl profileCrawl = new AjaxProfileCrawl(this.httpclient);
@@ -59,40 +62,46 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 					continue;
 				}
 				Vector<TwiUser> users=new Vector<TwiUser>(30);
+				boolean flag=false;
 				switch(task.ownType){
 					case Search:{
-						searchCrawl.doCrawl(task.getTargetString(),batchdb,users);
+						flag=searchCrawl.doCrawl(task.getTargetString(),batchdb,users);
 						sentKeyUsers(users);
 						break;
 					}
 					case Following:{						
-						followingCrawl.doCrawl(task.getTargetString(),batchdb,users);
+						flag=followingCrawl.doCrawl(task.getTargetString(),batchdb,users);
 						sentNorUsers(users);
 						break;
 					}
 					case Followers:{
-						followerCrawl.doCrawl(task.getTargetString(),batchdb,users);
+						flag=followerCrawl.doCrawl(task.getTargetString(),batchdb,users);
 						sentNorUsers(users);
 						break;
 					}
 					case TimeLine:{
-						timelineCrawl.doCrawl(task.getTargetString(),batchdb,users);
+						flag=timelineCrawl.doCrawl(task.getTargetString(),batchdb,users);
 						break;
 					}
 					case About:{
-						profileCrawl.doCrawl(task.getTargetString(), batchdb, users);
+						flag=profileCrawl.doCrawl(task.getTargetString(), batchdb, users);
 					}
 					default:{
 						LogSys.nodeLogger.error("未知的TaskType数据类型 exit");
 						break;
 					}												
 				}
+				
 				TwiUser[] userArray=new TwiUser[users.size()];
 				users.toArray(userArray);
 				if(users.size()>0){
 					batchdb.insertIntoUser(userArray);
 				}
-				
+				if(flag){
+					tracker.FinishTask(task);
+				}else{
+					tracker.FailTask(task);
+				}			
 				
 			}
 		}catch(Exception ex){

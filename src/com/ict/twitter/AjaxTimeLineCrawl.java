@@ -60,7 +60,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		String nextmaxID="";
 		String URL="";
 		int count=0;
-		AjaxTimeLineAnalyser TWAna=new AjaxTimeLineAnalyser(dbo);	
+		AjaxTimeLineAnalyser TWAna=new AjaxTimeLineAnalyser(dbo);
+		boolean flag=true;
 		do{
 			if(nextmaxID==null||nextmaxID.equals("")){
 				URL=String.format(baseUrl, userID,"");
@@ -72,6 +73,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 			if(content==null||(content.length())<=20){
 				System.err.println("web opreation error content is null");
 				has_more_items=false;
+				flag=false;
 				break;
 			}
 			try{
@@ -89,6 +91,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				}
 			}catch(ParseException ex){
 				has_more_items=false;
+				flag=false;
 				break;
 				
 			}catch(AllHasInsertedException ex){
@@ -98,12 +101,13 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 			catch(Exception ex){
 				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID);
 				ex.printStackTrace();
+				flag=false;
 				break;
 			}
 			count++;
 		}while(has_more_items);
 		System.out.println("共分析了"+count+"次 (20twi)");
-		return true;
+		return flag;
 		
 		
 	}

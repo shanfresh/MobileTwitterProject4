@@ -5,8 +5,10 @@ import java.util.concurrent.*;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ict.twitter.StatusTrack.MyTracker;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -17,6 +19,7 @@ public abstract class AjaxCrawl {
 	 */
 
 	public ExecutorService service = Executors.newCachedThreadPool();
+	
 	public abstract boolean doCrawl(String src, MulityInsertDataBase dbo,Vector<TwiUser> RelatUsers);
 
 
