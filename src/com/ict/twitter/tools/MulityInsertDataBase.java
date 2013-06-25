@@ -229,7 +229,7 @@ public class MulityInsertDataBase {
 		      }
 		}
 		System.out.println(String.format("Success:%d NoInfo:%d Failed:%d",OKRows,NoInfoRows,FailRows));
-		if(OKRows==updateCounts.length){
+		if(FailRows==updateCounts.length){
 			throw new AllHasInsertedException("所有的数据都插入过了");
 		}
 	}
