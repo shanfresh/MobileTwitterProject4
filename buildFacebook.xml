@@ -49,7 +49,11 @@
 					    </fileset>
 					    <fileset dir="${basedir}/lib/MongoDB">
 					    <include name="*.jar"/>
-			      </fileset>
+					    	
+				     	 </fileset>
+				  		 <fileset dir="${basedir}/lib/JUnit">
+				    		<include name="*.jar"/>
+		     			 </fileset>
 			</classpath>			
 		</javac>		
     </target>
@@ -80,7 +84,9 @@
 		    <fileset dir="${basedir}/lib/MongoDB">
 		        <include name="*.jar"/>
 		    </fileset>
-
+		    <fileset dir="${basedir}/lib/JUnit">
+		    	<include name="*.jar"/>
+     		</fileset>
 		</copy>
 	</target>
 

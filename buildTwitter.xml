@@ -51,21 +51,24 @@
 	<target name="build">
 		<javac srcdir="${basedir}/src" destdir="${basedir}/build/classes" debug="yes">
 			<classpath>
-				  <fileset dir="${basedir}/lib">
-					    <include name="*.jar"/>
-					    </fileset>
-					    <fileset dir="${basedir}/lib/JFreeChat">
-					    <include name="*.jar"/>
-					    </fileset>
-					    <fileset dir="${basedir}/lib/JSON">
-					    <include name="*.jar"/>
-					    </fileset>
-					    <fileset dir="${basedir}/lib/log4j">
-					    <include name="*.jar"/>
-					    </fileset>
-					    <fileset dir="${basedir}/lib/MongoDB">
-					    <include name="*.jar"/>
-			      </fileset>
+			 	 	<fileset dir="${basedir}/lib">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/JFreeChat">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/JSON">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/log4j">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/MongoDB">
+				    <include name="*.jar"/>
+		     		</fileset>
+				    <fileset dir="${basedir}/lib/JUnit">
+				    <include name="*.jar"/>
+		     		</fileset>
 			</classpath>			
 		</javac>		
     </target>
@@ -96,6 +99,10 @@
 		    <fileset dir="${basedir}/lib/MongoDB">
 		        <include name="*.jar"/>
 		    </fileset>
+		    <fileset dir="${basedir}/lib/JUnit">
+		    <include name="*.jar"/>
+     		</fileset>
+			
 		</copy>
 	</target>
 	<target name="TwitterJars" depends="depends,build">
@@ -128,6 +135,9 @@
 		    <fileset dir="${basedir}/lib/MongoDB">
 		        <include name="*.jar"/>
 		    </fileset>
+		    <fileset dir="${basedir}/lib/JUnit">
+		    <include name="*.jar"/>
+     		</fileset>
 		</copy>
 	</target>
 </project>
