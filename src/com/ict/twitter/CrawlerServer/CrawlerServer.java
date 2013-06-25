@@ -20,7 +20,7 @@ import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.BasePath;
 
 import java.util.HashMap;
-public class CrawlerServer  extends MessageBusComponent implements Runnable,MessageBusNames,MessageBussConnector {
+public class CrawlerServer extends MessageBusComponent implements Runnable,MessageBusNames,MessageBussConnector {
 
 	/**
 	 * 必须要改！！
@@ -64,15 +64,16 @@ public class CrawlerServer  extends MessageBusComponent implements Runnable,Mess
 	protected String args[];
 	protected OP op=null;
 	protected int deepth=10;
+	protected int keySearchCount=100;
 	/***************************/
 	public CrawlerServer(){
-		this("-Command Start -Deepth 10".split(" "));	
+		this("-Command Start -Deepth 10 -KeySearchCount 10".split(" "));	
 		
 	}
 	public CrawlerServer(String[] args){
 		LogSys.crawlerServLogger.info("Crawlserver初始化");
 		if (args.length < 1) {
-			System.err.println("Usage: CrawlerServer -Command [Start|Stop|Dump|Restart] -Deepth 10");
+			System.err.println("Usage: CrawlerServer -Command [Start|Stop|Dump|Restart] -Deepth 10 -KeySearchCount 10");
 		    return;
 	    }
 		this.args=args;
@@ -115,6 +116,8 @@ public class CrawlerServer  extends MessageBusComponent implements Runnable,Mess
 				}					
 			}else if(args[i].equals("-Deepth")){
 				deepth=Integer.parseInt(args[++i]);
+			}else if(args[i].equals("-KeySearchCount")){
+				keySearchCount=Integer.parseInt(args[++i]);
 			}
 		}
 		this.Normal_User_Deepth=deepth;
@@ -264,10 +267,9 @@ public class CrawlerServer  extends MessageBusComponent implements Runnable,Mess
 	protected void KeyWordSearch(boolean isResume){
 		currentstep=ServerStep.searchStart;
 		LogSys.crawlerServLogger.info("关键词搜索开始");			
-		
 		//非常重要
 		if(!isResume)
-			KeyWordsSearch();
+			KeyWordsSearch(keySearchCount);
 		while(currentstep!=ServerStep.searchEnd){
 			CollectNodesStatus();
 			SleepWithCount(60000);				
@@ -327,9 +329,9 @@ public class CrawlerServer  extends MessageBusComponent implements Runnable,Mess
 		
 		
 	}
-	public void KeyWordsSearch(){
+	public void KeyWordsSearch(int max){
 		String filelocation=basepath+"/UsefulFile/minganci_min.txt";
-		sb.InitSearch(filelocation, this);
+		sb.InitSearch(filelocation,max,this);
 		SleepWithCount(5000);
 		sendNewStep(NodeStep.search_start);
 		

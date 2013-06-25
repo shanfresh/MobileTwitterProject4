@@ -26,11 +26,9 @@ public class ServerBean implements Serializable{
 	public static SaveTxtFile tmpKeyId=new SaveTxtFile("Output/Twitter/tmpKeyIDs.txt",false);
 	public static SaveTxtFile tmpNormalId=new SaveTxtFile("Output/Twitter/NormalIDs.txt",false);
 	List<NormalUser> normalUserList=Collections.synchronizedList(new UserList<NormalUser>());
-	List<NormalUser> keyUsers=Collections.synchronizedList(new UserList<NormalUser>());	
-	boolean isdebug=true;
-	
+	List<NormalUser> keyUsers=Collections.synchronizedList(new UserList<NormalUser>());		
 	//初始化关键词搜索
-	public void InitSearch(String file,CrawlerServer server){
+	public void InitSearch(String file,int max,CrawlerServer server){
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"utf-8"));
@@ -50,11 +48,10 @@ public class ServerBean implements Serializable{
 				task.setTargetString(t);
 				server.addTask(task);				
 				i++;
-				if(isdebug&&i>=2){
+				if(i>max){
 					break;
 				}
 			}
-			LogSys.crawlerServLogger.info(isdebug+"【Server】总共新加的关键词数"+i+"个");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
