@@ -7,6 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.*;
 
 import com.ict.twitter.analyser.beans.TimeLine;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -22,7 +23,7 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		// TODO Auto-generated constructor stub
 	}
 
-	public AnalyserCursor doAnalyser(String src){
+	public AnalyserCursor doAnalyser(String src) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
 		AnalyserCursor result=new AnalyserCursor();
 		//doc.getelementsby

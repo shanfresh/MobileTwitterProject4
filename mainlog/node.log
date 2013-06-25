@@ -1,21 +1,11 @@
- INFO 2013-06-25 09:49:46 [main] [TwitterLoginManager.java:57] - StartTest
-  DEBUG 2013-06-25 09:49:46 [main] [TwitterLoginManager.java:94] - 准备进行用户登录操作
-  DEBUG 2013-06-25 09:49:54 [main] [TwitterLoginManager.java:104] - Login form get: HTTP/1.1 200 OK
-  DEBUG 2013-06-25 09:49:54 [main] [TwitterLoginManager.java:106] - Initial set of cookies:
-  DEBUG 2013-06-25 09:49:54 [main] [TwitterLoginManager.java:112] - - [version: 0][name: _twitter_sess][value: BAh7CSIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo%250ASGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlYjI5MDRlMThmMGEzMWUxMWNi%250AN2ExMDRjMGUzNjA0NDM6D2NyZWF0ZWRfYXRsKwj80QV5PwE6B2lkIiU3MTgz%250AOWQ5MjNjOTBiMThiYmFkMWNjNTc1MDhmYjE0ZA%253D%253D--800561f929bd3b3a32e3e9d811b14208a707e346][domain: .twitter.com][path: /][expiry: null]
-  DEBUG 2013-06-25 09:49:54 [main] [TwitterLoginManager.java:112] - - [version: 0][name: guest_id][value: v1%3A137212499199045222][domain: .twitter.com][path: /][expiry: Thu Jun 25 09:49:52 CST 2015]
-  DEBUG 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:126] - Login form get: HTTP/1.1 302 Found
-  DEBUG 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:128] - Post logon cookies:
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: _twitter_sess][value: BAh7CjoJdXNlcmkEMUzXHToMY3NyZl9pZCIlYjI5MDRlMThmMGEzMWUxMWNi%250AN2ExMDRjMGUzNjA0NDM6D2NyZWF0ZWRfYXRsKwj80QV5PwE6EHN0YXlfc2Vj%250AdXJlVDoHaWQiJTcxODM5ZDkyM2M5MGIxOGJiYWQxY2M1NzUwOGZiMTRk--71ba320499356ffbf0eba69cb82a808c6437acbc][domain: .twitter.com][path: /][expiry: null]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: auth_token][value: a78b2068875e298ac5253691e9b4aed8d8106684][domain: .twitter.com][path: /][expiry: null]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:138] - Success To Login To Twitter
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: guest_id][value: v1%3A137212499199045222][domain: .twitter.com][path: /][expiry: Thu Jun 25 09:49:52 CST 2015]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: lang][value: en][domain: twitter.com][path: /][expiry: null]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: remember_checked][value: 0][domain: .twitter.com][path: /][expiry: Sun Jun 25 21:49:55 CST 2023]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: remember_checked_on][value: 0][domain: .twitter.com][path: /][expiry: Sun Jun 25 21:49:55 CST 2023]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: secure_session][value: true][domain: .twitter.com][path: /][expiry: null]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: twid][value: u%3D500649009%7CZoraUj8y4DShIYwRBMEgtPsczMA%3D][domain: .twitter.com][path: /][expiry: null]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:136] - - [version: 0][name: twll][value: l%3D1372124995][domain: .twitter.com][path: /][expiry: Sun Jun 25 21:49:55 CST 2023]
-   INFO 2013-06-25 09:49:55 [main] [TwitterLoginManager.java:143] - Success To Save Cookies
-   INFO 2013-06-25 09:49:58 [main] [TwitterLoginManager.java:178] - 登陆成功with Usernetworktest2@126.com Password290749970
+ INFO 2013-06-25 10:14:43 [main] [TwitterLoginManager.java:230] - 恢复登录状态成功
+  DEBUG 2013-06-25 10:14:43 [main] [BasePath.java:17] - 工程路径是：D:\Java\workplace\MobileTwitterProject4
+  DEBUG 2013-06-25 10:14:44 [pool-1-thread-1] [BasePath.java:17] - 工程路径是：D:\Java\workplace\MobileTwitterProject4
+  DEBUG 2013-06-25 10:14:44 [pool-1-thread-1] [WebOperationAjax.java:48] - The Retry[0] OpenLink with Address:/i/profiles/show/BigBang_CBS/timeline?include_available_features=1&include_entities=1
+  DEBUG 2013-06-25 10:14:55 [main] [MulityInsertDataBase.java:108] - Success to connect to SQLServer
+  DEBUG 2013-06-25 10:14:55 [pool-1-thread-1] [WebOperationAjax.java:48] - The Retry[0] OpenLink with Address:/i/profiles/show/BigBang_CBS/timeline?include_available_features=1&include_entities=1&max_id=344540837260185599
+  DEBUG 2013-06-25 10:15:06 [pool-1-thread-1] [WebOperationAjax.java:48] - The Retry[0] OpenLink with Address:/i/profiles/show/BigBang_CBS/timeline?include_available_features=1&include_entities=1&max_id=335433018586038271
+  DEBUG 2013-06-25 10:15:20 [pool-1-thread-1] [WebOperationAjax.java:48] - The Retry[0] OpenLink with Address:/i/profiles/show/BigBang_CBS/timeline?include_available_features=1&include_entities=1&max_id=332646510439309312
+  DEBUG 2013-06-25 10:15:37 [pool-1-thread-1] [WebOperationAjax.java:48] - The Retry[0] OpenLink with Address:/i/profiles/show/BigBang_CBS/timeline?include_available_features=1&include_entities=1&max_id=328946091296960511
+  DEBUG 2013-06-25 10:15:49 [pool-1-thread-1] [WebOperationAjax.java:48] - The Retry[0] OpenLink with Address:/i/profiles/show/BigBang_CBS/timeline?include_available_features=1&include_entities=1&max_id=321076358535069696
   

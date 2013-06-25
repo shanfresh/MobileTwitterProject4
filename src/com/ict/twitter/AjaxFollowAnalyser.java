@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserRelationship;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -27,7 +28,7 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 		
 
 	}
-	public int doAnalyse(String currentUser,boolean isFollowing,String src,Vector<TwiUser> users){
+	public int doAnalyse(String currentUser,boolean isFollowing,String src,Vector<TwiUser> users) throws AllHasInsertedException{
 		System.out.println(count+"\t content:"+src.substring(0,100));
 		Document doc=Jsoup.parse(src, "/");
 		Elements follows=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item");

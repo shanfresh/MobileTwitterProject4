@@ -68,7 +68,12 @@ public class MulityInsertDataBase {
 			user.setWebpageLink("");
 			users[i]=user;
 		}
-		mm.insertIntoUser(users);
+		try {
+			mm.insertIntoUser(users);
+		} catch (AllHasInsertedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
@@ -82,7 +87,12 @@ public class MulityInsertDataBase {
 			userrel.setLinkType("follow");
 			users[i]=userrel;
 		}
-		mm.insertIntoUserRel(users);		
+		try {
+			mm.insertIntoUserRel(users);
+		} catch (AllHasInsertedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	
 	public Connection getConnection(){
@@ -110,7 +120,7 @@ public class MulityInsertDataBase {
 		return connection;
 	}
 	
-	public boolean insertIntoMessage(TimeLine[] timeline){
+	public boolean insertIntoMessage(TimeLine[] timeline) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		try {
 			con.setAutoCommit(false);
@@ -138,7 +148,7 @@ public class MulityInsertDataBase {
 		}
 		return true;
 	}	
-	public boolean insertIntoUser(TwiUser[] users){
+	public boolean insertIntoUser(TwiUser[] users) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		try {
 			if(userps==null){
@@ -176,7 +186,7 @@ public class MulityInsertDataBase {
 
 
 	
-	public boolean insertIntoUserRel(UserRelationship[] rels){
+	public boolean insertIntoUserRel(UserRelationship[] rels)throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		try {
 			if(userrelps==null){
@@ -205,16 +215,23 @@ public class MulityInsertDataBase {
 	}
 	
 	
-	private void checkBatch(int[] updateCounts){
+	private void checkBatch(int[] updateCounts) throws AllHasInsertedException{
+		int OKRows=0,NoInfoRows=0,FailRows=0;
 		for(int i=0;i<updateCounts.length;i++){
 			if (updateCounts[i] >= 0) {
-		        //System.out.println("["+i+"]Successfully executed; updateCount=" + updateCounts[i]);
+				OKRows++;
 		      } else if (updateCounts[i] == Statement.SUCCESS_NO_INFO) {
 		        System.out.println("["+i+"]Successfully executed; updateCount=Statement.SUCCESS_NO_INFO");
+		        NoInfoRows++;
 		      } else if (updateCounts[i] == Statement.EXECUTE_FAILED) {
 		        System.out.println("["+i+"]Failed to execute; updateCount=Statement.EXECUTE_FAILED");
+		        FailRows++;
 		      }
-		}		
+		}
+		System.out.println(String.format("Success:%d NoInfo:%d Failed:%d",OKRows,NoInfoRows,FailRows));
+		if(OKRows==updateCounts.length){
+			throw new AllHasInsertedException("所有的数据都插入过了");
+		}
 	}
 	
 	public void insertIntoUserProfile(UserProfile profile){

@@ -10,6 +10,7 @@ import com.ict.twitter.AjaxAnalyser;
 import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -27,7 +28,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		// TODO Auto-generated method stub
 
 	}
-	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users){
+	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
 		Elements follows=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item expanding-stream-item");
 		

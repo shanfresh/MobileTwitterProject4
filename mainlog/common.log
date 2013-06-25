@@ -1,14 +1,2 @@
- INFO 2013-06-25 09:49:46 [main] (TwitterLoginManager.java:57) - StartTest
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: _twitter_sess][value: BAh7CjoJdXNlcmkEMUzXHToMY3NyZl9pZCIlYjI5MDRlMThmMGEzMWUxMWNi%250AN2ExMDRjMGUzNjA0NDM6D2NyZWF0ZWRfYXRsKwj80QV5PwE6EHN0YXlfc2Vj%250AdXJlVDoHaWQiJTcxODM5ZDkyM2M5MGIxOGJiYWQxY2M1NzUwOGZiMTRk--71ba320499356ffbf0eba69cb82a808c6437acbc][domain: .twitter.com][path: /][expiry: null]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: auth_token][value: a78b2068875e298ac5253691e9b4aed8d8106684][domain: .twitter.com][path: /][expiry: null]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:138) - Success To Login To Twitter
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: guest_id][value: v1%3A137212499199045222][domain: .twitter.com][path: /][expiry: Thu Jun 25 09:49:52 CST 2015]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: lang][value: en][domain: twitter.com][path: /][expiry: null]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: remember_checked][value: 0][domain: .twitter.com][path: /][expiry: Sun Jun 25 21:49:55 CST 2023]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: remember_checked_on][value: 0][domain: .twitter.com][path: /][expiry: Sun Jun 25 21:49:55 CST 2023]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: secure_session][value: true][domain: .twitter.com][path: /][expiry: null]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: twid][value: u%3D500649009%7CZoraUj8y4DShIYwRBMEgtPsczMA%3D][domain: .twitter.com][path: /][expiry: null]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:136) - - [version: 0][name: twll][value: l%3D1372124995][domain: .twitter.com][path: /][expiry: Sun Jun 25 21:49:55 CST 2023]
-  INFO 2013-06-25 09:49:55 [main] (TwitterLoginManager.java:143) - Success To Save Cookies
-  INFO 2013-06-25 09:49:58 [main] (TwitterLoginManager.java:178) - µÇÂ½³É¹¦with Usernetworktest2@126.com Password290749970
+ INFO 2013-06-25 10:14:43 [main] (TwitterLoginManager.java:230) - »Ö¸´µÇÂ¼×´Ì¬³É¹¦
  
