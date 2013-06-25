@@ -15,8 +15,8 @@ public abstract class AjaxCrawl {
 	/**
 	 * @param args
 	 */
-	ExecutorService service = Executors.newCachedThreadPool();
-	
+
+	public ExecutorService service = Executors.newCachedThreadPool();
 	public abstract boolean doCrawl(String src, MulityInsertDataBase dbo,Vector<TwiUser> RelatUsers);
 
 
