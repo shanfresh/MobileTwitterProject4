@@ -250,12 +250,17 @@ public class MulityInsertDataBase {
 			userprofile.setInt(6, profile.getFollowing());
 			userprofile.setInt(7, profile.getFollower());
 			userprofile.setTimestamp(8, time);
-			userprofile.execute();
+			userprofile.executeUpdate();
 			con.commit();
-		}catch(MySQLIntegrityConstraintViolationException ex){
-			System.err.println("Duplicate key for ["+profile.getUser_id()+"]");
-		} catch (SQLException e) {
+		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){
+			System.out.println("÷ÿ∏¥≤Â»Î");
+		}
+		catch(SQLException ex){
+			System.out.println("Errorcode"+ex.getErrorCode());
+			ex.printStackTrace();
+		}catch(Exception e) {
 			// TODO Auto-generated catch block
+			System.err.println("Other Exception");
 			e.printStackTrace();
 		}
 	}
