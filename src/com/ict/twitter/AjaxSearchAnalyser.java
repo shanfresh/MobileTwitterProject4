@@ -44,7 +44,6 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 				String userID=firstChildren.attr("data-screen-name");
 				String content;
 				String date;
-				System.out.println(firstChildren.html());
 				try{
 					content=firstChildren.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first().text();			
 				}catch(NullPointerException ex){
@@ -69,6 +68,10 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		}
 		TimeLine[] TimeLineArray = new TimeLine[timelines.size()];
 		timelines.toArray(TimeLineArray);
+		if(super.isdebug){
+			for(int i=0;i<TimeLineArray.length;i++)
+				TimeLineArray[i].show();
+		}
 		super.batchdb.insertIntoMessage(TimeLineArray);
 		AnalyserCursor res=new AnalyserCursor(tweetID,follows.size());
 		return res;

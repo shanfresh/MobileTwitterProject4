@@ -79,11 +79,10 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 				res = ana.doAnalyse(html,RelateUsers);
 			} catch (AllHasInsertedException e) {
 				//系统发现重复采集故停止当前采集任务；
-				e.printStackTrace();
 				has_next=false;
 				LogSys.nodeLogger.debug("当前Search采集完成["+keyWords+"]");
-			}
-			
+				break;
+			}			
 			if(map.get("max_id")!=null){
 				next_max_id=(String)map.get("max_id");
 			}else{
