@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 
 import com.ict.twitter.analyser.beans.*;
 import com.ict.twitter.plantform.LogSys;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 public class MulityInsertDataBase {
 	private String ip="";
@@ -81,9 +82,7 @@ public class MulityInsertDataBase {
 			userrel.setLinkType("follow");
 			users[i]=userrel;
 		}
-		mm.insertIntoUserRel(users);
-		
-		
+		mm.insertIntoUserRel(users);		
 	}
 	
 	public Connection getConnection(){
@@ -236,6 +235,8 @@ public class MulityInsertDataBase {
 			userprofile.setTimestamp(8, time);
 			userprofile.execute();
 			con.commit();
+		}catch(MySQLIntegrityConstraintViolationException ex){
+			System.err.println("Duplicate key for ["+profile.getUser_id()+"]");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

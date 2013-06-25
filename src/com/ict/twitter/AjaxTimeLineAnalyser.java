@@ -32,9 +32,9 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		}
 		Vector<TimeLine> vector = new Vector<TimeLine>();
 		
-		for(Element t:twitterMessages){		
+		for(Element t:twitterMessages){
 			try{
-				Element content=t.getElementsByAttributeValue("class", "js-tweet-text").first();
+				Element content=t.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first();
 				Element time=t.getElementsByAttributeValue("class", "tweet-timestamp js-permalink js-nav").first();
 				String timeStr=time.attr("title");
 				
@@ -47,7 +47,7 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 				//System.out.println(tweet_id+" "+user_id+" "+user_name);
 				vector.add(new TimeLine(tweet_id,user_name,content.ownText(),timeStr));
 			}catch(NullPointerException ex){
-				;
+				ex.printStackTrace();
 			}			
 		}
 		TimeLine[] timelines = new TimeLine[vector.size()];

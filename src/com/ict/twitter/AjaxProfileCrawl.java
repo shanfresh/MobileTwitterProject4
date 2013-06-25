@@ -58,9 +58,6 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			if(profile.getPicture_url()!=null){
 				byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
 				profile.setPicturedata(result);
-				for(int i=0;i<result.length;i++){
-					System.out.println(Byte.toString(result[i]));
-				}
 			}
 			dbo.insertIntoUserProfile(profile);
 			System.out.println("insert into profile");
@@ -71,7 +68,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		}
 		return false;
 	}
-	public static void main2(String[] args){
+	public static void main(String[] args){
 		TwitterClientManager cm=new TwitterClientManager();
 		DefaultHttpClient httpclient = cm.getClientNoProxy();
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
@@ -106,7 +103,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			e.printStackTrace();
 		}
 	}
-	public static  void main(String[] args){
+	public static  void main2(String[] args){
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		dbo.getConnection();
 		dbo.getDatafromprofile();

@@ -62,8 +62,8 @@ public class TwitterLoginManager {
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
 		String[] items=lgtest.getAccounts();
 		System.out.println(items[0]);
-		lgtest.disableCountsByName(items[0]);
-//		lgtest.forceLogin();
+//		lgtest.disableCountsByName(items[0]);
+		lgtest.forceLogin();
 //		if(lgtest.checkLoginStatus()){
 //			System.out.println("µÇÂ¼³É¹¦");
 //		}else{

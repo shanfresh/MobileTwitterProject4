@@ -29,6 +29,12 @@ public class LoginManager {
 		user="networktest1@126.com";
 		pass="290749970abc";
 	}
+	public static void main(String[] args){
+		ClientManager cm=new ClientManager();
+		
+		LoginManager lm=new LoginManager(cm.getClientNoProxy());
+		lm.doLogin();
+	}
 	
 	public boolean loadCookieFromFile(){
 		return true;

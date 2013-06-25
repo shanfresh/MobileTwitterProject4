@@ -43,13 +43,14 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 				String userID=firstChildren.attr("data-screen-name");
 				String content;
 				String date;
+				System.out.println(firstChildren.html());
 				try{
-					content=firstChildren.getElementsByAttributeValue("class", "js-tweet-text").first().ownText();			
+					content=firstChildren.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first().ownText();			
 				}catch(NullPointerException ex){
 					content="null";
 				}
 				try{
-					date=firstChildren.getElementsByAttributeValue("class", "firstChildren").first().attr("title");
+					date=firstChildren.getElementsByAttributeValue("class", "time").first().children().get(0).attr("title");
 				}catch(NullPointerException ex){
 					date="null";
 				}
