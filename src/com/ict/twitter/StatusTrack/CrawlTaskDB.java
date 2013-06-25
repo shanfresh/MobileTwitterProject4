@@ -26,7 +26,7 @@ public class CrawlTaskDB {
 		}
 
 	}
-	public void AddTask(String taskStr,CrawlTaskType type){
+	public boolean AddTask(String taskStr,CrawlTaskType type){
 		Date date=new Date(System.currentTimeMillis());
 		try{
 			pst.setString(1, taskStr);
@@ -37,11 +37,12 @@ public class CrawlTaskDB {
 			pst.executeUpdate();
 		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){
 			System.err.println("÷ÿ∏¥≤Â»Î"+ex.getLocalizedMessage());
+			return false;
 		}
 		catch(Exception ex){
-			
-			ex.printStackTrace();
+			return false;
 		}
+		return true;
 		
 	}
 	public boolean FinishTask(String task,CrawlTaskType type,boolean isOK){

@@ -13,6 +13,7 @@ import com.ict.twitter.MessageBusTest.ControlClient;
 import com.ict.twitter.MessageBusTest.MessageBusCleanner;
 import com.ict.twitter.Report.NodeReporterReceiver;
 import com.ict.twitter.Report.ReportData;
+import com.ict.twitter.StatusTrack.MyTracker;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.plantform.PlatFormMain;
 import com.ict.twitter.task.beans.Task;
@@ -65,6 +66,10 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	protected OP op=null;
 	protected int deepth=10;
 	protected int keySearchCount=100;
+	/***************************/
+	
+	/***************************/
+	private MyTracker tracker;
 	/***************************/
 	public CrawlerServer(){
 		this("-Command Start -Deepth 10 -KeySearchCount 10".split(" "));	
@@ -121,8 +126,6 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 			}
 		}
 		this.Normal_User_Deepth=deepth;
-		
-
 	}
 
 	public int run(String[] args) throws Exception {
@@ -155,6 +158,8 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		KeyUserReceiver=new KeyUserReceiver(connection,MessageBusNames.KeyID,this,false);
 		nodeReporterReceiver=new NodeReporterReceiver(connection,MessageBusNames.ReportTwitterWEB,this,false);
 		
+		
+		tracker=new MyTracker();
 	}
 
 	public static String basepath;
@@ -348,7 +353,9 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		
 	}
 	public boolean addTask(Task task){
-		return taskSender.Send(task.TaskTOString());		
+		tracker.AddTask(task);
+		taskSender.Send(task.TaskTOString());
+		return true;
 	}
 	//添加普通用户
 	public void addNormalUser(NormalUser nu){		
