@@ -12,6 +12,7 @@ import org.json.simple.parser.ParseException;
 import com.ict.twitter.AjaxAnalyser.AnalyserCursor;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -45,6 +46,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
 		at.doCrawl("BigBang_CBS",dbo,users);
+		at.service.shutdown();
+		
 
 	}
 	public AjaxTimeLineCrawl(DefaultHttpClient httpclient){		
@@ -88,14 +91,18 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				has_more_items=false;
 				break;
 				
-			}catch(Exception ex){
+			}catch(AllHasInsertedException ex){
+				LogSys.nodeLogger.error("当前用户所有推文已经采集完毕--"+userID);
+				break;
+			}
+			catch(Exception ex){
 				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID);
 				ex.printStackTrace();
 				break;
 			}
 			count++;
 		}while(has_more_items);
-		System.out.println("共采集"+count+"次 (20twi)");
+		System.out.println("共分析了"+count+"次 (20twi)");
 		return true;
 		
 		

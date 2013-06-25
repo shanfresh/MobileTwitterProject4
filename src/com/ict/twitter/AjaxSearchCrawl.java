@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import com.ict.twitter.AjaxAnalyser.AnalyserCursor;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -73,7 +74,15 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			}
 			has_next=(Boolean)map.get("has_more_items");
 			String html=(String)map.get("items_html");
-			AnalyserCursor res=ana.doAnalyse(html,RelateUsers);
+			AnalyserCursor res=null;
+			try {
+				res = ana.doAnalyse(html,RelateUsers);
+			} catch (AllHasInsertedException e) {
+				//系统发现重复采集故停止当前采集任务；
+				e.printStackTrace();
+				has_next=false;
+				LogSys.nodeLogger.debug("当前Search采集完成["+keyWords+"]");
+			}
 			
 			if(map.get("max_id")!=null){
 				next_max_id=(String)map.get("max_id");

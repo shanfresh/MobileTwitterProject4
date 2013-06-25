@@ -46,7 +46,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 				String date;
 				System.out.println(firstChildren.html());
 				try{
-					content=firstChildren.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first().ownText();			
+					content=firstChildren.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first().text();			
 				}catch(NullPointerException ex){
 					content="null";
 				}
