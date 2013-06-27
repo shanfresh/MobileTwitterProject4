@@ -108,7 +108,7 @@ public class ServerBean implements Serializable{
 		for(int i=0;i<normalUserList.size();i++){
 			if(i%100==0){
 				try {
-					LogSys.crawlerServLogger.info("当前进行第"+i+"组数据导入的NormalUser总线");
+					LogSys.crawlerServLogger.info("当前进行第"+i+"组数据导入的NormalUser总线,共["+normalUserList.size()+"]");
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
