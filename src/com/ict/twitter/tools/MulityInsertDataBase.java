@@ -221,10 +221,9 @@ public class MulityInsertDataBase {
 			if (updateCounts[i] >= 0) {
 				OKRows++;
 		      } else if (updateCounts[i] == Statement.SUCCESS_NO_INFO) {
-		        System.out.println("["+i+"]Successfully executed; updateCount=Statement.SUCCESS_NO_INFO");
 		        NoInfoRows++;
 		      } else if (updateCounts[i] == Statement.EXECUTE_FAILED) {
-		        System.out.println("["+i+"]Failed to execute; updateCount=Statement.EXECUTE_FAILED");
+		    	//System.out.println("["+i+"]Failed to execute; updateCount=Statement.EXECUTE_FAILED");
 		        FailRows++;
 		      }
 		}

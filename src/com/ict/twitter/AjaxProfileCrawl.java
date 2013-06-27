@@ -49,6 +49,8 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LogSys.nodeLogger.error(e.getMessage());
+			LogSys.nodeLogger.error("CurrentJSON:"+ajaxContent);
 			return false;
 		}
 		try{
