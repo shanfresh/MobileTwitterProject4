@@ -13,7 +13,7 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 
 
 public class AjaxTimeLineAnalyser extends AjaxAnalyser{
-	boolean isdebug=System.getProperties().getProperty("isdebug").equals("TRUE");
+	boolean isdebug=false;
 	public AjaxTimeLineAnalyser(MulityInsertDataBase batchdb) {
 		super(batchdb);
 		// TODO Auto-generated constructor stub

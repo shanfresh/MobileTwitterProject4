@@ -359,7 +359,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	}
 	//添加普通用户
 	public void addNormalUser(NormalUser nu){		
-		sb.addNormalUser(nu);		
+		sb.addNormalUser(nu,deepth);		
 	}
 	
 	public void addKeyUser(NormalUser nu){
