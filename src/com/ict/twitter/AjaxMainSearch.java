@@ -85,6 +85,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 					}
 					case About:{
 						flag=profileCrawl.doCrawl(task.getTargetString(), batchdb, users);
+						break;
 					}
 					default:{
 						LogSys.nodeLogger.error("未知的TaskType数据类型 exit");

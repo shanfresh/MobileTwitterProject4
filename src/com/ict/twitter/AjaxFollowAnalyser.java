@@ -42,8 +42,7 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 				//一串数字
 				String userIDNO=firstChildren.attr("data-user-id");
 				//唯一标示符
-				String userID=firstChildren.attr("data-screen-name");				
-				System.out.printf("\t %2d,USIDNO:"+userIDNO+"userID"+userID+"\r\n",j++);	
+				String userID=firstChildren.attr("data-screen-name");					
 				users.add(new TwiUser(userID,userID,0,0));
 				userrels.add(new UserRelationship(currentUser,userID,isFollowing+""));
 			}
