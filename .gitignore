@@ -1,5 +1,7 @@
 mainlog/
 Output/
+config/TwitterAccounts.txt
+config/clientproperties.ini
 #################
 ## Eclipse
 #################
