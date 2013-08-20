@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 
 
 import com.ict.twitter.AjaxAnalyser.AnalyserCursor;
+import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.tools.AllHasInsertedException;
@@ -45,7 +46,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		AjaxTimeLineCrawl at=new AjaxTimeLineCrawl(httpclient);
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		at.doCrawl("BigBang_CBS",dbo,users);
+		at.doCrawl("BigBang_CBS",dbo,users,new ReportData());
 		at.service.shutdown();
 		
 
@@ -54,7 +55,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		this.httpclient=httpclient;
 	}
 	
-	public boolean doCrawl(String userID,MulityInsertDataBase dbo,Vector<TwiUser> RelatUsers){
+	public boolean doCrawl(String userID,MulityInsertDataBase dbo,Vector<TwiUser> RelatUsers,ReportData reportData){
 		
 		boolean has_more_items=false;
 		String nextmaxID="";
@@ -62,6 +63,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		int count=0;
 		AjaxTimeLineAnalyser TWAna=new AjaxTimeLineAnalyser(dbo);
 		boolean flag=true;
+		AnalyserCursor result;
 		do{
 			if(nextmaxID==null||nextmaxID.equals("")){
 				URL=String.format(baseUrl, userID,"");
@@ -81,7 +83,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				String html=(String) json.get("items_html");
 				has_more_items=(Boolean)json.get("has_more_items");
 				//采集结果
-				AnalyserCursor result=TWAna.doAnalyser(html);
+				result=TWAna.doAnalyser(html);
 				try{
 					Long resultMax=Long.parseLong(result.lastID);
 					resultMax=resultMax-1l;
@@ -89,6 +91,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				}catch(NumberFormatException ex){
 					nextmaxID=result.lastID;
 				}
+				
 			}catch(ParseException ex){
 				has_more_items=false;
 				flag=false;
@@ -105,6 +108,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				break;
 			}
 			count++;
+			reportData.message_increment+=result.size;
 		}while(has_more_items);
 		System.out.println("共分析了"+count+"次 (20twi)");
 		return flag;

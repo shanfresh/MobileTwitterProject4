@@ -52,7 +52,7 @@ public class NodeReporter {
 	public static void doReport(CrawlerServerReporter clr,int message,int message_rel,int user,int user_rel){
 		ReportData rd=new ReportData(message,message_rel,user,user_rel,"CRAWLSERVER");
 		try {
-			clr.doReportByDataBase(rd);
+			clr.doReportIncrementByDataBase(rd);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.err.println("»ã±¨Ê§°Ü");

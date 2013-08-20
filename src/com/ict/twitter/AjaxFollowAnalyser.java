@@ -33,6 +33,7 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 	public int doAnalyse(String currentUser,boolean isFollowing,String src,Vector<TwiUser> users) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
 		Elements follows=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item");
+		count=0;
 		count+=follows.size();
 		int j=1;
 		Vector<UserRelationship> userrels = new Vector<UserRelationship>(20);

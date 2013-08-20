@@ -8,6 +8,7 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.tools.AllHasInsertedException;
@@ -40,7 +41,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean doCrawl(String userID,MulityInsertDataBase batchdb,Vector<TwiUser> RelateUsers){
+	public boolean doCrawl(String userID,MulityInsertDataBase batchdb,Vector<TwiUser> RelateUsers,ReportData reportData){
 		
 		String URL;
 		boolean hasMoreItems=false;
@@ -80,6 +81,8 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 						nextCursor=null;
 					}
 				}
+				reportData.user_increment+=index;
+				reportData.user_rel_increment+=index;
 			}catch(AllHasInsertedException ex){
 				LogSys.nodeLogger.error("当前采集的用户下所有Following采集完毕--"+userID);
 				break;
@@ -89,8 +92,10 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 				e.printStackTrace();
 				return false;
 			}			
-					
 		}while(hasMoreItems&&nextCursor!=null);
+		
+		
+		
 		return true;
 	}
 	
@@ -105,7 +110,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		AjaxFollowCrawl at=new AjaxFollowCrawl(httpclient,false);
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		at.doCrawl("26_t_b",dbo,users);
+		at.doCrawl("26_t_b",dbo,users,new ReportData());
 		
 
 	}

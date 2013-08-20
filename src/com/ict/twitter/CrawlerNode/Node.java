@@ -102,16 +102,16 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	public void ModifyReportMessageByType(ReportDataType rpt,int count){
 		switch (rpt){
 		case Message:
-			rpdata.message_increment++;
+			rpdata.message_increment+=count;
 			break;
 		case Message_rel:
-			rpdata.message_rel_increment++;
+			rpdata.message_rel_increment+=count;
 			break;
 		case User:
-			rpdata.user_increment++;
+			rpdata.user_increment+=count;
 			break;
 		case User_rel:
-			rpdata.user_rel_increment++;
+			rpdata.user_rel_increment+=count;
 			break;			
 		}
 	}
@@ -139,8 +139,9 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	
 	private void TimerStart(){
 		try{
+			LogSys.nodeLogger.info("启动定时器成功["+this.NodeName+"]");
 			Timer timer=new Timer();
-			timer.schedule(new NodeReport(this), 1000, 60000);
+			timer.schedule(new NodeReport(this), 1000, 10000);
 		}catch(Exception ex){
 			ex.printStackTrace();
 			LogSys.nodeLogger.error("启动定时器失败");
@@ -152,7 +153,8 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	//Node 的报告类
 	public void nodeReportToCrawlServer(){
 		nodeReportSender.Send(rpdata);
-		rpdata=new ReportData();
+		LogSys.nodeLogger.debug(String.format("node发送的数据为M:%s,U:%s,UL:%s",rpdata.message_increment,rpdata.user_increment,rpdata.user_rel_increment));
+		rpdata=new ReportData();//汇报完毕后清空本地的统计数据
 		rpdata.NodeName=this.NodeName;
 	}
 	

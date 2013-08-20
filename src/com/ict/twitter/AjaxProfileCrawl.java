@@ -12,6 +12,7 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserProfile;
 import com.ict.twitter.plantform.LogSys;
@@ -20,7 +21,7 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 public class AjaxProfileCrawl extends AjaxCrawl {
 
 	private String BASE_URL="/i/profiles/popup?async_social_proof=false&user_id=95112124&_=1362725282347";
-	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&user_id=%s&_=%s";
+	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&screen_name=%s&_=%s";
 	private DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
 	public AjaxProfileCrawl(DefaultHttpClient _httpclient){
@@ -29,7 +30,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 	
 	@Override
 	public boolean doCrawl(String UserID, MulityInsertDataBase dbo,
-			Vector<TwiUser> RelatUsers) {
+			Vector<TwiUser> RelatUsers,ReportData reportData) {
 		UserProfile profile = new UserProfile();
 		AjaxProfileAnalyser profileana = new AjaxProfileAnalyser(dbo);
 		
@@ -81,7 +82,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
 		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient);
-		profilecrawl.doCrawl("488092285",dbo, users);
+		profilecrawl.doCrawl("488092285",dbo, users,new ReportData());
 		httpclient.getConnectionManager().shutdown();
 		profilecrawl.service.shutdown();
 	}

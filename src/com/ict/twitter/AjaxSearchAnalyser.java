@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import com.ict.twitter.AjaxAnalyser;
+import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
@@ -28,7 +29,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		// TODO Auto-generated method stub
 
 	}
-	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users) throws AllHasInsertedException{
+	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users,ReportData reportData) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
 		Elements follows=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item expanding-stream-item");
 		
@@ -74,6 +75,8 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		}
 		super.batchdb.insertIntoMessage(TimeLineArray);
 		AnalyserCursor res=new AnalyserCursor(tweetID,follows.size());
+		reportData.message_increment+=timelines.size();
+		reportData.user_increment+=follows.size();
 		return res;
 	}
 

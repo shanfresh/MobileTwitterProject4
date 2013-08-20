@@ -3,6 +3,7 @@ package com.ict.twitter.CrawlerServer;
 import com.ict.twitter.CrawlerMessage.MessageBusComponent;
 import com.ict.twitter.CrawlerNode.ControlReceiver;
 import com.ict.twitter.CrawlerNode.ControlSender;
+import com.ict.twitter.CrawlerNode.NodeReport;
 import com.ict.twitter.CrawlerNode.NodeStep;
 import com.ict.twitter.MessageBus.GetAceiveMqConnection;
 import com.ict.twitter.MessageBus.MessageBusNames;
@@ -11,6 +12,7 @@ import com.ict.twitter.MessageBus.Receiver;
 import com.ict.twitter.MessageBus.Sender;
 import com.ict.twitter.MessageBusTest.ControlClient;
 import com.ict.twitter.MessageBusTest.MessageBusCleanner;
+import com.ict.twitter.Report.CrawlerServerReporter;
 import com.ict.twitter.Report.NodeReporterReceiver;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.StatusTrack.MyTracker;
@@ -20,7 +22,10 @@ import com.ict.twitter.task.beans.Task;
 
 import com.ict.twitter.tools.BasePath;
 
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 public class CrawlerServer extends MessageBusComponent implements Runnable,MessageBusNames,MessageBussConnector {
 
 	/**
@@ -45,8 +50,13 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	Receiver KeyUserReceiver;
 	Receiver nodeReporterReceiver;
 	
+	/***************************************/
 	public HashMap<String,ReportData> NodeReportData;
-	public ReportData ServerReportData;
+	public Object reportlock=new Object();
+	public ReportData ServerReportData;//服务器需要汇报的数据综合，来自各个采集节点的数据
+	public CrawlerServerReporter crawlReporter;
+	/***************************************/
+	
 	public static long count;
 	public static long TaskID;
 	
@@ -158,7 +168,9 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		KeyUserReceiver=new KeyUserReceiver(connection,MessageBusNames.KeyID,this,false);
 		nodeReporterReceiver=new NodeReporterReceiver(connection,MessageBusNames.ReportTwitterWEB,this,false);
 		
-		
+		//启动定时器来完成服务器的汇报工作
+		//StartTimer;
+		crawlReporter=new CrawlerServerReporter("TwitterWEB");
 		tracker=new MyTracker();
 	}
 
@@ -166,6 +178,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	
 	public boolean StartCrawlServer(){
 		LogSys.crawlerServLogger.info("采集器总控端开始");
+		StartReportTimer();
 		try{
 			CollectionNodes();
 			KeyWordSearch(false);		
@@ -303,6 +316,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		LogSys.crawlerServLogger.info("关键用户采集结束");
 	}
 	protected int CrawlerServerNorUserSearch(int deepth,boolean isResume){
+		this.setCrawlServerDeepth(deepth);//设置CrawlServer的深度和递归的深度保持一致
 		currentstep=ServerStep.normalCaijiStart;
 		LogSys.crawlerServLogger.info("普通用户采集开始---深度："+deepth+"-----");		
 		if(!isResume)
@@ -429,25 +443,59 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		
 		
 	}
+	public void StartReportTimer(){
+		try{
+			LogSys.crawlerServLogger.info("正在启动StartReporterTimer.....");
+			Timer timer=new Timer();
+			timer.schedule(new TimerTask(){
+				public void run() {
+					try {
+						crawlReporter.doReportIncrementByDataBase(ServerReportData);
+						ResetServerReportData();//汇报完毕进行清空操作;
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						System.err.println("汇报出现错误重新汇报");
+						e.printStackTrace();
+					}
+				}
+			}, 1000, 10000);//每10s向汇报服务器进行汇报
+			LogSys.crawlerServLogger.info("启动成功StartReporterTimer");
+		}catch(Exception ex){
+			ex.printStackTrace();
+			LogSys.nodeLogger.error("启动定时器失败");
+		}
+	}
+	
 	//收到HeartReport
 	public void onReceiveReportFromNode(ReportData rpdata){
-		ServerReportData.add(rpdata);
-		if(NodeReportData.containsKey(rpdata.NodeName)){
-			ReportData tmprpdata=NodeReportData.get(rpdata.NodeName);
-			tmprpdata.add(rpdata);			
-		}else{
-			NodeReportData.put(rpdata.NodeName, rpdata);
-			LogSys.crawlerServLogger.debug("Crawler 收到信息来自新节点("+rpdata.NodeName+")");
-			
+		//服务器知识读取对应的数据并添加到
+		System.out.printf("Message:%d,User:%d,UserRel:%d\n",rpdata.message_increment,rpdata.user_increment,rpdata.user_rel_increment);
+		synchronized (reportlock) {
+			ServerReportData.add(rpdata);//服务器将数据进行累加；
 		}
 		
-
+		
+//		if(NodeReportData.containsKey(rpdata.NodeName)){
+//			ReportData tmprpdata=NodeReportData.get(rpdata.NodeName);
+//			tmprpdata.add(rpdata);			
+//		}else{
+//			NodeReportData.put(rpdata.NodeName, rpdata);
+//			LogSys.crawlerServLogger.debug("Crawler 收到信息来自新节点("+rpdata.NodeName+")");
+//		}
+		
+	}
+	private void ResetServerReportData(){
+		synchronized (reportlock) {
+			ServerReportData=new ReportData();
+		}
 	}
 	public void ShowAndLog(String msg){
 		LogSys.crawlerServLogger.info("【CRAWLERSERVER】"+msg);
 		
 	}
-
+	private void setCrawlServerDeepth(int dep){
+		this.deepth=dep;
+	}
 
 	
 

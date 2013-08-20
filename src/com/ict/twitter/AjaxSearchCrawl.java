@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.ict.twitter.AjaxAnalyser.AnalyserCursor;
+import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.tools.AllHasInsertedException;
@@ -41,11 +42,11 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		AjaxSearchCrawl test=new AjaxSearchCrawl(httpclient);
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
-		test.doCrawl("重庆+薄",dbo,users);
+		test.doCrawl("重庆+薄",dbo,users,new ReportData());
 		System.out.println("current Search String Size:"+users.size());
 	}
 
-	public boolean doCrawl(String keyWords,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers){
+	public boolean doCrawl(String keyWords,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData){
 		
 		boolean has_next=false;
 		String next_max_id=null;
@@ -76,13 +77,17 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			String html=(String)map.get("items_html");
 			AnalyserCursor res=null;
 			try {
-				res = ana.doAnalyse(html,RelateUsers);
+				res = ana.doAnalyse(html,RelateUsers,reportData);
 			} catch (AllHasInsertedException e) {
 				//系统发现重复采集故停止当前采集任务；
 				has_next=false;
 				LogSys.nodeLogger.debug("当前Search采集完成["+keyWords+"]");
 				break;
-			}			
+			}catch (Exception ex){
+				has_next=false;
+				LogSys.nodeLogger.debug("当前SearchAnalyse解析发生错误["+keyWords+"]");
+				return true;
+			}		
 			if(map.get("max_id")!=null){
 				next_max_id=(String)map.get("max_id");
 			}else{
@@ -97,7 +102,6 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 				
 			
 		}while(has_next==true);
-		
 		return true;
 
 	}
