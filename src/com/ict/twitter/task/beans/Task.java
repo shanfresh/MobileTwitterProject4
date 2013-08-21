@@ -22,7 +22,8 @@ public  class Task implements Serializable{
 	}
 	public TaskType ownType;
 	public String targetString;
-	
+	public boolean isTrack=false;
+	public int taskTrackID;
 	
 	public Task(TaskType ownType, String targetString) {
 		super();
@@ -72,12 +73,30 @@ public  class Task implements Serializable{
 		sb.append("<value>");
 		sb.append(targetString);
 		sb.append("</value>");
+		sb.append("<isTrack>");
+		sb.append(isTrack);
+		sb.append("</isTrack>");
+		sb.append("<taskTrackID>");
+		sb.append(taskTrackID);
+		sb.append("</taskTrackID>");
 		return sb.toString();		
 	}
 	public void StringToTask(String src){
 		
 		
 	}
-	
+	public boolean isTrack() {
+		return isTrack;
+	}
+	public void setTrack(boolean isTrack) {
+		this.isTrack = isTrack;
+	}
+	public int getTaskTrackID() {
+		return taskTrackID;
+	}
+	public void setTaskTrackID(int taskTrackID) {
+		this.taskTrackID = taskTrackID;
+	}
+
 	
 }

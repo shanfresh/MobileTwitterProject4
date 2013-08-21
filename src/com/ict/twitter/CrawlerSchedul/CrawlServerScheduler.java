@@ -41,17 +41,37 @@ public class CrawlServerScheduler extends TimerTask{
 			String[] keywords=parameter.split(" ");
 			for(int i=0;i<keywords.length;i++){
 				Task task=new Task();
+				task.setTrack(true);
+				task.setTaskTrackID(inputTask.ID);//需要修改
 				task.setOwnType(TaskType.Search);
 				task.setTargetString(keywords[i]);
 				crawlserver.addKeyWordAndTopicTask(task);
 			}
-			Task task=new Task();
-			task.setOwnType(TaskType.Search);
-			task.setTargetString(inputTask.TaskName);//把主题的名称也作为关键词进行搜索
-			crawlserver.addKeyWordAndTopicTask(task);
+			String parameter2=inputTask.TaskParameter2;
+			String[] keywords2=parameter.split(" ");
+			for(int i=0;i<keywords2.length;i++){
+				Task task=new Task();
+				task.setTrack(true);
+				task.setTaskTrackID(inputTask.ID);//需要修改
+				task.setOwnType(TaskType.TimeLine);
+				task.setTargetString(keywords2[i]);
+				crawlserver.addKeyWordAndTopicTask(task);
+				task.setOwnType(TaskType.Following);////搜索用户的粉丝
+				task.setTargetString(keywords2[i]);
+				crawlserver.addKeyWordAndTopicTask(task);
+				task.setOwnType(TaskType.Followers);//搜索用户的关注
+				task.setTargetString(keywords2[i]);
+				crawlserver.addKeyWordAndTopicTask(task);
+				task.setOwnType(TaskType.About);//搜索用户的主页
+				task.setTargetString(keywords2[i]);
+				crawlserver.addKeyWordAndTopicTask(task);
+			}
+
 		}
 		if(inputTask.InputType==InputType.KeyUser){
 			Task task=new Task();
+			task.setTrack(true);
+			task.setTaskTrackID(inputTask.ID);//要跟踪的ID是
 			task.setTargetString(inputTask.TaskName);//把主题的名称也作为关键词进行搜索
 			task.setOwnType(TaskType.TimeLine);//关注重点账户的推文
 			crawlserver.addKeyUserTask(task);
@@ -62,6 +82,8 @@ public class CrawlServerScheduler extends TimerTask{
 		}
 		if(inputTask.InputType==InputType.KeyWord){
 			Task task=new Task();
+			task.setTrack(true);
+			task.setTaskTrackID(inputTask.ID);//要跟踪的ID是
 			task.setTargetString(inputTask.TaskName);//把主题的名称也作为关键词进行搜索
 			task.setOwnType(TaskType.Search);//设置类型为Search类型
 			crawlserver.addKeyUserTask(task);
@@ -69,6 +91,8 @@ public class CrawlServerScheduler extends TimerTask{
 		}
 		if(inputTask.InputType==InputType.NorUser){
 			Task task=new Task();
+			task.setTrack(true);
+			task.setTaskTrackID(inputTask.ID);//要跟踪的ID是
 			task.setTargetString(inputTask.TaskName);//对普通用户的检索等于对普通用户的时间，粉丝等进行检索
 			task.setOwnType(TaskType.TimeLine);//
 			crawlserver.addTask(task);

@@ -70,8 +70,20 @@ public class TaskReceiver extends Receiver {
 		SimpleXmlAnalyser simxml=new SimpleXmlAnalyser(str);		
 		String first=simxml.getFirstValueByTag("type");		
 		String valuestr=simxml.getFirstValueByTag("value");
+		
+		String isTrack=simxml.getFirstValueByTag("isTrack");
+		String taskTrackID=simxml.getFirstValueByTag("taskTrackID");
 		t.setOwnType(TaskType.fromString(first));
 		t.setTargetString(valuestr);
+		if(isTrack!=null){
+			t.setTrack(Boolean.parseBoolean(isTrack));
+		}else{
+			t.setTrack(false);
+		}
+		if(t.isTrack()){
+			t.setTaskTrackID(Integer.parseInt(taskTrackID));
+		}
+		
 		return t;
 	}
 }
