@@ -37,7 +37,25 @@ public class NodeManager {
 		return mbDetect.getCount(MessageBusNames.Task);
 	}
 	
-	public boolean canNextStep(){
+	public boolean canNextStepByTaskBusName(String busname){
+		long taskSize=mbDetect.getCount(busname);
+		if(taskSize>0||taskSize==-1){			
+			return false;			
+		}
+		Iterator<NodeStatus> it=allNodeStatus.values().iterator();
+		int allNodecount=allNodeStatus.size();
+		finishcount=0;
+		while(it.hasNext()){
+			NodeStatus status=it.next();
+			if(status.isBusy==false){
+				finishcount++;
+			}			
+		}
+		LogSys.crawlerServLogger.info("已经成功进入下一阶段(Finish："+finishcount+"  TotalCount:"+allNodecount+" CurrentSetp:"+NodeManagerStep);
+		return true;
+	}
+	
+	private boolean canNextStep(){
 		/*1:检查总线的状态看是否全部的任务消息已经被消费完毕，即任务总线是否为空：
 		  2:检查各个采集节点是否处于空闲状态
 		  3:若全部为真，则返回true,否则返回false.

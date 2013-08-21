@@ -5,6 +5,7 @@ import com.ict.twitter.CrawlerNode.ControlReceiver;
 import com.ict.twitter.CrawlerNode.ControlSender;
 import com.ict.twitter.CrawlerNode.NodeReport;
 import com.ict.twitter.CrawlerNode.NodeStep;
+import com.ict.twitter.CrawlerSchedul.CrawlServerScheduler;
 import com.ict.twitter.MessageBus.GetAceiveMqConnection;
 import com.ict.twitter.MessageBus.MessageBusNames;
 import com.ict.twitter.MessageBus.MessageBussConnector;
@@ -44,7 +45,9 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	ControlSender controlSender;
 	//Task相关
 	Sender taskSender;
-	Receiver taskReceiver;
+	Sender urgentTaskSender;
+	Sender keyWordAndTopicTaskSender;
+	Sender keyUserTaskSender;
 	//NormalUser 相关
 	Receiver NormalReceiver;
 	Receiver KeyUserReceiver;
@@ -57,6 +60,10 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	public CrawlerServerReporter crawlReporter;
 	/***************************************/
 	
+	/***************************************/
+	CrawlServerScheduler schedule;
+	
+	/****************************************/
 	public static long count;
 	public static long TaskID;
 	
@@ -160,7 +167,11 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		ServerReportData=new ReportData();
 		nodeManager=new NodeManager();
 		scr=new ServerControlReceiverListener(this);
+		urgentTaskSender=new Sender(connection,MessageBusNames.UrgentTask+"?consumer.prefetchSize=0",false);
+		keyUserTaskSender=new Sender(connection,MessageBusNames.KeyUserTask+"?consumer.prefetchSize=0",false);
+		keyWordAndTopicTaskSender=new Sender(connection,MessageBusNames.KeyWordAndTopicTask+"?consumer.prefetchSize=0",false);
 		taskSender=new Sender(connection,MessageBusNames.Task+"?consumer.prefetchSize=0",false);	
+		
 		//taskReceiver=new Receiver(connection, false, MessageBusNames.Task, this, true, null);
 		controlReceiver=new ControlReceiver(connection,MessageBusNames.ControlC2S,this,false,scr);
    		controlSender=new ControlSender(connection,MessageBusNames.ControlS2C,true);
@@ -168,8 +179,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		KeyUserReceiver=new KeyUserReceiver(connection,MessageBusNames.KeyID,this,false);
 		nodeReporterReceiver=new NodeReporterReceiver(connection,MessageBusNames.ReportTwitterWEB,this,false);
 		
-		//启动定时器来完成服务器的汇报工作
-		//StartTimer;
+
 		crawlReporter=new CrawlerServerReporter("TwitterWEB");
 		tracker=new MyTracker();
 	}
@@ -179,6 +189,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	public boolean StartCrawlServer(){
 		LogSys.crawlerServLogger.info("采集器总控端开始");
 		StartReportTimer();
+		StartSchedulTimer();//启动调度器
 		try{
 			CollectionNodes();
 			KeyWordSearch(false);		
@@ -276,7 +287,6 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	}
 	
 	protected void CollectionNodes(){
-		int count=0;
 		LogSys.crawlerServLogger.info("搜索节点15S");
 		SleepWithCount(15000);		
 		LogSys.crawlerServLogger.info("当前状态"+nodeManager.currentstep());
@@ -291,7 +301,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		while(currentstep!=ServerStep.searchEnd){
 			CollectNodesStatus();
 			SleepWithCount(60000);				
-			if(nodeManager.canNextStep()){
+			if(nodeManager.canNextStepByTaskBusName(MessageBusNames.KeyWordAndTopicTask)){
 				currentstep=ServerStep.searchEnd;
 				nodeManager.show();
 			}else{
@@ -310,7 +320,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		while(currentstep!=ServerStep.keyuserCaijiEnd){
 			CollectNodesStatus();
 			SleepWithCount(20000);
-			if(nodeManager.canNextStep())
+			if(nodeManager.canNextStepByTaskBusName(MessageBusNames.KeyUserTask))
 				currentstep=ServerStep.keyuserCaijiEnd;
 		}
 		LogSys.crawlerServLogger.info("关键用户采集结束");
@@ -325,7 +335,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		while(currentstep!=ServerStep.normalCaijiEnd){
 			CollectNodesStatus();
 			SleepWithCount(20000);
-			if(nodeManager.canNextStep())
+			if(nodeManager.canNextStepByTaskBusName(MessageBusNames.Task))
 				currentstep=ServerStep.normalCaijiEnd;
 		}
 		LogSys.crawlerServLogger.info("普通用户采集结束---深度："+deepth+"-----");
@@ -340,6 +350,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	//采集种子用户信息的任务
 	public void ChuizhiCaiji(){							
 		String filelocation=basepath+"/UsefulFile/KeyIDs.txt";
+		//添加从数据库中读取关键用户这一步
 		sb.InitChuizhi(filelocation, this,isFirstChuiZhi);
 		SleepWithCount(5000);
 		sendNewStep(NodeStep.keyuser_start);
@@ -371,6 +382,24 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		taskSender.Send(task.TaskTOString());
 		return true;
 	}
+	public boolean addUrgentTask(Task task){
+		System.err.println("AddUrgentTaskAdded");
+		tracker.AddTask(task);
+		urgentTaskSender.Send(task.TaskTOString());
+		return true;
+	}
+	public boolean addKeyWordAndTopicTask(Task task){
+		tracker.AddTask(task);
+		keyWordAndTopicTaskSender.Send(task.TaskTOString());
+		return true;
+	}
+	public boolean addKeyUserTask(Task task){
+		tracker.AddTask(task);
+		keyUserTaskSender.Send(task.TaskTOString());
+		return true;
+	}
+	
+	
 	//添加普通用户
 	public void addNormalUser(NormalUser nu){		
 		sb.addNormalUser(nu,deepth);		
@@ -489,6 +518,14 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 			ServerReportData=new ReportData();
 		}
 	}
+	private void StartSchedulTimer(){
+		Timer time=new Timer();
+		schedule=new CrawlServerScheduler(this);
+		time.schedule(schedule, 10000, 60000);
+		System.out.println("启动CrawlerSchedul成功");
+	}
+	
+	
 	public void ShowAndLog(String msg){
 		LogSys.crawlerServLogger.info("【CRAWLERSERVER】"+msg);
 		

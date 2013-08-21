@@ -46,7 +46,7 @@ public class ServerBean implements Serializable{
 				Task task=new Task();
 				task.setOwnType(TaskType.Search);
 				task.setTargetString(t);
-				server.addTask(task);				
+				server.addKeyWordAndTopicTask(task);				
 				i++;
 				if(i>max){
 					break;
@@ -76,22 +76,22 @@ public class ServerBean implements Serializable{
 			Task task=new Task();
 			task.setOwnType(TaskType.TimeLine);
 			task.setTargetString(t);
-			server.addTask(task);
+			server.addKeyUserTask(task);
 			
 			task=new Task(); 
 			task.setOwnType(TaskType.Following);
 			task.setTargetString(t);
-			server.addTask(task);
+			server.addKeyUserTask(task);
 			
 			task=new Task();
 			task.setOwnType(TaskType.Followers);
 			task.setTargetString(t);
-			server.addTask(task);
+			server.addKeyUserTask(task);
 			
 			task=new Task();
 			task.setOwnType(TaskType.About);
 			task.setTargetString(t);
-			server.addTask(task);	
+			server.addKeyUserTask(task);	
 		}
 		
 		

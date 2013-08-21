@@ -22,6 +22,9 @@ public class TaskReceiver extends Receiver {
 			Message msg = null;
 			try {
 				msg = consumer.receive(1000);
+				if(msg==null){
+					return null;
+				}
 				TextMessage txtMessage=(TextMessage)msg;
 				return StringToTask(txtMessage.getText());
 			} catch(javax.jms.IllegalStateException e){
@@ -34,14 +37,8 @@ public class TaskReceiver extends Receiver {
 				}
 								
 			} catch (JMSException e) {
-				Task task=null;
-				checkAndRetry(task);
-				e.printStackTrace();
-				if(checkAndRetry(task)){
-					return task;
-				}else{
-					return null;
-				}
+				return null;
+
 			} 
 			
 	}

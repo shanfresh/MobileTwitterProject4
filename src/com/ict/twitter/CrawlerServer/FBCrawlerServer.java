@@ -2,6 +2,7 @@ package com.ict.twitter.CrawlerServer;
 
 import com.ict.twitter.CrawlerNode.NodeStep;
 import com.ict.twitter.CrawlerServer.CrawlerServer.OP;
+import com.ict.twitter.MessageBus.MessageBusNames;
 import com.ict.twitter.MessageBusTest.ControlClient;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.plantform.PlatFormMain;
@@ -77,7 +78,7 @@ public class FBCrawlerServer extends CrawlerServer {
 		while(currentstep!=ServerStep.normalCaijiEnd){
 			CollectNodesStatus();
 			SleepWithCount(20000);
-			if(nodeManager.canNextStep())
+			if(nodeManager.canNextStepByTaskBusName(MessageBusNames.Task))
 				currentstep=ServerStep.normalCaijiEnd;
 		}
 		LogSys.crawlerServLogger.info("普通用户采集结束");
