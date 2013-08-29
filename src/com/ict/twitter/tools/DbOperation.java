@@ -290,4 +290,11 @@ public class DbOperation {
 		
 		
 	}
+	public Connection GetConnection(){
+		if(this.connect!=null){
+			return this.connect;
+		}else{
+			return this.conDB();
+		}
+	}
 }

@@ -7,22 +7,18 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.*;
 
 import com.ict.twitter.analyser.beans.TimeLine;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
 
 public class AjaxTimeLineAnalyser extends AjaxAnalyser{
-
-
-
-
-
+	boolean isdebug=false;
 	public AjaxTimeLineAnalyser(MulityInsertDataBase batchdb) {
 		super(batchdb);
 		// TODO Auto-generated constructor stub
 	}
-
-	public AnalyserCursor doAnalyser(String src){
+	public AnalyserCursor doAnalyser(String src) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
 		AnalyserCursor result=new AnalyserCursor();
 		//doc.getelementsby
@@ -32,9 +28,9 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		}
 		Vector<TimeLine> vector = new Vector<TimeLine>();
 		
-		for(Element t:twitterMessages){		
+		for(Element t:twitterMessages){
 			try{
-				Element content=t.getElementsByAttributeValue("class", "js-tweet-text").first();
+				Element content=t.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first();
 				Element time=t.getElementsByAttributeValue("class", "tweet-timestamp js-permalink js-nav").first();
 				String timeStr=time.attr("title");
 				
@@ -45,13 +41,17 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 				String user_name=firstDiv.attr("data-name");				
 				result.lastID=tweet_id;
 				//System.out.println(tweet_id+" "+user_id+" "+user_name);
-				vector.add(new TimeLine(tweet_id,user_name,content.ownText(),timeStr));
+				vector.add(new TimeLine(tweet_id,user_name,content.text(),timeStr));
 			}catch(NullPointerException ex){
-				;
+				ex.printStackTrace();
 			}			
 		}
 		TimeLine[] timelines = new TimeLine[vector.size()];
 		vector.toArray(timelines);
+		if(isdebug){
+			for(int i=0;i<timelines.length;i++)
+				timelines[i].show();
+		}
 		super.batchdb.insertIntoMessage(timelines);
 		result.size=twitterMessages.size();
 		return result;

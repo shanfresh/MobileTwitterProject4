@@ -8,6 +8,7 @@ import javax.jms.TextMessage;
 import com.ict.twitter.MessageBus.Receiver;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.MainType;
 import com.ict.twitter.task.beans.Task.TaskType;
 import com.ict.twitter.tools.SimpleXmlAnalyser;
 
@@ -22,6 +23,9 @@ public class TaskReceiver extends Receiver {
 			Message msg = null;
 			try {
 				msg = consumer.receive(1000);
+				if(msg==null){
+					return null;
+				}
 				TextMessage txtMessage=(TextMessage)msg;
 				return StringToTask(txtMessage.getText());
 			} catch(javax.jms.IllegalStateException e){
@@ -34,14 +38,8 @@ public class TaskReceiver extends Receiver {
 				}
 								
 			} catch (JMSException e) {
-				Task task=null;
-				checkAndRetry(task);
-				e.printStackTrace();
-				if(checkAndRetry(task)){
-					return task;
-				}else{
-					return null;
-				}
+				return null;
+
 			} 
 			
 	}
@@ -73,8 +71,23 @@ public class TaskReceiver extends Receiver {
 		SimpleXmlAnalyser simxml=new SimpleXmlAnalyser(str);		
 		String first=simxml.getFirstValueByTag("type");		
 		String valuestr=simxml.getFirstValueByTag("value");
+		
+		String isTrack=simxml.getFirstValueByTag("isTrack");
+		String taskTrackID=simxml.getFirstValueByTag("taskTrackID");
+		String MainTypeStr=simxml.getFirstValueByTag("MainType");
+		t.setMainType(MainType.valueOf(MainTypeStr));
+		
 		t.setOwnType(TaskType.fromString(first));
 		t.setTargetString(valuestr);
+		if(isTrack!=null){
+			t.setTrack(Boolean.parseBoolean(isTrack));
+		}else{
+			t.setTrack(false);
+		}
+		if(t.isTrack()){
+			t.setTaskTrackID(Integer.parseInt(taskTrackID));
+		}
+		
 		return t;
 	}
 }

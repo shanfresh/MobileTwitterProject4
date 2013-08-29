@@ -28,6 +28,9 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	ControlSender controlUpload;	
 	Receiver controlDownload;
 	//任务接受总线
+	TaskReceiver urgentReceiver;
+	TaskReceiver keyWordAndTopicReceiver;
+	TaskReceiver keyUserReceiver;
 	TaskReceiver taskReceiver;	
 	//状态报告类
 	NodeReporterSender nodeReportSender;
@@ -68,8 +71,15 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	}
 
 	public void InitTaskReceiver(javax.jms.Connection connection){
-		String URL=MessageBusNames.Task+"?consumer.prefetchSize=0";
-		taskReceiver=new TaskReceiver(connection,URL,this);
+		String NorURL=MessageBusNames.Task+"?consumer.prefetchSize=0";
+		String urgentURL=MessageBusNames.UrgentTask+"?consumer.prefetchSize=0";
+		String keyWordAndTopic=MessageBusNames.KeyWordAndTopicTask+"?consumer.prefetchSize=0";
+		String keyUser=MessageBusNames.KeyUserTask+"?consumer.prefetchSize=0";
+		
+		urgentReceiver=new TaskReceiver(connection,urgentURL,this);
+		keyWordAndTopicReceiver=new TaskReceiver(connection,keyWordAndTopic,this);
+		keyUserReceiver=new TaskReceiver(connection, keyUser, this);
+		taskReceiver=new TaskReceiver(connection,NorURL,this);
 	}
 	public void NodeStart(){
 		try{
@@ -102,16 +112,16 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	public void ModifyReportMessageByType(ReportDataType rpt,int count){
 		switch (rpt){
 		case Message:
-			rpdata.message_increment++;
+			rpdata.message_increment+=count;
 			break;
 		case Message_rel:
-			rpdata.message_rel_increment++;
+			rpdata.message_rel_increment+=count;
 			break;
 		case User:
-			rpdata.user_increment++;
+			rpdata.user_increment+=count;
 			break;
 		case User_rel:
-			rpdata.user_rel_increment++;
+			rpdata.user_rel_increment+=count;
 			break;			
 		}
 	}
@@ -139,8 +149,9 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	
 	private void TimerStart(){
 		try{
+			LogSys.nodeLogger.info("启动定时器成功["+this.NodeName+"]");
 			Timer timer=new Timer();
-			timer.schedule(new NodeReport(this), 1000, 60000);
+			timer.schedule(new NodeReport(this), 1000, 10000);
 		}catch(Exception ex){
 			ex.printStackTrace();
 			LogSys.nodeLogger.error("启动定时器失败");
@@ -152,7 +163,7 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	//Node 的报告类
 	public void nodeReportToCrawlServer(){
 		nodeReportSender.Send(rpdata);
-		rpdata=new ReportData();
+		rpdata=new ReportData();//汇报完毕后清空本地的统计数据
 		rpdata.NodeName=this.NodeName;
 	}
 	
@@ -209,18 +220,33 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 			Task task=null;
 			if(isPaused){
 				return null;
-			}else{
-				task=taskReceiver.PickUpTaskMessage();
-				if(task==null&&!ReportNullFlag){
-					ShowAndLog("【任务缓存为空】");
-					ReportNullFlag=true;
-				}else if(task!=null){
-					ReportNullFlag=false;
-				}
 			}
+			task=getTaskByReceiver(urgentReceiver);
+			if(task!=null){
+				return task;
+			}
+			task=getTaskByReceiver(keyWordAndTopicReceiver);
+			if(task!=null){
+				return task;
+			}
+			task=getTaskByReceiver(keyUserReceiver);
+			if(task!=null){
+				return task;
+			}
+			task=getTaskByReceiver(taskReceiver);
+			if(task==null&&!ReportNullFlag){
+				ShowAndLog("【任务缓存为空】");
+				ReportNullFlag=true;
+			}else if(task!=null){
+				ReportNullFlag=false;
+			}
+
+			
+			
 			return task;
 			
 		}catch(Exception e){
+			e.printStackTrace();
 			try{
 				Thread.sleep(1000);
 			}catch(Exception sleep){
@@ -238,7 +264,15 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 		}		
 		return true;
 	}
-
+	private Task getTaskByReceiver(TaskReceiver taskReceiver){
+		Task task=taskReceiver.PickUpTaskMessage();
+		if(task==null&&!ReportNullFlag){
+			ReportNullFlag=true;
+		}else if(task!=null){
+			ReportNullFlag=false;
+		}
+		return task;
+	}
 	
 	
 

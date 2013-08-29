@@ -9,10 +9,6 @@ public class NodeReport extends TimerTask {
 	}
 	@Override
 	public void run() {
-		//if(node.ms.isSleep&&node.taskBuffer.size()>0){
-			
-		//}
-		
 		node.nodeReportToCrawlServer();
 		
 	}

@@ -12,30 +12,44 @@ import org.apache.http.params.CoreConnectionPNames;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserProfile;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxProfileCrawl extends AjaxCrawl {
 
 	private String BASE_URL="/i/profiles/popup?async_social_proof=false&user_id=95112124&_=1362725282347";
-	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&user_id=%s&_=%s";
+	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&screen_name=%s&_=%s";
 	private DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
-	public AjaxProfileCrawl(DefaultHttpClient _httpclient){
+	public AjaxProfileCrawl(DefaultHttpClient _httpclient,DbOperation dboperation){
 		this.httpclient=_httpclient;
+		super.dboperation=dboperation;
+		
 	}
 	
 	@Override
-	public boolean doCrawl(String UserID, MulityInsertDataBase dbo,
-			Vector<TwiUser> RelatUsers) {
+	public boolean doCrawl(Task task, MulityInsertDataBase dbo,
+			Vector<TwiUser> RelatUsers,ReportData reportData) {
+		String UserID=task.getTargetString();
 		UserProfile profile = new UserProfile();
 		AjaxProfileAnalyser profileana = new AjaxProfileAnalyser(dbo);
 		
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
-		String ajaxContent=super.openLink(httpclient, URL);
+		String ajaxContent=super.openLink(httpclient, URL,task,1);
+		if(ajaxContent==null){
+			LogSys.nodeLogger.error("ProfileÕ¯¬Á«Î«Û ß∞‹:"+UserID);
+			super.SaveWebOpStatus(task, URL, 1, WebOperationResult.Fail, dbo);
+			return false;
+			
+		}
+		super.SaveWebOpStatus(task, URL, 1, WebOperationResult.Success, dbo);
 		String user_screen_name="";
 		String htmlContent=null;
 		try {
@@ -49,6 +63,8 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LogSys.nodeLogger.error(e.getLocalizedMessage());
+			LogSys.nodeLogger.error("CurrentJSON:"+ajaxContent);
 			return false;
 		}
 		try{
@@ -58,9 +74,6 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			if(profile.getPicture_url()!=null){
 				byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
 				profile.setPicturedata(result);
-				for(int i=0;i<result.length;i++){
-					System.out.println(Byte.toString(result[i]));
-				}
 			}
 			dbo.insertIntoUserProfile(profile);
 			System.out.println("insert into profile");
@@ -71,7 +84,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		}
 		return false;
 	}
-	public static void main2(String[] args){
+	public static void main(String[] args){
 		TwitterClientManager cm=new TwitterClientManager();
 		DefaultHttpClient httpclient = cm.getClientNoProxy();
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
@@ -81,8 +94,9 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
-		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient);
-		profilecrawl.doCrawl("488092285",dbo, users);
+		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
+		Task task=new Task(TaskType.About,"488092285");
+		profilecrawl.doCrawl(task,dbo, users,new ReportData());
 		httpclient.getConnectionManager().shutdown();
 		profilecrawl.service.shutdown();
 	}
@@ -106,7 +120,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			e.printStackTrace();
 		}
 	}
-	public static  void main(String[] args){
+	public static  void main2(String[] args){
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		dbo.getConnection();
 		dbo.getDatafromprofile();

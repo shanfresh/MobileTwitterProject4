@@ -2,6 +2,8 @@ package com.ict.twitter;
 
 import java.util.Vector;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,6 +11,7 @@ import org.jsoup.select.Elements;
 
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserRelationship;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -27,10 +30,10 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 		
 
 	}
-	public int doAnalyse(String currentUser,boolean isFollowing,String src,Vector<TwiUser> users){
-		System.out.println(count+"\t content:"+src.substring(0,100));
+	public int doAnalyse(String currentUser,boolean isFollowing,String src,Vector<TwiUser> users) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
 		Elements follows=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item");
+		count=0;
 		count+=follows.size();
 		int j=1;
 		Vector<UserRelationship> userrels = new Vector<UserRelationship>(20);
@@ -40,8 +43,7 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 				//一串数字
 				String userIDNO=firstChildren.attr("data-user-id");
 				//唯一标示符
-				String userID=firstChildren.attr("data-screen-name");				
-				System.out.printf("\t %2d,USIDNO:"+userIDNO+"userID"+userID+"\r\n",j++);	
+				String userID=firstChildren.attr("data-screen-name");					
 				users.add(new TwiUser(userID,userID,0,0));
 				userrels.add(new UserRelationship(currentUser,userID,isFollowing+""));
 			}

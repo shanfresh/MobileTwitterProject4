@@ -20,9 +20,16 @@ public  class Task implements Serializable{
 	        return stringToEnum.get(symbol);
 	    }
 	}
+	public enum MainType{
+		KeyUser,KeyWord,Topic,Urgent,Normal
+	}
+	
 	public TaskType ownType;
 	public String targetString;
-	
+	public MainType mainType;
+	public int MainTypeID;
+	public boolean isTrack=false;
+	public int taskTrackID;
 	
 	public Task(TaskType ownType, String targetString) {
 		super();
@@ -72,12 +79,39 @@ public  class Task implements Serializable{
 		sb.append("<value>");
 		sb.append(targetString);
 		sb.append("</value>");
+		sb.append("<isTrack>");
+		sb.append(isTrack);
+		sb.append("</isTrack>");
+		sb.append("<taskTrackID>");
+		sb.append(taskTrackID);
+		sb.append("</taskTrackID>");
+		sb.append("<MainType>");
+		sb.append(mainType);
+		sb.append("</MainType>");
 		return sb.toString();		
 	}
 	public void StringToTask(String src){
 		
 		
 	}
-	
+	public boolean isTrack() {
+		return isTrack;
+	}
+	public void setTrack(boolean isTrack) {
+		this.isTrack = isTrack;
+	}
+	public int getTaskTrackID() {
+		return taskTrackID;
+	}
+	public void setTaskTrackID(int taskTrackID) {
+		this.taskTrackID = taskTrackID;
+	}
+	public MainType getMainType() {
+		return mainType;
+	}
+	public void setMainType(MainType mainType) {
+		this.mainType = mainType;
+	}
+
 	
 }

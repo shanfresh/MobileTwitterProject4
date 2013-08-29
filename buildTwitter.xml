@@ -51,21 +51,24 @@
 	<target name="build">
 		<javac srcdir="${basedir}/src" destdir="${basedir}/build/classes" debug="yes">
 			<classpath>
-				  <fileset dir="${basedir}/lib">
-					    <include name="*.jar"/>
-					    </fileset>
-					    <fileset dir="${basedir}/lib/JFreeChat">
-					    <include name="*.jar"/>
-					    </fileset>
-					    <fileset dir="${basedir}/lib/JSON">
-					    <include name="*.jar"/>
-					    </fileset>
-					    <fileset dir="${basedir}/lib/log4j">
-					    <include name="*.jar"/>
-					    </fileset>
-					    <fileset dir="${basedir}/lib/MongoDB">
-					    <include name="*.jar"/>
-			      </fileset>
+			 	 	<fileset dir="${basedir}/lib">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/JFreeChat">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/JSON">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/log4j">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/MongoDB">
+				    <include name="*.jar"/>
+		     		</fileset>
+				    <fileset dir="${basedir}/lib/JUnit">
+				    <include name="*.jar"/>
+		     		</fileset>
 			</classpath>			
 		</javac>		
     </target>
@@ -73,7 +76,7 @@
 	
 	
 	<target name="MainFramejar" depends="depends,build">
-		<jar destfile="${basedir}/build/MainFrame.jar" basedir="${basedir}/build/classes">
+		<jar destfile="${basedir}/build/MainFrame.jar" basedir="${basedir}/build/classes" >
 			<manifest>
 				<attribute name="Main-Class" value="com.ict.twitter.plantform.PlatFormMain"/>
 				<attribute name="Class-Path" value=". lib/junit.jar lib/jsoup-1.6.1-javadoc.jar lib/jsoup-1.6.1-sources.jar lib/jsoup-1.6.1.jar lib/log4j-1.2.17.jar lib/activemq-all-5.6.0.jar lib/commons-logging-1.1.1.jar lib/commons-codec-1.6.jar lib/lombok.jar lib/fluent-hc-4.2.2.jar lib/httpclient-4.2.2.jar lib/httpclient-cache-4.2.2.jar lib/httpcore-4.2.2.jar lib/httpmime-4.2.2.jar lib/mysql-connector-java-5.1.22-bin.jar lib/json-simple-1.1.1.jar lib/mongo-2.10.1.jar lib/gnujaxp.jar lib/iText-2.1.5.jar lib/jcommon-1.0.17.jar lib/jfreechart-1.0.14-experimental.jar lib/jfreechart-1.0.14-swt.jar lib/jfreechart-1.0.14.jar lib/junit.jar lib/servlet.jar lib/swtgraphics2d.jar"/>
@@ -96,6 +99,10 @@
 		    <fileset dir="${basedir}/lib/MongoDB">
 		        <include name="*.jar"/>
 		    </fileset>
+		    <fileset dir="${basedir}/lib/JUnit">
+		    <include name="*.jar"/>
+     		</fileset>
+			
 		</copy>
 	</target>
 	<target name="TwitterJars" depends="depends,build">
@@ -128,6 +135,9 @@
 		    <fileset dir="${basedir}/lib/MongoDB">
 		        <include name="*.jar"/>
 		    </fileset>
+		    <fileset dir="${basedir}/lib/JUnit">
+		    <include name="*.jar"/>
+     		</fileset>
 		</copy>
 	</target>
 </project>

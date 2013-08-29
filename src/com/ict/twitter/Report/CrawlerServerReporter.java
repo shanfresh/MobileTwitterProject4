@@ -59,9 +59,12 @@ public class CrawlerServerReporter{
 				}
 			}
 			if(ps==null){
-				ps=con.prepareStatement(
-						"insert into node_count(node_name,message_increment,message_rel_increment,user_increment,user_rel_increment," +
-						"message_count,message_rel_count,user_count,user_rel_count,db_time,total_time) values(?,?,?,?,?,?,?,?,?,?,?)");
+				String psStr="INSERT INTO `statistics` "+
+						"(`state`,"+"`message_count`,`message_increment`,"+
+						"`user_count`,`user_increment`,`followship_count`,`followship_increment`"+
+						") VALUES(?,?,?,?,?,?,?)";
+				System.out.println(psStr);
+				ps=con.prepareStatement(psStr);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -70,32 +73,22 @@ public class CrawlerServerReporter{
 		}
 		return true;
 	}
-	public boolean doReportByDataBase(ReportData rpdata) throws SQLException{
+	//Report增量信息，每分钟汇报一次，或者每条消息汇报一次
+	public boolean doReportIncrementByDataBase(ReportData rpdata) throws SQLException{
 		initiallize();
-		ps.setString(1, ClinetID);
-		ps.setInt(2, rpdata.message_increment);
-		ps.setInt(3, rpdata.message_rel_increment);
-		ps.setInt(4, rpdata.user_increment);
-		ps.setInt(5, rpdata.user_rel_increment);
-		message_count+=rpdata.message_increment;
-		message_rel_count+=rpdata.message_rel_increment;
-		user_count+=rpdata.user_increment;
-		user_rel_count+=rpdata.user_rel_increment;
-		
-		ps.setInt(6, message_count);
-		ps.setInt(7, message_rel_count);
-		ps.setInt(8, user_count);
-		ps.setInt(9, user_rel_count);
-		Timestamp current=new Timestamp(System.currentTimeMillis());
-		ps.setTimestamp(10, current);
-		ps.setInt(11, 0);
+		ps.setBoolean(1, true);//State表明是增量信息1：增量，2：全量
+		ps.setInt(2, -1);
+		ps.setInt(3, rpdata.message_increment);
+		ps.setInt(4, -1);
+		ps.setInt(5, rpdata.user_increment);
+		ps.setInt(6, -1);//消息
+		ps.setInt(7, rpdata.user_rel_increment);//用户关系的增长信息
 		try{
 			ps.executeUpdate();
 		}catch(SQLException ex){
+			System.out.println(ex.getMessage());
 			ex.printStackTrace();
 		}
-		
-		System.out.println("当前总量信息M,ML,U,UL: "+message_count+","+message_rel_count+","+user_count+","+user_rel_count+",");
 		return true;		
 	}
 	
@@ -107,10 +100,10 @@ public class CrawlerServerReporter{
 		int user=2;
 		int user_rel=33;
 		CrawlerServerReporter cr=new CrawlerServerReporter(id, con,message,message_rel,user,user_rel);
-		for(int i=0;i<100;i++){
+		for(int i=0;i<2;i++){
 			ReportData rpdata=new ReportData(1,2,1,3,"NULL");
 			try {
-				cr.doReportByDataBase(rpdata);
+				cr.doReportIncrementByDataBase(rpdata);
 				System.out.println("汇报成功");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

@@ -5,8 +5,12 @@ import java.util.concurrent.*;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.ict.twitter.DatabaseBean.WebOpLogOp;
+import com.ict.twitter.Report.ReportData;
+import com.ict.twitter.StatusTrack.MyTracker;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -15,12 +19,13 @@ public abstract class AjaxCrawl {
 	/**
 	 * @param args
 	 */
-	ExecutorService service = Executors.newCachedThreadPool();
-	
-	public abstract boolean doCrawl(String src, MulityInsertDataBase dbo,Vector<TwiUser> RelatUsers);
 
+	public ExecutorService service = Executors.newCachedThreadPool();
+	public WebOpLogOp weboplog;
+	public DbOperation dboperation;
+	public abstract boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData);
 
-	public String openLink(final DefaultHttpClient httpclient,final String targetUrl) {
+	public String openLink(final DefaultHttpClient httpclient,final String targetUrl,Task task,int count) {
 		String WebPageContent = null;
 		Future<String> future = service.submit(new Callable<String>() {
 			public String call() throws Exception {
@@ -34,7 +39,7 @@ public abstract class AjaxCrawl {
 		});
 		
 		try{
-			WebPageContent = (String) future.get(20000, TimeUnit.MILLISECONDS);
+			WebPageContent = (String) future.get(20000, TimeUnit.MILLISECONDS);			
 		}catch(TimeoutException ex){
 			LogSys.nodeLogger.error("OpenURL TimeOut(20s):" + targetUrl);
 		}
@@ -53,6 +58,27 @@ public abstract class AjaxCrawl {
 
 			
 	}
-
+	//保存采集到的Web请求日志信息
+	public boolean SaveWebOpStatus(Task task,String URL,int count,WebOperationResult webrs,MulityInsertDataBase dbo){
+		if(weboplog==null){
+			if(dboperation==null){
+				dboperation=new DbOperation();
+			}
+			weboplog=new WebOpLogOp(dboperation.GetConnection());
+		}
+		try{
+			String taskName=task.getTargetString();
+			String MainType=task.getMainType().toString();
+			String taskType=task.getOwnType().toString();
+			String CurrentURL=URL;
+			String resultStr= webrs.toString();
+			return weboplog.Insert(task.getTargetString(), task.getMainType().toString(), task.ownType.toString(),URL,webrs.toString(), count);
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return false;
+		}
+		
+	}
 
 }

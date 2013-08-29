@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 
+import com.ict.twitter.StatusTrack.CrawlUserDB;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.task.beans.Task.TaskType;
@@ -23,14 +24,11 @@ public class ServerBean implements Serializable{
 	private static final long serialVersionUID = -9133824015130047653L;
 	public static String aname="~~~~";
 	public static boolean isFirstChuizhi=true;
-	public static SaveTxtFile tmpKeyId=new SaveTxtFile("Output/Twitter/tmpKeyIDs.txt",false);
-	public static SaveTxtFile tmpNormalId=new SaveTxtFile("Output/Twitter/NormalIDs.txt",false);
+	CrawlUserDB crawluser=new CrawlUserDB();
 	List<NormalUser> normalUserList=Collections.synchronizedList(new UserList<NormalUser>());
-	List<NormalUser> keyUsers=Collections.synchronizedList(new UserList<NormalUser>());	
-	boolean isdebug=true;
-	
+	List<NormalUser> keyUsers=Collections.synchronizedList(new UserList<NormalUser>());		
 	//初始化关键词搜索
-	public void InitSearch(String file,CrawlerServer server){
+	public void InitSearch(String file,int max,CrawlerServer server){
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(file),"utf-8"));
@@ -48,13 +46,12 @@ public class ServerBean implements Serializable{
 				Task task=new Task();
 				task.setOwnType(TaskType.Search);
 				task.setTargetString(t);
-				server.addTask(task);				
+				server.addKeyWord(task);				
 				i++;
-				if(isdebug&&i>=2){
+				if(i>max){
 					break;
 				}
 			}
-			LogSys.crawlerServLogger.info(isdebug+"【Server】总共新加的关键词数"+i+"个");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,22 +76,22 @@ public class ServerBean implements Serializable{
 			Task task=new Task();
 			task.setOwnType(TaskType.TimeLine);
 			task.setTargetString(t);
-			server.addTask(task);
+			server.addKeyUserTask(task);
 			
 			task=new Task(); 
 			task.setOwnType(TaskType.Following);
 			task.setTargetString(t);
-			server.addTask(task);
+			server.addKeyUserTask(task);
 			
 			task=new Task();
 			task.setOwnType(TaskType.Followers);
 			task.setTargetString(t);
-			server.addTask(task);
+			server.addKeyUserTask(task);
 			
 			task=new Task();
 			task.setOwnType(TaskType.About);
 			task.setTargetString(t);
-			server.addTask(task);	
+			server.addKeyUserTask(task);	
 		}
 		
 		
@@ -111,7 +108,7 @@ public class ServerBean implements Serializable{
 		for(int i=0;i<normalUserList.size();i++){
 			if(i%100==0){
 				try {
-					LogSys.crawlerServLogger.info("当前进行第"+i+"组数据导入的NormalUser总线");
+					LogSys.crawlerServLogger.info("当前进行第"+i+"组数据导入的NormalUser总线,共["+normalUserList.size()+"]");
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -132,9 +129,7 @@ public class ServerBean implements Serializable{
 			server.addTask(task);
 		}
 		int size=normalUserList.size();
-		this.CreateNewNormalUserFile(deepth);
-		normalUserList.clear();
-		
+		normalUserList.clear();		
 		return size;
 
 		
@@ -144,24 +139,13 @@ public class ServerBean implements Serializable{
 	/*
 	 * keyUser.contains(user) 值得商榷？？
 	 */
-	public void addNormalUser(NormalUser user){
+	public void addNormalUser(NormalUser user,int deepth){
 		//如果种子用户列表中已经存在。 
 		if(keyUsers.contains(user)){
 			return ;
 		}		
 		normalUserList.add(user);
-		tmpNormalId.Append(user.userID+"\r\n");
-		tmpNormalId.flush();
-		Comparator<NormalUser> comparator=new Comparator<NormalUser>(){
-			public int compare(NormalUser user1, NormalUser user2) {
-				// TODO Auto-generated method stub
-				if(user1.sum>=user2.sum)
-					return 0;
-				else
-					return 1;
-			}		
-		};
-		Collections.sort(normalUserList,comparator);		
+		crawluser.insertUserItem(user.userID, -1, false, null, deepth);		
 	} 
 	public void showNormalUserList(){
 		for(NormalUser u:normalUserList){
@@ -175,8 +159,7 @@ public class ServerBean implements Serializable{
 		if(keyUsers.contains(user)){
 			return ;
 		}
-		tmpKeyId.Append(user.userID+"\r\n");
-		tmpKeyId.flush();		
+		crawluser.insertUserItem(user.userID, -1, true, null, 0);	
 		keyUsers.add(user);
 		LogSys.crawlerServLogger.debug("添加新的种子用户到Vector User"+user);
 		
@@ -189,11 +172,6 @@ public class ServerBean implements Serializable{
 	public static void ADDKEYUSER(ServerBean sb, NormalUser nu) {
 		sb.addKeyUser(nu);
 		
-	}
-	
-	private void CreateNewNormalUserFile(int deepth){
-		String filename=String.format("Output/Twitter/NormalIDs_deepth_%s.txt", deepth);
-		tmpNormalId=new SaveTxtFile(filename,false);
 	}
 	
 }

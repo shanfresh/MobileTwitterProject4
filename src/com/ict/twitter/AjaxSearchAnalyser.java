@@ -7,9 +7,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import com.ict.twitter.AjaxAnalyser;
+import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -27,7 +29,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		// TODO Auto-generated method stub
 
 	}
-	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users){
+	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users,ReportData reportData) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
 		Elements follows=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item expanding-stream-item");
 		
@@ -44,12 +46,12 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 				String content;
 				String date;
 				try{
-					content=firstChildren.getElementsByAttributeValue("class", "js-tweet-text").first().ownText();			
+					content=firstChildren.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first().text();			
 				}catch(NullPointerException ex){
 					content="null";
 				}
 				try{
-					date=firstChildren.getElementsByAttributeValue("class", "firstChildren").first().attr("title");
+					date=firstChildren.getElementsByAttributeValue("class", "time").first().children().get(0).attr("title");
 				}catch(NullPointerException ex){
 					date="null";
 				}
@@ -67,8 +69,14 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		}
 		TimeLine[] TimeLineArray = new TimeLine[timelines.size()];
 		timelines.toArray(TimeLineArray);
+		if(super.isdebug){
+			for(int i=0;i<TimeLineArray.length;i++)
+				TimeLineArray[i].show();
+		}
 		super.batchdb.insertIntoMessage(TimeLineArray);
 		AnalyserCursor res=new AnalyserCursor(tweetID,follows.size());
+		reportData.message_increment+=timelines.size();
+		reportData.user_increment+=follows.size();
 		return res;
 	}
 
