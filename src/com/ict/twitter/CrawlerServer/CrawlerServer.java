@@ -20,6 +20,7 @@ import com.ict.twitter.StatusTrack.MyTracker;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.plantform.PlatFormMain;
 import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.MainType;
 
 import com.ict.twitter.tools.BasePath;
 
@@ -378,22 +379,32 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		
 	}
 	public boolean addTask(Task task){
+		task.setMainType(MainType.Normal);
 		tracker.AddTask(task);
 		taskSender.Send(task.TaskTOString());
 		return true;
 	}
 	public boolean addUrgentTask(Task task){
+		task.setMainType(MainType.Urgent);
 		System.err.println("AddUrgentTaskAdded");
 		tracker.AddTask(task);
 		urgentTaskSender.Send(task.TaskTOString());
 		return true;
 	}
-	public boolean addKeyWordAndTopicTask(Task task){
+	public boolean addKeyWord(Task task){
+		task.setMainType(MainType.KeyWord);
+		tracker.AddTask(task);
+		keyWordAndTopicTaskSender.Send(task.TaskTOString());
+		return true;
+	}
+	public boolean addTopic(Task task){
+		task.setMainType(MainType.Topic);
 		tracker.AddTask(task);
 		keyWordAndTopicTaskSender.Send(task.TaskTOString());
 		return true;
 	}
 	public boolean addKeyUserTask(Task task){
+		task.setMainType(MainType.KeyUser);
 		tracker.AddTask(task);
 		keyUserTaskSender.Send(task.TaskTOString());
 		return true;
@@ -498,7 +509,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	//收到HeartReport
 	public void onReceiveReportFromNode(ReportData rpdata){
 		//服务器知识读取对应的数据并添加到
-		System.out.printf("Message:%d,User:%d,UserRel:%d\n",rpdata.message_increment,rpdata.user_increment,rpdata.user_rel_increment);
+		//System.out.printf("Message:%d,User:%d,UserRel:%d\n",rpdata.message_increment,rpdata.user_increment,rpdata.user_rel_increment);
 		synchronized (reportlock) {
 			ServerReportData.add(rpdata);//服务器将数据进行累加；
 		}

@@ -12,6 +12,8 @@ import com.ict.twitter.AjaxAnalyser.AnalyserCursor;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
@@ -29,7 +31,8 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 	DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
 	
-	public AjaxSearchCrawl(DefaultHttpClient _httpclient){
+	public AjaxSearchCrawl(DefaultHttpClient _httpclient,DbOperation dboperation){
+		super.dboperation=dboperation;
 		this.httpclient=_httpclient;
 	}
 	public static void main(String[] args) {
@@ -39,31 +42,35 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
 		lgtest.doLogin();
-		AjaxSearchCrawl test=new AjaxSearchCrawl(httpclient);
+		AjaxSearchCrawl test=new AjaxSearchCrawl(httpclient,null);
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
-		test.doCrawl("重庆+薄",dbo,users,new ReportData());
+		Task task=new Task(TaskType.Search,"重庆+薄");
 		System.out.println("current Search String Size:"+users.size());
 	}
-
-	public boolean doCrawl(String keyWords,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData){
-		
+	
+	
+	public boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData){
+		String keyWords=task.getTargetString();
 		boolean has_next=false;
 		String next_max_id=null;
 		AjaxSearchAnalyser ana=new AjaxSearchAnalyser(dbo);
 		String URL;
+		int count=1;
 		do{
 			if(next_max_id==null||next_max_id.equals("")){
 				URL=String.format(baseURL,"",keyWords);
 			}else{
 				URL=String.format(baseURL,max_id_str+next_max_id,keyWords);
 			}
-			String content=super.openLink(httpclient, URL);
+			String content=super.openLink(httpclient, URL,task,count++);
 			Map map=null;
 			if(content==null){
 				System.out.println("HttpClint返回Ajax内容为空或长度不够");
+				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, dbo);
 				break;
 			}
+			super.SaveWebOpStatus(task, URL, count, WebOperationResult.Success, dbo);
 			try {
 				map = (Map)parser.parse(content);				
 			}catch (ParseException e) {

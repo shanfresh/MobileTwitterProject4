@@ -16,6 +16,9 @@ import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserProfile;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxProfileCrawl extends AjaxCrawl {
@@ -24,19 +27,29 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&screen_name=%s&_=%s";
 	private DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
-	public AjaxProfileCrawl(DefaultHttpClient _httpclient){
+	public AjaxProfileCrawl(DefaultHttpClient _httpclient,DbOperation dboperation){
 		this.httpclient=_httpclient;
+		super.dboperation=dboperation;
+		
 	}
 	
 	@Override
-	public boolean doCrawl(String UserID, MulityInsertDataBase dbo,
+	public boolean doCrawl(Task task, MulityInsertDataBase dbo,
 			Vector<TwiUser> RelatUsers,ReportData reportData) {
+		String UserID=task.getTargetString();
 		UserProfile profile = new UserProfile();
 		AjaxProfileAnalyser profileana = new AjaxProfileAnalyser(dbo);
 		
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
-		String ajaxContent=super.openLink(httpclient, URL);
+		String ajaxContent=super.openLink(httpclient, URL,task,1);
+		if(ajaxContent==null){
+			LogSys.nodeLogger.error("ProfileÕ¯¬Á«Î«Û ß∞‹:"+UserID);
+			super.SaveWebOpStatus(task, URL, 1, WebOperationResult.Fail, dbo);
+			return false;
+			
+		}
+		super.SaveWebOpStatus(task, URL, 1, WebOperationResult.Success, dbo);
 		String user_screen_name="";
 		String htmlContent=null;
 		try {
@@ -81,8 +94,9 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
-		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient);
-		profilecrawl.doCrawl("488092285",dbo, users,new ReportData());
+		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
+		Task task=new Task(TaskType.About,"488092285");
+		profilecrawl.doCrawl(task,dbo, users,new ReportData());
 		httpclient.getConnectionManager().shutdown();
 		profilecrawl.service.shutdown();
 	}

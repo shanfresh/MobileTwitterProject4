@@ -8,6 +8,7 @@ import javax.jms.TextMessage;
 import com.ict.twitter.MessageBus.Receiver;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.MainType;
 import com.ict.twitter.task.beans.Task.TaskType;
 import com.ict.twitter.tools.SimpleXmlAnalyser;
 
@@ -73,6 +74,9 @@ public class TaskReceiver extends Receiver {
 		
 		String isTrack=simxml.getFirstValueByTag("isTrack");
 		String taskTrackID=simxml.getFirstValueByTag("taskTrackID");
+		String MainTypeStr=simxml.getFirstValueByTag("MainType");
+		t.setMainType(MainType.valueOf(MainTypeStr));
+		
 		t.setOwnType(TaskType.fromString(first));
 		t.setTargetString(valuestr);
 		if(isTrack!=null){

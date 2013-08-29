@@ -11,6 +11,8 @@ import org.json.simple.parser.ParseException;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
@@ -31,7 +33,8 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 	 * isFollowing true:following
 	 * isFollowing false:follower
 	 */
-	public AjaxFollowCrawl(DefaultHttpClient httpclient,boolean isFollowing){
+	public AjaxFollowCrawl(DefaultHttpClient httpclient,boolean isFollowing,DbOperation dboperation){
+		super.dboperation=dboperation;
 		if(isFollowing){
 			baseUrl="/%s/following/users?%sinclude_available_features=1&include_entities=1&is_forward=true";;
 		}else{
@@ -41,24 +44,28 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean doCrawl(String userID,MulityInsertDataBase batchdb,Vector<TwiUser> RelateUsers,ReportData reportData){
-		
+	public boolean doCrawl(Task task,MulityInsertDataBase batchdb,Vector<TwiUser> RelateUsers,ReportData reportData){
+		String userID=task.getTargetString();
 		String URL;
 		boolean hasMoreItems=false;
 		AjaxFollowAnalyser aa=new AjaxFollowAnalyser(batchdb);
 		String nextCursor="";
+		int count=0;
 		do{
+			count++;
 			hasMoreItems=false;
 			if(nextCursor.equals("")){
 				URL=String.format(baseUrl, userID,"");
 			}else{
 				URL=String.format(baseUrl, userID,cursor+nextCursor);
 			}
-			String content=openLink(httpclient, URL);
+			String content=openLink(httpclient, URL,task,count);
 			if(content==null||(content.length())<=20){
 				System.out.println("网页返回为空 采集结束");
+				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, batchdb);
 				return false;
 			}
+			super.SaveWebOpStatus(task, URL, count, WebOperationResult.Success, batchdb);
 			Map<String, Object> map = null;
 			int index=0;
 			try {
@@ -107,10 +114,10 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
 		lgtest.doLogin();
-		AjaxFollowCrawl at=new AjaxFollowCrawl(httpclient,false);
+		AjaxFollowCrawl at=new AjaxFollowCrawl(httpclient,false,null);
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		at.doCrawl("26_t_b",dbo,users,new ReportData());
+		at.doCrawl(new Task(TaskType.Following,"26_t_b"),dbo,users,new ReportData());
 		
 
 	}

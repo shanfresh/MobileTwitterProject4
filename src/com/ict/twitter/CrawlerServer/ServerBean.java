@@ -46,7 +46,7 @@ public class ServerBean implements Serializable{
 				Task task=new Task();
 				task.setOwnType(TaskType.Search);
 				task.setTargetString(t);
-				server.addKeyWordAndTopicTask(task);				
+				server.addKeyWord(task);				
 				i++;
 				if(i>max){
 					break;

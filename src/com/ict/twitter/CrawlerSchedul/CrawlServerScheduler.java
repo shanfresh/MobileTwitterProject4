@@ -45,26 +45,26 @@ public class CrawlServerScheduler extends TimerTask{
 				task.setTaskTrackID(inputTask.ID);//需要修改
 				task.setOwnType(TaskType.Search);
 				task.setTargetString(keywords[i]);
-				crawlserver.addKeyWordAndTopicTask(task);
+				crawlserver.addTopic(task);
 			}
 			String parameter2=inputTask.TaskParameter2;
-			String[] keywords2=parameter.split(" ");
+			String[] keywords2=parameter2.split(" ");
 			for(int i=0;i<keywords2.length;i++){
 				Task task=new Task();
 				task.setTrack(true);
 				task.setTaskTrackID(inputTask.ID);//需要修改
 				task.setOwnType(TaskType.TimeLine);
 				task.setTargetString(keywords2[i]);
-				crawlserver.addKeyWordAndTopicTask(task);
+				crawlserver.addTopic(task);
 				task.setOwnType(TaskType.Following);////搜索用户的粉丝
 				task.setTargetString(keywords2[i]);
-				crawlserver.addKeyWordAndTopicTask(task);
+				crawlserver.addTopic(task);
 				task.setOwnType(TaskType.Followers);//搜索用户的关注
 				task.setTargetString(keywords2[i]);
-				crawlserver.addKeyWordAndTopicTask(task);
+				crawlserver.addTopic(task);
 				task.setOwnType(TaskType.About);//搜索用户的主页
 				task.setTargetString(keywords2[i]);
-				crawlserver.addKeyWordAndTopicTask(task);
+				crawlserver.addTopic(task);
 			}
 
 		}

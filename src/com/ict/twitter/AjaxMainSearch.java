@@ -47,13 +47,13 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 	@Override
 	public void doWork(){
 		LogSys.nodeLogger.info("MainSearch["+Name+"] Start To doWork");		
-		AjaxFollowCrawl followingCrawl=new AjaxFollowCrawl(this.httpclient,true);
-		AjaxFollowCrawl followerCrawl=new AjaxFollowCrawl(this.httpclient,false);
+		AjaxFollowCrawl followingCrawl=new AjaxFollowCrawl(this.httpclient,true,this.DBOp);
+		AjaxFollowCrawl followerCrawl=new AjaxFollowCrawl(this.httpclient,false,this.DBOp);
 		followerCrawl.isFollowing=false;
 		
-		AjaxSearchCrawl searchCrawl=new AjaxSearchCrawl(this.httpclient);
-		AjaxTimeLineCrawl timelineCrawl=new AjaxTimeLineCrawl(this.httpclient);	
-		AjaxProfileCrawl profileCrawl = new AjaxProfileCrawl(this.httpclient);
+		AjaxSearchCrawl searchCrawl=new AjaxSearchCrawl(this.httpclient,this.DBOp);
+		AjaxTimeLineCrawl timelineCrawl=new AjaxTimeLineCrawl(this.httpclient,this.DBOp);	
+		AjaxProfileCrawl profileCrawl = new AjaxProfileCrawl(this.httpclient,this.DBOp);
 		MulityInsertDataBase batchdb =  new MulityInsertDataBase();
 		try{
 			while(true){
@@ -67,26 +67,26 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 				boolean flag=false;
 				switch(task.ownType){
 					case Search:{
-						flag=searchCrawl.doCrawl(task.getTargetString(),batchdb,users,reportData);
+						flag=searchCrawl.doCrawl(task,batchdb,users,reportData);
 						sentKeyUsers(users);
 						break;
 					}
 					case Following:{						
-						flag=followingCrawl.doCrawl(task.getTargetString(),batchdb,users,reportData);
+						flag=followingCrawl.doCrawl(task,batchdb,users,reportData);
 						sentNorUsers(users);
 						break;
 					}
 					case Followers:{
-						flag=followerCrawl.doCrawl(task.getTargetString(),batchdb,users,reportData);
+						flag=followerCrawl.doCrawl(task,batchdb,users,reportData);
 						sentNorUsers(users);
 						break;
 					}
 					case TimeLine:{
-						flag=timelineCrawl.doCrawl(task.getTargetString(),batchdb,users,reportData);
+						flag=timelineCrawl.doCrawl(task,batchdb,users,reportData);
 						break;
 					}
 					case About:{
-						flag=profileCrawl.doCrawl(task.getTargetString(), batchdb, users,reportData);
+						flag=profileCrawl.doCrawl(task, batchdb, users,reportData);
 						break;
 					}
 					default:{
