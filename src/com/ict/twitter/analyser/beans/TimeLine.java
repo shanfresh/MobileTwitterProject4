@@ -22,6 +22,9 @@ public class TimeLine {
 	public int replyCount;	
 	public Date strictTime;
 	
+	public int TaskTrackID;
+	public int MainTypeID;
+	
 	//用于替换状态中的一些字符
 	Pattern p1 = Pattern.compile("[\"|'|\\\\]");
 	
@@ -128,6 +131,18 @@ public class TimeLine {
 	
 	public void show(){
 		LogSys.nodeLogger.debug("id     \t"+id+"\t"+"author \t"+author+"\t"+"content \t"+content+"\t");
+	}
+	public int getTaskTrackID() {
+		return TaskTrackID;
+	}
+	public void setTaskTrackID(int taskTrackID) {
+		TaskTrackID = taskTrackID;
+	}
+	public int getMainTypeID() {
+		return MainTypeID;
+	}
+	public void setMainTypeID(int mainTypeID) {
+		MainTypeID = mainTypeID;
 	}
 
 

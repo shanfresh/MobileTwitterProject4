@@ -13,8 +13,8 @@ public class MyTracker extends BaseTracker {
 	}
 	
 	@Override
-	public void AddTask(Task task){		
-		statusdb.AddTask(task.getTargetString(), TaskType2CrawlTaskType(task.ownType));
+	public int AddTask(Task task){		
+		return statusdb.AddTask(task.getTargetString(), TaskType2CrawlTaskType(task.ownType));
 	}
 
 	@Override

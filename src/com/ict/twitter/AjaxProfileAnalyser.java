@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxProfileAnalyser extends AjaxAnalyser {
@@ -15,8 +16,10 @@ public class AjaxProfileAnalyser extends AjaxAnalyser {
 	
 	
 	
-	public AjaxProfileAnalyser(MulityInsertDataBase batchdb) {
-		super(batchdb);
+
+	public AjaxProfileAnalyser(MulityInsertDataBase batchdb, Task task) {
+		super(batchdb, task);
+		// TODO Auto-generated constructor stub
 	}
 	public void doAnylyze(String content,UserProfile userprofile){
 		String picture_url="";

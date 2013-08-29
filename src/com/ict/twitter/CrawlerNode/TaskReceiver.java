@@ -75,6 +75,7 @@ public class TaskReceiver extends Receiver {
 		String isTrack=simxml.getFirstValueByTag("isTrack");
 		String taskTrackID=simxml.getFirstValueByTag("taskTrackID");
 		String MainTypeStr=simxml.getFirstValueByTag("MainType");
+		String MainTypeID_Str=simxml.getFirstValueByTag("MainTypeID");
 		t.setMainType(MainType.valueOf(MainTypeStr));
 		
 		t.setOwnType(TaskType.fromString(first));
@@ -87,7 +88,10 @@ public class TaskReceiver extends Receiver {
 		if(t.isTrack()){
 			t.setTaskTrackID(Integer.parseInt(taskTrackID));
 		}
-		
+		if(MainTypeID_Str!=null){
+			int MainTypeID=Integer.parseInt(MainTypeID_Str);
+			t.setMainTypeID(MainTypeID);
+		}
 		return t;
 	}
 }

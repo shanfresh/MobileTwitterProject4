@@ -42,7 +42,7 @@ public class CrawlServerScheduler extends TimerTask{
 			for(int i=0;i<keywords.length;i++){
 				Task task=new Task();
 				task.setTrack(true);
-				task.setTaskTrackID(inputTask.ID);//需要修改
+				task.setMainTypeID(inputTask.ID);//设置MainTypeID
 				task.setOwnType(TaskType.Search);
 				task.setTargetString(keywords[i]);
 				crawlserver.addTopic(task);
@@ -52,7 +52,7 @@ public class CrawlServerScheduler extends TimerTask{
 			for(int i=0;i<keywords2.length;i++){
 				Task task=new Task();
 				task.setTrack(true);
-				task.setTaskTrackID(inputTask.ID);//需要修改
+				task.setMainTypeID(inputTask.ID);//设置MainType为用户输入的ID
 				task.setOwnType(TaskType.TimeLine);
 				task.setTargetString(keywords2[i]);
 				crawlserver.addTopic(task);
@@ -71,7 +71,7 @@ public class CrawlServerScheduler extends TimerTask{
 		if(inputTask.InputType==InputType.KeyUser){
 			Task task=new Task();
 			task.setTrack(true);
-			task.setTaskTrackID(inputTask.ID);//要跟踪的ID是
+			task.setMainTypeID(inputTask.ID);
 			task.setTargetString(inputTask.TaskName);//把主题的名称也作为关键词进行搜索
 			task.setOwnType(TaskType.TimeLine);//关注重点账户的推文
 			crawlserver.addKeyUserTask(task);
@@ -83,7 +83,7 @@ public class CrawlServerScheduler extends TimerTask{
 		if(inputTask.InputType==InputType.KeyWord){
 			Task task=new Task();
 			task.setTrack(true);
-			task.setTaskTrackID(inputTask.ID);//要跟踪的ID是
+			task.setMainTypeID(inputTask.ID);//要跟踪的MainTypeID是
 			task.setTargetString(inputTask.TaskName);//把主题的名称也作为关键词进行搜索
 			task.setOwnType(TaskType.Search);//设置类型为Search类型
 			crawlserver.addKeyUserTask(task);
@@ -92,7 +92,7 @@ public class CrawlServerScheduler extends TimerTask{
 		if(inputTask.InputType==InputType.NorUser){
 			Task task=new Task();
 			task.setTrack(true);
-			task.setTaskTrackID(inputTask.ID);//要跟踪的ID是
+			task.setMainTypeID(inputTask.ID);//要跟踪的MainTypeIDID是
 			task.setTargetString(inputTask.TaskName);//对普通用户的检索等于对普通用户的时间，粉丝等进行检索
 			task.setOwnType(TaskType.TimeLine);//
 			crawlserver.addTask(task);

@@ -27,7 +27,7 @@ public  class Task implements Serializable{
 	public TaskType ownType;
 	public String targetString;
 	public MainType mainType;
-	public int MainTypeID;
+	public int mainTypeID;
 	public boolean isTrack=false;
 	public int taskTrackID;
 	
@@ -88,6 +88,9 @@ public  class Task implements Serializable{
 		sb.append("<MainType>");
 		sb.append(mainType);
 		sb.append("</MainType>");
+		sb.append("<MainTypeID>");
+		sb.append(this.getMainTypeID());
+		sb.append("</MainTypeID>");
 		return sb.toString();		
 	}
 	public void StringToTask(String src){
@@ -111,6 +114,12 @@ public  class Task implements Serializable{
 	}
 	public void setMainType(MainType mainType) {
 		this.mainType = mainType;
+	}
+	public int getMainTypeID() {
+		return mainTypeID;
+	}
+	public void setMainTypeID(int mainTypeID) {
+		this.mainTypeID = mainTypeID;
 	}
 
 	

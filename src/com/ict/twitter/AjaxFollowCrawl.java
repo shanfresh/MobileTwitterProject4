@@ -48,7 +48,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		String userID=task.getTargetString();
 		String URL;
 		boolean hasMoreItems=false;
-		AjaxFollowAnalyser aa=new AjaxFollowAnalyser(batchdb);
+		AjaxFollowAnalyser aa=new AjaxFollowAnalyser(batchdb,task);
 		String nextCursor="";
 		int count=0;
 		do{

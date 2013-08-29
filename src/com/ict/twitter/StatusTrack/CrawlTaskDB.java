@@ -3,6 +3,7 @@ package com.ict.twitter.StatusTrack;
 import com.ict.twitter.tools.DbOperation;
 import java.sql.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -10,7 +11,7 @@ import org.junit.Test;
 public class CrawlTaskDB {
 	DbOperation dbOp;
 	Connection con;
-	PreparedStatement pst,pstUpdateStatus;
+	PreparedStatement pst,pstUpdateStatus,pstFind;
 	public CrawlTaskDB(){
 		dbOp=new DbOperation();
 		con=dbOp.conDB();
@@ -18,7 +19,8 @@ public class CrawlTaskDB {
 	}
 	private void Init(){
 		try {
-			pst=con.prepareStatement("INSERT INTO `crawlstatus` (`taskStr`,`taskType`,`CreateTime`,`FinTime`,`Status`) VALUES(?,?,?,?,?)");
+			pst=con.prepareStatement("INSERT INTO `crawlstatus` (`taskStr`,`taskType`,`CreateTime`,`FinTime`,`Status`) VALUES(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			pstFind=con.prepareStatement("Select id from `crawlstatus` where `taskStr`=? AND `taskType`=?");
 			pstUpdateStatus=con.prepareStatement("update `crawlstatus` SET `FinTime`=?,`Status`=? WHERE taskStr=? AND taskType=?");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -26,8 +28,9 @@ public class CrawlTaskDB {
 		}
 
 	}
-	public boolean AddTask(String taskStr,CrawlTaskType type){
+	public int AddTask(String taskStr,CrawlTaskType type){
 		Date date=new Date(System.currentTimeMillis());
+		int result=-1;
 		try{
 			pst.setString(1, taskStr);
 			pst.setInt(2, type.ordinal()+1);
@@ -35,14 +38,34 @@ public class CrawlTaskDB {
 			pst.setDate(4, null);
 			pst.setString(5, "Created");
 			pst.executeUpdate();
+			ResultSet rsFind=pst.getGeneratedKeys();
+			if(rsFind.next()){
+				result=rsFind.getInt(1);
+			}
+			pst.close();
 		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){
 			System.err.println("重复插入"+ex.getLocalizedMessage());
-			return false;
+			try {
+				pstFind.setString(1, taskStr);
+				pstFind.setInt(2, type.ordinal()+1);
+				ResultSet rs=pstFind.executeQuery();
+				if(rs.next()){
+					result=rs.getInt(1);
+				}
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return result;//出错后返回查找之后的的
+			
+		}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}catch(Exception ex){
+			return -1;
 		}
-		catch(Exception ex){
-			return false;
-		}
-		return true;
+		return result;
 		
 	}
 	public boolean FinishTask(String task,CrawlTaskType type,boolean isOK){
@@ -75,14 +98,25 @@ public class CrawlTaskDB {
 	}
 	
 	@Test
+	@Ignore
 	public void testUpdate(){
 		db.SetTaskStatus("shanjixi", CrawlTaskType.Search,"Fail");
 	}
 	
+	@After
+	public void after(){
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@Test
-	@Ignore
 	public void test(){
-		db.AddTask("shanjixi", CrawlTaskType.Search);
+		int t=db.AddTask("shanjixi", CrawlTaskType.Search);
+		System.out.println(t);
 	}
 
 }

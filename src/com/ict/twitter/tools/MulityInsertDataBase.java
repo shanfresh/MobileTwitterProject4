@@ -125,7 +125,7 @@ public class MulityInsertDataBase {
 		try {
 			con.setAutoCommit(false);
 			if(messageps==null){
-				messageps = con.prepareStatement("insert into message(channel_id,message_id,title,user_id,create_time,crawl_time) values(?,?,?,?,?,?)");
+				messageps = con.prepareStatement("insert into message(channel_id,message_id,title,user_id,create_time,crawl_time,other1,other2) values(?,?,?,?,?,?,?,?)");
 			}
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			for(int i=0;i<timeline.length;i++){
@@ -135,6 +135,8 @@ public class MulityInsertDataBase {
 				messageps.setString(4, timeline[i].getAuthor());
 				messageps.setString(5, timeline[i].getDate());
 				messageps.setTimestamp(6, time);
+				messageps.setString(7, Integer.toString(timeline[i].getTaskTrackID()));//timeline没有加入对应的
+				messageps.setString(8, Integer.toString(timeline[i].getMainTypeID()));//other1设置为TaskTrackerID,other2设置为MainTypeID
 				messageps.addBatch();				
 			}
 			messageps.executeBatch();

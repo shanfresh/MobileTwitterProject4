@@ -63,7 +63,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		boolean has_more_items=false;
 		String nextmaxID="";
 		String URL="";
-		AjaxTimeLineAnalyser TWAna=new AjaxTimeLineAnalyser(dbo);
+		AjaxTimeLineAnalyser TWAna=new AjaxTimeLineAnalyser(dbo,task);
 		boolean flag=true;
 		AnalyserCursor result;
 		int count=1;

@@ -380,32 +380,37 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	}
 	public boolean addTask(Task task){
 		task.setMainType(MainType.Normal);
-		tracker.AddTask(task);
+		int taskTrackerID=tracker.AddTask(task);
+		task.setTaskTrackID(taskTrackerID);
 		taskSender.Send(task.TaskTOString());
 		return true;
 	}
 	public boolean addUrgentTask(Task task){
 		task.setMainType(MainType.Urgent);
 		System.err.println("AddUrgentTaskAdded");
-		tracker.AddTask(task);
+		int taskTrackerID=tracker.AddTask(task);
+		task.setTaskTrackID(taskTrackerID);//ÉèÖÃTaskTrackID;
 		urgentTaskSender.Send(task.TaskTOString());
 		return true;
 	}
 	public boolean addKeyWord(Task task){
 		task.setMainType(MainType.KeyWord);
-		tracker.AddTask(task);
+		int taskTrackerID=tracker.AddTask(task);
+		task.setTaskTrackID(taskTrackerID);
 		keyWordAndTopicTaskSender.Send(task.TaskTOString());
 		return true;
 	}
 	public boolean addTopic(Task task){
 		task.setMainType(MainType.Topic);
-		tracker.AddTask(task);
+		int taskTrackerID=tracker.AddTask(task);
+		task.setTaskTrackID(taskTrackerID);
 		keyWordAndTopicTaskSender.Send(task.TaskTOString());
 		return true;
 	}
 	public boolean addKeyUserTask(Task task){
 		task.setMainType(MainType.KeyUser);
-		tracker.AddTask(task);
+		int taskTrackerID=tracker.AddTask(task);
+		task.setTaskTrackID(taskTrackerID);
 		keyUserTaskSender.Send(task.TaskTOString());
 		return true;
 	}

@@ -54,7 +54,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		String keyWords=task.getTargetString();
 		boolean has_next=false;
 		String next_max_id=null;
-		AjaxSearchAnalyser ana=new AjaxSearchAnalyser(dbo);
+		AjaxSearchAnalyser ana=new AjaxSearchAnalyser(dbo,task);
 		String URL;
 		int count=1;
 		do{

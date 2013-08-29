@@ -3,6 +3,7 @@ package com.ict.twitter;
 import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserRelationship;
+import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -16,6 +17,7 @@ public class AjaxAnalyser {
 		}
 	}
 	DbOperation dbo;
+	Task task;
 	public MulityInsertDataBase batchdb;
 	public AjaxAnalyser(DbOperation dbo){
 		if(dbo!=null)
@@ -30,7 +32,10 @@ public class AjaxAnalyser {
 			this.batchdb=new MulityInsertDataBase();
 		}
 	}
-	
+	public AjaxAnalyser(MulityInsertDataBase batchdb,Task task){//创建分析器的同时将Task传给分析器，方便存放数据库
+		this(batchdb);
+		this.task=task;		
+	}
 	
 	
 	

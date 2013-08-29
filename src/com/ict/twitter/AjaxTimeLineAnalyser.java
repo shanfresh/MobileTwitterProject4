@@ -7,6 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.*;
 
 import com.ict.twitter.analyser.beans.TimeLine;
+import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
@@ -14,8 +15,8 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 	boolean isdebug=false;
-	public AjaxTimeLineAnalyser(MulityInsertDataBase batchdb) {
-		super(batchdb);
+	public AjaxTimeLineAnalyser(MulityInsertDataBase batchdb,Task task) {
+		super(batchdb,task);
 		// TODO Auto-generated constructor stub
 	}
 	public AnalyserCursor doAnalyser(String src) throws AllHasInsertedException{
@@ -51,6 +52,10 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		if(isdebug){
 			for(int i=0;i<timelines.length;i++)
 				timelines[i].show();
+		}
+		for(int i=0;i<timelines.length;i++){
+			timelines[i].setMainTypeID(task.getMainTypeID());
+			timelines[i].setTaskTrackID(task.getTaskTrackID());
 		}
 		super.batchdb.insertIntoMessage(timelines);
 		result.size=twitterMessages.size();

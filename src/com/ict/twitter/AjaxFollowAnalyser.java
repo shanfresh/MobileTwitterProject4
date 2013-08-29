@@ -11,6 +11,7 @@ import org.jsoup.select.Elements;
 
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserRelationship;
+import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
@@ -18,8 +19,9 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 public class AjaxFollowAnalyser extends AjaxAnalyser {
 
 
-	public AjaxFollowAnalyser(MulityInsertDataBase batchdb) {
-		super(batchdb);
+
+	public AjaxFollowAnalyser(MulityInsertDataBase batchdb, Task task) {
+		super(batchdb, task);
 		// TODO Auto-generated constructor stub
 	}
 	/**

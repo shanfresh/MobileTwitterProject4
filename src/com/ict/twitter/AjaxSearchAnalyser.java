@@ -11,6 +11,7 @@ import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
@@ -18,8 +19,8 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 public class AjaxSearchAnalyser extends AjaxAnalyser {
 
 	
-	public AjaxSearchAnalyser(MulityInsertDataBase batchdb) {
-		super(batchdb);
+	public AjaxSearchAnalyser(MulityInsertDataBase batchdb, Task task) {
+		super(batchdb, task);
 		// TODO Auto-generated constructor stub
 	}
 	/**
@@ -72,6 +73,10 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		if(super.isdebug){
 			for(int i=0;i<TimeLineArray.length;i++)
 				TimeLineArray[i].show();
+		}
+		for(int i=0;i<TimeLineArray.length;i++){
+			TimeLineArray[i].setMainTypeID(task.getMainTypeID());
+			TimeLineArray[i].setTaskTrackID(task.getTaskTrackID());
 		}
 		super.batchdb.insertIntoMessage(TimeLineArray);
 		AnalyserCursor res=new AnalyserCursor(tweetID,follows.size());

@@ -38,7 +38,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			Vector<TwiUser> RelatUsers,ReportData reportData) {
 		String UserID=task.getTargetString();
 		UserProfile profile = new UserProfile();
-		AjaxProfileAnalyser profileana = new AjaxProfileAnalyser(dbo);
+		AjaxProfileAnalyser profileana = new AjaxProfileAnalyser(dbo,task);
 		
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
