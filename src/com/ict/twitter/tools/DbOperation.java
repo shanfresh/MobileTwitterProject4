@@ -291,9 +291,15 @@ public class DbOperation {
 		
 	}
 	public Connection GetConnection(){
-		if(this.connect!=null){
-			return this.connect;
-		}else{
+		try {
+			if(this.connect!=null&&(!this.connect.isClosed())){
+				return this.connect;
+			}else{
+				return this.conDB();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return this.conDB();
 		}
 	}

@@ -6,6 +6,7 @@ import com.ict.twitter.CrawlerNode.ControlSender;
 import com.ict.twitter.CrawlerNode.NodeReport;
 import com.ict.twitter.CrawlerNode.NodeStep;
 import com.ict.twitter.CrawlerSchedul.CrawlServerScheduler;
+import com.ict.twitter.CrawlerSchedul.ReportTotalScheduler;
 import com.ict.twitter.MessageBus.GetAceiveMqConnection;
 import com.ict.twitter.MessageBus.MessageBusNames;
 import com.ict.twitter.MessageBus.MessageBussConnector;
@@ -490,7 +491,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	}
 	public void StartReportTimer(){
 		try{
-			LogSys.crawlerServLogger.info("正在启动StartReporterTimer.....");
+			LogSys.crawlerServLogger.info("正在启动[增量]StartReporterTimer.....");
 			Timer timer=new Timer();
 			timer.schedule(new TimerTask(){
 				public void run() {
@@ -504,7 +505,15 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 					}
 				}
 			}, 1000, 10000);//每10s向汇报服务器进行汇报
-			LogSys.crawlerServLogger.info("启动成功StartReporterTimer");
+			LogSys.crawlerServLogger.info("启动成功[增量]StartReporterTimer");
+			
+			LogSys.crawlerServLogger.info("正在启动[全量]StartReporterTimer.....");
+			Timer timerQuanliang=new Timer();
+			timerQuanliang.schedule(
+					new ReportTotalScheduler(this), 
+					20000, //每次汇报的前20秒启动
+					600000);//平均每5分钟汇报一次全量数据
+			LogSys.crawlerServLogger.info("启动成功[全量]StartReporterTimer");
 		}catch(Exception ex){
 			ex.printStackTrace();
 			LogSys.nodeLogger.error("启动定时器失败");

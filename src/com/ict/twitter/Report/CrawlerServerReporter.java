@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+
+import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.tools.DBFactory;
 
 public class CrawlerServerReporter{
@@ -91,7 +93,27 @@ public class CrawlerServerReporter{
 		}
 		return true;		
 	}
-	
+	//Report全量信息，每分钟汇报一次，或者每条消息汇报一次
+	public boolean doReportIncrementTotal(int message,int user,int userRel) throws SQLException{
+		initiallize();
+		ps.setBoolean(1, false);//State表明是增量信息1：增量，0：全量
+		ps.setInt(2,message );
+		ps.setInt(3, 0);
+		ps.setInt(4, user);
+		ps.setInt(5, 0);
+		ps.setInt(6, userRel);//消息
+		ps.setInt(7, 0);//用户关系的增长信息
+		try{
+			ps.executeUpdate();
+		}catch(SQLException ex){
+			System.out.println(ex.getMessage());
+			ex.printStackTrace();
+			LogSys.crawlerServLogger.error("汇报全量数据失败"+message+","+user+","+userRel+"");
+			LogSys.crawlerServLogger.error(ex.fillInStackTrace());
+		}
+		LogSys.crawlerServLogger.info("汇报全量数据成功"+message+","+user+","+userRel+"");
+		return true;
+	}
 	public static void main(String[] args){
 		Connection con=(new DBFactory()).getConnection();
 		String id="FacebookWEB";

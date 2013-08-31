@@ -29,12 +29,12 @@ public class CrawlTaskDB {
 
 	}
 	public int AddTask(String taskStr,CrawlTaskType type){
-		Date date=new Date(System.currentTimeMillis());
+		Timestamp now=new Timestamp(System.currentTimeMillis());
 		int result=-1;
 		try{
 			pst.setString(1, taskStr);
 			pst.setInt(2, type.ordinal()+1);
-			pst.setDate(3,date);
+			pst.setTimestamp(3,now);
 			pst.setDate(4, null);
 			pst.setString(5, "Created");
 			pst.executeUpdate();
