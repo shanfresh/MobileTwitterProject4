@@ -7,6 +7,7 @@ import com.ict.twitter.CrawlerNode.NodeReport;
 import com.ict.twitter.CrawlerNode.NodeStep;
 import com.ict.twitter.CrawlerSchedul.CrawlServerScheduler;
 import com.ict.twitter.CrawlerSchedul.KeyUserScheduler;
+import com.ict.twitter.CrawlerSchedul.KeyWordsScheduler;
 import com.ict.twitter.CrawlerSchedul.ReportTotalScheduler;
 import com.ict.twitter.MessageBus.GetAceiveMqConnection;
 import com.ict.twitter.MessageBus.MessageBusNames;
@@ -194,6 +195,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		StartReportTimer();
 		StartSchedulTimer();//启动调度器
 		StartKeyUserSchedulTimer();//启动对KeyUser的定时采集
+		StartKeyWordSchedulTimer();//启动对KeyWords的定时采集
 		try{
 			CollectionNodes();
 			KeyWordSearch(false);		
@@ -561,6 +563,17 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		time.schedule(kuser, 10000,day);
 		System.out.println("启动KeyUserSchedul成功");
 	}
+	//启动KeyWord调度
+	private void StartKeyWordSchedulTimer(){
+		Timer time=new Timer();
+		KeyWordsScheduler keyword=new KeyWordsScheduler(this);
+		long minute=60000;
+		long hour=60*minute;
+		long day=hour*12;
+		time.schedule(keyword, 10*60000, day);//每天干完keyUser10min后感Keywords
+		System.out.println("启动KeyUserSchedul成功");
+	}
+	
 	
 	public void ShowAndLog(String msg){
 		LogSys.crawlerServLogger.info("【CRAWLERSERVER】"+msg);
