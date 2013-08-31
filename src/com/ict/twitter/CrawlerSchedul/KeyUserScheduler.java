@@ -9,6 +9,8 @@ import org.junit.Test;
 import com.ict.twitter.CrawlerServer.CrawlerServer;
 import com.ict.twitter.DAO.DBKeyUserDAO;
 import com.ict.twitter.DAO.bean.KeyUser;
+import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.task.beans.Task.TaskType;
 import com.ict.twitter.tools.BasePath;
 import com.ict.twitter.tools.ReadTxtFile;
 //
@@ -27,7 +29,29 @@ public class KeyUserScheduler extends TimerTask{
 	}
 	@Override
 	public void run() {
-		
+		Vector<KeyUser> all=this.getAllKeyUsers();
+		for(int i=0;i<all.size();i++){
+			String t=all.get(i).UserID;
+			Task task=new Task();
+			task.setOwnType(TaskType.TimeLine);
+			task.setTargetString(t);
+			crawlserver.addKeyUserTask(task);
+			
+			task=new Task(); 
+			task.setOwnType(TaskType.Following);
+			task.setTargetString(t);
+			crawlserver.addKeyUserTask(task);
+			
+			task=new Task();
+			task.setOwnType(TaskType.Followers);
+			task.setTargetString(t);
+			crawlserver.addKeyUserTask(task);
+			
+			task=new Task();
+			task.setOwnType(TaskType.About);
+			task.setTargetString(t);
+			crawlserver.addKeyUserTask(task);	
+		}
 		
 	}
 	public Vector<KeyUser> getAllKeyUsers(){
