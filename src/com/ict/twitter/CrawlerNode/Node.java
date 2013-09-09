@@ -1,5 +1,7 @@
 package com.ict.twitter.CrawlerNode;
 
+import java.io.FileInputStream;
+import java.util.Properties;
 import java.util.Timer;
 import java.util.Vector;
 
@@ -44,8 +46,9 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	Sender normalUserSender;
 	Sender keyUserSender;
 	public DbOperation dbOper;
-	boolean isProxy;
-	
+	public boolean isProxy;
+	public String proxyAddress="";
+	public int proxyPort=0;
 	private NodeStatusBean nodeStatusBean;
 	//----------------------------------------------------------------------//
 	
@@ -141,6 +144,17 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 					this.setIsProxy(false);
 				}
 			}
+		}
+		Properties properties=new Properties();
+		properties.load(new FileInputStream("config/clientproperties.ini"));
+		if(properties.getProperty("http.ipv4").contains("True")){				
+			this.proxyAddress=properties.getProperty("http.proxyHost");
+			this.proxyPort=Integer.parseInt(properties.getProperty("http.proxyPort").trim());
+		}else if(properties.getProperty("http.ipv6").contains("True")){
+			this.setIsProxy(false);
+		}else{
+			LogSys.nodeLogger.error("IPV4/IPV6 is NOT OK");
+			System.exit(-1);
 		}
 	}
 

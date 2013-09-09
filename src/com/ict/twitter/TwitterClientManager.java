@@ -98,7 +98,7 @@ public class TwitterClientManager {
 	}
 	public DefaultHttpClient getClientByIpAndPort(String ip,int port){
 		httpclient = new DefaultHttpClient(cm);
-		HttpHost proxy = new HttpHost("127.0.0.1", port);
+		HttpHost proxy = new HttpHost(ip, port);
 		httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 

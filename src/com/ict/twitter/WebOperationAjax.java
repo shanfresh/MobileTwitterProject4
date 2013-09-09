@@ -50,7 +50,7 @@ public class WebOperationAjax {
 			if(res!=null){
 				return res;
 			}else{
-				return openLink(httpclient,linkAddress,count++);
+				return openLink(httpclient,linkAddress,count+1);
 			}
 		}else{
 			return null;

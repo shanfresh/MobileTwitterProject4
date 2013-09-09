@@ -24,7 +24,12 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 	
 	private void InitHttpclientAndConnection(){
 		TwitterClientManager cm=new TwitterClientManager();
-		DefaultHttpClient httpclient = cm.getClientNoProxy();
+		DefaultHttpClient httpclient=null;
+		if(this.node.isProxy){
+			httpclient=cm.getClientByIpAndPort(this.node.proxyAddress, this.node.proxyPort);
+		}else{
+			httpclient= cm.getClientNoProxy();
+		}
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		this.httpclient=httpclient;
