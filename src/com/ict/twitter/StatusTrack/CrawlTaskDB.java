@@ -29,6 +29,7 @@ public class CrawlTaskDB {
 
 	}
 	public int AddTask(String taskStr,CrawlTaskType type){
+		this.Init();
 		Timestamp now=new Timestamp(System.currentTimeMillis());
 		int result=-1;
 		try{
@@ -77,6 +78,7 @@ public class CrawlTaskDB {
 	}
 	
 	private boolean SetTaskStatus(String task,CrawlTaskType type,String status){
+		this.Init();
 		Timestamp date=new Timestamp(System.currentTimeMillis());
 		try{
 			pstUpdateStatus.setTimestamp(1, date);

@@ -27,6 +27,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 		DefaultHttpClient httpclient=null;
 		if(this.node.isProxy){
 			httpclient=cm.getClientByIpAndPort(this.node.proxyAddress, this.node.proxyPort);
+			System.err.println("启用了代理服务器");
 		}else{
 			httpclient= cm.getClientNoProxy();
 		}

@@ -39,7 +39,6 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	private boolean ReportNullFlag=false;
 	
 	
-	public SaveTxtFile svt=new SaveTxtFile("Output/Twitter/newMinganci.txt",true);
 	public ReportData rpdata;
 	//----------------------------------------------------------------------
 	//普通用户信息发送
@@ -138,7 +137,7 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 		for(String t:pro){
 			if(t.startsWith("http.isProxy")){
 				String res=t.substring(t.indexOf('=')+1);
-				if(res.equals("true")){
+				if(res.equalsIgnoreCase("true")){
 					this.setIsProxy(true);
 				}else{
 					this.setIsProxy(false);
@@ -307,11 +306,7 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	public void setStep(NodeStep newStep){
 		nodeStatusBean.curStep=newStep;
 	}
-	public synchronized void saveSearchWords(String t){
-		svt.Append(t);
-		svt.Append("\r\n");
-		svt.flush();
-	}
+
 	private void ShowAndLog(String msg){
 		LogSys.nodeLogger.info("【"+this.NodeName+"】: "+msg);		
 	}
