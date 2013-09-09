@@ -39,7 +39,7 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 				String tweet_id=firstDiv.attr("data-tweet-id");
 				//UserIDNO
 				//String user_id=firstDiv.attr("data-user-id");
-				String user_name=firstDiv.attr("data-name");				
+				String user_name=firstDiv.attr("data-screen-name");				
 				result.lastID=tweet_id;
 				//System.out.println(tweet_id+" "+user_id+" "+user_name);
 				vector.add(new TimeLine(tweet_id,user_name,content.text(),timeStr));
