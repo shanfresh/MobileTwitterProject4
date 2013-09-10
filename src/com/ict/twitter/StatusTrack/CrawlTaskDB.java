@@ -19,9 +19,15 @@ public class CrawlTaskDB {
 	}
 	private void Init(){
 		try {
-			pst=con.prepareStatement("INSERT INTO `crawlstatus` (`taskStr`,`taskType`,`CreateTime`,`FinTime`,`Status`) VALUES(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-			pstFind=con.prepareStatement("Select id from `crawlstatus` where `taskStr`=? AND `taskType`=?");
-			pstUpdateStatus=con.prepareStatement("update `crawlstatus` SET `FinTime`=?,`Status`=? WHERE taskStr=? AND taskType=?");
+			if(pst==null||pst.isClosed()){
+				pst=con.prepareStatement("INSERT INTO `crawlstatus` (`taskStr`,`taskType`,`CreateTime`,`FinTime`,`Status`) VALUES(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+			}
+			if(pstFind==null||pstFind.isClosed()){
+				pstFind=con.prepareStatement("Select id from `crawlstatus` where `taskStr`=? AND `taskType`=?");
+			}
+			if(pstUpdateStatus==null||pstUpdateStatus.isClosed()){
+				pstUpdateStatus=con.prepareStatement("update `crawlstatus` SET `FinTime`=?,`Status`=? WHERE taskStr=? AND taskType=?");
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
