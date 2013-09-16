@@ -157,6 +157,7 @@ public class MulityInsertDataBase {
 				userps = con.prepareStatement("insert into user(channel_id,user_id,real_name,crawl_time,fans_num,friends_num,location,description,profile_image_url,url) values(?,?,?,?,?,?,?,?,?,?)");
 			}
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
+			userps.clearBatch();
 			for(int i=0;i<users.length;i++){
 				userps.setInt(1, 6);
 				userps.setString(2,users[i].getName());

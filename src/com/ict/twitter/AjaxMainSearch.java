@@ -11,6 +11,7 @@ import com.ict.twitter.StatusTrack.MyTracker;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -103,9 +104,14 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 				
 				TwiUser[] userArray=new TwiUser[users.size()];
 				users.toArray(userArray);
-				if(users.size()>0){
-					batchdb.insertIntoUser(userArray);
+				try{
+					if(users.size()>0){
+						batchdb.insertIntoUser(userArray);
+					}
+				}catch(AllHasInsertedException ex){
+					LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");
 				}
+
 				if(flag){
 					tracker.FinishTask(task);
 				}else{
