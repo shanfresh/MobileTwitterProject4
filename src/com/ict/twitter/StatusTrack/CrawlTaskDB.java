@@ -15,30 +15,12 @@ public class CrawlTaskDB {
 	public CrawlTaskDB(){
 		dbOp=new DbOperation();
 		con=dbOp.conDB();
-		Init();
-	}
-	private void Init(){
-		try {
-			if(pst==null||pst.isClosed()){
-				pst=con.prepareStatement("INSERT INTO `crawlstatus` (`taskStr`,`taskType`,`CreateTime`,`FinTime`,`Status`) VALUES(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-			}
-			if(pstFind==null||pstFind.isClosed()){
-				pstFind=con.prepareStatement("Select id from `crawlstatus` where `taskStr`=? AND `taskType`=?");
-			}
-			if(pstUpdateStatus==null||pstUpdateStatus.isClosed()){
-				pstUpdateStatus=con.prepareStatement("update `crawlstatus` SET `FinTime`=?,`Status`=? WHERE taskStr=? AND taskType=?");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 	}
 	public int AddTask(String taskStr,CrawlTaskType type){
-		this.Init();
 		Timestamp now=new Timestamp(System.currentTimeMillis());
 		int result=-1;
 		try{
+			pst=con.prepareStatement("INSERT INTO `crawlstatus` (`taskStr`,`taskType`,`CreateTime`,`FinTime`,`Status`) VALUES(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 			pst.setString(1, taskStr);
 			pst.setInt(2, type.ordinal()+1);
 			pst.setTimestamp(3,now);
@@ -51,8 +33,9 @@ public class CrawlTaskDB {
 			}
 			pst.close();
 		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){
-			System.err.println("重复插入"+ex.getLocalizedMessage());
+			System.err.println("采集状态已经插入，更新crawlstatus:"+ex.getLocalizedMessage());
 			try {
+				pstFind=con.prepareStatement("Select id from `crawlstatus` where `taskStr`=? AND `taskType`=?");
 				pstFind.setString(1, taskStr);
 				pstFind.setInt(2, type.ordinal()+1);
 				ResultSet rs=pstFind.executeQuery();
@@ -63,6 +46,12 @@ public class CrawlTaskDB {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally{
+				try{
+					pstFind.close();
+				}catch(SQLException ex2){
+					ex2.printStackTrace();
+				}
 			}
 			return result;//出错后返回查找之后的的
 			
@@ -71,6 +60,13 @@ public class CrawlTaskDB {
 				e.printStackTrace();
 		}catch(Exception ex){
 			return -1;
+		}finally{
+			try{
+				pst.close();
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+			
 		}
 		return result;
 		
@@ -84,18 +80,25 @@ public class CrawlTaskDB {
 	}
 	
 	private boolean SetTaskStatus(String task,CrawlTaskType type,String status){
-		this.Init();
 		Timestamp date=new Timestamp(System.currentTimeMillis());
 		try{
+			pstUpdateStatus=con.prepareStatement("update `crawlstatus` SET `FinTime`=?,`Status`=? WHERE taskStr=? AND taskType=?");
 			pstUpdateStatus.setTimestamp(1, date);
 			pstUpdateStatus.setString(2, status);
 			pstUpdateStatus.setString(3,task);
 			pstUpdateStatus.setInt(4, type.ordinal()+1);
 			pstUpdateStatus.executeUpdate();
+			
 			return true;
 		}catch(Exception ex){
 			ex.printStackTrace();
 			return false;
+		}finally{
+			try{
+				pstUpdateStatus.close();
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
 		
 	}

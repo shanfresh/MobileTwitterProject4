@@ -64,7 +64,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			LogSys.nodeLogger.error(e.getLocalizedMessage());
-			LogSys.nodeLogger.error("CurrentJSON:"+ajaxContent);
+			LogSys.nodeLogger.error("AjaxProfile¡ª¡ªError:"+URL);
 			return false;
 		}
 		try{
