@@ -53,6 +53,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 				}
 				try{
 					date=firstChildren.getElementsByAttributeValue("class", "time").first().children().get(0).attr("title");
+					date=timeTrans.NormTimeFormat(date);
 				}catch(NullPointerException ex){
 					date="null";
 				}

@@ -3,6 +3,7 @@ package com.ict.twitter;
 import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserRelationship;
+import com.ict.twitter.analyser.filter.TimeTransformer;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
@@ -18,14 +19,15 @@ public class AjaxAnalyser {
 	}
 	DbOperation dbo;
 	Task task;
+	protected TimeTransformer timeTrans;
 	public MulityInsertDataBase batchdb;
-	public AjaxAnalyser(DbOperation dbo){
+	private AjaxAnalyser(DbOperation dbo){
 		if(dbo!=null)
 			this.dbo=dbo;
 		else
 			this.dbo=new DbOperation();
 	}
-	public AjaxAnalyser(MulityInsertDataBase batchdb){
+	private AjaxAnalyser(MulityInsertDataBase batchdb){
 		if(batchdb!=null){
 			this.batchdb=batchdb;
 		}else{
@@ -34,7 +36,8 @@ public class AjaxAnalyser {
 	}
 	public AjaxAnalyser(MulityInsertDataBase batchdb,Task task){//创建分析器的同时将Task传给分析器，方便存放数据库
 		this(batchdb);
-		this.task=task;		
+		this.task=task;
+		timeTrans=new TimeTransformer();
 	}
 	
 	

@@ -34,7 +34,7 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 				Element content=t.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first();
 				Element time=t.getElementsByAttributeValue("class", "tweet-timestamp js-permalink js-nav").first();
 				String timeStr=time.attr("title");
-				
+				timeStr=timeTrans.NormTimeFormat(timeStr);
 				Element firstDiv=t.children().first();
 				String tweet_id=firstDiv.attr("data-tweet-id");
 				//UserIDNO
