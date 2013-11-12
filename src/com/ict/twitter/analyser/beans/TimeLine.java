@@ -130,7 +130,7 @@ public class TimeLine {
 	}
 	
 	public void show(){
-		LogSys.nodeLogger.debug("id     \t"+id+"\t"+"author \t"+author+"\t"+"content \t"+content+"\t");
+		LogSys.nodeLogger.debug("id     \t"+id+"\t"+TaskTrackID+"\t"+"author \t"+author+"\t"+"content \t"+content+"\t");
 	}
 	public int getTaskTrackID() {
 		return TaskTrackID;

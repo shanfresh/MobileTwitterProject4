@@ -1,4 +1,6 @@
 package com.ict.twitter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
@@ -14,7 +16,7 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 
 
 public class AjaxTimeLineAnalyser extends AjaxAnalyser{
-	boolean isdebug=false;
+	boolean isdebug=true;
 	public AjaxTimeLineAnalyser(MulityInsertDataBase batchdb,Task task) {
 		super(batchdb,task);
 		// TODO Auto-generated constructor stub
@@ -39,6 +41,10 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 				String tweet_id=firstDiv.attr("data-tweet-id");
 				String user_name=firstDiv.attr("data-screen-name");				
 				result.lastID=tweet_id;
+				
+				List<String> userids=getUserID(content);
+				String url=GetURL(content);
+				String PicUrl=GetPicURL(content);
 				//System.out.println(tweet_id+" "+user_id+" "+user_name);
 				vector.add(new TimeLine(tweet_id,user_name,content.text(),timeStr));
 			}catch(NullPointerException ex){
@@ -60,4 +66,46 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		return result;
 		
 	}
+	private List<String> getUserID(Element content){
+		if(content==null){
+			return null;
+		}
+		List<String> res=new ArrayList<String>();
+		Elements eles=content.getElementsByAttributeValue("class","twitter-atreply pretty-link");
+		for(Element t:eles){
+			res.add(t.attr("href"));
+			if(isdebug){
+				System.out.print("ID:"+t.attr("href"));
+			}
+		}
+		if(eles.size()>0){
+			System.out.println();
+		}
+		
+		return res;
+	}
+	private String GetURL(Element content){
+		if(content==null){
+			return null;
+		}
+		Elements t=content.getElementsByAttributeValue("class", "twitter-timeline-link");
+		if(t.size()>0){
+			String url=t.first().attr("data-expanded-url");
+			System.out.println("TimeLineURL:"+url);
+			return url;
+		}else{
+			return null;
+		}		
+	}
+	private String GetPicURL(Element content){
+		Elements t=content.getElementsByTag("img");
+		if(t.size()>0){
+			String url=t.first().attr("src");
+			System.out.println("Image:SRC:"+url);
+			return url;
+		}else{
+			return null;
+		}
+	}
+	
 }

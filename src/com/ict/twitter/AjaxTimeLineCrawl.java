@@ -40,7 +40,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TwitterClientManager cm=new TwitterClientManager();
-		DefaultHttpClient httpclient = cm.getClientNoProxy();
+		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.219", 8087);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
@@ -48,8 +48,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		AjaxTimeLineCrawl at=new AjaxTimeLineCrawl(httpclient,null);
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		//at.doCrawl(new Task(TaskType.TimeLine,"BigBang_CBS"),dbo,users,new ReportData());
-		at.doCrawl(new Task(TaskType.TimeLine,"mynamexu"),dbo,users,new ReportData());
+		at.doCrawl(new Task(TaskType.TimeLine,"BigBang_CBS"),dbo,users,new ReportData());
+		//at.doCrawl(new Task(TaskType.TimeLine,"mynamexu"),dbo,users,new ReportData());
 		at.service.shutdown();
 		
 
