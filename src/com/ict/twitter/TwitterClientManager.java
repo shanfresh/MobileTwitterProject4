@@ -55,7 +55,6 @@ public class TwitterClientManager {
 		Scheme http = new Scheme("http", 80, PlainSocketFactory.getSocketFactory());
 		X509TrustManager tm = new X509TrustManager() {	        
 	        public X509Certificate[] getAcceptedIssuers() {
-	        	System.out.println("X509Certificate");	        	
 	        	return null;
 	        	}
 			@Override

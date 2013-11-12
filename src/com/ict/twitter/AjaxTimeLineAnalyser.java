@@ -32,13 +32,11 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		for(Element t:twitterMessages){
 			try{
 				Element content=t.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first();
-				Element time=t.getElementsByAttributeValue("class", "tweet-timestamp js-permalink js-nav").first();
+				Element time=t.getElementsByAttributeValue("class", "tweet-timestamp js-permalink js-nav js-tooltip").first();
 				String timeStr=time.attr("title");
 				timeStr=timeTrans.NormTimeFormat(timeStr);
 				Element firstDiv=t.children().first();
 				String tweet_id=firstDiv.attr("data-tweet-id");
-				//UserIDNO
-				//String user_id=firstDiv.attr("data-user-id");
 				String user_name=firstDiv.attr("data-screen-name");				
 				result.lastID=tweet_id;
 				//System.out.println(tweet_id+" "+user_id+" "+user_name);

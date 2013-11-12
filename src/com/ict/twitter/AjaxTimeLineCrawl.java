@@ -48,7 +48,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		AjaxTimeLineCrawl at=new AjaxTimeLineCrawl(httpclient,null);
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		at.doCrawl(new Task(TaskType.TimeLine,"BigBang_CBS"),dbo,users,new ReportData());
+		//at.doCrawl(new Task(TaskType.TimeLine,"BigBang_CBS"),dbo,users,new ReportData());
+		at.doCrawl(new Task(TaskType.TimeLine,"mynamexu"),dbo,users,new ReportData());
 		at.service.shutdown();
 		
 

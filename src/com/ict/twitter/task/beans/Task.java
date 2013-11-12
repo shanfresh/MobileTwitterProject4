@@ -34,6 +34,7 @@ public  class Task implements Serializable{
 	public Task(TaskType ownType, String targetString) {
 		super();
 		this.ownType = ownType;
+		this.mainType=MainType.Normal;
 		this.targetString = targetString;
 	}
 	public Task(){
