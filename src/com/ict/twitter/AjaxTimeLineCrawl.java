@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
+import org.apache.log4j.net.SyslogAppender;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -51,7 +52,6 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		at.doCrawl(new Task(TaskType.TimeLine,"BigBang_CBS"),dbo,users,new ReportData());
 		//at.doCrawl(new Task(TaskType.TimeLine,"mynamexu"),dbo,users,new ReportData());
 		at.service.shutdown();
-		
 
 	}
 	public AjaxTimeLineCrawl(DefaultHttpClient httpclient,DbOperation dboperation){		
@@ -89,7 +89,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				String html=(String) json.get("items_html");
 				has_more_items=(Boolean)json.get("has_more_items");
 				//采集结果
-				result=TWAna.doAnalyser(html);
+				result=TWAna.doAnalyser(html,RelatUsers);
 				try{
 					Long resultMax=Long.parseLong(result.lastID);
 					resultMax=resultMax-1l;

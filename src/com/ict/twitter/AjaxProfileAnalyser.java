@@ -26,7 +26,7 @@ public class AjaxProfileAnalyser extends AjaxAnalyser {
 		int tweet=0,following=0,follower=0;
 		String location=null,selfIntroductionstr=null;
 		Document doc=Jsoup.parse(content, "/");
-		Elements picture=doc.getElementsByAttributeValue("class", "profile-picture media-thumbnail js-nav");
+		Elements picture=doc.getElementsByAttributeValueContaining("class", "profile-picture media-thumbnail js-nav js-tooltip");
 		if(picture.size()>0){
 			picture_url=picture.get(0).child(0).attr("src");
 		}else{

@@ -28,6 +28,7 @@ public class MulityInsertDataBase {
 	private final String encode="utf-8";
 	private Connection connection;
 	private PreparedStatement messageps=null;
+	private PreparedStatement messagdetailps=null;
 	private PreparedStatement userps=null;
 	private PreparedStatement userrelps=null;
 	private PreparedStatement userprofile=null;
@@ -115,7 +116,7 @@ public class MulityInsertDataBase {
 			LogSys.nodeLogger.error("Error loading Mysql Driver!");
 			e.printStackTrace();
 		}
-		LogSys.nodeLogger.debug("Success to connect to SQLServer");
+		LogSys.nodeLogger.debug("Success to connect to SQLServer  [IP:]"+ip+" [DBName:"+databaseName+"]");
 		
 		return connection;
 	}
@@ -149,7 +150,57 @@ public class MulityInsertDataBase {
 			e.printStackTrace();
 		}
 		return true;
-	}	
+	}
+	/*Insert Messagdeatil
+	 * RelUser
+	 * URL
+	 * ImgURL
+	*/
+	public boolean insertIntoMessageDetail(MessageDetail[] MessageDetail){
+		Connection con=this.getConnection();
+		try {
+			con.setAutoCommit(false);
+			
+			if(messagdetailps==null){
+				messagdetailps = con.prepareStatement("insert into message_detail(`message_id`,`rel_ids`,`web_url`,`img_url`) values(?,?,?,?)");
+			}
+			messagdetailps.clearBatch();
+			for(int i=0;i<MessageDetail.length;i++){
+				if(MessageDetail[i].getMessageid()==null){
+					LogSys.crawlerServLogger.debug("Insert into message-detail error with Messageid==null");
+					continue;
+				}
+				messagdetailps.setString(1, MessageDetail[i].getMessageid());
+				if(MessageDetail[i].getUsers()!=null){
+					StringBuffer sb=new StringBuffer();
+					for(int j=0;j<MessageDetail[i].getUsers().size();j++){
+						sb.append(MessageDetail[i].getUsers().get(j));
+					}
+					messagdetailps.setString(2, sb.toString());
+				}else{
+					messagdetailps.setString(2, null);
+				}
+				messagdetailps.setString(3,MessageDetail[i].getWeburl());
+				messagdetailps.setString(4,MessageDetail[i].getImgurl());
+				messagdetailps.executeBatch();
+			}
+			con.commit();	
+		} catch( BatchUpdateException ex){
+			int[] res = ex.getUpdateCounts();
+			try {
+				checkBatch(res);
+			} catch (AllHasInsertedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+		
+	}
+	
 	public boolean insertIntoUser(TwiUser[] users) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		try {

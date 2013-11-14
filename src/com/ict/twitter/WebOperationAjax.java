@@ -214,7 +214,19 @@ public class WebOperationAjax {
 	}
 
 	public static byte[] getSource(DefaultHttpClient httpclient,String url){
-		HttpGet get = new HttpGet(url);
+		if(url==null||url.equalsIgnoreCase("null")){
+			LogSys.clientLogger.error("Profile URL is¡¡NULL"+url);
+			return null;
+		}
+		URI uri=null;
+		try {
+			uri=new URI(url);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		HttpGet get = new HttpGet(uri);
 		HttpResponse response=null;
 		byte[] res=null;
 		InputStream input;

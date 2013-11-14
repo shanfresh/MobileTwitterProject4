@@ -71,10 +71,8 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			profile.setUser_id(UserID);
 			profile.setUser_screen_name(user_screen_name);
 			profileana.doAnylyze(htmlContent, profile);
-			if(profile.getPicture_url()!=null){
-				byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
-				profile.setPicturedata(result);
-			}
+			byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
+			profile.setPicturedata(result);
 			dbo.insertIntoUserProfile(profile);
 			System.out.println("insert into profile");
 			return true;
@@ -86,7 +84,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 	}
 	public static void main(String[] args){
 		TwitterClientManager cm=new TwitterClientManager();
-		DefaultHttpClient httpclient = cm.getClientNoProxy();
+		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.219", 8087);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
@@ -95,7 +93,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
 		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
-		Task task=new Task(TaskType.About,"488092285");
+		Task task=new Task(TaskType.About,"networktest1");
 		profilecrawl.doCrawl(task,dbo, users,new ReportData());
 		httpclient.getConnectionManager().shutdown();
 		profilecrawl.service.shutdown();

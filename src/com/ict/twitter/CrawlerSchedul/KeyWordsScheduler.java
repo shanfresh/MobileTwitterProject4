@@ -11,9 +11,6 @@ import com.ict.twitter.tools.BasePath;
 import com.ict.twitter.tools.ReadTxtFile;
 
 import java.util.*;
-
-import sun.misc.Timeable;
-import sun.misc.Timer;
 public class KeyWordsScheduler extends BasicScheduler{
 	private String basepath=BasePath.getBase();
 	private String FilePath=basepath+"/UsefulFile/minganci_min.txt";

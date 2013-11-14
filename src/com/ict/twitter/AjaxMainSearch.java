@@ -90,6 +90,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 					}
 					case TimeLine:{
 						flag=timelineCrawl.doCrawl(task,batchdb,users,reportData);
+						sentKeyUsers(users);
 						break;
 					}
 					case About:{
@@ -101,7 +102,6 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 						break;
 					}												
 				}
-				
 				TwiUser[] userArray=new TwiUser[users.size()];
 				users.toArray(userArray);
 				try{
