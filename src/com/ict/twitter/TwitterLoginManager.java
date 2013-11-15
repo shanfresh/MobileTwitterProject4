@@ -32,6 +32,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Test;
 
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.tools.MyCookieStore;
@@ -290,6 +291,8 @@ public class TwitterLoginManager {
 		}		
 		return null;		
 	}
+
+	
 	private boolean enableAllCounts(){
 		ReadTxtFile rtf = new ReadTxtFile(ACCOUNT_FILE_PATH);
 		Vector<String> counts = rtf.read();

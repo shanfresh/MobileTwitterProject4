@@ -130,8 +130,8 @@ public class WebOperationAjax {
 			
 			//执行后过滤，发现网页的异常情况,需要重新登录操作，则进行重新登录
 			if(needReLogin){				
-				TwitterLoginManager twlogin = new TwitterLoginManager(httpclient);
-				twlogin.forceLogin();
+				AdvanceLoginManager twlogin = new AdvanceLoginManager(httpclient);
+				twlogin.trylogin();
 				return null;
 			}
 			

@@ -92,7 +92,7 @@ public class TwitterClientManager {
 		httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);	
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 20000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
-		httpclient.setCookieStore(new MyCookieStore());
+		httpclient.setCookieStore(new TwitterLoginCookieStore());
 		return httpclient;		
 	}
 	public DefaultHttpClient getClientByIpAndPort(String ip,int port){
@@ -101,7 +101,7 @@ public class TwitterClientManager {
 		httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
-		httpclient.setCookieStore(new MyCookieStore());
+		httpclient.setCookieStore(new TwitterLoginCookieStore());
 		return httpclient;
 	}
 	public DefaultHttpClient getClientNoProxy(){
@@ -110,7 +110,7 @@ public class TwitterClientManager {
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 20000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
 		httpclient.setHttpRequestRetryHandler(new myRetryHandler());
-		httpclient.setCookieStore(new MyCookieStore());
+		httpclient.setCookieStore(new TwitterLoginCookieStore());
 		return httpclient;		
 	}
 	
