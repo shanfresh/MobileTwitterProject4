@@ -76,7 +76,7 @@ public class ClientManager {
 	}
 	public DefaultHttpClient getClient(String ip,int port){		
 		httpclient = new DefaultHttpClient(poolConnectManager,params);
-		HttpHost proxy = new HttpHost("127.0.0.1", 8087);
+		HttpHost proxy = new HttpHost(ip, port);
 		httpclient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 		httpclient.setHttpRequestRetryHandler(new myRetryHandler());
 		return httpclient;		

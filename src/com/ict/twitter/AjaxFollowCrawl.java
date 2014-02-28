@@ -109,7 +109,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TwitterClientManager cm=new TwitterClientManager();
-		DefaultHttpClient httpclient = cm.getClientNoProxy();
+		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.67", 8087);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
@@ -117,7 +117,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		AjaxFollowCrawl at=new AjaxFollowCrawl(httpclient,false,null);
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		at.doCrawl(new Task(TaskType.Following,"26_t_b"),dbo,users,new ReportData());
+		at.doCrawl(new Task(TaskType.Following,"BigBang_CBS"),dbo,users,new ReportData());
 		
 
 	}

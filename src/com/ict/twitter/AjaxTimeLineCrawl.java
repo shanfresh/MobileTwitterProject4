@@ -27,10 +27,11 @@ import com.ict.twitter.tools.MulityInsertDataBase;
  */
 public class AjaxTimeLineCrawl extends AjaxCrawl{
 
-	
+	/*
+	 *https://twitter.com/i/profiles/show/BigBang_CBS/timeline?include_available_features=1&include_entities=1&last_note_ts=0&max_id=431598637420789760
+	 */
 	private String baseUrl="/i/profiles/show/%s/timeline?include_available_features=1&include_entities=1%s";
 	private String max_id="&max_id=";
-	private String InteratorUrl="/i/profiles/show/%s/timeline?include_available_features=1&include_entities=1&max_id=%s";
 	
 	private DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
@@ -41,7 +42,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		TwitterClientManager cm=new TwitterClientManager();
-		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.219", 8087);
+		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.67", 8087);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
@@ -58,6 +59,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		this.httpclient=httpclient;
 		super.dboperation=dboperation;
 	}
+	
+	
 	
 	public boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelatUsers,ReportData reportData){
 		String userID=task.getTargetString();

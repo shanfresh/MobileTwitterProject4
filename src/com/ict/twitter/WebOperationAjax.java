@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -40,13 +42,16 @@ public class WebOperationAjax {
 	
 	public static String logFile="TwitterOpenLog.html";
 	public static String base=BasePath.getBase();	
-
+	public static boolean debug=true;
 	
 	//"/searches?page=1&q='"+targetString+"'";
 	public static String openLink(DefaultHttpClient httpclient,String linkAddress,int count) throws RuntimeException{
 		if(count<=2){
 			LogSys.nodeLogger.debug("The Retry["+count+"] OpenLink with Address:"+linkAddress);
 			String res=openLink(httpclient,linkAddress);
+			if(debug){
+				SaveToTextFile(res);	
+			}
 			if(res!=null){
 				return res;
 			}else{
@@ -56,7 +61,15 @@ public class WebOperationAjax {
 			return null;
 		}
 	}
-	
+	private static void SaveToTextFile(String Content){
+		Date date=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+		String filename=sdf.format(date);
+		SaveTxtFile sxf=new SaveTxtFile(filename, false);
+		System.out.println("保存的文件名是："+filename);
+		sxf.Append(Content);
+		sxf.close();
+	}
 	
 	private  static String openLink(DefaultHttpClient httpclient,String linkAddress) throws RuntimeException{
 		URI uri=null;

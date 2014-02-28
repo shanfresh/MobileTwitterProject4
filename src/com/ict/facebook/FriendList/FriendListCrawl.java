@@ -18,7 +18,7 @@ import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.tools.DbOperation;
 
 public class FriendListCrawl {
-
+	boolean MONGO_USED=false;
 	/**
 	 * @param args
 	 */
@@ -30,6 +30,9 @@ public class FriendListCrawl {
 	static FBOperation fbOperation =  new FBOperation();
 	
 	public static void main(String[] args) {
+		WebOp.CreateHttpclient();
+		WebOp.Init();
+		
 		// TODO Auto-generated method stub
 		FriendListCrawl friendsAnalyser = new FriendListCrawl();		
 		//friendsAnalyser.doAnalyse("100003538989221");
@@ -42,6 +45,9 @@ public class FriendListCrawl {
 		
 		
 		System.out.println("USERCOUNT:"+users.size());
+		for(User t:users2){
+			System.out.println(t.toString());
+		}
 		System.out.println("USERCOUNT2:"+users.size());
 		
 	}
@@ -83,7 +89,7 @@ public class FriendListCrawl {
 					ex.printStackTrace();
 					System.out.println(res.html);
 				}
-				if(!res.isMongoGet){
+				if(MONGO_USED&&!res.isMongoGet){
 					FBOperation.insertFriend(userID, index, targetURL, res.html);
 				}
 				index+=increseCount;	
@@ -120,12 +126,12 @@ public class FriendListCrawl {
 		FBWebOperation.setLogFile("UserList.html");
 		if(URL.contains("https://www.facebook.com"))
 			URL=URL.substring("https://www.facebook.com".length());
-		String HTML=FBOperation.getFriend(UserID, index);
-		if(HTML!=null&&HTML.length()>20){
+		//String HTML=FBOperation.getFriend(UserID, index);
+		String HTML=null;
+		if(MONGO_USED&&HTML!=null&&HTML.length()>20){
 			LogSys.nodeLogger.debug("Success to getFriendHTML from MongoDB!["+UserID+"]["+index+"]");
 			return new WebOpenResult(true, HTML);	
 		}else{
-			LogSys.nodeLogger.debug("Fail  to getFriendHTML from MongoDB!["+UserID+"]["+index+"]");
 			Future<String> future=WebOp.putWebOpTask(URL);
 			String html;
 			try {

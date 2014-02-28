@@ -55,5 +55,16 @@ public class TimeTransformer {
          return NormCreateTime;
      }
 
+	public String Convert(String timelong){
+		String template="1393439473";
+		if(timelong.length()==template.length()){
+			long time=Long.parseLong(timelong);
+			Date date=new Date(time*1000);
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			return sdf.format(date);
+			
+		}
+		return null;
+	}
 
 }

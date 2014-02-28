@@ -1,8 +1,11 @@
 package com.ict.twitter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,6 +18,7 @@ import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
+import com.ict.twitter.tools.ReadTxtFile;
 
 
 public class AjaxTimeLineAnalyser extends AjaxAnalyser{
@@ -23,12 +27,37 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		super(batchdb,task);
 		// TODO Auto-generated constructor stub
 	}
+	public static void main(String[] args){
+		ReadTxtFile rtf=new ReadTxtFile("2014-02-25 21-23-38");
+		String content=rtf.readALL();
+		System.out.println(content);
+		JSONParser parser = new JSONParser();
+		Map<?, ?> json = null;
+		try {
+			json = (Map<?, ?>) parser.parse(content);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String html=(String) json.get("items_html");
+		Vector<TwiUser> users =new Vector<TwiUser>();
+		AjaxTimeLineAnalyser atl=new AjaxTimeLineAnalyser(null,null);
+		try {
+			atl.doAnalyser(html, users);
+		} catch (AllHasInsertedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	public AnalyserCursor doAnalyser(String src,Vector<TwiUser> users) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
 		AnalyserCursor result=new AnalyserCursor();
 		//doc.getelementsby
-		Elements twitterMessages=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item expanding-stream-item");
-		if(twitterMessages.size()<=10){
+		Elements twitterMessages=doc.getElementsByAttributeValueStarting("class", "js-stream-item stream-item stream-item");
+		if(twitterMessages.size()<=2){
 			System.out.println("[Warning] twitter count"+twitterMessages.size());
 		}
 		Vector<TimeLine> vector = new Vector<TimeLine>();
@@ -36,12 +65,13 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		for(Element t:twitterMessages){
 			try{
 				Element content=t.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first();
-				Element time=t.getElementsByAttributeValue("class", "tweet-timestamp js-permalink js-nav js-tooltip").first();
-				String timeStr=time.attr("title");
-				timeStr=timeTrans.NormTimeFormat(timeStr);
+				Element time=t.getElementsByAttributeValueStarting("class", "_timestamp js-short-timestamp").first();
+				String timeStr=time.attr("data-time");
+				timeStr=timeTrans.Convert(timeStr);
 				Element firstDiv=t.children().first();
 				String tweet_id=firstDiv.attr("data-tweet-id");
-				String user_name=firstDiv.attr("data-screen-name");				
+				String user_name=firstDiv.attr("data-screen-name");	
+				String user_id=firstDiv.attr("data-user-id");
 				result.lastID=tweet_id;
 				
 				List<String> relUser=getUserID(content,users);

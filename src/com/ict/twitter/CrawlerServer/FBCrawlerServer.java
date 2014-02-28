@@ -28,11 +28,28 @@ public class FBCrawlerServer extends CrawlerServer {
 		}
 		
 	}
+	public FBCrawlerServer(String[] args){
+		LogSys.crawlerServLogger.info("Crawlserver初始化");
+		if (args.length < 1) {
+			System.err.println("Usage: CrawlerServer -Command [Start|Stop|Dump|Restart] -Deepth 10 -KeySearchCount 10");
+		    return;
+	    }
+		this.args=args;
+	}
+
+	public static void main(String[] args){
+		for(int i=0;i<args.length;i++){
+			System.out.print(args[i]+" ");
+		}
+		FBCrawlerServer crawler =  new FBCrawlerServer(args);
+		Thread mthread= new Thread(crawler);
+		mthread.setName("CrawlServer");
+		mthread.start();
+	}
 	public boolean StartCrawlServer(){
 		LogSys.crawlerServLogger.info("采集器总控端开始");
 		try{
 			CollectionNodes();
-			KeyWordSearch(false);		
 			CrawlerServerKeyUserSearch(false);
 			NorUserSearchWithDepth(Normal_User_Deepth,false);
 		}catch(Exception ex){

@@ -2,12 +2,14 @@ package com.ict.twitter.plantform;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
+
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
+import com.ict.twitter.MessageBus.GetAceiveMqConnection;
 import com.ict.twitter.MessageBus.MessageBussConnector;
 
-public class MessageBusTest implements MessageBussConnector {
+public class MessageBusTest{
 
 	/**
 	 * @param args
@@ -18,13 +20,8 @@ public class MessageBusTest implements MessageBussConnector {
 
 	}
 	public boolean doTest(){
-		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory( 
-                ActiveMQConnection.DEFAULT_USER, 
-                ActiveMQConnection.DEFAULT_PASSWORD, 
-                address); 
-		Connection connection;
+		ActiveMQConnection connection=GetAceiveMqConnection.StaticGetConnection();
 		try {
-			connection= connectionFactory.createConnection();
 			connection.start();
 			if(connection!=null){
 				connection.stop();

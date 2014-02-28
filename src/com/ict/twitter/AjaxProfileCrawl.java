@@ -51,11 +51,13 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		}
 		super.SaveWebOpStatus(task, URL, 1, WebOperationResult.Success, dbo);
 		String user_screen_name="";
+		String user_number_id="";
 		String htmlContent=null;
 		try {
 			@SuppressWarnings("unchecked")
 			Map<String,String> map =(Map<String,String>)parser.parse(ajaxContent);
 			user_screen_name=map.get("screen_name");
+			user_number_id=map.get("user_id");
 			htmlContent=map.get("html");
 			if(htmlContent==null)
 				return false;
@@ -75,6 +77,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			profile.setPicturedata(result);
 			dbo.insertIntoUserProfile(profile);
 			System.out.println("insert into profile");
+			System.out.println(profile.toString());
 			return true;
 		}catch(Exception exe){
 			exe.printStackTrace();
@@ -84,7 +87,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 	}
 	public static void main(String[] args){
 		TwitterClientManager cm=new TwitterClientManager();
-		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.219", 8087);
+		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.67", 8087);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
@@ -93,7 +96,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
 		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
-		Task task=new Task(TaskType.About,"networktest1");
+		Task task=new Task(TaskType.About,"BigBang_CBS");
 		profilecrawl.doCrawl(task,dbo, users,new ReportData());
 		httpclient.getConnectionManager().shutdown();
 		profilecrawl.service.shutdown();

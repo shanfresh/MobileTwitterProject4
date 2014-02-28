@@ -15,11 +15,9 @@
     <!-- ================================= 
           target: default              
          ================================= -->
-    <target name="compile" depends="MainFramejar" description="make TwitterProject4">
+    <target name="compile" depends="TwitterJars" description="make TwitterProject4">
           	
     </target>
-
-
     <!-- - - - - - - - - - - - - - - - - - 
           target: depends                      
          - - - - - - - - - - - - - - - - - -->
@@ -47,6 +45,11 @@
     	    	
     	<copy file="${basedir}/runNodes.bat" tofile="${basedir}/build/runNodes.bat" />
     	<copy file="${basedir}/runServer.bat" tofile="${basedir}/build/runServer.bat" />
+ 		<copy todir="${basedir}/build/">
+ 		    <fileset dir="${basedir}/">
+ 		      <include name="*.sh"/>
+ 		    </fileset>
+ 		</copy>   	
     </target>
 	<target name="build">
 		<javac srcdir="${basedir}/src" destdir="${basedir}/build/classes" debug="yes">
@@ -74,37 +77,6 @@
     </target>
 
 	
-	
-	<target name="MainFramejar" depends="depends,build">
-		<jar destfile="${basedir}/build/MainFrame.jar" basedir="${basedir}/build/classes" >
-			<manifest>
-				<attribute name="Main-Class" value="com.ict.twitter.plantform.PlatFormMain"/>
-				<attribute name="Class-Path" value=". lib/junit.jar lib/jsoup-1.6.1-javadoc.jar lib/jsoup-1.6.1-sources.jar lib/jsoup-1.6.1.jar lib/log4j-1.2.17.jar lib/activemq-all-5.6.0.jar lib/commons-logging-1.1.1.jar lib/commons-codec-1.6.jar lib/lombok.jar lib/fluent-hc-4.2.2.jar lib/httpclient-4.2.2.jar lib/httpclient-cache-4.2.2.jar lib/httpcore-4.2.2.jar lib/httpmime-4.2.2.jar lib/mysql-connector-java-5.1.22-bin.jar lib/json-simple-1.1.1.jar lib/mongo-2.10.1.jar lib/gnujaxp.jar lib/iText-2.1.5.jar lib/jcommon-1.0.17.jar lib/jfreechart-1.0.14-experimental.jar lib/jfreechart-1.0.14-swt.jar lib/jfreechart-1.0.14.jar lib/junit.jar lib/servlet.jar lib/swtgraphics2d.jar"/>
-			</manifest>
-		</jar>		
-        <delete dir="${basedir}/build/lib"/>
-		<copy todir="${basedir}/build/lib">
-		    <fileset dir="${basedir}/lib">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/JFreeChat">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/JSON">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/log4j">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/MongoDB">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/JUnit">
-		    <include name="*.jar"/>
-     		</fileset>
-			
-		</copy>
-	</target>
 	<target name="TwitterJars" depends="depends,build">
 		<jar destfile="${basedir}/build/TwitterCrawlerServer.jar" basedir="${basedir}/build/classes">
 			<manifest>
@@ -140,4 +112,146 @@
      		</fileset>
 		</copy>
 	</target>
+	
+	<target name="obfuscateNode" depends="clean">
+	  <taskdef resource="proguard/ant/task.properties"
+	           classpath="lib/proguard/proguard.jar" />
+
+	  <proguard printmapping="proguard.map"  overloadaggressively="on"   repackageclasses=""  renamesourcefileattribute="SourceFile" optimize="false">
+
+	    <!-- Specify the input jars, output jars, and library jars. -->
+
+	    <injar  file="build/TwitterNodes.jar" />
+		<outjar file="build/TwitterNodes2.jar"/>
+
+	    
+	  	<libraryjar file="${java.home}/lib/rt.jar" />
+	    <libraryjar dir="${basedir}/lib/"/>
+
+	    <!-- Adapt the resource file names, based on the corresponding obfuscated
+	         class names. -->
+
+	    <adaptresourcefilenames    filter="**.properties,**.gif,**.jpg"  />
+	    <adaptresourcefilecontents filter="proguard/ant/task.properties" />
+
+	    <!-- Optionally preserve line numbers in the obfuscated stack traces.
+	    <keepattribute name="LineNumberTable">
+	    <keepattribute name="SourceFile">
+	    -->
+
+	    <!-- The main seeds: ProGuard and its companion tool ReTrace. -->
+
+	    <keep access="public" name="com.ict.twitter.CrawlerServer.CrawlerServer">
+	      <method access    ="public static"
+	              type      ="void"
+	              name      ="main"
+	              parameters="java.lang.String[]" />
+	    </keep>
+	    <keep access="public" name="com.ict.twitter.CrawlerNode.runTWAjaxNodes">
+	      <method access    ="public static"
+	              type      ="void"
+	              name      ="main"
+	              parameters="java.lang.String[]" />
+	    </keep>
+
+	  </proguard>
+	</target>
+	
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<target name="obfuscate">
+	  <taskdef resource="proguard/ant/task.properties"
+	           classpath="lib/proguard/proguard.jar" />
+
+	  <proguard printseeds="on"
+	            printmapping="out.map"
+	            renamesourcefileattribute="SourceFile" optimize="false">
+
+	    <!-- Specify the input jars, output jars, and library jars. -->
+
+	    <injar  file="build/TwitterNodes.jar" />
+	    <outjar file="build/TwitterNodes2.jar" />
+
+	    <libraryjar file="${java.home}/lib/rt.jar" />
+	  	<libraryjar dir="${basedir}/lib/"/>
+
+	    <keepattribute name="LineNumberTable" />
+	    <keepattribute name="SourceFile" />
+
+	    <!-- Preserve all annotations. -->
+
+	    <keepattribute name="*Annotation*" />
+
+	    <!-- Preserve all public applications. -->
+
+	    <keepclasseswithmembers access="public">
+	      <method access    ="public static"
+	              type      ="void"
+	              name      ="main"
+	              parameters="java.lang.String[]" />
+	    </keepclasseswithmembers>
+
+	    <!-- Preserve all native method names and the names of their classes. -->
+
+	    <keepclasseswithmembernames>
+	      <method access="native" />
+	    </keepclasseswithmembernames>
+
+	    <!-- Preserve the methods that are required in all enumeration classes. -->
+
+	    <keepclassmembers allowoptimization="true" type="enum">
+	      <method access="public static"
+	              type="**[]"
+	              name="values"
+	              parameters="" />
+	      <method access="public static"
+	              type="**"
+	              name="valueOf"
+	              parameters="java.lang.String" />
+	    </keepclassmembers>
+
+	    <!-- Explicitly preserve all serialization members. The Serializable
+	         interface is only a marker interface, so it wouldn't save them.
+	         You can comment this out if your library doesn't use serialization.
+	         If your code contains serializable classes that have to be backward
+	         compatible, please refer to the manual. -->
+
+	    <keepclassmembers implements="java.io.Serializable">
+	      <field  access    ="static final"
+	              type      ="long"
+	              name      ="serialVersionUID" />
+	      <field  access    ="static final"
+	              type      ="java.io.ObjectStreamField[]"
+	              name      ="serialPersistentFields" />
+	      <method access    ="private"
+	              type      ="void"
+	              name      ="writeObject"
+	              parameters="java.io.ObjectOutputStream" />
+	      <method access    ="private"
+	              type      ="void"
+	              name      ="readObject"
+	              parameters="java.io.ObjectInputStream" />
+	      <method type      ="java.lang.Object"
+	              name      ="writeReplace"
+	              parameters="" />
+	      <method type      ="java.lang.Object"
+	              name      ="readResolve"
+	              parameters="" />
+	    </keepclassmembers>
+
+	    <!-- Your application may contain more items that need to be preserved;
+	         typically classes that are dynamically created using Class.forName -->
+
+	  </proguard>
+	</target>
+	
+	
+	
+	  <target name = "clean">
+	    <delete file="${basedir}/build/TwitterNodes2.jar" />
+	    <delete file="${basedir}/build/TwitterCrawlerServer2.jar"/>
+	    
+	  </target>
+	
+	
 </project>

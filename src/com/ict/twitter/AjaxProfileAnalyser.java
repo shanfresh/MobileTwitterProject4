@@ -1,7 +1,10 @@
 package com.ict.twitter;
 
+import java.util.Map;
+
 import com.ict.twitter.analyser.beans.UserProfile;
 
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,6 +13,7 @@ import org.jsoup.select.Elements;
 
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.MulityInsertDataBase;
+import com.ict.twitter.tools.ReadTxtFile;
 
 public class AjaxProfileAnalyser extends AjaxAnalyser {
 	
@@ -68,6 +72,7 @@ public class AjaxProfileAnalyser extends AjaxAnalyser {
 			Element target=allElements.first();
 			String count=target.child(0).ownText();
 			count=count.replaceAll(",", "");
+			count=count.replaceAll("Íò", "10000");
 			int res=Integer.parseInt(count);
 			return res;
 		}
@@ -76,7 +81,22 @@ public class AjaxProfileAnalyser extends AjaxAnalyser {
 	
 	
 	public static void main(String[] args) {
-
+		JSONParser parser = new JSONParser();
+		ReadTxtFile rtf=new ReadTxtFile("2014-02-27 13-57-01");
+		String content=rtf.readALL();
+		try {
+			Map map=(Map) parser.parse(content);
+			String html=(String)map.get("html");
+			AjaxProfileAnalyser ajaxprofileana=new AjaxProfileAnalyser(null, null);
+			UserProfile up=new UserProfile();
+			ajaxprofileana.doAnylyze(html, up);
+			System.out.println(up.toString());
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

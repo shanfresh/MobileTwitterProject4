@@ -13,12 +13,14 @@ import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
 
+
+import com.ict.twitter.MessageBus.GetAceiveMqConnection;
 import com.ict.twitter.MessageBus.MessageBusNames;
 import com.ict.twitter.MessageBus.MessageBussConnector;
 import com.ict.twitter.MessageBus.Sender;
 import com.ict.twitter.plantform.LogSys;
 
-public class MessageBusStatusDetect implements MessageBussConnector{
+public class MessageBusStatusDetect{
 
 	String MessageBusName;
 	Queue queue;
@@ -28,9 +30,8 @@ public class MessageBusStatusDetect implements MessageBussConnector{
 	MessageConsumer consumer;
 	public long oldSize=0;
 	public MessageBusStatusDetect(){
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(ActiveMQConnection.DEFAULT_USER,ActiveMQConnection.DEFAULT_PASSWORD,address);
 		try{
-			Connection connection = connectionFactory.createConnection();
+			ActiveMQConnection connection=GetAceiveMqConnection.StaticGetConnection();
 			connection.start();
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			Queue replyTo = session.createTemporaryQueue();

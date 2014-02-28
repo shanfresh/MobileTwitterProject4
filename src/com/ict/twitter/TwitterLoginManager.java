@@ -147,8 +147,8 @@ public class TwitterLoginManager {
                 }
             }
             if(logined){
-            	MyCookieStore mycookiestore = (MyCookieStore) httpclient.getCookieStore();
-                mycookiestore.savetofile("Output/Twitter/TwitterLoginCookie.dat");
+            	TwitterLoginCookieStore mycookiestore = (TwitterLoginCookieStore) httpclient.getCookieStore();
+                //mycookiestore.savetofile("Output/Twitter/TwitterLoginCookie.dat");
             }else{
             	File f =  new File("Output/Twitter/TwitterLoginCookie.dat");
             	if(f!=null&&f.exists()&&f.isFile()){

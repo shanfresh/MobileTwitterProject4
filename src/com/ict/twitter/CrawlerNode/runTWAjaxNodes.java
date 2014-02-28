@@ -14,7 +14,7 @@ public class runTWAjaxNodes {
 	 */
 	public static void main(String[] args) {
 		run();
-
+		RunExpriedMonitor();
 	}
 	public static boolean run(){
 		DbOperation dbOper=new DbOperation();
@@ -36,6 +36,11 @@ public class runTWAjaxNodes {
 			return false;
 		}
 		return true;
+	}
+	private static void RunExpriedMonitor(){
+		RunStatusMonitor rsm=new RunStatusMonitor();
+		Thread ts=new Thread(rsm);
+		ts.setDaemon(true);
 	}
 
 }

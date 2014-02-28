@@ -30,6 +30,9 @@ public class SaveTxtFile implements Serializable{
 	}
 	public int Append(String t){
 		try {
+			if(t==null){
+				return -1;
+			}
 			bw.write(t);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

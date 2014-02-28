@@ -14,7 +14,7 @@ import com.ict.twitter.CrawlerNode.Node;
 import com.ict.twitter.CrawlerServer.CrawlerServer;
 import com.ict.twitter.plantform.LogSys;
 
-public class Receiver implements MessageBussConnector,MessageListener{
+public class Receiver implements MessageListener{
 	public Session session;
 	protected Destination destination ;
 	public MessageConsumer consumer;

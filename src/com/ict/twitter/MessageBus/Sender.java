@@ -15,7 +15,7 @@ import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQSession;
 import com.ict.twitter.plantform.LogSys;
 
-public class Sender implements MessageBussConnector {
+public class Sender{
 	public Session session;
 	public Destination destination;
 	public MessageProducer producer;	

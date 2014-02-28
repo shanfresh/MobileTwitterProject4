@@ -20,6 +20,8 @@ import com.ict.twitter.tools.BasePath;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.ReadTxtFile;
 import com.ict.twitter.tools.SaveTxtFile;
+import com.ict.twitter.tools.filemonitor.FileMonitor;
+import com.ict.twitter.tools.filemonitor.WebOpLogFlagCallBack;
 public abstract class Node extends MessageBusComponent implements Runnable{
 	/*----------------------控制相关--------------------------------*/
 	public String NodeName;
@@ -66,6 +68,7 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	public void run() {
 		NodeStart();
 		TimerStart();
+		ConfigMonitorStart();
 		SendHeartBeat();
 		startMainSearch();		
 		
@@ -172,6 +175,11 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	}
 
 	
+	private void ConfigMonitorStart(){
+		FileMonitor fm=FileMonitor.getInstance();
+		WebOpLogFlagCallBack fcc=new WebOpLogFlagCallBack();
+		fm.AddMonitor("config/clientproperties.ini", "webop.savetofileflag", fcc);
+	}
 	
 	//Node 的报告类
 	public void nodeReportToCrawlServer(){

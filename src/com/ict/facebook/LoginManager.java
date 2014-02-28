@@ -32,7 +32,7 @@ public class LoginManager {
 	public static void main(String[] args){
 		ClientManager cm=new ClientManager();
 		
-		LoginManager lm=new LoginManager(cm.getClientNoProxy());
+		LoginManager lm=new LoginManager(cm.getClient("192.168.120.67", 8087));
 		lm.doLogin();
 	}
 	

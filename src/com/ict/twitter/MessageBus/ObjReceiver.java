@@ -8,7 +8,7 @@ import javax.jms.Connection;
 import com.ict.twitter.CrawlerNode.Node;
 import com.ict.twitter.CrawlerNode.TaskReceiver;
 
-public class ObjReceiver extends TaskReceiver implements MessageBussConnector {
+public class ObjReceiver extends TaskReceiver{
 	public ObjReceiver(Connection con, String queue, Node _node) {
 		super(con, queue, _node);
 		// TODO Auto-generated constructor stub

@@ -31,7 +31,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
-public class CrawlerServer extends MessageBusComponent implements Runnable,MessageBusNames,MessageBussConnector {
+public class CrawlerServer extends MessageBusComponent implements Runnable,MessageBusNames{
 
 	/**
 	 * ±ØÐëÒª¸Ä£¡£¡
@@ -157,11 +157,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	
 
 
-	private void showGUI(){
-		MyGUIMainMonitor nn=new MyGUIMainMonitor(this);
-		nn.setVisible(true);
-		nn.setTextFieldValue(nn.jTextFieldKeyUser,"111");
-	}
+
 	public void Initiallize(){
 
 		javax.jms.Connection connection=GetAceiveMqConnection.StaticGetConnection();

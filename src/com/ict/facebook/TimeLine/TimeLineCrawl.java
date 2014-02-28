@@ -20,16 +20,19 @@ public class TimeLineCrawl {
 	static ClientManager cm=new ClientManager();
 	String BASE_URL=null;
 	static FBOperation fbOperation =  new FBOperation();
-	
+	static boolean From_Mongo_DB=false;
 	
 	public static void main(String[] args) {
 		WebOp.CreateHttpclient();
 		WebOp.Init();
 		final TimeLineCrawl testTimeLine = new TimeLineCrawl();
 		final TimeLineCrawl testTimeLine2 = new TimeLineCrawl();
-		  //                  100001230554499
-		testTimeLine.doCrawl("100001230554499",null,null);
-
+		Vector<FBTimeLine> fblist=new Vector<FBTimeLine>();
+		testTimeLine.doCrawl("100001230554499",null,fblist);
+		
+		for(FBTimeLine t:fblist){
+			t.show();
+		}
 		
 		
 		
@@ -74,7 +77,7 @@ public class TimeLineCrawl {
 				e.printStackTrace();				
 				return;
 			}
-			if(!webres.isMongoGet){
+			if(From_Mongo_DB&&!webres.isMongoGet){
 				boolean insertres=FBOperation.insertTimeLine(personID, URL, webres.html);
 				if(insertres){
 					LogSys.nodeLogger.debug("Insert into MongoDB-TimeLine Success["+personID+"]");
@@ -106,14 +109,13 @@ public class TimeLineCrawl {
 	
 	private WebOpenResult doOpen(String personID,String URL) throws NoRouteToHostException{
 		String res=null;
-		if((res=FBOperation.getTimeLine(personID))
+		if(From_Mongo_DB&&(res=FBOperation.getTimeLine(personID))
 			!=null&&res.length()>20){
 			LogSys.nodeLogger.debug("Success to getTimeLineHTML from MongoDB!["+personID+"]");
 			System.out.println(res);
 			return new WebOpenResult(true,res);			
 		}else{
 			FBWebOperation.setLogFile("TimeLine.html");
-			LogSys.nodeLogger.debug("Fail to get TimeLineHTML from MongoDB!["+personID+"]");
 			Future<String> future=WebOp.putWebOpTask(URL);
 			String html;
 			try {
@@ -138,8 +140,7 @@ public class TimeLineCrawl {
 			}else{
 				LogSys.nodeLogger.debug("WebOP Failed  URL:"+URL);
 				return null;
-			}
-			
+			}		
 			
 
 						

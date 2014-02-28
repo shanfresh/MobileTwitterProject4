@@ -17,6 +17,9 @@ public class FriendsAnalyser {
 	JSONParser parser=new JSONParser();
 	Parser htmlparser=new Parser();
 	
+	/*
+	 * {"engagement":{"eng_type":"1","eng_src":"2","eng_tid":"100001442018323","eng_data":[]},"coeff2_registry_key":"0406","coeff2_info":"AasMuB2FqmdgtwVjzGOczmd8z-sI333hTArMfYXk-qxf71RtBRy4cNzykql7Me2iALgNx9r3jTMiWYjvRjJF_SIY","coeff2_action":"1","coeff2_pv_signature":"702324316"}
+	 */
 	private final String TAG="fsl fwb fcb";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -48,8 +51,11 @@ public class FriendsAnalyser {
 			user.AliasName=ele.text();
 			user.ProfileURL=ele.child(0).attr("href");
 			String ajaxString=ele.child(0).attr("data-hovercard");
+			int startindex=0;
 			if(ajaxString.lastIndexOf('=')>0)
-				user.ProfileID=ajaxString.substring(ajaxString.lastIndexOf('=')+1);
+				startindex=ajaxString.lastIndexOf("id=")+3;
+				int endindex=ajaxString.indexOf('&', startindex);
+				user.ProfileID=ajaxString.substring(startindex,endindex);
 			if(user.ProfileID!=null){
 				users.add(user);
 			}			

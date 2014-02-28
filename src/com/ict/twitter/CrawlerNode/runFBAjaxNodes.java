@@ -32,7 +32,7 @@ public class runFBAjaxNodes {
 		try{
 			PropertyConfigurator.configure ("config/log4j_Main.properties" ) ;
 			Properties pro=new Properties();
-			pro.load(new FileInputStream("config/clientproperties.ini"));
+			pro.load(new FileInputStream("config/FB_clientproperties.ini"));
 			
 			if(pro.getProperty("http.ipv4").contains("True")){				
 				httpclient= FacebookCm.getClient(pro.getProperty("http.proxyHost"), Integer.parseInt(pro.getProperty("http.proxyPort").trim()));

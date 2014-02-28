@@ -35,10 +35,6 @@ import org.jsoup.select.Elements;
 
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.tools.DbOperation;
-import com.ict.twitter.tools.MyCookieStore;
-import com.ict.twitter.tools.SavitchIn;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 import java.util.*;
 public class AdvanceLoginManager {
 	class CookieItem{

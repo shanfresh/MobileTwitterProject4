@@ -14,7 +14,7 @@ public class FacebookWEBControlClient extends ControlClient {
 	@Override
 	public boolean ToStart(){
 		LogSys.clientLogger.info("启动FacebookWeb采集系统CrawlerServer");
-		server=new FBCrawlerServer();
+		server=new FBCrawlerServer("-Command Start -Deepth 10 -KeySearchCount 10".split(" "));
 		serverThread=new Thread(server);
 		serverThread.setName("FacebookWebCrawlerServer");
 		serverThread.start();
@@ -75,7 +75,7 @@ public class FacebookWEBControlClient extends ControlClient {
 
 	public boolean ToRestart(){
 		LogSys.clientLogger.info("FacebookWeb收到恢复重启CrawlerServer信息");
-		server=new FBCrawlerServer();
+		server=new FBCrawlerServer("-Command Start -Deepth 10 -KeySearchCount 10".split(" "));
 		server.RestartCrawlServer();
 		server.isResume=true;
 		serverThread=new Thread(server);

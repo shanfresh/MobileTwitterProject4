@@ -25,9 +25,11 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 	 * @param args
 	 *        304600005539422208
 	 * max_id=304600005539422207
+	 * 
+	 * https://twitter.com
 	 */
-	String baseURL="/i/search/timeline?src=typd&type=recent&include_available_features=1&include_entities=1%s&q='%s'";
-	String max_id_str="&max_id=";
+	String baseURL="/i/search/timeline?q='%s'&src=typd&f=realtime&include_available_features=1&include_entities=1&last_note_ts=0";
+	String max_id_str="&scroll_cursor=%s";
 	DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
 	
@@ -37,7 +39,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 	}
 	public static void main(String[] args) {
 		TwitterClientManager cm=new TwitterClientManager();
-		DefaultHttpClient httpclient = cm.getClientNoProxy();
+		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.67",8087);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
@@ -45,7 +47,9 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		AjaxSearchCrawl test=new AjaxSearchCrawl(httpclient,null);
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
-		Task task=new Task(TaskType.Search,"重庆+薄");
+		Task task=new Task(TaskType.Search,"薄熙来");
+		ReportData reportData=new ReportData();
+		test.doCrawl(task, dbo, users, reportData);
 		System.out.println("current Search String Size:"+users.size());
 	}
 	
@@ -59,11 +63,12 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		int count=1;
 		do{
 			if(next_max_id==null||next_max_id.equals("")){
-				URL=String.format(baseURL,"",keyWords);
+				URL=String.format(baseURL,keyWords,"");
 			}else{
-				URL=String.format(baseURL,max_id_str+next_max_id,keyWords);
+				URL=String.format(baseURL+max_id_str,keyWords,next_max_id);
 			}
 			String content=super.openLink(httpclient, URL,task,count++);
+			
 			Map map=null;
 			if(content==null){
 				System.out.println("HttpClint返回Ajax内容为空或长度不够");
@@ -94,18 +99,15 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 				has_next=false;
 				LogSys.nodeLogger.debug("当前SearchAnalyse解析发生错误["+keyWords+"]");
 				return true;
-			}		
-			if(map.get("max_id")!=null){
-				next_max_id=(String)map.get("max_id");
+			}	
+			if(map.get("has_more_items")!=null){
+				has_next=(boolean)map.get("has_more_items");
 			}else{
-				try{
-					next_max_id=Long.toString(Long.parseLong(res.lastID)-1);
-				}catch(NumberFormatException ex){
-					LogSys.nodeLogger.error(res.lastID);
-					has_next=false;
-					next_max_id="0";
-				}
-			} 
+				has_next=false;
+			}
+			if(has_next){
+				next_max_id=(String)map.get("scroll_cursor");
+			}
 				
 			
 		}while(has_next==true);

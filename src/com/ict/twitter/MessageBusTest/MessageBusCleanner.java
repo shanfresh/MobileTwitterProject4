@@ -11,11 +11,12 @@ import javax.jms.Session;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
+import com.ict.twitter.MessageBus.GetAceiveMqConnection;
 import com.ict.twitter.MessageBus.MessageBusNames;
 import com.ict.twitter.MessageBus.MessageBussConnector;
 import com.ict.twitter.plantform.LogSys;
 
-public class MessageBusCleanner implements MessageBusNames,MessageBussConnector{
+public class MessageBusCleanner implements MessageBusNames{
 
 	/**
 	 * @param args
@@ -26,11 +27,7 @@ public class MessageBusCleanner implements MessageBusNames,MessageBussConnector{
 	}
 	public static void CleanTaskBus(){
 		try{
-			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory( 
-	                ActiveMQConnection.DEFAULT_USER, 
-	                ActiveMQConnection.DEFAULT_PASSWORD, 
-	                address); 			
-			Connection connection = connectionFactory.createConnection();
+			ActiveMQConnection connection=GetAceiveMqConnection.StaticGetConnection();
 			Session session = null;
 			connection.start(); 
 			session = connection.createSession(true, Session.CLIENT_ACKNOWLEDGE);
@@ -57,11 +54,7 @@ public class MessageBusCleanner implements MessageBusNames,MessageBussConnector{
 	}
 	public static void Clean(){
 		try{
-			ConnectionFactory connectionFactory = new ActiveMQConnectionFactory( 
-	                ActiveMQConnection.DEFAULT_USER, 
-	                ActiveMQConnection.DEFAULT_PASSWORD, 
-	                address); 			
-			Connection connection = connectionFactory.createConnection();
+			ActiveMQConnection connection=GetAceiveMqConnection.StaticGetConnection();
 			Session session = null;
 			connection.start(); 
 			session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
