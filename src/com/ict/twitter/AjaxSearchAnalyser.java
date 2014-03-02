@@ -32,7 +32,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 	}
 	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users,ReportData reportData) throws AllHasInsertedException{
 		Document doc=Jsoup.parse(src, "/");
-		Elements follows=doc.getElementsByAttributeValue("class","js-stream-item stream-item stream-item expanding-stream-item");
+		Elements follows=doc.getElementsByAttributeValueStarting("class","js-stream-item stream-item stream-item expanding-stream-item");
 		
 		int j=1;
 		String tweetID="";
@@ -52,8 +52,8 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 					content="null";
 				}
 				try{
-					date=firstChildren.getElementsByAttributeValue("class", "time").first().children().get(0).attr("title");
-					date=timeTrans.NormTimeFormat(date);
+					date=firstChildren.getElementsByAttributeValueStarting("class", "_timestamp js-short-timestamp").first().attr("data-time");
+					date=timeTrans.Convert(date);
 				}catch(NullPointerException ex){
 					date="null";
 				}

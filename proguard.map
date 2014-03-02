@@ -1,0 +1,952 @@
+com.ict.facebook.A2NFilter -> a:
+    char[] trailChars -> a
+    java.nio.charset.CharsetEncoder encoder -> a
+    int read(char[],int,int) -> read
+    int read() -> read
+    boolean canConvert(char) -> a
+com.ict.facebook.ClientManager -> b:
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    org.apache.http.impl.conn.PoolingClientConnectionManager poolConnectManager -> a
+    org.apache.http.params.HttpParams params -> a
+    void Initiallize() -> a
+    org.apache.http.impl.client.DefaultHttpClient getClient(java.lang.String,int) -> a
+    org.apache.http.impl.client.DefaultHttpClient getClientNoProxy() -> a
+com.ict.facebook.ClientManager$1 -> c:
+    com.ict.facebook.ClientManager this$0 -> a
+    java.security.cert.X509Certificate[] getAcceptedIssuers() -> getAcceptedIssuers
+    void checkClientTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkClientTrusted
+    void checkServerTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkServerTrusted
+com.ict.facebook.CrawlerNode.FBAjaxNode -> d:
+    void startMainSearch() -> a
+com.ict.facebook.DataBaseOP -> e:
+    com.ict.twitter.tools.DbOperation dbo -> a
+    boolean saveUser(java.lang.String,java.util.Vector) -> a
+    boolean saveUserRel(java.lang.String,java.util.Vector) -> b
+    boolean saveTimeLine(java.lang.String,java.util.Vector) -> c
+com.ict.facebook.FBAjaxMainSearch -> f:
+    void run() -> run
+    void doWork() -> a
+    void sentNorUsers(java.util.Vector) -> a
+    com.ict.twitter.task.beans.Task getTask() -> a
+    void SLEEP(int) -> a
+com.ict.facebook.FBAjaxMainSearch$1 -> g:
+    int[] $SwitchMap$com$ict$twitter$task$beans$Task$TaskType -> a
+com.ict.facebook.FBOperation -> h:
+    com.mongodb.MongoClient mongoClient -> a
+    java.lang.String DataBaseName -> a
+    boolean insertTimeLine(java.lang.String,java.lang.String,java.lang.String) -> a
+    com.mongodb.MongoClient getClient() -> a
+    boolean insertFriend(java.lang.String,int,java.lang.String,java.lang.String) -> a
+    java.lang.String getTimeLine(java.lang.String) -> a
+    java.lang.String getFriend(java.lang.String,int) -> a
+com.ict.facebook.FBWebOperation -> i:
+    java.lang.String logFile -> a
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    void setLogFile(java.lang.String) -> a
+com.ict.facebook.FriendList.FriendListCrawl -> j:
+    java.lang.String URLNAMETAG -> a
+    java.lang.String BaseURL -> b
+    java.lang.String BaseURLTEMPLET -> c
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    com.ict.facebook.FBOperation fbOperation -> a
+    void doCrawl(java.lang.String,com.ict.twitter.tools.DbOperation,java.util.Vector) -> a
+    int doAnalyse(java.lang.String,boolean,java.util.Vector) -> a
+    com.ict.facebook.WebOpenResult doOpen(java.lang.String,int,java.lang.String) -> a
+com.ict.facebook.FriendList.FriendsAnalyser -> k:
+    org.json.simple.parser.JSONParser parser -> a
+    org.jsoup.parser.Parser htmlparser -> a
+    java.lang.String TAG -> a
+    java.lang.Object getAttributeByName(java.lang.String,java.lang.String) -> a
+    java.lang.String getHtml(java.lang.String) -> a
+    java.util.Vector AnalyserHtml(java.lang.String) -> a
+com.ict.facebook.FriendList.User -> l:
+    java.lang.String ProfileID -> a
+    java.lang.String AliasName -> b
+    java.lang.String ProfileURL -> c
+    java.lang.String toString() -> toString
+    java.lang.String toUserSQL(java.lang.String) -> a
+    java.lang.String toUserRelSql(java.lang.String,com.ict.facebook.FriendList.User,java.lang.String) -> a
+    java.lang.String RemoveInvalidStr(java.lang.String) -> b
+com.ict.facebook.LoginManager -> m:
+    java.lang.String user -> a
+    java.lang.String pass -> b
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    boolean doLogin() -> a
+com.ict.facebook.TimeLine.FBTimeLine -> n:
+    java.util.regex.Pattern p1 -> a
+    java.lang.String getFBSql(java.lang.String) -> a
+    java.lang.String RemoveInvalidStr(java.lang.String) -> b
+com.ict.facebook.TimeLine.ReadTxtFile -> o:
+    java.lang.String file -> a
+    java.util.Vector read() -> a
+com.ict.facebook.TimeLine.TimeLineAnalyser -> p:
+    org.json.simple.parser.JSONParser parser -> a
+    java.lang.String doAnalyse(java.lang.String,java.lang.String,java.util.Vector) -> a
+    java.lang.String getAttributeByName(java.lang.String,java.lang.String) -> a
+    boolean GetAttribute(java.lang.String,com.ict.facebook.TimeLine.FBTimeLine) -> a
+    java.lang.String GetTimeLineContent(int,org.jsoup.nodes.Element) -> a
+    java.lang.String Millseconds2String(java.lang.String) -> a
+com.ict.facebook.TimeLine.TimeLineCrawl -> q:
+    com.ict.facebook.ClientManager cm -> a
+    java.lang.String BASE_URL -> a
+    com.ict.facebook.FBOperation fbOperation -> a
+    void doCrawl(java.lang.String,com.ict.twitter.tools.DbOperation,java.util.Vector) -> a
+    java.lang.String generateURLByTempFile(java.lang.String) -> a
+    com.ict.facebook.WebOpenResult doOpen(java.lang.String,java.lang.String) -> a
+com.ict.facebook.WebOp -> r:
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    java.util.concurrent.ExecutorService service -> a
+    org.apache.http.HttpHost targetHost -> a
+    org.apache.http.protocol.BasicHttpContext localcontext -> a
+    void setHttpclient(org.apache.http.impl.client.DefaultHttpClient) -> a
+    boolean Init() -> a
+    java.util.concurrent.Future putWebOpTask(java.lang.String) -> a
+    java.lang.String OpenLink(java.lang.String) -> b
+    java.lang.String access$000(java.lang.String) -> a
+com.ict.facebook.WebOp$1 -> s:
+    java.lang.String val$targetURL -> a
+    java.lang.String call() -> a
+    java.lang.Object call() -> call
+com.ict.facebook.WebOpenResult -> t:
+    boolean isMongoGet -> a
+    java.lang.String html -> a
+com.ict.facebook.myRetryHandler -> u:
+com.ict.twitter.A2NFilter -> v:
+    char[] trailChars -> a
+    java.nio.charset.CharsetEncoder encoder -> a
+    int read(char[],int,int) -> read
+    int read() -> read
+    boolean canConvert(char) -> a
+com.ict.twitter.AdvanceLoginManager -> w:
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    com.ict.twitter.tools.DbOperation dbo -> a
+    boolean getAvailableCookie(com.ict.twitter.AdvanceLoginManager$CookieItem) -> a
+    java.util.List GetAvailableCount() -> a
+    boolean trylogin() -> a
+    boolean forceLogin(java.lang.String[]) -> a
+    java.lang.String getToken(java.lang.String) -> a
+    boolean markStatus(java.lang.String,java.lang.String) -> a
+    boolean MaskAsNotAvailable(java.lang.String) -> a
+    boolean SaveCookieToDB(java.lang.String,java.util.List) -> a
+    boolean checkLoginStatus() -> b
+    java.lang.String SaveToHtml(org.apache.http.HttpEntity,java.lang.String) -> a
+com.ict.twitter.AdvanceLoginManager$CookieItem -> x:
+    java.util.List cookieList -> a
+    java.lang.String username -> a
+    com.ict.twitter.AdvanceLoginManager this$0 -> a
+com.ict.twitter.AjaxAnalyser -> y:
+    boolean isdebug -> a
+    com.ict.twitter.task.beans.Task task -> a
+    com.ict.twitter.analyser.filter.TimeTransformer timeTrans -> a
+    com.ict.twitter.tools.MulityInsertDataBase batchdb -> a
+com.ict.twitter.AjaxAnalyser$AnalyserCursor -> z:
+    java.lang.String lastID -> a
+    int size -> a
+    com.ict.twitter.AjaxAnalyser this$0 -> a
+com.ict.twitter.AjaxCrawl -> A:
+    java.util.concurrent.ExecutorService service -> a
+    com.ict.twitter.DatabaseBean.WebOpLogOp weboplog -> a
+    com.ict.twitter.tools.DbOperation dboperation -> a
+    java.lang.String openLink(org.apache.http.impl.client.DefaultHttpClient,java.lang.String,com.ict.twitter.task.beans.Task,int) -> a
+    boolean SaveWebOpStatus(com.ict.twitter.task.beans.Task,java.lang.String,int,com.ict.twitter.WebOperationResult,com.ict.twitter.tools.MulityInsertDataBase) -> a
+com.ict.twitter.AjaxCrawl$1 -> B:
+    org.apache.http.impl.client.DefaultHttpClient val$httpclient -> a
+    java.lang.String val$targetUrl -> a
+    com.ict.twitter.AjaxCrawl this$0 -> a
+    java.lang.String call() -> a
+    java.lang.Object call() -> call
+com.ict.twitter.AjaxFollowAnalyser -> C:
+    int count -> a
+    int doAnalyse(java.lang.String,boolean,java.lang.String,java.util.Vector) -> a
+com.ict.twitter.AjaxFollowCrawl -> D:
+    boolean isFollowing -> a
+    java.lang.String baseUrl -> a
+    java.lang.String cursor -> b
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    org.json.simple.parser.JSONParser parser -> a
+    boolean doCrawl(com.ict.twitter.task.beans.Task,com.ict.twitter.tools.MulityInsertDataBase,java.util.Vector,com.ict.twitter.Report.ReportData) -> a
+com.ict.twitter.AjaxMainSearch -> E:
+    boolean test -> a
+    com.ict.twitter.StatusTrack.MyTracker tracker -> a
+    void InitHttpclientAndConnection() -> b
+    void run() -> run
+    void doWork() -> a
+    void sentKeyUsers(java.util.Vector) -> a
+    void sentNorUsers(java.util.Vector) -> b
+    com.ict.twitter.task.beans.Task getTask() -> a
+    void SLEEP(int) -> a
+com.ict.twitter.AjaxMainSearch$1 -> F:
+    int[] $SwitchMap$com$ict$twitter$task$beans$Task$TaskType -> a
+com.ict.twitter.AjaxMainSearchFrameWork -> G:
+    java.lang.String Name -> a
+    com.ict.twitter.tools.DbOperation DBOp -> a
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    com.ict.twitter.CrawlerNode.AjaxNode node -> a
+com.ict.twitter.AjaxProfileAnalyser -> H:
+    void doAnylyze(java.lang.String,com.ict.twitter.analyser.beans.UserProfile) -> a
+    int getCount(org.jsoup.nodes.Element,java.lang.String) -> a
+com.ict.twitter.AjaxProfileCrawl -> I:
+    java.lang.String BASE_URL -> a
+    java.lang.String TEMP_URL -> b
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    org.json.simple.parser.JSONParser parser -> a
+    boolean doCrawl(com.ict.twitter.task.beans.Task,com.ict.twitter.tools.MulityInsertDataBase,java.util.Vector,com.ict.twitter.Report.ReportData) -> a
+com.ict.twitter.AjaxSearchAnalyser -> J:
+    com.ict.twitter.AjaxAnalyser$AnalyserCursor doAnalyse(java.lang.String,java.util.Vector,com.ict.twitter.Report.ReportData) -> a
+com.ict.twitter.AjaxSearchCrawl -> K:
+    java.lang.String baseURL -> a
+    java.lang.String max_id_str -> b
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    org.json.simple.parser.JSONParser parser -> a
+    boolean doCrawl(com.ict.twitter.task.beans.Task,com.ict.twitter.tools.MulityInsertDataBase,java.util.Vector,com.ict.twitter.Report.ReportData) -> a
+com.ict.twitter.AjaxTimeLineAnalyser -> L:
+    boolean isdebug -> b
+    com.ict.twitter.AjaxAnalyser$AnalyserCursor doAnalyser(java.lang.String,java.util.Vector) -> a
+    java.util.List getUserID(org.jsoup.nodes.Element,java.util.Vector) -> a
+    java.lang.String GetURL(org.jsoup.nodes.Element) -> a
+    java.lang.String GetPicURL(org.jsoup.nodes.Element) -> b
+com.ict.twitter.AjaxTimeLineCrawl -> M:
+    java.lang.String baseUrl -> a
+    java.lang.String max_id -> b
+    java.lang.String InteratorUrl -> c
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    org.json.simple.parser.JSONParser parser -> a
+    boolean doCrawl(com.ict.twitter.task.beans.Task,com.ict.twitter.tools.MulityInsertDataBase,java.util.Vector,com.ict.twitter.Report.ReportData) -> a
+com.ict.twitter.CrawlerMessage.ControlMessage -> N:
+com.ict.twitter.CrawlerMessage.MessageBusComponent -> O:
+    void main(java.lang.String[]) -> main
+com.ict.twitter.CrawlerNode.AjaxNode -> com.ict.twitter.CrawlerNode.a:
+    void startMainSearch() -> a
+com.ict.twitter.CrawlerNode.ControlReceiver -> com.ict.twitter.CrawlerNode.b:
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.CrawlerNode.ControlSender -> com.ict.twitter.CrawlerNode.c:
+    boolean Send(com.ict.twitter.CrawlerMessage.ControlMessage) -> a
+com.ict.twitter.CrawlerNode.Node -> com.ict.twitter.CrawlerNode.d:
+    java.lang.String NodeName -> a
+    boolean isPaused -> b
+    java.util.Vector taskBuffer -> a
+    com.ict.twitter.CrawlerNode.ControlSender controlUpload -> a
+    com.ict.twitter.MessageBus.Receiver controlDownload -> a
+    com.ict.twitter.CrawlerNode.TaskReceiver urgentReceiver -> a
+    com.ict.twitter.CrawlerNode.TaskReceiver keyWordAndTopicReceiver -> b
+    com.ict.twitter.CrawlerNode.TaskReceiver keyUserReceiver -> c
+    com.ict.twitter.CrawlerNode.TaskReceiver taskReceiver -> d
+    com.ict.twitter.Report.NodeReporterSender nodeReportSender -> a
+    boolean ReportNullFlag -> c
+    com.ict.twitter.Report.ReportData rpdata -> a
+    com.ict.twitter.MessageBus.Sender normalUserSender -> a
+    com.ict.twitter.MessageBus.Sender keyUserSender -> b
+    com.ict.twitter.tools.DbOperation dbOper -> a
+    boolean isProxy -> a
+    java.lang.String proxyAddress -> b
+    int proxyPort -> a
+    com.ict.twitter.CrawlerNode.NodeStatusBean nodeStatusBean -> a
+    com.ict.twitter.CrawlerNode.NodeStatusBean getNodeStatusBean() -> a
+    void run() -> run
+    void InitTaskReceiver(javax.jms.Connection) -> a
+    void NodeStart() -> b
+    void startMainSearch() -> a
+    void ModifyReportMessageByType(com.ict.twitter.Report.ReportDataType,int) -> a
+    void readProperties() -> g
+    void TimerStart() -> h
+    void nodeReportToCrawlServer() -> c
+    void SendHeartBeat() -> d
+    void Pause() -> e
+    void Resume() -> f
+    com.ict.twitter.task.beans.Task getTask() -> a
+    boolean CleanTask() -> a
+    com.ict.twitter.task.beans.Task getTaskByReceiver(com.ict.twitter.CrawlerNode.TaskReceiver) -> a
+    void addNomalUserIDs(java.lang.String) -> a
+    void addKeyUserIDs(java.lang.String) -> b
+    void setIsProxy(boolean) -> a
+    void ShowAndLog(java.lang.String) -> c
+com.ict.twitter.CrawlerNode.Node$1 -> com.ict.twitter.CrawlerNode.e:
+    int[] $SwitchMap$com$ict$twitter$Report$ReportDataType -> a
+com.ict.twitter.CrawlerNode.NodeHeartBeatReport -> com.ict.twitter.CrawlerNode.f:
+    java.lang.String name -> a
+    boolean isBusy -> a
+    com.ict.twitter.CrawlerNode.NodeStep currentstep -> a
+    int taskBufferSize -> a
+com.ict.twitter.CrawlerNode.NodeReport -> com.ict.twitter.CrawlerNode.g:
+    com.ict.twitter.CrawlerNode.Node node -> a
+    void run() -> run
+com.ict.twitter.CrawlerNode.NodeStatusBean -> com.ict.twitter.CrawlerNode.h:
+    com.ict.twitter.CrawlerNode.Node node -> a
+    boolean isBusy -> a
+    com.ict.twitter.CrawlerNode.NodeStep curStep -> a
+    void HeartBeat(com.ict.twitter.CrawlerNode.ControlSender) -> a
+com.ict.twitter.CrawlerNode.NodeStep -> com.ict.twitter.CrawlerNode.i:
+    com.ict.twitter.CrawlerNode.NodeStep init -> a
+    com.ict.twitter.CrawlerNode.NodeStep search_start -> b
+    com.ict.twitter.CrawlerNode.NodeStep search_end -> c
+    com.ict.twitter.CrawlerNode.NodeStep keyuser_start -> d
+    com.ict.twitter.CrawlerNode.NodeStep keyuser_end -> e
+    com.ict.twitter.CrawlerNode.NodeStep normaluser_start -> f
+    com.ict.twitter.CrawlerNode.NodeStep normaluser_end -> g
+    com.ict.twitter.CrawlerNode.NodeStep[] $VALUES -> a
+    com.ict.twitter.CrawlerNode.NodeStep valueOf(java.lang.String) -> a
+com.ict.twitter.CrawlerNode.TaskReceiver -> com.ict.twitter.CrawlerNode.j:
+    int TaskSize -> a
+    com.ict.twitter.task.beans.Task PickUpTaskMessage() -> a
+    boolean checkAndRetry(com.ict.twitter.task.beans.Task) -> a
+    com.ict.twitter.task.beans.Task StringToTask(java.lang.String) -> a
+com.ict.twitter.CrawlerNode.runFBAjaxNodes -> com.ict.twitter.CrawlerNode.k:
+    boolean run() -> a
+com.ict.twitter.CrawlerNode.runTWAjaxNodes -> com.ict.twitter.CrawlerNode.runTWAjaxNodes:
+    void main(java.lang.String[]) -> main
+    boolean run() -> a
+com.ict.twitter.CrawlerSchedul.BasicScheduler -> P:
+    com.ict.twitter.CrawlerServer.CrawlerServer crawlserver -> a
+com.ict.twitter.CrawlerSchedul.CrawlServerScheduler -> Q:
+    com.ict.twitter.CrawlerServer.CrawlerServer crawlserver -> a
+    com.ict.twitter.DatabaseBean.DBBeanInputTask inputTaskOp -> a
+    void run() -> run
+    void checkUserInsert() -> a
+    void InserIntoMessbus(com.ict.twitter.DatabaseBean.InputTaskBean) -> a
+com.ict.twitter.CrawlerSchedul.KeyUserScheduler -> R:
+    com.ict.twitter.CrawlerServer.CrawlerServer crawlserver -> a
+    com.ict.twitter.DAO.DBKeyUserDAO dbkeyuser -> a
+    java.lang.String basepath -> a
+    java.lang.String FilePath -> b
+    void run() -> run
+    java.util.Vector getAllKeyUsers() -> a
+    java.util.Vector GetDBUser() -> c
+    java.util.Vector GetTextUser() -> b
+com.ict.twitter.CrawlerSchedul.KeyWordsScheduler -> S:
+    java.lang.String basepath -> a
+    java.lang.String FilePath -> b
+    void run() -> run
+    java.util.Vector getAllWords() -> a
+    java.util.Vector getText() -> b
+    java.util.Vector getDbKeyWords() -> c
+com.ict.twitter.CrawlerSchedul.ReportTotalScheduler -> T:
+    com.ict.twitter.CrawlerServer.CrawlerServer crawlserver -> a
+    com.ict.twitter.tools.DbOperation dbo -> a
+    void run() -> run
+com.ict.twitter.CrawlerServer.CrawlerServer -> com.ict.twitter.CrawlerServer.CrawlerServer:
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep currentstep -> a
+    int Normal_User_Deepth -> a
+    com.ict.twitter.MessageBus.Receiver controlReceiver -> a
+    com.ict.twitter.CrawlerNode.ControlSender controlSender -> a
+    com.ict.twitter.MessageBus.Sender taskSender -> a
+    com.ict.twitter.MessageBus.Sender urgentTaskSender -> b
+    com.ict.twitter.MessageBus.Sender keyWordAndTopicTaskSender -> c
+    com.ict.twitter.MessageBus.Sender keyUserTaskSender -> d
+    com.ict.twitter.MessageBus.Receiver NormalReceiver -> b
+    com.ict.twitter.MessageBus.Receiver KeyUserReceiver -> c
+    com.ict.twitter.MessageBus.Receiver nodeReporterReceiver -> d
+    java.util.HashMap NodeReportData -> a
+    java.lang.Object reportlock -> a
+    com.ict.twitter.Report.ReportData ServerReportData -> a
+    com.ict.twitter.Report.CrawlerServerReporter crawlReporter -> a
+    com.ict.twitter.CrawlerSchedul.CrawlServerScheduler schedule -> a
+    boolean isFirstChuiZhi -> a
+    boolean isFirstBingXing -> b
+    com.ict.twitter.CrawlerServer.ServerBean sb -> a
+    boolean isResume -> c
+    com.ict.twitter.CrawlerServer.NodeManager nodeManager -> a
+    com.ict.twitter.CrawlerServer.ServerControlReceiverListener scr -> a
+    java.lang.String[] args -> a
+    com.ict.twitter.CrawlerServer.CrawlerServer$OP op -> a
+    int deepth -> b
+    int keySearchCount -> c
+    com.ict.twitter.StatusTrack.MyTracker tracker -> a
+    java.lang.String basepath -> a
+    void main(java.lang.String[]) -> main
+    void run() -> run
+    void checkArgs() -> a
+    void Initiallize() -> b
+    boolean StartCrawlServer() -> a
+    boolean StopCrawlServer() -> b
+    boolean RestartCrawlServer() -> c
+    void SleepWithCount(int) -> a
+    void CollectionNodes() -> c
+    void KeyWordSearch(boolean) -> a
+    void CrawlerServerKeyUserSearch(boolean) -> b
+    int CrawlerServerNorUserSearch(int,boolean) -> a
+    void ChuizhiCaiji() -> d
+    void KeyWordsSearch(int) -> b
+    void NormalCaiji() -> e
+    boolean addTask(com.ict.twitter.task.beans.Task) -> a
+    boolean addKeyWord(com.ict.twitter.task.beans.Task) -> b
+    boolean addTopic(com.ict.twitter.task.beans.Task) -> c
+    boolean addKeyUserTask(com.ict.twitter.task.beans.Task) -> d
+    void addNormalUser(com.ict.twitter.CrawlerServer.NormalUser) -> a
+    void addKeyUser(com.ict.twitter.CrawlerServer.NormalUser) -> b
+    int showNormalUserSize() -> a
+    boolean sendNewStep(com.ict.twitter.CrawlerNode.NodeStep) -> a
+    boolean CollectNodesStatus() -> d
+    void TellNodeToPause() -> f
+    void TellNodeToResume() -> g
+    void StartReportTimer() -> h
+    void onReceiveReportFromNode(com.ict.twitter.Report.ReportData) -> a
+    void ResetServerReportData() -> i
+    void StartSchedulTimer() -> j
+    void StartKeyUserSchedulTimer() -> k
+    void StartKeyWordSchedulTimer() -> l
+    void setCrawlServerDeepth(int) -> c
+    void access$000(com.ict.twitter.CrawlerServer.CrawlerServer) -> a
+com.ict.twitter.CrawlerServer.CrawlerServer$1 -> com.ict.twitter.CrawlerServer.a:
+    com.ict.twitter.CrawlerServer.CrawlerServer this$0 -> a
+    void run() -> run
+com.ict.twitter.CrawlerServer.CrawlerServer$2 -> com.ict.twitter.CrawlerServer.b:
+    int[] $SwitchMap$com$ict$twitter$CrawlerServer$CrawlerServer$ServerStep -> a
+com.ict.twitter.CrawlerServer.CrawlerServer$OP -> com.ict.twitter.CrawlerServer.c:
+    com.ict.twitter.CrawlerServer.CrawlerServer$OP START -> a
+    com.ict.twitter.CrawlerServer.CrawlerServer$OP STOP -> b
+    com.ict.twitter.CrawlerServer.CrawlerServer$OP DUMP -> c
+    com.ict.twitter.CrawlerServer.CrawlerServer$OP RESTART -> d
+    com.ict.twitter.CrawlerServer.CrawlerServer$OP[] $VALUES -> a
+com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep -> com.ict.twitter.CrawlerServer.d:
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep init -> a
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep searchStart -> b
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep searchEnd -> c
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep keyuserCaijiStart -> d
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep keyuserCaijiEnd -> e
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep normalCaijiStart -> f
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep normalCaijiEnd -> g
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep[] $VALUES -> a
+    com.ict.twitter.CrawlerServer.CrawlerServer$ServerStep[] values() -> a
+com.ict.twitter.CrawlerServer.CrawlerServerDumper -> com.ict.twitter.CrawlerServer.e:
+    com.ict.twitter.CrawlerServer.CrawlerServer crawlerServer -> a
+    boolean TaskResume(java.lang.String) -> a
+    boolean TaskSaver(java.lang.String) -> b
+    boolean OtherStatusSaver(java.lang.String) -> c
+    boolean OtherStatusResumer(java.lang.String) -> d
+    com.ict.twitter.task.beans.Task StringToTask(java.lang.String) -> a
+com.ict.twitter.CrawlerServer.FBCrawlerServer -> com.ict.twitter.CrawlerServer.f:
+    com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep currentstep -> a
+    void run() -> run
+    boolean StartCrawlServer() -> a
+    boolean RestartCrawlServer() -> c
+    int NorUserSearchWithDepth(int,boolean) -> b
+    boolean CollectNodesStatus() -> d
+    void ChuizhiCaiji() -> d
+    void NormalCaiji() -> e
+com.ict.twitter.CrawlerServer.FBCrawlerServer$1 -> com.ict.twitter.CrawlerServer.g:
+    int[] $SwitchMap$com$ict$twitter$CrawlerServer$FBCrawlerServer$ServerStep -> a
+com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep -> com.ict.twitter.CrawlerServer.h:
+    com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep init -> a
+    com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep keyuserCaijiStart -> b
+    com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep keyuserCaijiEnd -> c
+    com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep normalCaijiStart -> d
+    com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep normalCaijiEnd -> e
+    com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep[] $VALUES -> a
+    com.ict.twitter.CrawlerServer.FBCrawlerServer$ServerStep[] values() -> a
+com.ict.twitter.CrawlerServer.InputType -> com.ict.twitter.CrawlerServer.i:
+    com.ict.twitter.CrawlerServer.InputType Topic -> a
+    com.ict.twitter.CrawlerServer.InputType KeyWord -> b
+    com.ict.twitter.CrawlerServer.InputType KeyUser -> c
+    com.ict.twitter.CrawlerServer.InputType NorUser -> d
+    com.ict.twitter.CrawlerServer.InputType[] $VALUES -> a
+    com.ict.twitter.CrawlerServer.InputType valueOf(java.lang.String) -> a
+com.ict.twitter.CrawlerServer.KeyUserReceiver -> com.ict.twitter.CrawlerServer.j:
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.CrawlerServer.MessageBusStatusDetect -> com.ict.twitter.CrawlerServer.k:
+    javax.jms.Queue queue -> a
+    javax.jms.Session session -> a
+    javax.jms.MessageProducer producer -> a
+    javax.jms.Message msg -> a
+    javax.jms.MessageConsumer consumer -> a
+    long oldSize -> a
+    long getCount(java.lang.String) -> a
+com.ict.twitter.CrawlerServer.NodeManager -> com.ict.twitter.CrawlerServer.l:
+    int nodecount -> a
+    int finishcount -> b
+    com.ict.twitter.CrawlerNode.NodeStep NodeManagerStep -> a
+    java.util.Hashtable allNodeStatus -> a
+    com.ict.twitter.CrawlerServer.MessageBusStatusDetect mbDetect -> a
+    long getTaskSizeCount() -> a
+    boolean canNextStepByTaskBusName(java.lang.String) -> a
+    com.ict.twitter.CrawlerNode.NodeStep currentstep() -> a
+    void addNode(java.lang.String) -> a
+    void onnodefinish(java.lang.String,com.ict.twitter.CrawlerNode.NodeStep) -> a
+    void onHeartBeatReceive(com.ict.twitter.CrawlerNode.NodeHeartBeatReport) -> a
+    int getBusyCount() -> a
+    java.lang.String show() -> a
+    void nodeShow(java.lang.String,com.ict.twitter.CrawlerServer.NodeManager$NodeStatus,java.lang.StringBuilder) -> a
+    java.lang.String nodeToString(com.ict.twitter.CrawlerServer.NodeManager$NodeStatus,java.lang.String) -> a
+com.ict.twitter.CrawlerServer.NodeManager$NodeStatus -> com.ict.twitter.CrawlerServer.m:
+    boolean isBusy -> a
+    int taskSize -> a
+    com.ict.twitter.CrawlerNode.NodeStep currentstep -> a
+    com.ict.twitter.CrawlerServer.NodeManager this$0 -> a
+com.ict.twitter.CrawlerServer.NormalUser -> com.ict.twitter.CrawlerServer.n:
+    java.lang.String userID -> a
+    int sum -> a
+    boolean equals(java.lang.Object) -> equals
+    int hashCode() -> hashCode
+    java.lang.String toString() -> toString
+com.ict.twitter.CrawlerServer.NormalUserReceiver -> com.ict.twitter.CrawlerServer.o:
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.CrawlerServer.ServerBean -> com.ict.twitter.CrawlerServer.p:
+    java.lang.String aname -> a
+    boolean isFirstChuizhi -> a
+    com.ict.twitter.StatusTrack.CrawlUserDB crawluser -> a
+    java.util.List normalUserList -> a
+    java.util.List keyUsers -> b
+    void InitSearch(java.lang.String,int,com.ict.twitter.CrawlerServer.CrawlerServer) -> a
+    void InitChuizhi(java.lang.String,com.ict.twitter.CrawlerServer.CrawlerServer,boolean) -> a
+    int InitBingxing(com.ict.twitter.CrawlerServer.CrawlerServer,int) -> a
+    void addNormalUser(com.ict.twitter.CrawlerServer.NormalUser,int) -> a
+    void addKeyUser(com.ict.twitter.CrawlerServer.NormalUser) -> a
+com.ict.twitter.CrawlerServer.ServerControlReceiverListener -> com.ict.twitter.CrawlerServer.q:
+    com.ict.twitter.CrawlerServer.CrawlerServer crawlServer -> a
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.CrawlerServer.UserList -> com.ict.twitter.CrawlerServer.r:
+    boolean add(java.lang.Object) -> add
+com.ict.twitter.DAO.DBKeyUserDAO -> U:
+    com.ict.twitter.tools.DbOperation dbo -> a
+    java.util.Vector GetKeyUser() -> a
+com.ict.twitter.DAO.DBKeyWordDAO -> V:
+    com.ict.twitter.tools.DbOperation dbo -> a
+    java.util.Vector getKeyWords() -> a
+com.ict.twitter.DAO.bean.KeyUser -> W:
+    java.lang.String UserID -> a
+    int CrawlCount -> a
+    int weight -> b
+com.ict.twitter.DAO.bean.KeyWord -> X:
+    java.lang.String word -> a
+com.ict.twitter.DatabaseBean.DBBeanInputTask -> Y:
+    com.ict.twitter.tools.DbOperation dbOp -> a
+    java.sql.Connection con -> a
+    java.sql.PreparedStatement pst -> a
+    java.sql.PreparedStatement newInput -> b
+    java.sql.PreparedStatement statusModify -> c
+    boolean Init() -> a
+    boolean CheckHasNewInput() -> b
+    java.util.Vector GetAllTask() -> a
+    boolean ModifyStatus(java.lang.String,int) -> a
+com.ict.twitter.DatabaseBean.InputTaskBean -> Z:
+    int ID -> a
+    java.lang.String TaskName -> a
+    java.lang.String TaskParameter -> b
+    java.lang.String TaskParameter2 -> c
+    com.ict.twitter.CrawlerServer.InputType InputType -> a
+    int TaskWeight -> b
+com.ict.twitter.DatabaseBean.WebOpLogOp -> aa:
+    java.sql.Connection con -> a
+    java.sql.PreparedStatement pst -> a
+    boolean Insert(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int) -> a
+com.ict.twitter.MessageBus.GetAceiveMqConnection -> ab:
+    org.apache.activemq.ActiveMQConnection StaticGetConnection() -> a
+com.ict.twitter.MessageBus.Receiver -> ac:
+    javax.jms.Session session -> a
+    javax.jms.Destination destination -> a
+    javax.jms.MessageConsumer consumer -> a
+    com.ict.twitter.CrawlerNode.Node node -> a
+    com.ict.twitter.CrawlerServer.CrawlerServer server -> a
+    boolean isNode -> a
+    java.lang.String ReceiverName -> a
+    void init(javax.jms.Connection,java.lang.String,boolean,javax.jms.MessageListener,boolean) -> a
+    void Exit() -> a
+    java.lang.String Receive() -> a
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.MessageBus.Sender -> ad:
+    javax.jms.Session session -> a
+    javax.jms.Destination destination -> a
+    javax.jms.MessageProducer producer -> a
+    java.lang.String currentQueue -> a
+    boolean iSTopic -> a
+    org.apache.activemq.ActiveMQConnection con -> a
+    void init(javax.jms.Connection,java.lang.String,boolean) -> a
+    void Exit() -> a
+    boolean checkConnectable() -> a
+    boolean Send(java.lang.String) -> a
+    boolean Send(java.lang.Object) -> a
+com.ict.twitter.MessageBusTest.ClientsID -> ae:
+    com.ict.twitter.MessageBusTest.ClientsID NONE -> a
+    com.ict.twitter.MessageBusTest.ClientsID TwitterAPI -> b
+    com.ict.twitter.MessageBusTest.ClientsID TwitterWEB -> c
+    com.ict.twitter.MessageBusTest.ClientsID FacebookAPI -> d
+    com.ict.twitter.MessageBusTest.ClientsID FacebookWEB -> e
+    com.ict.twitter.MessageBusTest.ClientsID ALL -> f
+    com.ict.twitter.MessageBusTest.ClientsID[] $VALUES -> a
+    com.ict.twitter.MessageBusTest.ClientsID[] values() -> a
+    java.lang.String toString() -> toString
+com.ict.twitter.MessageBusTest.ControlClient -> af:
+    com.ict.twitter.MessageBusTest.ClientsID Name -> a
+    com.ict.twitter.MessageBusTest.WorkState currentWs -> a
+    com.ict.twitter.MessageBus.Receiver controlrecever -> a
+    com.ict.twitter.MessageBus.Sender controlSender -> a
+    com.ict.twitter.MessageBus.Sender crawlInfoSender -> b
+    com.ict.twitter.MessageBusTest.NodeControlMessageProcess ncmp -> a
+    com.ict.twitter.MessageBusTest.NodeCondition mycondition -> a
+    boolean isRunning -> a
+    javax.jms.Connection con -> a
+    void Initiallize() -> a
+    void run() -> run
+    void finalize() -> finalize
+    boolean ToStart() -> a
+    boolean ToPause() -> b
+    boolean ToResume() -> c
+    boolean ToStop() -> d
+    boolean ToRestart() -> e
+    boolean ToDisplay() -> f
+    boolean ToShow(com.ict.twitter.MessageBusTest.ControlCommandMessage) -> a
+    void NodeSendFailToExecuteCommand(com.ict.twitter.MessageBusTest.ControlCommandMessage) -> a
+com.ict.twitter.MessageBusTest.ControlCommandMessage -> ag:
+    com.ict.twitter.MessageBusTest.ClientsID nodeID -> a
+    java.lang.String targetName -> a
+    com.ict.twitter.MessageBusTest.WorkState workState -> a
+    java.lang.String information -> b
+    com.ict.twitter.MessageBusTest.ControlCommandMessage lastMs -> a
+com.ict.twitter.MessageBusTest.ControlMessageProcess -> ah:
+    com.ict.twitter.MessageBusTest.ControlCommandMessage commandMessage -> a
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.MessageBusTest.ControlServer -> ai:
+    java.lang.String Name -> a
+    com.ict.twitter.MessageBus.Receiver controlRecever -> a
+    com.ict.twitter.MessageBus.Receiver crawlInfoRecever -> b
+    com.ict.twitter.MessageBus.Sender mysender -> a
+    com.ict.twitter.MessageBusTest.ServerControlMessageProcess scmp -> a
+    com.ict.twitter.MessageBusTest.ServerCrawlerMessageProcess sCrawlerMessageProcess -> a
+    org.apache.commons.logging.Log log -> a
+    boolean isRunning -> a
+    java.util.Hashtable allNodeCondition -> a
+    java.util.Hashtable clients -> b
+    java.lang.String status -> b
+    void run() -> run
+    boolean startControlClient() -> a
+    void onMessage(javax.jms.Message) -> onMessage
+    void finalize() -> finalize
+    void setState(com.ict.twitter.MessageBusTest.ClientsID,com.ict.twitter.MessageBusTest.WorkState) -> a
+com.ict.twitter.MessageBusTest.CrawlerMessage -> aj:
+    com.ict.twitter.MessageBusTest.ClientsID nodeID -> a
+    long MessageID -> a
+    boolean Incremental -> a
+    java.lang.String reportTime -> a
+    int MessageCount -> a
+    int MessageRelationShipCount -> b
+    int UserCount -> c
+    int UserRelationShipCount -> d
+    java.lang.String show() -> a
+com.ict.twitter.MessageBusTest.CrawlerMessageProcess -> ak:
+    com.ict.twitter.MessageBusTest.CrawlerMessage crawlerMessage -> a
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.MessageBusTest.FacebookWEBControlClient -> al:
+    com.ict.twitter.CrawlerServer.FBCrawlerServer server -> a
+    java.lang.Thread serverThread -> a
+    boolean ToStart() -> a
+    boolean ToPause() -> b
+    boolean ToResume() -> c
+    boolean ToDisplay() -> f
+    boolean ToStop() -> d
+    boolean ToRestart() -> e
+com.ict.twitter.MessageBusTest.MQMessage -> am:
+com.ict.twitter.MessageBusTest.MessageProcess -> an:
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.MessageBusTest.MessagebusNode -> ao:
+com.ict.twitter.MessageBusTest.NodeCondition -> ap:
+    com.ict.twitter.MessageBusTest.ClientsID name -> a
+    com.ict.twitter.MessageBusTest.WorkState ws -> a
+    int MessageCount -> a
+    int MessageRelationShipCount -> b
+    int UserCount -> c
+    int UserRelationShipCount -> d
+    void show() -> a
+com.ict.twitter.MessageBusTest.NodeControlMessageProcess -> aq:
+    com.ict.twitter.MessageBusTest.ControlClient client -> a
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.MessageBusTest.ServerControlMessageProcess -> ar:
+    com.ict.twitter.MessageBusTest.ControlServer myserver -> a
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.MessageBusTest.ServerCrawlerMessageProcess -> as:
+    com.ict.twitter.MessageBusTest.ControlServer myserver -> a
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.MessageBusTest.WorkState -> at:
+    com.ict.twitter.MessageBusTest.WorkState start -> a
+    com.ict.twitter.MessageBusTest.WorkState working -> b
+    com.ict.twitter.MessageBusTest.WorkState stop -> c
+    com.ict.twitter.MessageBusTest.WorkState pause -> d
+    com.ict.twitter.MessageBusTest.WorkState suspend -> e
+    com.ict.twitter.MessageBusTest.WorkState resume -> f
+    com.ict.twitter.MessageBusTest.WorkState toRestart -> g
+    com.ict.twitter.MessageBusTest.WorkState error -> h
+    com.ict.twitter.MessageBusTest.WorkState show -> i
+    com.ict.twitter.MessageBusTest.WorkState display -> j
+    com.ict.twitter.MessageBusTest.WorkState[] $VALUES -> a
+com.ict.twitter.Report.CrawlerServerReporter -> au:
+    java.lang.String ClinetID -> a
+    java.sql.Connection con -> a
+    java.sql.PreparedStatement ps -> a
+    boolean initiallize() -> a
+    boolean doReportIncrementByDataBase(com.ict.twitter.Report.ReportData) -> a
+    boolean doReportIncrementTotal(int,int,int) -> a
+com.ict.twitter.Report.NodeReporterReceiver -> av:
+    void onMessage(javax.jms.Message) -> onMessage
+com.ict.twitter.Report.NodeReporterSender -> aw:
+com.ict.twitter.Report.ReportData -> ax:
+    int message_increment -> a
+    int message_rel_increment -> b
+    int user_increment -> c
+    int user_rel_increment -> d
+    java.lang.String NodeName -> a
+    void add(com.ict.twitter.Report.ReportData) -> a
+com.ict.twitter.Report.ReportDataType -> ay:
+    com.ict.twitter.Report.ReportDataType Message -> a
+    com.ict.twitter.Report.ReportDataType Message_rel -> b
+    com.ict.twitter.Report.ReportDataType User -> c
+    com.ict.twitter.Report.ReportDataType User_rel -> d
+    com.ict.twitter.Report.ReportDataType[] $VALUES -> a
+    com.ict.twitter.Report.ReportDataType[] values() -> a
+com.ict.twitter.StatusTrack.BaseTracker -> az:
+com.ict.twitter.StatusTrack.CrawlTaskDB -> aA:
+    com.ict.twitter.tools.DbOperation dbOp -> a
+    java.sql.Connection con -> a
+    java.sql.PreparedStatement pst -> a
+    java.sql.PreparedStatement pstUpdateStatus -> b
+    java.sql.PreparedStatement pstFind -> c
+    int AddTask(java.lang.String,com.ict.twitter.StatusTrack.CrawlTaskType) -> a
+    boolean FinishTask(java.lang.String,com.ict.twitter.StatusTrack.CrawlTaskType,boolean) -> a
+    boolean SetTaskStatus(java.lang.String,com.ict.twitter.StatusTrack.CrawlTaskType,java.lang.String) -> a
+com.ict.twitter.StatusTrack.CrawlTaskType -> aB:
+    com.ict.twitter.StatusTrack.CrawlTaskType Search -> a
+    com.ict.twitter.StatusTrack.CrawlTaskType TimeLine -> b
+    com.ict.twitter.StatusTrack.CrawlTaskType Following -> c
+    com.ict.twitter.StatusTrack.CrawlTaskType Follower -> d
+    com.ict.twitter.StatusTrack.CrawlTaskType Profile -> e
+    com.ict.twitter.StatusTrack.CrawlTaskType[] $VALUES -> a
+com.ict.twitter.StatusTrack.CrawlUser -> aC:
+    java.lang.String username -> a
+    long userid -> a
+    boolean isKeyUser -> a
+    java.sql.Timestamp createTime -> a
+    int deepth -> a
+com.ict.twitter.StatusTrack.CrawlUserDB -> aD:
+    com.ict.twitter.tools.DbOperation dbOp -> a
+    java.sql.Connection con -> a
+    java.sql.PreparedStatement pst -> a
+    void Init() -> a
+    int insertUser(com.ict.twitter.StatusTrack.CrawlUser[]) -> a
+    int insertUserItem(java.lang.String,int,boolean,java.sql.Timestamp,int) -> a
+    void checkBatch(int[]) -> a
+com.ict.twitter.StatusTrack.MyTracker -> aE:
+    com.ict.twitter.StatusTrack.CrawlTaskDB statusdb -> a
+    int AddTask(com.ict.twitter.task.beans.Task) -> a
+    void FinishTask(com.ict.twitter.task.beans.Task) -> a
+    void FailTask(com.ict.twitter.task.beans.Task) -> b
+    com.ict.twitter.StatusTrack.CrawlTaskType TaskType2CrawlTaskType(com.ict.twitter.task.beans.Task$TaskType) -> a
+com.ict.twitter.StatusTrack.MyTracker$1 -> aF:
+    int[] $SwitchMap$com$ict$twitter$task$beans$Task$TaskType -> a
+com.ict.twitter.TwitterClientManager -> aG:
+    org.apache.http.impl.client.DefaultHttpClient httpclient -> a
+    org.apache.http.conn.scheme.SchemeRegistry sr -> a
+    org.apache.http.impl.conn.PoolingClientConnectionManager cm -> a
+    void Initiallize() -> a
+    org.apache.http.impl.client.DefaultHttpClient getClientByIpAndPort(java.lang.String,int) -> a
+    org.apache.http.impl.client.DefaultHttpClient getClientNoProxy() -> a
+com.ict.twitter.TwitterClientManager$1 -> aH:
+    com.ict.twitter.TwitterClientManager this$0 -> a
+    java.security.cert.X509Certificate[] getAcceptedIssuers() -> getAcceptedIssuers
+    void checkClientTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkClientTrusted
+    void checkServerTrusted(java.security.cert.X509Certificate[],java.lang.String) -> checkServerTrusted
+com.ict.twitter.TwitterLoginCookieStore -> aI:
+    java.util.List savetodb() -> a
+    void resume(java.lang.Object) -> a
+com.ict.twitter.WebOperationAjax -> aJ:
+    java.lang.String logFile -> a
+    java.lang.String base -> b
+    java.lang.String str1 -> c
+    java.lang.String openLink(org.apache.http.impl.client.DefaultHttpClient,java.lang.String,int) -> a
+    java.lang.String openLink(org.apache.http.impl.client.DefaultHttpClient,java.lang.String) -> a
+    byte[] getSource(org.apache.http.impl.client.DefaultHttpClient,java.lang.String) -> a
+com.ict.twitter.WebOperationResult -> aK:
+    com.ict.twitter.WebOperationResult Success -> a
+    com.ict.twitter.WebOperationResult Fail -> b
+    com.ict.twitter.WebOperationResult TimeOut -> c
+    com.ict.twitter.WebOperationResult[] $VALUES -> a
+com.ict.twitter.analyser.beans.MessageDetail -> aL:
+    java.lang.String messageid -> a
+    java.util.List users -> a
+    java.lang.String weburl -> b
+    java.lang.String imgurl -> c
+    java.lang.String getMessageid() -> a
+    void setMessageid(java.lang.String) -> a
+    java.util.List getUsers() -> a
+    void setUsers(java.util.List) -> a
+    java.lang.String getWeburl() -> b
+    void setWeburl(java.lang.String) -> b
+    java.lang.String getImgurl() -> c
+    void setImgurl(java.lang.String) -> c
+com.ict.twitter.analyser.beans.TimeLine -> aM:
+    java.lang.String id -> a
+    java.lang.String author -> b
+    java.lang.String content -> c
+    java.lang.String date -> d
+    java.lang.String link -> e
+    int reTWcount -> a
+    int replyCount -> b
+    int TaskTrackID -> c
+    int MainTypeID -> d
+    java.util.regex.Pattern p1 -> b
+    java.lang.String getId() -> a
+    void setId(java.lang.String) -> a
+    java.lang.String getAuthor() -> b
+    void setAuthor(java.lang.String) -> b
+    java.lang.String getContent() -> c
+    void setContent(java.lang.String) -> c
+    java.lang.String getDate() -> d
+    void setDate(java.lang.String) -> d
+    void setLink(java.lang.String) -> e
+    void setReTWcount(int) -> a
+    void setReplyCount(int) -> b
+    void show() -> a
+    int getTaskTrackID() -> a
+    void setTaskTrackID(int) -> c
+    int getMainTypeID() -> b
+    void setMainTypeID(int) -> d
+com.ict.twitter.analyser.beans.TwiUser -> aN:
+    java.lang.String webpageLink -> a
+    java.lang.String name -> b
+    java.lang.String AliasName -> c
+    int following -> a
+    int followers -> b
+    java.lang.String location -> d
+    java.lang.String summarized -> e
+    java.lang.String profileImageUrl -> f
+    java.util.regex.Pattern p1 -> a
+    java.lang.String getWebpageLink() -> a
+    java.lang.String getProfileImageUrl() -> b
+    java.lang.String getName() -> c
+    void setName(java.lang.String) -> a
+    java.lang.String getAliasName() -> d
+    void setAliasName(java.lang.String) -> b
+    java.lang.String getLocation() -> e
+    java.lang.String getSummarized() -> f
+    void setFollowing(int) -> a
+    void setFollowers(int) -> b
+com.ict.twitter.analyser.beans.UserProfile -> aO:
+    java.lang.String User_id -> a
+    java.lang.String user_screen_name -> b
+    java.lang.String picture_url -> c
+    byte[] picturedata -> a
+    java.lang.String selfintroduction -> d
+    java.lang.String location -> e
+    int tweet -> a
+    int following -> b
+    int follower -> c
+    java.lang.String toString() -> toString
+    java.lang.String getUser_id() -> a
+    void setUser_id(java.lang.String) -> a
+    java.lang.String getUser_screen_name() -> b
+    void setUser_screen_name(java.lang.String) -> b
+    java.lang.String getPicture_url() -> c
+    void setPicture_url(java.lang.String) -> c
+    byte[] getPicturedata() -> a
+    void setPicturedata(byte[]) -> a
+    void setSelfintroduction(java.lang.String) -> d
+    void setLocation(java.lang.String) -> e
+    int getTweet() -> a
+    void setTweet(int) -> a
+    int getFollowing() -> b
+    void setFollowing(int) -> b
+    int getFollower() -> c
+    void setFollower(int) -> c
+com.ict.twitter.analyser.beans.UserRelationship -> aP:
+    java.lang.String user_A -> a
+    java.lang.String user_B -> b
+    java.lang.String linkType -> c
+    java.util.regex.Pattern p1 -> a
+    java.lang.String getUser_B() -> a
+    java.lang.String getUser_A() -> b
+    java.lang.String getLinkType() -> c
+com.ict.twitter.analyser.filter.TimeTransformer -> aQ:
+    java.lang.String NormTimeFormat(java.lang.String) -> a
+com.ict.twitter.plantform.LogSys -> aR:
+    org.apache.log4j.Logger debugLogger -> a
+    org.apache.log4j.Logger nodeLogger -> b
+    org.apache.log4j.Logger crawlerServLogger -> c
+    org.apache.log4j.Logger clientLogger -> d
+com.ict.twitter.plantform.PlatFormMain -> aS:
+    org.apache.commons.logging.Log log -> a
+com.ict.twitter.task.beans.Task -> aT:
+    com.ict.twitter.task.beans.Task$TaskType ownType -> a
+    java.lang.String targetString -> a
+    com.ict.twitter.task.beans.Task$MainType mainType -> a
+    int mainTypeID -> a
+    boolean isTrack -> a
+    int taskTrackID -> b
+    com.ict.twitter.task.beans.Task$TaskType getOwnType() -> a
+    void setOwnType(com.ict.twitter.task.beans.Task$TaskType) -> a
+    java.lang.String getTargetString() -> a
+    void setTargetString(java.lang.String) -> a
+    java.lang.String toString() -> toString
+    java.lang.String TaskTOString() -> b
+    boolean isTrack() -> a
+    void setTrack(boolean) -> a
+    int getTaskTrackID() -> a
+    void setTaskTrackID(int) -> a
+    com.ict.twitter.task.beans.Task$MainType getMainType() -> a
+    void setMainType(com.ict.twitter.task.beans.Task$MainType) -> a
+    int getMainTypeID() -> b
+    void setMainTypeID(int) -> b
+com.ict.twitter.task.beans.Task$MainType -> aU:
+    com.ict.twitter.task.beans.Task$MainType KeyUser -> a
+    com.ict.twitter.task.beans.Task$MainType KeyWord -> b
+    com.ict.twitter.task.beans.Task$MainType Topic -> c
+    com.ict.twitter.task.beans.Task$MainType Urgent -> d
+    com.ict.twitter.task.beans.Task$MainType Normal -> e
+    com.ict.twitter.task.beans.Task$MainType[] $VALUES -> a
+    com.ict.twitter.task.beans.Task$MainType valueOf(java.lang.String) -> a
+com.ict.twitter.task.beans.Task$TaskType -> aV:
+    com.ict.twitter.task.beans.Task$TaskType About -> a
+    com.ict.twitter.task.beans.Task$TaskType TimeLine -> b
+    com.ict.twitter.task.beans.Task$TaskType Following -> c
+    com.ict.twitter.task.beans.Task$TaskType Followers -> d
+    com.ict.twitter.task.beans.Task$TaskType Search -> e
+    java.util.Map stringToEnum -> a
+    com.ict.twitter.task.beans.Task$TaskType[] $VALUES -> a
+    com.ict.twitter.task.beans.Task$TaskType[] values() -> a
+    com.ict.twitter.task.beans.Task$TaskType fromString(java.lang.String) -> a
+com.ict.twitter.tools.AllHasInsertedException -> aW:
+com.ict.twitter.tools.BasePath -> aX:
+    java.lang.String getBase() -> a
+com.ict.twitter.tools.DBFactory -> aY:
+    java.util.Properties pro -> a
+    java.sql.Connection getConnection() -> a
+com.ict.twitter.tools.DbOperation -> aZ:
+    java.lang.String ip -> a
+    java.lang.String driver -> b
+    java.lang.String user -> c
+    java.lang.String password -> d
+    java.lang.String databaseName -> e
+    java.lang.String encode -> f
+    int patchCount -> a
+    java.sql.Connection connect -> a
+    java.sql.Statement stmt -> a
+    void reginster() -> a
+    java.sql.Connection conDB() -> a
+    void createStmt() -> b
+    boolean insertWithoutBatch(java.lang.String) -> a
+    java.sql.Connection GetConnection() -> b
+com.ict.twitter.tools.MulityInsertDataBase -> ba:
+    java.lang.String ip -> a
+    java.lang.String user -> b
+    java.lang.String password -> c
+    java.lang.String databaseName -> d
+    java.lang.String encode -> e
+    java.sql.Connection connection -> a
+    java.sql.PreparedStatement messageps -> a
+    java.sql.PreparedStatement messagdetailps -> b
+    java.sql.PreparedStatement userps -> c
+    java.sql.PreparedStatement userrelps -> d
+    java.sql.PreparedStatement userprofile -> e
+    java.sql.Connection getConnection() -> a
+    boolean insertIntoMessage(com.ict.twitter.analyser.beans.TimeLine[]) -> a
+    boolean insertIntoMessageDetail(com.ict.twitter.analyser.beans.MessageDetail[]) -> a
+    boolean insertIntoUser(com.ict.twitter.analyser.beans.TwiUser[]) -> a
+    boolean insertIntoUserRel(com.ict.twitter.analyser.beans.UserRelationship[]) -> a
+    void checkBatch(int[]) -> a
+    void insertIntoUserProfile(com.ict.twitter.analyser.beans.UserProfile) -> a
+com.ict.twitter.tools.ReadTxtFile -> bb:
+    java.lang.String file -> a
+    java.util.Vector read() -> a
+com.ict.twitter.tools.SimpleXmlAnalyser -> bc:
+    java.lang.String str -> a
+    java.lang.String getFirstValueByTag(java.lang.String) -> a
+    java.lang.String[] getValueByTag(java.lang.String) -> a
+com.ict.twitter.tools.UTF8Filter -> bd:
+    java.lang.String queryStr -> a
+    boolean IsAllUTF8(java.lang.String) -> a
+    java.lang.String CleanLeaveUTF8(java.lang.String) -> a
