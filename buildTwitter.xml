@@ -37,7 +37,7 @@
     		</fileset>
     	</delete>    	    	
     	<echo message="Clean build Start Build"/>
-    	<mkdir dir="${basedir}/build/classes"/> 
+    	<mkdir dir="${basedir}/build/classes"/>
     	<mkdir dir="${basedir}/build/mainlog"/>    	
     	<copydir dest="${basedir}/build/config" src="${basedir}/config"></copydir>
     	<copydir dest="${basedir}/build/UsefulFile" src="${basedir}/UsefulFile"></copydir>
@@ -72,8 +72,17 @@
 				    <fileset dir="${basedir}/lib/JUnit">
 				    <include name="*.jar"/>
 		     		</fileset>
+					<filelist>
+						<file name="${basedir}/src/hbase-site.xml"/>
+					</filelist>
 			</classpath>			
-		</javac>		
+		</javac>
+		<copy todir="${basedir}/build/">
+			<fileset dir="${basedir}/src">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		
     </target>
 
 	

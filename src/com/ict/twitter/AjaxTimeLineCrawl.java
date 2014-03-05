@@ -50,7 +50,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		AjaxTimeLineCrawl at=new AjaxTimeLineCrawl(httpclient,null);
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		at.doCrawl(new Task(TaskType.TimeLine,"BigBang_CBS"),dbo,users,new ReportData());
+		at.doCrawl(new Task(TaskType.TimeLine,"wenyunchao"),dbo,users,new ReportData());
 		//at.doCrawl(new Task(TaskType.TimeLine,"mynamexu"),dbo,users,new ReportData());
 		at.service.shutdown();
 
@@ -65,7 +65,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 	public boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelatUsers,ReportData reportData){
 		String userID=task.getTargetString();
 		boolean has_more_items=false;
-		String nextmaxID="";
+		String nextmaxID="416792326216773631";
 		String URL="";
 		AjaxTimeLineAnalyser TWAna=new AjaxTimeLineAnalyser(dbo,task);
 		boolean flag=true;

@@ -65,7 +65,7 @@ public class WebOperationAjax {
 		Date date=new Date();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 		String filename=sdf.format(date);
-		SaveTxtFile sxf=new SaveTxtFile(filename, false);
+		SaveTxtFile sxf=new SaveTxtFile("Output/"+filename, false);
 		System.out.println("保存的文件名是："+filename);
 		sxf.Append(Content);
 		sxf.close();

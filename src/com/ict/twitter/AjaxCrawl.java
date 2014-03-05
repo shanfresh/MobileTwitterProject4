@@ -9,6 +9,7 @@ import com.ict.twitter.DatabaseBean.WebOpLogOp;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.StatusTrack.MyTracker;
 import com.ict.twitter.analyser.beans.TwiUser;
+import com.ict.twitter.hbase.TwitterHbase;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.DbOperation;
@@ -23,8 +24,18 @@ public abstract class AjaxCrawl {
 	public ExecutorService service = Executors.newCachedThreadPool();
 	public WebOpLogOp weboplog;
 	public DbOperation dboperation;
-	public abstract boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData);
 
+	/////////////////////////////HBASE///////////////////////////////////////////
+	protected boolean savetohbase=false;
+	protected TwitterHbase hbase=null; 
+	//////////////////////////////////////////////////////////////////////////////
+	public void SetHabae(TwitterHbase hbase){
+		savetohbase=true;
+		this.hbase=hbase;
+	}
+	
+	public abstract boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData);
+	
 	public String openLink(final DefaultHttpClient httpclient,final String targetUrl,Task task,int count) {
 		String WebPageContent = null;
 		Future<String> future = service.submit(new Callable<String>() {

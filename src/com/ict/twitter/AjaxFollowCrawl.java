@@ -10,6 +10,8 @@ import org.json.simple.parser.ParseException;
 
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
+import com.ict.twitter.hbase.MessageTwitterHbase;
+import com.ict.twitter.hbase.TwitterHbase;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.task.beans.Task.TaskType;
@@ -117,7 +119,9 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		AjaxFollowCrawl at=new AjaxFollowCrawl(httpclient,false,null);
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		at.doCrawl(new Task(TaskType.Following,"BigBang_CBS"),dbo,users,new ReportData());
+		
+		
+		at.doCrawl(new Task(TaskType.Following,"wenyunchao"),dbo,users,new ReportData());
 		
 
 	}

@@ -4,6 +4,7 @@ import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserRelationship;
 import com.ict.twitter.analyser.filter.TimeTransformer;
+import com.ict.twitter.hbase.TwitterHbase;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
@@ -19,27 +20,30 @@ public class AjaxAnalyser {
 	}
 	DbOperation dbo;
 	Task task;
+	AjaxCrawl ajaxcrawl;
+
 	protected TimeTransformer timeTrans;
 	public MulityInsertDataBase batchdb;
-	private AjaxAnalyser(DbOperation dbo){
-		if(dbo!=null)
-			this.dbo=dbo;
-		else
-			this.dbo=new DbOperation();
+	/////////////////////////////HBASE///////////////////////////////////////////
+	protected boolean savetohbase=false;
+	protected TwitterHbase hbase=null; 
+	//////////////////////////////////////////////////////////////////////////////
+	public void SetHabae(TwitterHbase hbase){
+		savetohbase=true;
+		this.hbase=hbase;
 	}
-	private AjaxAnalyser(MulityInsertDataBase batchdb){
+
+	public AjaxAnalyser(MulityInsertDataBase batchdb,Task task){//创建分析器的同时将Task传给分析器，方便存放数据库
+		
 		if(batchdb!=null){
 			this.batchdb=batchdb;
 		}else{
 			this.batchdb=new MulityInsertDataBase();
 		}
-	}
-	public AjaxAnalyser(MulityInsertDataBase batchdb,Task task){//创建分析器的同时将Task传给分析器，方便存放数据库
-		this(batchdb);
 		this.task=task;
 		timeTrans=new TimeTransformer();
 	}
-	
+
 	
 	
 	//采集的游动标记位置
@@ -99,6 +103,7 @@ public class AjaxAnalyser {
 		return dbo.insertWithoutBatch(sqlStr);	
 		
 	}
+
 
 	
 }

@@ -1,15 +1,18 @@
 package com.ict.twitter;
 
+import java.io.IOException;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import com.ict.twitter.AjaxAnalyser;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
+import com.ict.twitter.hbase.MessageTwitterHbase;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.AllHasInsertedException;
@@ -30,7 +33,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		// TODO Auto-generated method stub
 
 	}
-	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users,ReportData reportData) throws AllHasInsertedException{
+	public AnalyserCursor doAnalyse (String src,Vector<TwiUser> users,ReportData reportData) throws AllHasInsertedException,Exception{
 		Document doc=Jsoup.parse(src, "/");
 		Elements follows=doc.getElementsByAttributeValueStarting("class","js-stream-item stream-item stream-item expanding-stream-item");
 		
@@ -79,7 +82,10 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 			TimeLineArray[i].setMainTypeID(task.getMainTypeID());
 			TimeLineArray[i].setTaskTrackID(task.getTaskTrackID());
 		}
+		//hbase
+		//((MessageTwitterHbase)hbase).InsertIntoTable(TimeLineArray);
 		super.batchdb.insertIntoMessage(TimeLineArray);
+		
 		AnalyserCursor res=new AnalyserCursor(tweetID,follows.size());
 		reportData.message_increment+=timelines.size();
 		reportData.user_increment+=follows.size();

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public  class Task implements Serializable{
 	public enum TaskType{
-		About,TimeLine,Following,Followers,Search;
+		About,TimeLine,Following,Followers,Search,MessageRel;
 		private static final Map<String, TaskType> stringToEnum = new HashMap<String, TaskType>();
 	    static {
 	        // Initialize map from constant name to enum constant

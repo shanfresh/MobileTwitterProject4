@@ -33,6 +33,7 @@ public class MulityInsertDataBase {
 	private PreparedStatement userrelps=null;
 	private PreparedStatement userprofile=null;
 	
+	private PreparedStatement messagereteet=null;
 	
 	
 	public MulityInsertDataBase(){
@@ -182,8 +183,9 @@ public class MulityInsertDataBase {
 				}
 				messagdetailps.setString(3,MessageDetail[i].getWeburl());
 				messagdetailps.setString(4,MessageDetail[i].getImgurl());
-				messagdetailps.executeBatch();
+				
 			}
+			messagdetailps.executeBatch();
 			con.commit();	
 		} catch( BatchUpdateException ex){
 			int[] res = ex.getUpdateCounts();
@@ -199,6 +201,44 @@ public class MulityInsertDataBase {
 		}
 		return true;
 		
+	}
+	
+	public boolean insertIntoMessageReTeet(MessageReteet[] MessageReteet){
+		Connection con=this.getConnection();
+		try {
+			con.setAutoCommit(false);
+			
+			if(messagereteet==null){
+				messagereteet = con.prepareStatement("insert into message_reteet(`message_id`,`user_id`,`user_name`,`user_aliasname`,`content`,`date`) values(?,?,?,?,?,?)");
+			}
+			messagereteet.clearBatch();
+			for(int i=0;i<MessageReteet.length;i++){
+				MessageReteet mr=MessageReteet[i];
+				messagereteet.setString(1, mr.getMessage_id());
+				messagereteet.setString(2,mr.getUser_id());
+				messagereteet.setString(3, mr.getUser_name());
+				messagereteet.setString(4, mr.getUser_aliasname());
+				messagereteet.setString(5, mr.getContent());
+				messagereteet.setString(6, mr.getDate());
+				messagereteet.addBatch();
+				
+			}
+			messagereteet.executeBatch();
+			con.commit();
+			
+		} catch( BatchUpdateException ex){
+			int[] res = ex.getUpdateCounts();
+			try {
+				checkBatch(res);
+			} catch (AllHasInsertedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
 	}
 	
 	public boolean insertIntoUser(TwiUser[] users) throws AllHasInsertedException{

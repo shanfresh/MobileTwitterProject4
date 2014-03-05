@@ -11,6 +11,8 @@ import org.json.simple.parser.ParseException;
 import com.ict.twitter.AjaxAnalyser.AnalyserCursor;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
+import com.ict.twitter.hbase.MessageTwitterHbase;
+import com.ict.twitter.hbase.TwitterHbase;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.task.beans.Task.TaskType;
@@ -49,7 +51,13 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		Task task=new Task(TaskType.Search,"薄熙来");
 		ReportData reportData=new ReportData();
+		MessageTwitterHbase hbase=new MessageTwitterHbase("message");
+		test.SetHabae(hbase);
 		test.doCrawl(task, dbo, users, reportData);
+		
+		
+		
+		
 		System.out.println("current Search String Size:"+users.size());
 	}
 	
@@ -59,6 +67,8 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		boolean has_next=false;
 		String next_max_id=null;
 		AjaxSearchAnalyser ana=new AjaxSearchAnalyser(dbo,task);
+		ana.SetHabae(hbase);
+		
 		String URL;
 		int count=1;
 		do{
@@ -98,7 +108,8 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			}catch (Exception ex){
 				has_next=false;
 				LogSys.nodeLogger.debug("当前SearchAnalyse解析发生错误["+keyWords+"]");
-				return true;
+				ex.printStackTrace();
+				return false;
 			}	
 			if(map.get("has_more_items")!=null){
 				has_next=(boolean)map.get("has_more_items");
