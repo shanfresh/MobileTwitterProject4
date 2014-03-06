@@ -71,6 +71,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		boolean flag=true;
 		AnalyserCursor result;
 		int count=1;
+		int targetPageCount=task.getPageCount();
 		do{
 			if(nextmaxID==null||nextmaxID.equals("")){
 				URL=String.format(baseUrl, userID,"");
@@ -78,7 +79,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				URL=String.format(baseUrl, userID,max_id+nextmaxID);
 			}
 			
-			String content=openLink(httpclient, URL,task,count+1);
+			String content=openLink(httpclient, URL,task,count);
 			if(content==null||(content.length())<=20){
 				System.err.println("web opreation error content is null");
 				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, dbo);
@@ -118,6 +119,10 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 			}
 			count++;
 			reportData.message_increment+=result.size;
+			if(targetPageCount!=-1&&count){
+				
+			}
+			
 		}while(has_more_items);
 		System.out.println("共分析了"+count+"次 (20twi)");
 		return flag;
