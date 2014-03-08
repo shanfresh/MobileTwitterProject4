@@ -38,8 +38,10 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 	public AjaxFollowCrawl(DefaultHttpClient httpclient,boolean isFollowing,DbOperation dboperation){
 		super.dboperation=dboperation;
 		if(isFollowing){
+			this.isFollowing=true;
 			baseUrl="/%s/following/users?%sinclude_available_features=1&include_entities=1&is_forward=true";;
 		}else{
+			this.isFollowing=false;
 			baseUrl="/%s/followers/users?%sinclude_available_features=1&include_entities=1&is_forward=true";;
 		}
 		this.httpclient=httpclient;
@@ -125,7 +127,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		at.doCrawl(task,dbo,users,new ReportData());
 		
 		for(TwiUser t:users){
-			System.out.println(t.toString());
+			
 		}
 		System.out.println(users.size());
 		
@@ -133,7 +135,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		users.toArray(userArray);
 		try{
 			if(users.size()>0){
-				dbo.insertIntoUser(userArray);
+				dbo.insertIntoUser(userArray,"user_wenyunchao");
 			}
 		}catch(AllHasInsertedException ex){
 			LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");
