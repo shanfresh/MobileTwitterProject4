@@ -76,8 +76,9 @@ public class TaskReceiver extends Receiver {
 		String taskTrackID=simxml.getFirstValueByTag("taskTrackID");
 		String MainTypeStr=simxml.getFirstValueByTag("MainType");
 		String MainTypeID_Str=simxml.getFirstValueByTag("MainTypeID");
-		t.setMainType(MainType.valueOf(MainTypeStr));
-		
+		String PageCount_Str=simxml.getFirstValueByTag("PageCount");
+		String TargetTableName_Str=simxml.getFirstValueByTag("TargetTableName");
+		t.setMainType(MainType.valueOf(MainTypeStr));		
 		t.setOwnType(TaskType.fromString(first));
 		t.setTargetString(valuestr);
 		if(isTrack!=null){
@@ -91,6 +92,16 @@ public class TaskReceiver extends Receiver {
 		if(MainTypeID_Str!=null){
 			int MainTypeID=Integer.parseInt(MainTypeID_Str);
 			t.setMainTypeID(MainTypeID);
+		}
+		if(PageCount_Str!=null){
+			t.setPageCount(Integer.parseInt(PageCount_Str));
+		}else{
+			t.setPageCount(-1);
+		}
+		if(TargetTableName_Str!=null){
+			t.setTargetTableName(TargetTableName_Str);
+		}else{
+			t.setTargetTableName(null);
 		}
 		return t;
 	}

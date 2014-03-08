@@ -24,7 +24,7 @@ import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.plantform.PlatFormMain;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.task.beans.Task.MainType;
-
+import com.ict.twitter.task.beans.Task.TaskType;
 import com.ict.twitter.tools.BasePath;
 
 import java.sql.SQLException;
@@ -40,7 +40,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	public enum ServerStep{
 		init,searchStart,searchEnd,keyuserCaijiStart,keyuserCaijiEnd,normalCaijiStart,normalCaijiEnd
 	}
-	protected static enum OP {START, STOP, DUMP, RESTART};
+	protected static enum OP {START, STOP, DUMP, RESTART, CUSTORM, REFRESH};
 	public com.ict.twitter.CrawlerServer.CrawlerServer.ServerStep currentstep=ServerStep.init;
 	public int Normal_User_Deepth = 20;
 	
@@ -87,13 +87,15 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	protected OP op=null;
 	protected int deepth=10;
 	protected int keySearchCount=100;
+	protected String CustomTaskFolderDir="";
 	/***************************/
 	
 	/***************************/
 	private MyTracker tracker;
 	/***************************/
 	public CrawlerServer(){
-		this("-Command Start -Deepth 10 -KeySearchCount 10".split(" "));	
+		//this("-Command Start -Deepth 10 -KeySearchCount 10".split(" "));	
+		this("-Command Start -FolderDir D:\\ServerTask -Deepth 10 -KeySearchCount 10".split(" "));	
 		
 	}
 	public CrawlerServer(String[] args){
@@ -120,14 +122,23 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		if(op==OP.START){
 			Initiallize();
 			StartCrawlServer();
-		}else if(op==OP.STOP){
+		}else if(op==OP.CUSTORM){
+			LogSys.crawlerServLogger.info("正在进入用户自定义采集");
+			Initiallize();
+			StartCustormServer();
+		}else if(op==OP.REFRESH){
+			Initiallize();
+			StartRefreshServer();
+		}
+		else if(op==OP.STOP){
 			System.err.println("此处需要修复");
 			System.exit(-1);
 			//StopCrawlServer();
 		}
 		
 	}
-	public void checkArgs(){		
+	public void checkArgs(){
+		System.out.println("服务器正在检查配置参数");
 		for(int i=0;i<args.length;i++){
 			if(args[i].equals("-Command")){
 				String command=args[++i];
@@ -139,7 +150,18 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 					op=OP.DUMP;
 				}else if(command.equals("Restart")){
 					op=OP.RESTART;
-				}					
+				}else if(command.equals("Custorm")){
+					op=OP.CUSTORM;
+					if(args[++i].equalsIgnoreCase("-FolderDir")){
+						this.CustomTaskFolderDir=args[++i];
+						System.out.println("指定的任务文件夹是："+CustomTaskFolderDir);
+					}else{
+						System.err.println("没有指定FoldDir");
+						System.exit(-1);
+					}
+				}else if(command.equals("Refresh")){
+					op=OP.REFRESH;
+				}
 			}else if(args[i].equals("-Deepth")){
 				deepth=Integer.parseInt(args[++i]);
 			}else if(args[i].equals("-KeySearchCount")){
@@ -206,7 +228,54 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	
 		return true;
 	}
-	
+	//开启用户自定义采集
+	private boolean StartCustormServer(){
+		LogSys.crawlerServLogger.info("采集器总控端[自定义模式]启动");
+		try{
+			CollectionNodes();
+			System.err.println("FileName not typed");
+			sb.InitCustomerByFile(this,this.CustomTaskFolderDir);
+			sendNewStep(NodeStep.search_start);
+			SleepWithCount(5000);			
+			sendNewStep(NodeStep.search_end);
+			
+			LogSys.crawlerServLogger.info("正常采集结束All is Finish");
+		}catch(Exception ex){
+			ex.printStackTrace();
+			LogSys.crawlerServLogger.error("crawlServer exit with error");
+		}
+		LogSys.crawlerServLogger.info("采集器总控端停止");
+		return true;
+	}
+
+	private boolean StartRefreshServer(){
+		LogSys.crawlerServLogger.info("采集器总控端[刷新关键账户表推文模式]启动");
+		currentstep=ServerStep.searchStart;
+		try{
+			CollectionNodes();
+			//只取第一页的用户信息
+			sb.InitRefresh(this,"followings_to_wenyunchao","`followings_to_wenyunchao_message`",TaskType.TimeLine, 1);
+			sendNewStep(NodeStep.search_start);
+			while(currentstep!=ServerStep.searchEnd){
+				CollectNodesStatus();
+				SleepWithCount(60000);				
+				if(nodeManager.canNextStepByTaskBusName(MessageBusNames.KeyUserTask)){
+					currentstep=ServerStep.searchEnd;
+					nodeManager.show();
+				}else{
+					LogSys.crawlerServLogger.debug("不能进入下一个采集状态");
+					
+				}
+			}
+			
+			LogSys.crawlerServLogger.info("采集器总控端[刷新关键账户表推文模式]FINISH");
+		}catch(Exception ex){
+			ex.printStackTrace();
+			LogSys.crawlerServLogger.error("crawlServer exit with error");
+		}
+		
+		return true;
+	}
 	
 	/*Try To Stop Current CrawlServer~~
 	 * 1:TellNodeToPause (don't get Task from MessageBus);

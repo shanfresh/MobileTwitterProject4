@@ -90,8 +90,9 @@ public class AjaxRTCrawl extends AjaxCrawl {
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
 		AjaxRTCrawl reteetCrawl=new AjaxRTCrawl(httpclient,null);
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
-				
-		reteetCrawl.doCrawl(new Task(TaskType.MessageRel,"441031275470929920"),dbo,users,new ReportData());
+		//15:45:11	delete from message_reteet where message_id='441031275470929920'	5 row(s) affected	0.016 sec
+		//15:45:34	delete from message_reteet where message_id='441012049007480832'	3 row(s) affected	0.031 sec
+		reteetCrawl.doCrawl(new Task(TaskType.MessageRel,"441012049007480832"),dbo,users,new ReportData());
 		
 	}
 

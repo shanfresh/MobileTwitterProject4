@@ -73,7 +73,9 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			profile.setUser_id(UserID);
 			profile.setUser_screen_name(user_screen_name);
 			profileana.doAnylyze(htmlContent, profile);
-			byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
+			byte[] result=new byte[1];
+			System.out.println("时间问题，暂时不采集用户的profile中的图片内容");
+			//byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
 			profile.setPicturedata(result);
 			dbo.insertIntoUserProfile(profile);
 			System.out.println("insert into profile");
@@ -82,6 +84,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		}catch(Exception exe){
 			exe.printStackTrace();
 			LogSys.crawlerServLogger.error("ErrorIn AjaxProfileCrawl", exe.fillInStackTrace());
+			
 		}
 		return false;
 	}
@@ -96,7 +99,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
 		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
-		Task task=new Task(TaskType.About,"BigBang_CBS");
+		Task task=new Task(TaskType.About,"wenyunchao");
 		profilecrawl.doCrawl(task,dbo, users,new ReportData());
 		httpclient.getConnectionManager().shutdown();
 		profilecrawl.service.shutdown();

@@ -120,9 +120,24 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
 		
+		Task task=new Task(TaskType.Followers,"wenyunchao");
+		task.setTargetTableName("follower_to_wenyunchao");
+		at.doCrawl(task,dbo,users,new ReportData());
 		
-		at.doCrawl(new Task(TaskType.Following,"wenyunchao"),dbo,users,new ReportData());
+		for(TwiUser t:users){
+			System.out.println(t.toString());
+		}
+		System.out.println(users.size());
 		
+		TwiUser[] userArray=new TwiUser[users.size()];
+		users.toArray(userArray);
+		try{
+			if(users.size()>0){
+				dbo.insertIntoUser(userArray);
+			}
+		}catch(AllHasInsertedException ex){
+			LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");
+		}
 
 	}
 

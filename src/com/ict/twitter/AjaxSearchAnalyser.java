@@ -84,7 +84,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		}
 		//hbase
 		//((MessageTwitterHbase)hbase).InsertIntoTable(TimeLineArray);
-		super.batchdb.insertIntoMessage(TimeLineArray);
+		super.batchdb.insertIntoMessage(TimeLineArray,"message");
 		
 		AnalyserCursor res=new AnalyserCursor(tweetID,follows.size());
 		reportData.message_increment+=timelines.size();

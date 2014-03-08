@@ -42,17 +42,16 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 	public static void main(String[] args) {
 		TwitterClientManager cm=new TwitterClientManager();
 		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.67",8087);
-		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
-		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
+		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 100000);
+		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 100000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
 		lgtest.doLogin();
 		AjaxSearchCrawl test=new AjaxSearchCrawl(httpclient,null);
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
-		Task task=new Task(TaskType.Search,"薄熙来");
+		Task task=new Task(TaskType.Search,"wenyunchao");
 		ReportData reportData=new ReportData();
-		MessageTwitterHbase hbase=new MessageTwitterHbase("message");
-		test.SetHabae(hbase);
+		
 		test.doCrawl(task, dbo, users, reportData);
 		
 		
@@ -77,11 +76,13 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			}else{
 				URL=String.format(baseURL+max_id_str,keyWords,next_max_id);
 			}
-			String content=super.openLink(httpclient, URL,task,count++);
+			String content=super.openLink(httpclient, URL,task,count);
 			
 			Map map=null;
 			if(content==null){
 				System.out.println("HttpClint返回Ajax内容为空或长度不够");
+				System.out.println("CurrentURL:"+URL);
+				System.out.println("Content:"+content);
 				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, dbo);
 				break;
 			}
@@ -103,6 +104,8 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			} catch (AllHasInsertedException e) {
 				//系统发现重复采集故停止当前采集任务；
 				has_next=false;
+				//LogSys.nodeLogger.debug("当前Search采集已经入库，继续采集["+keyWords+"]");
+				
 				LogSys.nodeLogger.debug("当前Search采集完成["+keyWords+"]");
 				break;
 			}catch (Exception ex){
@@ -119,7 +122,12 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			if(has_next){
 				next_max_id=(String)map.get("scroll_cursor");
 			}
-				
+			try {
+				Thread.currentThread().sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 			
 		}while(has_next==true);
 		return true;

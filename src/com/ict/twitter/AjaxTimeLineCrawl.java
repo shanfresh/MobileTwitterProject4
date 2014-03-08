@@ -35,6 +35,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 	
 	private DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
+	
 
 	/**
 	 * 
@@ -50,7 +51,10 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		AjaxTimeLineCrawl at=new AjaxTimeLineCrawl(httpclient,null);
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		at.doCrawl(new Task(TaskType.TimeLine,"wenyunchao"),dbo,users,new ReportData());
+		Task task=new Task(TaskType.TimeLine,"wenyunchao");
+		task.setTargetTableName("message_wenyunchao");
+		task.setPageCount(-1);
+		at.doCrawl(task,dbo,users,new ReportData());
 		//at.doCrawl(new Task(TaskType.TimeLine,"mynamexu"),dbo,users,new ReportData());
 		at.service.shutdown();
 
@@ -65,7 +69,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 	public boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelatUsers,ReportData reportData){
 		String userID=task.getTargetString();
 		boolean has_more_items=false;
-		String nextmaxID="416792326216773631";
+		String nextmaxID=null;
 		String URL="";
 		AjaxTimeLineAnalyser TWAna=new AjaxTimeLineAnalyser(dbo,task);
 		boolean flag=true;
@@ -73,13 +77,14 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		int count=1;
 		int targetPageCount=task.getPageCount();
 		do{
+			int retryCount=0;
 			if(nextmaxID==null||nextmaxID.equals("")){
 				URL=String.format(baseUrl, userID,"");
 			}else{
 				URL=String.format(baseUrl, userID,max_id+nextmaxID);
 			}
 			
-			String content=openLink(httpclient, URL,task,count);
+			String content=openLink(httpclient, URL,task,retryCount);
 			if(content==null||(content.length())<=20){
 				System.err.println("web opreation error content is null");
 				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, dbo);
@@ -119,8 +124,9 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 			}
 			count++;
 			reportData.message_increment+=result.size;
-			if(targetPageCount!=-1&&count){
-				
+			if(targetPageCount!=-1&&count>targetPageCount){
+				System.out.println("受限深度的采集，跳出"+targetPageCount+"/"+count);
+				break;
 			}
 			
 		}while(has_more_items);

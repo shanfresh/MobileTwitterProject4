@@ -72,8 +72,16 @@ public class AjaxProfileAnalyser extends AjaxAnalyser {
 			Element target=allElements.first();
 			String count=target.child(0).ownText();
 			count=count.replaceAll(",", "");
-			count=count.replaceAll("Íò", "10000");
-			int res=Integer.parseInt(count);
+			int res=0;
+			if(count.contains("Íò")){				
+				count=count.replaceAll("Íò", "");
+				float flo=Float.parseFloat(count);
+				flo=flo*10000;
+				res=(int)flo;
+			}else{
+				res=Integer.parseInt(count);
+			}
+			
 			return res;
 		}
 		return -1;

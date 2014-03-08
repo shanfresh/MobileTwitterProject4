@@ -24,6 +24,7 @@ import com.ict.twitter.tools.ReadTxtFile;
 public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 	boolean isdebug=false;
 	public AjaxTimeLineAnalyser(MulityInsertDataBase batchdb,Task task) {
+		
 		super(batchdb,task);
 		// TODO Auto-generated constructor stub
 	}
@@ -103,7 +104,12 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		}
 		MessageDetail[] ss=msgdetailvector.toArray(new MessageDetail[msgdetailvector.size()]);
 		super.batchdb.insertIntoMessageDetail(ss);
-		super.batchdb.insertIntoMessage(timelines);
+		if(task.getTargetTableName()!=null){
+			super.batchdb.insertIntoMessage(timelines,task.getTargetTableName());
+		}else{
+			super.batchdb.insertIntoMessage(timelines,"message");
+		}
+		
 		result.size=twitterMessages.size();
 		return result;
 		

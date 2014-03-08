@@ -75,7 +75,7 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 		}
 		UserRelationship[] rels = new  UserRelationship[userrels.size()];
 		userrels.toArray(rels);
-		super.batchdb.insertIntoUserRel(rels);
+		super.batchdb.insertIntoUserRel(rels,"user_relationship");
 		return count;
 	}
 	

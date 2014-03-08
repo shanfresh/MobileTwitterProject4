@@ -34,14 +34,16 @@ public abstract class AjaxCrawl {
 		this.hbase=hbase;
 	}
 	
+	boolean Total_Crawl_FLAG=false;
+	
 	public abstract boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData);
 	
-	public String openLink(final DefaultHttpClient httpclient,final String targetUrl,Task task,int count) {
+	public String openLink(final DefaultHttpClient httpclient,final String targetUrl,Task task,final int count) {
 		String WebPageContent = null;
 		Future<String> future = service.submit(new Callable<String>() {
 			public String call() throws Exception {
 				try {
-					return WebOperationAjax.openLink(httpclient, targetUrl,0);
+					return WebOperationAjax.openLink(httpclient, targetUrl,count);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -91,5 +93,6 @@ public abstract class AjaxCrawl {
 		}
 		
 	}
+	
 
 }

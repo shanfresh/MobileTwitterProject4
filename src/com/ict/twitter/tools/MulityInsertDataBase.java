@@ -13,7 +13,6 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Vector;
-
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 
@@ -29,8 +28,8 @@ public class MulityInsertDataBase {
 	private Connection connection;
 	private PreparedStatement messageps=null;
 	private PreparedStatement messagdetailps=null;
-	private PreparedStatement userps=null;
-	private PreparedStatement userrelps=null;
+	
+	
 	private PreparedStatement userprofile=null;
 	
 	private PreparedStatement messagereteet=null;
@@ -80,21 +79,7 @@ public class MulityInsertDataBase {
 		
 	}
 	public static void main(String[] args){
-		MulityInsertDataBase mm =  new MulityInsertDataBase();
-		UserRelationship users[]= new UserRelationship[200];
-		for(int i=0;i<200;i++){
-			UserRelationship userrel=new UserRelationship();
-			userrel.setUser_A(i+"");
-			userrel.setUser_B(i+"");
-			userrel.setLinkType("follow");
-			users[i]=userrel;
-		}
-		try {
-			mm.insertIntoUserRel(users);
-		} catch (AllHasInsertedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		
 	}
 	
 	public Connection getConnection(){
@@ -122,7 +107,44 @@ public class MulityInsertDataBase {
 		return connection;
 	}
 	
-	public boolean insertIntoMessage(TimeLine[] timeline) throws AllHasInsertedException{
+	public boolean insertIntoMessage(TimeLine[] timeline,String targetTableName) throws AllHasInsertedException{
+		Connection con=this.getConnection();
+		PreparedStatement insertWithTarget=null;
+		int errorcount=0;
+		try {
+			con.setAutoCommit(false);
+			insertWithTarget = con.prepareStatement("insert into"+" "+targetTableName+"(channel_id,message_id,title,user_id,create_time,crawl_time,other1,other2) values(?,?,?,?,?,?,?,?)");
+			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
+			insertWithTarget.clearBatch();
+			for(int i=0;i<timeline.length;i++){
+				insertWithTarget.setInt(1, 6);
+				insertWithTarget.setString(2,timeline[i].getId());
+				insertWithTarget.setString(3, timeline[i].getContent());
+				insertWithTarget.setString(4, timeline[i].getAuthor());
+				insertWithTarget.setString(5, timeline[i].getDate());
+				insertWithTarget.setTimestamp(6, time);
+				insertWithTarget.setString(7, Integer.toString(timeline[i].getTaskTrackID()));//timeline没有加入对应的
+				insertWithTarget.setString(8, Integer.toString(timeline[i].getMainTypeID()));//other1设置为TaskTrackerID,other2设置为MainTypeID
+				insertWithTarget.addBatch();				
+			}
+			insertWithTarget.executeBatch();
+			insertWithTarget.close();
+			con.commit();	
+		} catch( BatchUpdateException ex){
+			int[] res = ex.getUpdateCounts();
+			checkBatch(res);
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.err.println("当前数据插入出错【"+errorcount+"】");
+			return false;
+		}		
+		return true;
+		
+	}
+
+	
+	private boolean insertIntoMessage(TimeLine[] timeline) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		try {
 			con.setAutoCommit(false);
@@ -244,9 +266,9 @@ public class MulityInsertDataBase {
 	public boolean insertIntoUser(TwiUser[] users) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		try {
-			if(userps==null){
-				userps = con.prepareStatement("insert into user(channel_id,user_id,real_name,crawl_time,fans_num,friends_num,location,description,profile_image_url,url) values(?,?,?,?,?,?,?,?,?,?)");
-			}
+			
+			PreparedStatement userps = con.prepareStatement("insert into user(channel_id,user_id,real_name,crawl_time,fans_num,friends_num,location,description,profile_image_url,url) values(?,?,?,?,?,?,?,?,?,?)");
+			
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			userps.clearBatch();
 			for(int i=0;i<users.length;i++){
@@ -277,15 +299,10 @@ public class MulityInsertDataBase {
 		return true;
 	}
 	
-
-
-	
-	public boolean insertIntoUserRel(UserRelationship[] rels)throws AllHasInsertedException{
+	public boolean insertIntoUserRel(UserRelationship[] rels,String targetTableName) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		try {
-			if(userrelps==null){
-				userrelps = con.prepareStatement("insert into user_relationship(channel_id,user_id_A,user_id_B,link_type,crawl_time) values(?,?,?,?,?)");
-			}
+			PreparedStatement userrelps = con.prepareStatement("insert into "+targetTableName+"(channel_id,user_id_A,user_id_B,link_type,crawl_time) values(?,?,?,?,?)");
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			for(int i=0;i<rels.length;i++){
 				UserRelationship userel =rels[i];
@@ -298,15 +315,21 @@ public class MulityInsertDataBase {
 			}
 			userrelps.executeBatch();
 			con.commit();
-		}catch( BatchUpdateException ex){
+		}catch(BatchUpdateException ex){
 			int[] res = ex.getUpdateCounts();
+			ex.printStackTrace();
 			checkBatch(res);			
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
-		return true;		
+		return true;
+		
 	}
+	
+
+	
+
 	
 	
 	private void checkBatch(int[] updateCounts) throws AllHasInsertedException{
@@ -332,7 +355,7 @@ public class MulityInsertDataBase {
 		
 		try {
 			if(userprofile==null){
-				userprofile=con.prepareStatement("INSERT INTO user_profile(user_id,user_name,profile_url,profile_image,tweet,following,follower,crawl_time) VALUES(?,?,?,?,?,?,?,?)");
+				userprofile=con.prepareStatement("INSERT INTO user_profile(user_id,user_name,profile_url,profile_image,tweet,following,follower,crawl_time,location,intruduction) VALUES(?,?,?,?,?,?,?,?,?,?)");
 			}
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			userprofile.setString(1, profile.getUser_id());
@@ -343,6 +366,8 @@ public class MulityInsertDataBase {
 			userprofile.setInt(6, profile.getFollowing());
 			userprofile.setInt(7, profile.getFollower());
 			userprofile.setTimestamp(8, time);
+			userprofile.setString(9, profile.getLocation());
+			userprofile.setString(10,profile.getSelfintroduction());
 			userprofile.executeUpdate();
 			con.commit();
 		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){

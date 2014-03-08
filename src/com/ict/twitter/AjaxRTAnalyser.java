@@ -87,11 +87,12 @@ public class AjaxRTAnalyser extends AjaxAnalyser {
 	}
 	private String ParseDate(Element t){
 		try{
-			Element dateEle=t.getElementsByAttributeValueStarting("class", "_timestamp js-short-timestamp js-relative-timestamp").first();
+			Element dateEle=t.getElementsByAttributeValueStarting("class", 
+					"_timestamp js-short-timestamp").first();
 			String dateStr=dateEle.attr("data-time");
 			return ttf.Convert(dateStr);
 		}catch(Exception ex){
-			System.err.println("解析出错");
+			System.err.println("时间内容解析出错");
 			return null;
 		}
 		
