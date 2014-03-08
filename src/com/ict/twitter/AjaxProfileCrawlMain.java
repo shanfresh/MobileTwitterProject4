@@ -45,7 +45,7 @@ public class AjaxProfileCrawlMain {
 		Connection connection=this.GetDBCon();
 		Vector<String> result=new Vector<String>();
 		try {
-			PreparedStatement pst=connection.prepareStatement("SELECT UserName FROM keyuser;");
+			PreparedStatement pst=connection.prepareStatement("SELECT user_name FROM http_twitter140305.result WHERE follower_count IS  NULL");
 			ResultSet rst=pst.executeQuery();
 			while(rst.next()){
 				result.add(rst.getString(1));
@@ -76,8 +76,7 @@ public class AjaxProfileCrawlMain {
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 		String filename=sdf.format(date);
 		SaveTxtFile sxf=new SaveTxtFile(filename, false);
-		System.out.println("出错后ID 列表："+filename);
-		
+		System.out.println("出错后ID 列表："+filename);	
 		
 		AjaxProfileCrawl apc=new AjaxProfileCrawl(httpclient, null);
 		AjaxProfileCrawlMain father=new AjaxProfileCrawlMain();

@@ -29,7 +29,13 @@ public class AjaxProfileAnalyser extends AjaxAnalyser {
 		String picture_url="";
 		int tweet=0,following=0,follower=0;
 		String location=null,selfIntroductionstr=null;
+		
 		Document doc=Jsoup.parse(content, "/");
+		Elements userNamediv=doc.getElementsByAttributeValueContaining("class","fullname editable-group");
+		if(userNamediv.size()>0){
+			userprofile.setUser_screen_name(userNamediv.get(0).text());
+		}
+		
 		Elements picture=doc.getElementsByAttributeValueContaining("class", "profile-picture media-thumbnail js-nav js-tooltip");
 		if(picture.size()>0){
 			picture_url=picture.get(0).child(0).attr("src");

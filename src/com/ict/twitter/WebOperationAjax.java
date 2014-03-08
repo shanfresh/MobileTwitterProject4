@@ -154,7 +154,12 @@ public class WebOperationAjax {
 			LogSys.nodeLogger.debug("ClientProtocalException e");
 		}catch(HttpHostConnectException ex){
 			return null;
-		}catch (java.net.SocketTimeoutException x){
+		}catch(org.apache.http.ConnectionClosedException ex){
+			LogSys.nodeLogger.error("文件不正常关闭");
+			ex.printStackTrace();
+			return sb.toString();
+		}
+		catch (java.net.SocketTimeoutException x){
 			LogSys.nodeLogger.debug("读取文件超时");
 			httpget.abort();
 			return null;			

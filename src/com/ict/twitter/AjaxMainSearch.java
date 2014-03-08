@@ -106,7 +106,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 				users.toArray(userArray);
 				try{
 					if(users.size()>0){
-						batchdb.insertIntoUser(userArray);
+						batchdb.insertIntoUser(userArray,"users");
 					}
 				}catch(AllHasInsertedException ex){
 					LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");

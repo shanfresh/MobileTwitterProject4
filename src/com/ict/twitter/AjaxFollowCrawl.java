@@ -53,17 +53,18 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		String URL;
 		boolean hasMoreItems=false;
 		AjaxFollowAnalyser aa=new AjaxFollowAnalyser(batchdb,task);
-		String nextCursor="";
+		String nextCursor="1398203915301193556";
 		int count=0;
 		do{
 			count++;
+			int retryCount=0;
 			hasMoreItems=false;
 			if(nextCursor.equals("")){
 				URL=String.format(baseUrl, userID,"");
 			}else{
 				URL=String.format(baseUrl, userID,cursor+nextCursor);
 			}
-			String content=openLink(httpclient, URL,task,count);
+			String content=openLink(httpclient, URL,task,retryCount);
 			if(content==null||(content.length())<=20){
 				System.out.println("网页返回为空 采集结束");
 				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, batchdb);
@@ -82,8 +83,11 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 			}
 			try{
 				Object hasmore = map.get("has_more_items");
-				String items_html=(String)map.get("items_html");			
-				index=aa.doAnalyse(userID,isFollowing,items_html,RelateUsers);	
+				String items_html=(String)map.get("items_html");
+				Vector<TwiUser> needTosave=new Vector<TwiUser>();				
+				index=aa.doAnalyse(userID,isFollowing,items_html,needTosave);
+				SaveToDataBase(task,batchdb,needTosave);
+				
 				if(hasmore!=null){
 					hasMoreItems=(Boolean)hasmore;
 					if(hasMoreItems)
@@ -102,12 +106,24 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID);
 				e.printStackTrace();
 				return false;
-			}			
+			}
 		}while(hasMoreItems&&nextCursor!=null);
 		
 		
 		
 		return true;
+	}
+	
+	private void SaveToDataBase(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers){
+		TwiUser[] userArray=new TwiUser[RelateUsers.size()];
+		RelateUsers.toArray(userArray);
+		try{
+			if(RelateUsers.size()>0){
+				dbo.insertIntoUser(userArray,"user_wenyunchao");
+			}
+		}catch(AllHasInsertedException ex){
+			LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -118,28 +134,16 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
 		lgtest.doLogin();
-		AjaxFollowCrawl at=new AjaxFollowCrawl(httpclient,false,null);
+		AjaxFollowCrawl at=new AjaxFollowCrawl(httpclient,true,null);
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
 		
-		Task task=new Task(TaskType.Followers,"wenyunchao");
-		task.setTargetTableName("follower_to_wenyunchao");
-		at.doCrawl(task,dbo,users,new ReportData());
-		
-		for(TwiUser t:users){
-			
-		}
+		Task task=new Task(TaskType.Following,"wenyunchao");
+		task.setTargetTableName("user_relationship");
+		at.doCrawl(task,dbo,users,new ReportData());		
 		System.out.println(users.size());
 		
-		TwiUser[] userArray=new TwiUser[users.size()];
-		users.toArray(userArray);
-		try{
-			if(users.size()>0){
-				dbo.insertIntoUser(userArray,"user_wenyunchao");
-			}
-		}catch(AllHasInsertedException ex){
-			LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");
-		}
+
 
 	}
 

@@ -70,7 +70,7 @@ public class MulityInsertDataBase {
 			users[i]=user;
 		}
 		try {
-			mm.insertIntoUser(users);
+			mm.insertIntoUser(users,"user");
 		} catch (AllHasInsertedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -263,11 +263,11 @@ public class MulityInsertDataBase {
 		return true;
 	}
 	
-	public boolean insertIntoUser(TwiUser[] users) throws AllHasInsertedException{
+	public boolean insertIntoUser(TwiUser[] users,String usertable) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		try {
 			
-			PreparedStatement userps = con.prepareStatement("insert into user(channel_id,user_id,real_name,crawl_time,fans_num,friends_num,location,description,profile_image_url,url) values(?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement userps = con.prepareStatement("insert into "+usertable+"(channel_id,user_id,real_name,crawl_time,fans_num,friends_num,location,description,profile_image_url,url) values(?,?,?,?,?,?,?,?,?,?)");
 			
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			userps.clearBatch();
@@ -290,7 +290,7 @@ public class MulityInsertDataBase {
 		}catch( BatchUpdateException ex){
 			int[] res = ex.getUpdateCounts();
 			checkBatch(res);
-			
+			ex.printStackTrace();
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -350,7 +350,7 @@ public class MulityInsertDataBase {
 		}
 	}
 	
-	public void insertIntoUserProfile(UserProfile profile){
+	public void insertIntoUserProfile(UserProfile profile) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		
 		try {
@@ -372,6 +372,7 @@ public class MulityInsertDataBase {
 			con.commit();
 		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){
 			System.out.println("重复插入");
+			throw new AllHasInsertedException("重复插入");
 		}
 		catch(SQLException ex){
 			System.out.println("Errorcode"+ex.getErrorCode());
@@ -382,6 +383,41 @@ public class MulityInsertDataBase {
 			e.printStackTrace();
 		}
 	}
+	
+	public void UpdateUserProfile(UserProfile profile){
+		Connection con=this.getConnection();
+		
+		try {
+			
+			PreparedStatement userprofile=con.prepareStatement("update user_profile set user_name=?,profile_url=?,profile_image=?,tweet=?,following=?,follower=?,crawl_time=?,location=?,intruduction=? where user_id=?");
+			
+			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
+			userprofile.setString(10, profile.getUser_id());
+			
+			userprofile.setString(1, profile.getUser_screen_name());
+			userprofile.setString(2, profile.getPicture_url());
+			userprofile.setBytes(3, profile.getPicturedata());
+			userprofile.setInt(4, profile.getTweet());
+			userprofile.setInt(5, profile.getFollowing());
+			userprofile.setInt(6, profile.getFollower());
+			userprofile.setTimestamp(7, time);
+			userprofile.setString(8, profile.getLocation());
+			userprofile.setString(9,profile.getSelfintroduction());
+			userprofile.executeUpdate();
+			con.commit();
+		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){
+			System.out.println("重复插入");
+		}
+		catch(SQLException ex){
+			System.out.println("Errorcode"+ex.getErrorCode());
+			ex.printStackTrace();
+		}catch(Exception e) {
+			// TODO Auto-generated catch block
+			System.err.println("Other Exception");
+			e.printStackTrace();
+		}
+	}
+	
 	public void getDatafromprofile(){
 		Connection con=this.getConnection();
 		try{

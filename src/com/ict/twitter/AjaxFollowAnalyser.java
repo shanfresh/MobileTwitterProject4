@@ -35,7 +35,7 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 	public static void main(String[] args) {
 		JSONParser parser=new JSONParser();
 		Map<String, Object> map = null;
-		ReadTxtFile rxf=new ReadTxtFile("2014-02-27 14-42-24");
+		ReadTxtFile rxf=new ReadTxtFile("users_1398203915301193556");
 		try {
 			map = (Map<String,Object>) parser.parse(rxf.readALL());
 		} catch (ParseException e1) {
@@ -50,7 +50,7 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 		} catch (AllHasInsertedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 		
 
 	}
@@ -67,15 +67,24 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 				//一串数字
 				String userIDNO=firstChildren.attr("data-user-id");
 				//唯一标示符
-				String userID=firstChildren.attr("data-screen-name");					
-				users.add(new TwiUser(userID,userID,0,0));
+				String userID=firstChildren.attr("data-screen-name");
+				Element ele2=firstChildren.select("div[class^=user-actions btn-group]").first();
+				String userScreenName=ele2.attr("data-name");
+				TwiUser user=new TwiUser(userID,userScreenName,0,0);
+				users.add(user);
+				user.show();
 				userrels.add(new UserRelationship(currentUser,userID,isFollowing+""));
 			}
 			
 		}
 		UserRelationship[] rels = new  UserRelationship[userrels.size()];
 		userrels.toArray(rels);
-		super.batchdb.insertIntoUserRel(rels,"user_relationship");
+		if(task.getTargetTableName()!=null){
+			super.batchdb.insertIntoUserRel(rels,task.getTargetTableName());
+		}else{
+			super.batchdb.insertIntoUserRel(rels,"user_relationship");
+		}
+		
 		return count;
 	}
 	

@@ -10,23 +10,34 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
 import com.ict.twitter.analyser.beans.TimeLine;
+import com.ict.twitter.tools.ReadTxtFile;
 import com.ict.twitter.tools.SaveTxtFile;
 
 public class DocumentAnalyser {
 	File f;
+	Vector<String> trueList;
+	Vector<String> falsList;
 	public DocumentAnalyser(String filename){
 		f=new File(filename);
 		if(f.exists()==false){
 			System.err.println("文件不存在");
-		}		
+		}
+		trueList=load("AnalyseSource/支持关键词.txt");
+		System.out.println("支持的值大小"+trueList.size());
+		falsList=load("AnalyseSource/反对关键词.txt");
+		System.out.println("不支持的值大小"+falsList.size());
 	}
+	
+	
 	Vector<TimeLine> total=new Vector<TimeLine>();
 	HashMap<String,Vector<TimeLine>> combine;
+
 	public void doAna(){
 		try {
 			total.clear();
@@ -41,7 +52,7 @@ public class DocumentAnalyser {
 				}
 			}
 			br.close();
-			System.out.println(count);
+			System.out.println(total.size());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,36 +81,81 @@ public class DocumentAnalyser {
 	}
 	private void Combine(){
 		combine=new HashMap<String,Vector<TimeLine>>();
+		System.out.println("总的个数"+total.size());
+		int baohan=0;
+		int bubaohan=0;
 		for(TimeLine t:total){
 			if(combine.containsKey(t.getAuthor())){
 				Vector<TimeLine> vect=combine.get(t.getAuthor());
 				vect.add(t);
+				combine.put(t.getAuthor(), vect);
+				baohan++;
 			}else{
 				Vector<TimeLine> vect=new Vector<TimeLine>();
 				vect.add(t);
 				combine.put(t.getAuthor(), vect);
+				bubaohan++;
 			}
 		}
+		System.out.println("Combine"+baohan+"_"+bubaohan);
 		
 	}
+	public int getCount(boolean flag,String content){
+		int count=0;
+		if(flag){
+			for(String t:trueList){
+				if(content.contains(t)){
+					count++;
+				}				
+			}			
+		}else{
+			for(String t:falsList){
+				if(content.contains(t)){
+					count++;
+				}				
+			}
+		}
+		return count;
+	}
+	
+	
+	
 	private void print(SaveTxtFile sxf){
 		Set<String> key=combine.keySet();
 		Iterator<String> it=key.iterator();
 		
 		while(it.hasNext()){
-			String line="";
 			String t=it.next();
-			line+=(t+"\t");
+			
+			String line="";
+			
+			line+=(t+"\t");			
 			line+=(combine.get(t).size()+"\t");
 			Vector<TimeLine> cur=combine.get(t);
+			StringBuffer sb=new StringBuffer();
 			for(TimeLine timeline:cur){
-				line+=(timeline.getContent()+"||");
+				sb.append(timeline.getContent()+"||");
 			}
-			line+="\r\n";
+			int truecount=getCount(true, sb.toString());
+			int falsecount=getCount(false,sb.toString());
+			line +=truecount+"\t";
+			line +=falsecount+"\t";
+			line+=sb.toString()+"\r\n";
+			
 			sxf.Append(line);
 			System.out.print(line);
 		}
+		sxf.close();
+		System.out.println();
 		
+	}
+	
+	private Vector<String> load(String fileName){
+		
+		ReadTxtFile rxf=new ReadTxtFile(fileName);
+		Vector<String> result=rxf.read();
+		
+		return result;
 	}
 	
 	public static void main(String[] args){
@@ -109,8 +165,8 @@ public class DocumentAnalyser {
 		Date date=new Date();
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 		String filename=sdf.format(date);
-		System.out.println("出错后ID 列表："+filename);
-		SaveTxtFile sxf=new SaveTxtFile(filename,false);
+		System.out.println("分析后页面列表："+filename);
+		SaveTxtFile sxf=new SaveTxtFile("AnalyseSource/"+filename,false);
 		da.print(sxf);
 		
 		

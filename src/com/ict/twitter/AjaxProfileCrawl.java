@@ -18,6 +18,7 @@ import com.ict.twitter.analyser.beans.UserProfile;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.task.beans.Task.TaskType;
+import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
 
@@ -81,7 +82,11 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			System.out.println("insert into profile");
 			System.out.println(profile.toString());
 			return true;
-		}catch(Exception exe){
+		}catch(AllHasInsertedException ex){
+			System.out.println("正在更新");
+			dbo.UpdateUserProfile(profile);
+		}
+		catch(Exception exe){
 			exe.printStackTrace();
 			LogSys.crawlerServLogger.error("ErrorIn AjaxProfileCrawl", exe.fillInStackTrace());
 			
