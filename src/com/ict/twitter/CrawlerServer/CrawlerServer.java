@@ -254,7 +254,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		try{
 			CollectionNodes();
 			//只取第一页的用户信息
-			sb.InitRefresh(this,"followings_to_wenyunchao","`followings_to_wenyunchao_message`",TaskType.TimeLine, 1);
+			sb.InitRefresh(this,"crawlstatus_0309_1427","message_result_0309",TaskType.TimeLine, -1);
 			sendNewStep(NodeStep.search_start);
 			while(currentstep!=ServerStep.searchEnd){
 				CollectNodesStatus();

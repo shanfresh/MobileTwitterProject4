@@ -148,7 +148,7 @@ public class ServerBean implements Serializable{
 		Connection con=dbo.GetConnection();
 		Vector<String> userlist=new Vector<String>();
 		try {
-			PreparedStatement pst=con.prepareStatement("select UserName from "+tableName);
+			PreparedStatement pst=con.prepareStatement("select taskStr from "+tableName+" "+" where Status='Fail'");
 			ResultSet rs=pst.executeQuery();
 			while(rs.next()){
 				userlist.add(rs.getString(1));				
@@ -157,13 +157,12 @@ public class ServerBean implements Serializable{
 				Task task=new Task();
 				task.setPageCount(-1);
 				task.setOwnType(tasktype);
-				task.setTargetTableName("");
 				task.setTargetString(t);
 				task.setTargetTableName(targetTableName);
 				task.setPageCount(pageCount);
 				server.addKeyUserTask(task);
 			}
-			System.out.println("向总线添加关键用户-Timeline"+userlist.size());
+			LogSys.crawlerServLogger.info("向总线添加关键用户-Timeline"+userlist.size());
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
