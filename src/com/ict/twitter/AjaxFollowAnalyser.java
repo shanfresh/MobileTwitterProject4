@@ -1,5 +1,6 @@
 package com.ict.twitter;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Vector;
 
@@ -14,6 +15,7 @@ import org.jsoup.select.Elements;
 
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserRelationship;
+import com.ict.twitter.hbase.UserRelTwitterHbase;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
@@ -83,6 +85,15 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 			super.batchdb.insertIntoUserRel(rels,task.getTargetTableName());
 		}else{
 			super.batchdb.insertIntoUserRel(rels,"user_relationship");
+		}
+		if(this.HbaseEnable){
+			try {
+				((UserRelTwitterHbase)super.hbase).InsertIntoTable(rels);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.err.print("±£¥ÊHBASE≥ˆ¥Ì¡À");
+				e.printStackTrace();
+			}
 		}
 		
 		return count;

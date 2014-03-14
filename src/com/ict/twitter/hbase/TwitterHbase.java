@@ -1,6 +1,7 @@
 package com.ict.twitter.hbase;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.Vector;
 
@@ -11,6 +12,10 @@ import org.apache.hadoop.hbase.MasterNotRunningException;
 import org.apache.hadoop.hbase.ZooKeeperConnectionException;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTable;
+import org.apache.hadoop.hbase.client.Put;
+import org.apache.hadoop.hbase.util.Bytes;
+
+import com.ict.twitter.analyser.beans.TimeLine;
 
 public abstract class TwitterHbase {
 	Configuration conf=HbaseFactory.conf;
@@ -18,6 +23,7 @@ public abstract class TwitterHbase {
 	String tableName=null;
 	String[] familyNames;
 	Map<String,String[]> columnsmap;
+	SimpleDateFormat sdf;
 	public TwitterHbase(String tableName){
 		try {
 			this.tableName=tableName;
@@ -35,6 +41,8 @@ public abstract class TwitterHbase {
 		}catch(Exception e){
 				e.printStackTrace();
 		}
+		sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 	}
 	protected boolean CheckTableExists(String tablename) throws Exception{
 		HBaseAdmin admin = new HBaseAdmin(conf);
@@ -49,6 +57,15 @@ public abstract class TwitterHbase {
 		admin.close();
 		return flag;
 		
+	}
+	
+	public void close(){
+		try {
+			table.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean CreateTable(String tablename) throws Exception{
@@ -67,7 +84,7 @@ public abstract class TwitterHbase {
                
             }
     		if(CheckTableExists(tablename)){
-    			System.out.println("数据库表已经存在");
+    			System.out.println("创建数据表之前，检查数据库表是否已经存在");
     			admin.close();
     			return false;
     		}else{
@@ -92,4 +109,5 @@ public abstract class TwitterHbase {
     }
 	protected abstract void SetFamilyNameAndColumns();
 	
+
 }

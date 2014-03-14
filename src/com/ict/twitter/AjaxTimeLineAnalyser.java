@@ -1,4 +1,5 @@
 package com.ict.twitter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.jsoup.select.*;
 import com.ict.twitter.analyser.beans.MessageDetail;
 import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
+import com.ict.twitter.hbase.MessageTwitterHbase;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
@@ -23,6 +25,7 @@ import com.ict.twitter.tools.ReadTxtFile;
 
 public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 	boolean isdebug=false;
+	
 	public AjaxTimeLineAnalyser(MulityInsertDataBase batchdb,Task task) {
 		
 		super(batchdb,task);
@@ -61,7 +64,7 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		if(twitterMessages.size()<=2){
 			System.out.println("[Warning] twitter count"+twitterMessages.size());
 		}
-		Vector<TimeLine> vector = new Vector<TimeLine>();
+		Vector<TimeLine> vector= new Vector<TimeLine>();
 		Vector<MessageDetail> msgdetailvector=new Vector<MessageDetail>();
 		for(Element t:twitterMessages){
 			try{
@@ -108,6 +111,15 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 			super.batchdb.insertIntoMessage(timelines,task.getTargetTableName());
 		}else{
 			super.batchdb.insertIntoMessage(timelines,"message");
+		}
+		if(this.HbaseEnable){
+			MessageTwitterHbase mth=(MessageTwitterHbase)super.hbase;
+			try {
+				mth.InsertIntoTable(timelines);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		result.size=twitterMessages.size();

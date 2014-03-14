@@ -1,6 +1,7 @@
 package com.ict.twitter.hbase;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.hadoop.hbase.client.Put;
@@ -11,6 +12,7 @@ import com.ict.twitter.analyser.beans.TimeLine;
 public class MessageTwitterHbase extends TwitterHbase{
 	public MessageTwitterHbase(String tableName) {
 		super(tableName);
+		SetFamilyNameAndColumns();
 	}
 	public void close(){
 		try {
@@ -41,8 +43,8 @@ public class MessageTwitterHbase extends TwitterHbase{
 				}				
 			}
 			table.put(put);
-			table.flushCommits();
 		}
+		table.flushCommits();
 		return true;
 	}
 	
@@ -52,22 +54,27 @@ public class MessageTwitterHbase extends TwitterHbase{
 			case "id":
 				result=timeline.getId();
 				break;
-			case "author":
+			case "user_id":
 				result=timeline.getAuthor();
 				break;
-			case "content":
+			case "title":
 				result=timeline.getContent();
 				break;
 			case "date":
 				result=timeline.getDate();
+				if(columnname.equalsIgnoreCase("create_time")){
+					result=timeline.getDate();
+				}else if(columnname.equalsIgnoreCase("crawl_time")){
+					result=sdf.format(new Date());
+				}
 				break;
 			case "link":
 				result=timeline.getLink();
 				break;
 			case "detail":{
-				if(columnname.equalsIgnoreCase("reTWcount")){
+				if(columnname.equalsIgnoreCase("retw_count")){
 					result=Integer.toBinaryString(timeline.getReTWcount());
-				}else if(columnname.equalsIgnoreCase("replycount")){
+				}else if(columnname.equalsIgnoreCase("reply_count")){
 					result=Integer.toBinaryString(timeline.getReplyCount());
 				}
 				break;
@@ -81,9 +88,11 @@ public class MessageTwitterHbase extends TwitterHbase{
 	}
 	@Override
 	protected void SetFamilyNameAndColumns() {
-		familyNames=new String[]{"author","content","date","link","detail"};
+		familyNames=new String[]{"user_id","title","date","link","detail"};
 		columnsmap=new HashMap<String,String[]>();
-		String[] detailColumn=new String[]{"reTWcount","replycount"};
+		String[] dateColumn=new String[]{"create_time","crawl_time"};
+		String[] detailColumn=new String[]{"retw_count","reply_count"};
+		columnsmap.put("date", dateColumn);
 		columnsmap.put("detail", detailColumn);
 	}
 

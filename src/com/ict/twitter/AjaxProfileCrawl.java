@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.util.Map;
 import java.util.Vector;
 
@@ -15,6 +16,7 @@ import org.json.simple.parser.ParseException;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserProfile;
+import com.ict.twitter.hbase.UserTwitterHbase;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.task.beans.Task.TaskType;
@@ -24,10 +26,12 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxProfileCrawl extends AjaxCrawl {
 
-	private String BASE_URL="/i/profiles/popup?async_social_proof=false&user_id=95112124&_=1362725282347";
+	//private String BASE_URL="/i/profiles/popup?async_social_proof=false&user_id=95112124&_=1362725282347";
 	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&screen_name=%s&_=%s";
 	private DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
+	private boolean IS_ADD_MESSAGE_ANA=true;
+	
 	public AjaxProfileCrawl(DefaultHttpClient _httpclient,DbOperation dboperation){
 		this.httpclient=_httpclient;
 		super.dboperation=dboperation;
@@ -40,6 +44,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		String UserID=task.getTargetString();
 		UserProfile profile = new UserProfile();
 		AjaxProfileAnalyser profileana = new AjaxProfileAnalyser(dbo,task);
+		
 		
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
@@ -78,6 +83,8 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			System.out.println("时间问题，暂时不采集用户的profile中的图片内容");
 			//byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
 			profile.setPicturedata(result);
+			//对Hbase进行插入操作
+			SaveToHbase(profile);
 			dbo.insertIntoUserProfile(profile);
 			System.out.println("insert into profile");
 			System.out.println(profile.toString());
@@ -85,13 +92,18 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		}catch(AllHasInsertedException ex){
 			System.out.println("正在更新");
 			dbo.UpdateUserProfile(profile);
-		}
-		catch(Exception exe){
+			
+		}catch(Exception exe){
 			exe.printStackTrace();
 			LogSys.crawlerServLogger.error("ErrorIn AjaxProfileCrawl", exe.fillInStackTrace());
 			
 		}
 		return false;
+	}
+	public void SaveToHbase(UserProfile profile) throws IOException{
+		if(this.Hbase_Enable){
+			((UserTwitterHbase)hbase).InsertIntoTable(profile);
+		}
 	}
 	public static void main(String[] args){
 		TwitterClientManager cm=new TwitterClientManager();
@@ -105,6 +117,8 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		
 		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
 		Task task=new Task(TaskType.About,"wenyunchao");
+		UserTwitterHbase userhbase=new UserTwitterHbase("user");
+		profilecrawl.SetHabae(userhbase, true);
 		profilecrawl.doCrawl(task,dbo, users,new ReportData());
 		httpclient.getConnectionManager().shutdown();
 		profilecrawl.service.shutdown();

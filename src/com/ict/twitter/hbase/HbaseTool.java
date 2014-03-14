@@ -2,6 +2,7 @@ package com.ict.twitter.hbase;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Vector;
 
 import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.Get;
@@ -11,6 +12,8 @@ import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.conf.Configuration;
+
+import com.ict.twitter.analyser.beans.TimeLine;
 public class HbaseTool {
 	static Configuration conf = HbaseFactory.conf;    
     
@@ -51,6 +54,7 @@ public class HbaseTool {
         try {
 			HTable table = new HTable(conf, Bytes.toBytes(tableName));
 			HColumnDescriptor[] columnFamilies = table.getTableDescriptor().getColumnFamilies();
+			
 			for(int i=0;i<column.length;i++){
 				put.add(Bytes.toBytes(familyName), Bytes.toBytes(column[i]), Bytes.toBytes(value[i]));
 			}
@@ -70,7 +74,7 @@ public class HbaseTool {
     		Result result=table.get(get);
     		List<KeyValue> values=result.list();
     		for(KeyValue t:values){
-    			System.out.println(Bytes.toString(t.getFamily())+"_"+Bytes.toString(t.getQualifier())+"_"+Bytes.toString(t.getValue()));
+    			System.out.println(Bytes.toString(t.getFamilyArray())+"_"+Bytes.toString(t.getQualifier())+"_"+Bytes.toString(t.getValue()));
     		}
     		table.close();
     		return result;
@@ -85,14 +89,25 @@ public class HbaseTool {
     
     public static void main(String[] args) throws Exception {
     	 String tableName = "message";
-         String[] family = { "title", "author" };
-    	
+         String[] family = {"user_id","title","date","link","detail"};
+    	 MessageTwitterHbase mth=new MessageTwitterHbase("message");
          CreateTable(tableName,family);
+         Vector<TimeLine> alltime=new Vector<TimeLine>();
          for(int i=0;i<100;i++){
-        	 String messageid=String.format("%3d", i);
-        	 InputData(tableName,messageid,"title",new String[]{"content"},new String[]{"À¥Ã÷¼ÓÓÍÓÐ"});
-        	 InputData(tableName,messageid,"author",new String[]{"id"},new String[]{"author"+i});
+        	 TimeLine t=new TimeLine();
+        	 t.setId(i+"_twi");
+        	 t.setAuthor("sjx");
+        	 t.setContent("Shanjixi is ok");
+        	 t.setDate("2011-10-10 00:00:00");
+        	 t.setLink("");
+        	 t.setReplyCount(1);
+        	 t.setReTWcount(1);
+        	 alltime.add(t);
+        	 
+        	 
          }
+         TimeLine[] result=alltime.toArray(new TimeLine[alltime.size()]);
+         mth.InsertIntoTable(result);
          
          
          

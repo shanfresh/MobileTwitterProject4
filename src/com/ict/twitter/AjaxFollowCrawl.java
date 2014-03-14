@@ -12,6 +12,7 @@ import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.hbase.MessageTwitterHbase;
 import com.ict.twitter.hbase.TwitterHbase;
+import com.ict.twitter.hbase.UserRelTwitterHbase;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.task.beans.Task.TaskType;
@@ -53,7 +54,10 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		String URL;
 		boolean hasMoreItems=false;
 		AjaxFollowAnalyser aa=new AjaxFollowAnalyser(batchdb,task);
-		String nextCursor="1398203915301193556";
+		if(this.Hbase_Enable){
+			aa.SetHabae(hbase, this.Hbase_Enable);
+		}
+		String nextCursor="";
 		int count=0;
 		do{
 			count++;
@@ -135,6 +139,8 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
 		lgtest.doLogin();
 		AjaxFollowCrawl at=new AjaxFollowCrawl(httpclient,true,null);
+		UserRelTwitterHbase userrelhbase=new UserRelTwitterHbase("user_relationship");
+		at.SetHabae(userrelhbase, true);
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
 		

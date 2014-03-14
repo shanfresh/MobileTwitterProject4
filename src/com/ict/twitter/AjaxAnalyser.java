@@ -25,11 +25,11 @@ public class AjaxAnalyser {
 	protected TimeTransformer timeTrans;
 	public MulityInsertDataBase batchdb;
 	/////////////////////////////HBASE///////////////////////////////////////////
-	protected boolean savetohbase=false;
+	protected boolean HbaseEnable=false;
 	protected TwitterHbase hbase=null; 
 	//////////////////////////////////////////////////////////////////////////////
-	public void SetHabae(TwitterHbase hbase){
-		savetohbase=true;
+	public void SetHabae(TwitterHbase hbase,boolean HbaseEnable){
+		this.HbaseEnable=HbaseEnable;
 		this.hbase=hbase;
 	}
 

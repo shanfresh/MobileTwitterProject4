@@ -52,7 +52,8 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 	public int proxyPort=0;
 	private NodeStatusBean nodeStatusBean;
 	//----------------------------------------------------------------------//
-	
+	//------------------Hbase----------------------------------------------//
+	public boolean Hbase_Enable=false;
 	public NodeStatusBean getNodeStatusBean() {
 		return nodeStatusBean;
 	}
@@ -158,6 +159,14 @@ public abstract class Node extends MessageBusComponent implements Runnable{
 			LogSys.nodeLogger.error("IPV4/IPV6 is NOT OK");
 			System.exit(-1);
 		}
+		
+		if(properties.getProperty("hbase.enable").equalsIgnoreCase("True")){
+			LogSys.nodeLogger.info("¿ªÆôHBase");
+			this.Hbase_Enable=true;
+		}else{
+			this.Hbase_Enable=false;
+		}
+		
 	}
 
 

@@ -26,11 +26,11 @@ public abstract class AjaxCrawl {
 	public DbOperation dboperation;
 
 	/////////////////////////////HBASE///////////////////////////////////////////
-	protected boolean savetohbase=false;
+	protected boolean Hbase_Enable=false;
 	protected TwitterHbase hbase=null; 
 	//////////////////////////////////////////////////////////////////////////////
-	public void SetHabae(TwitterHbase hbase){
-		savetohbase=true;
+	public void SetHabae(TwitterHbase hbase,boolean IsEnable){
+		Hbase_Enable=IsEnable;
 		this.hbase=hbase;
 	}
 	

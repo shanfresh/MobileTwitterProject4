@@ -66,8 +66,9 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		boolean has_next=false;
 		String next_max_id=null;
 		AjaxSearchAnalyser ana=new AjaxSearchAnalyser(dbo,task);
-		ana.SetHabae(hbase);
-		
+		if(this.Hbase_Enable){
+			ana.SetHabae(hbase,true);
+		}
 		String URL;
 		int count=1;
 		do{

@@ -82,8 +82,9 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 			TimeLineArray[i].setMainTypeID(task.getMainTypeID());
 			TimeLineArray[i].setTaskTrackID(task.getTaskTrackID());
 		}
-		//hbase
-		//((MessageTwitterHbase)hbase).InsertIntoTable(TimeLineArray);
+		if(super.HbaseEnable){
+			((MessageTwitterHbase)hbase).InsertIntoTable(TimeLineArray);
+		}
 		super.batchdb.insertIntoMessage(TimeLineArray,"message");
 		
 		AnalyserCursor res=new AnalyserCursor(tweetID,follows.size());

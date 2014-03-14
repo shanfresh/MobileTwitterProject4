@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
+
 import com.ict.twitter.CrawlerNode.AjaxNode;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.Report.ReportDataType;
@@ -14,10 +15,14 @@ import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.AllHasInsertedException;
 import com.ict.twitter.tools.DbOperation;
 import com.ict.twitter.tools.MulityInsertDataBase;
-
+import com.ict.twitter.hbase.*;
 public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 	boolean test=true;
 	MyTracker tracker=new MyTracker();
+	MessageTwitterHbase msghbase;
+	UserRelTwitterHbase userrelhbase;
+	UserTwitterHbase userhbase;
+	
 	public AjaxMainSearch(String Name,AjaxNode fatherNode){
 		this.Name=Name;
 		this.node=fatherNode;
@@ -40,8 +45,18 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 		}else{
 			this.DBOp=new DbOperation();
 		}
+		if(this.node.Hbase_Enable){
+			InitHbase();
+		}
 		
 	}
+	
+	private void InitHbase(){
+		msghbase=new MessageTwitterHbase("message");
+		userrelhbase=new UserRelTwitterHbase("user_relationship");
+		userhbase=new UserTwitterHbase("user");
+	}
+	
 	@Override
 	public void run() {
 		InitHttpclientAndConnection();
@@ -62,6 +77,10 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 		AjaxTimeLineCrawl timelineCrawl=new AjaxTimeLineCrawl(this.httpclient,this.DBOp);	
 		AjaxProfileCrawl profileCrawl = new AjaxProfileCrawl(this.httpclient,this.DBOp);
 		MulityInsertDataBase batchdb =  new MulityInsertDataBase();
+		followingCrawl.SetHabae(userrelhbase,this.node.Hbase_Enable);
+		searchCrawl.SetHabae(msghbase,this.node.Hbase_Enable);
+		timelineCrawl.SetHabae(msghbase,this.node.Hbase_Enable);
+		profileCrawl.SetHabae(userhbase,this.node.Hbase_Enable);
 		try{
 			while(true){
 				Task task=this.getTask();

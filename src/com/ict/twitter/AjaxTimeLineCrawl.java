@@ -10,9 +10,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
+
 import com.ict.twitter.AjaxAnalyser.AnalyserCursor;
 import com.ict.twitter.Report.ReportData;
 import com.ict.twitter.analyser.beans.TwiUser;
+import com.ict.twitter.hbase.MessageTwitterHbase;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.task.beans.Task.TaskType;
@@ -49,6 +51,9 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
 		lgtest.doLogin();
 		AjaxTimeLineCrawl at=new AjaxTimeLineCrawl(httpclient,null);
+		MessageTwitterHbase msghbase=new MessageTwitterHbase("message");
+		at.SetHabae(msghbase, true);
+		
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
 		Task task=new Task(TaskType.TimeLine,"wenyunchao");
@@ -72,6 +77,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		String nextmaxID=null;
 		String URL="";
 		AjaxTimeLineAnalyser TWAna=new AjaxTimeLineAnalyser(dbo,task);
+		TWAna.SetHabae(this.hbase, this.Hbase_Enable);
+		
 		boolean flag=true;
 		AnalyserCursor result;
 		int count=1;
@@ -106,6 +113,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				}catch(NumberFormatException ex){
 					nextmaxID=result.lastID;
 				}
+				
 				
 			}catch(ParseException ex){
 				has_more_items=false;
