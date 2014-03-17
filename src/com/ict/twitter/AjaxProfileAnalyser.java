@@ -33,7 +33,7 @@ public class AjaxProfileAnalyser extends AjaxAnalyser {
 		Document doc=Jsoup.parse(content, "/");
 		Elements userNamediv=doc.getElementsByAttributeValueContaining("class","fullname editable-group");
 		if(userNamediv.size()>0){
-			userprofile.setUser_screen_name(userNamediv.get(0).text());
+			userprofile.setUser_aliasname(userNamediv.get(0).text());
 		}
 		
 		Elements picture=doc.getElementsByAttributeValueContaining("class", "profile-picture media-thumbnail js-nav js-tooltip");

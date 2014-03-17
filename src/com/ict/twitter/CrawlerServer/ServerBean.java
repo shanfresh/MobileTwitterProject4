@@ -170,6 +170,35 @@ public class ServerBean implements Serializable{
 		}
 	}
 	
+	public void InitSample(CrawlerServer server,String fileName,String targetTableName,TaskType tasktype){
+		try {
+			ReadTxtFile rxf=new ReadTxtFile(fileName);
+			Vector<String> userlist=rxf.read();
+			int count=0;
+			for(String t:userlist){
+				if(t.equalsIgnoreCase("")){
+					continue;
+				}
+				Task task=new Task();
+				task.setOwnType(tasktype);
+				task.setTargetString(t);
+				task.setTargetTableName(targetTableName);
+				task.setAddParameter("UseUserID");
+				task.setPageCount(-1);
+				server.addKeyUserTask(task);
+				count++;
+				if(count%100==0){
+					System.out.println("添加任务"+count+"/"+userlist.size());
+				}
+				
+			}
+			System.out.println("向总线添加关键用户-Profile"+userlist.size());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 	
 	
 	

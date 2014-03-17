@@ -30,7 +30,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 	 * 
 	 * https://twitter.com
 	 */
-	String baseURL="/i/search/timeline?q='%s'&src=typd&f=realtime&include_available_features=1&include_entities=1&last_note_ts=0";
+	String baseURL="/i/search/timeline?q='%s'&src=typd&f=realtime&include_available_features=1&latent_count=0&include_entities=1&last_note_ts=0&oldest_unread_id=0";
 	String max_id_str="&scroll_cursor=%s";
 	DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
@@ -50,6 +50,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		Task task=new Task(TaskType.Search,"wenyunchao");
+		task.setTargetTableName("message_search_wenyunchao");
 		ReportData reportData=new ReportData();
 		
 		test.doCrawl(task, dbo, users, reportData);
@@ -64,7 +65,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 	public boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData){
 		String keyWords=task.getTargetString();
 		boolean has_next=false;
-		String next_max_id=null;
+		String next_max_id="445034735127912449";
 		AjaxSearchAnalyser ana=new AjaxSearchAnalyser(dbo,task);
 		if(this.Hbase_Enable){
 			ana.SetHabae(hbase,true);
@@ -104,11 +105,11 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 				res = ana.doAnalyse(html,RelateUsers,reportData);
 			} catch (AllHasInsertedException e) {
 				//系统发现重复采集故停止当前采集任务；
-				has_next=false;
-				//LogSys.nodeLogger.debug("当前Search采集已经入库，继续采集["+keyWords+"]");
+				has_next=true;
+				LogSys.nodeLogger.debug("当前Search采集已经入库，继续采集["+keyWords+"]");
 				
-				LogSys.nodeLogger.debug("当前Search采集完成["+keyWords+"]");
-				break;
+				//LogSys.nodeLogger.debug("当前Search采集完成["+keyWords+"]");
+				//break;
 			}catch (Exception ex){
 				has_next=false;
 				LogSys.nodeLogger.debug("当前SearchAnalyse解析发生错误["+keyWords+"]");
@@ -122,12 +123,6 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			}
 			if(has_next){
 				next_max_id=(String)map.get("scroll_cursor");
-			}
-			try {
-				Thread.currentThread().sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}	
 			
 		}while(has_next==true);

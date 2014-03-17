@@ -131,6 +131,7 @@ public class MulityInsertDataBase {
 			insertWithTarget.close();
 			con.commit();	
 		} catch( BatchUpdateException ex){
+			ex.printStackTrace();
 			int[] res = ex.getUpdateCounts();
 			checkBatch(res);
 		}catch (SQLException e) {
@@ -205,12 +206,14 @@ public class MulityInsertDataBase {
 				}
 				messagdetailps.setString(3,MessageDetail[i].getWeburl());
 				messagdetailps.setString(4,MessageDetail[i].getImgurl());
+				messagdetailps.addBatch();
 				
 			}
 			messagdetailps.executeBatch();
 			con.commit();	
 		} catch( BatchUpdateException ex){
 			int[] res = ex.getUpdateCounts();
+			ex.printStackTrace();
 			try {
 				checkBatch(res);
 			} catch (AllHasInsertedException e) {
@@ -350,26 +353,26 @@ public class MulityInsertDataBase {
 		}
 	}
 	
-	public void insertIntoUserProfile(UserProfile profile) throws AllHasInsertedException{
+	public void insertIntoUserProfile(UserProfile profile,String tableName) throws AllHasInsertedException{
 		Connection con=this.getConnection();
 		
 		try {
-			if(userprofile==null){
-				userprofile=con.prepareStatement("INSERT INTO user_profile(user_id,user_name,profile_url,profile_image,tweet,following,follower,crawl_time,location,intruduction) VALUES(?,?,?,?,?,?,?,?,?,?)");
-			}
+			userprofile=con.prepareStatement("INSERT INTO "+tableName+"(user_id,user_name,user_aliasname,profile_url,profile_image,tweet,following,follower,crawl_time,location,intruduction) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			userprofile.setString(1, profile.getUser_id());
-			userprofile.setString(2, profile.getUser_screen_name());
-			userprofile.setString(3, profile.getPicture_url());
-			userprofile.setBytes(4, profile.getPicturedata());
-			userprofile.setInt(5, profile.getTweet());
-			userprofile.setInt(6, profile.getFollowing());
-			userprofile.setInt(7, profile.getFollower());
-			userprofile.setTimestamp(8, time);
-			userprofile.setString(9, profile.getLocation());
-			userprofile.setString(10,profile.getSelfintroduction());
+			userprofile.setString(2, profile.getUser_name());
+			userprofile.setString(3, profile.getUser_aliasname());
+			userprofile.setString(4, profile.getPicture_url());
+			userprofile.setBytes(5, profile.getPicturedata());
+			userprofile.setInt(6, profile.getTweet());
+			userprofile.setInt(7, profile.getFollowing());
+			userprofile.setInt(8, profile.getFollower());
+			userprofile.setTimestamp(9, time);
+			userprofile.setString(10, profile.getLocation());
+			userprofile.setString(11,profile.getSelfintroduction());
 			userprofile.executeUpdate();
 			con.commit();
+			userprofile.close();
 		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){
 			System.out.println("重复插入");
 			throw new AllHasInsertedException("重复插入");
@@ -384,29 +387,30 @@ public class MulityInsertDataBase {
 		}
 	}
 	
-	public void UpdateUserProfile(UserProfile profile){
+	public void UpdateUserProfileByName(UserProfile profile){
 		Connection con=this.getConnection();
 		
 		try {
 			
-			PreparedStatement userprofile=con.prepareStatement("update user_profile set user_name=?,profile_url=?,profile_image=?,tweet=?,following=?,follower=?,crawl_time=?,location=?,intruduction=? where user_id=?");
+			PreparedStatement userprofile=con.prepareStatement("update user_profile set user_id=?,user_aliasname=?,profile_url=?,profile_image=?,tweet=?,following=?,follower=?,crawl_time=?,location=?,intruduction=? where user_name=?");
 			
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
-			userprofile.setString(10, profile.getUser_id());
+			userprofile.setString(11, profile.getUser_name());
 			
-			userprofile.setString(1, profile.getUser_screen_name());
-			userprofile.setString(2, profile.getPicture_url());
-			userprofile.setBytes(3, profile.getPicturedata());
-			userprofile.setInt(4, profile.getTweet());
-			userprofile.setInt(5, profile.getFollowing());
-			userprofile.setInt(6, profile.getFollower());
-			userprofile.setTimestamp(7, time);
-			userprofile.setString(8, profile.getLocation());
-			userprofile.setString(9,profile.getSelfintroduction());
+			userprofile.setString(1, profile.getUser_id());
+			userprofile.setString(2, profile.getUser_aliasname());
+			userprofile.setString(3, profile.getPicture_url());
+			userprofile.setBytes(4, profile.getPicturedata());
+			userprofile.setInt(5, profile.getTweet());
+			userprofile.setInt(6, profile.getFollowing());
+			userprofile.setInt(7, profile.getFollower());
+			userprofile.setTimestamp(8, time);
+			userprofile.setString(9, profile.getLocation());
+			userprofile.setString(10,profile.getSelfintroduction());
 			userprofile.executeUpdate();
 			con.commit();
 		}catch(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException ex){
-			System.out.println("重复插入");
+			System.out.println("更新Profile");
 		}
 		catch(SQLException ex){
 			System.out.println("Errorcode"+ex.getErrorCode());

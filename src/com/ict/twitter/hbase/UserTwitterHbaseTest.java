@@ -51,11 +51,11 @@ public class UserTwitterHbaseTest {
 			userpro.setTweet(1);
 			userpro.setFollower(1);
 			userpro.setFollowing(1);
-			userpro.setUser_id(i+"");
+			userpro.setUser_name(i+"_twi");
 			userpro.setLocation("Beijing");
 			userpro.setPicture_url("www.baidu.com");
 			userpro.setSelfintroduction("I am OK");
-			userpro.setUser_screen_name("Alias_11111");
+			userpro.setUser_aliasname("I AM OK");
 			
 			
 			

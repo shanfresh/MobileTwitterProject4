@@ -87,48 +87,85 @@
 		</copy>
 		
     </target>
-
+	
 	
 	<target name="TwitterJars" depends="depends,build">
+		    <delete dir="${basedir}/build/lib"/>
+			<copy todir="${basedir}/build/lib">
+			    <fileset dir="${basedir}/lib">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/JFreeChat">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/JSON">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/log4j">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/JUnit">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/MongoDB">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/proguard">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/hbase">
+			    	<include name="*.jar"/>
+		 		</fileset>
+			</copy>
+		<path id="classpath">
+		       <fileset  dir="${basedir}/build/lib">
+		       		<include  name="*.jar" />	
+		       </fileset>
+		 </path>
+	    <pathconvert property="lib" pathsep=" ">  
+	        <!--mapper,对路径组合方式进行控制-->  
+	        <mapper>  
+	            <!--chainedmapper 作用是联合多个mapper-->  
+	            <chainedmapper>  
+	                <!--过滤文件，将路径去掉，只保留文件名-->  
+	                <flattenmapper />  
+	                <!--过滤+转换器，将所有的文件名前面都加上一个lib，我们知道lib目录下面有jar包，  
+	                    lib/*的作用其实是将jar包名与路径进行组合形成如：lib/google.jar这样的相对路径  
+	                 -->  
+	                <globmapper from="*" to="lib/*" />  
+	            </chainedmapper>  
+	        </mapper>  
+	        <!--按照mapper定义的格式组合lib目录下面的所有jar文件，形成诸如lib/jar1.jar lib/jar2.jar的字符串-->  
+	        <fileset dir="${basedir}/build/lib">  
+	            <include name="*.jar" />  
+	        </fileset>  
+	    </pathconvert> 
+		
+		
 		<jar destfile="${basedir}/build/TwitterCrawlerServer.jar" basedir="${basedir}/build/classes">
 			<manifest>
 				<attribute name="Main-Class" value="com.ict.twitter.CrawlerServer.CrawlerServer"/>
-				<attribute name="Class-Path" value=". lib/junit.jar lib/jsoup-1.6.1-javadoc.jar lib/jsoup-1.6.1-sources.jar lib/jsoup-1.6.1.jar lib/log4j-1.2.17.jar lib/activemq-all-5.6.0.jar lib/commons-logging-1.1.1.jar lib/commons-codec-1.6.jar lib/lombok.jar lib/fluent-hc-4.2.2.jar lib/httpclient-4.2.2.jar lib/httpclient-cache-4.2.2.jar lib/httpcore-4.2.2.jar lib/httpmime-4.2.2.jar lib/mysql-connector-java-5.1.22-bin.jar lib/json-simple-1.1.1.jar lib/mongo-2.10.1.jar lib/gnujaxp.jar lib/iText-2.1.5.jar lib/jcommon-1.0.17.jar lib/jfreechart-1.0.14-experimental.jar lib/jfreechart-1.0.14-swt.jar lib/jfreechart-1.0.14.jar lib/junit.jar lib/servlet.jar lib/swtgraphics2d.jar lib/hbase"/>
-			</manifest>
-		</jar>
-		<jar destfile="${basedir}/build/TwitterNodes.jar" basedir="${basedir}/build/classes">
-			<manifest>
-				<attribute name="Main-Class" value="com.ict.twitter.CrawlerNode.runTWAjaxNodes"/>
 				<attribute name="Class-Path" value=". lib/junit.jar lib/jsoup-1.6.1-javadoc.jar lib/jsoup-1.6.1-sources.jar lib/jsoup-1.6.1.jar lib/log4j-1.2.17.jar lib/activemq-all-5.6.0.jar lib/commons-logging-1.1.1.jar lib/commons-codec-1.6.jar lib/lombok.jar lib/fluent-hc-4.2.2.jar lib/httpclient-4.2.2.jar lib/httpclient-cache-4.2.2.jar lib/httpcore-4.2.2.jar lib/httpmime-4.2.2.jar lib/mysql-connector-java-5.1.22-bin.jar lib/json-simple-1.1.1.jar lib/mongo-2.10.1.jar lib/gnujaxp.jar lib/iText-2.1.5.jar lib/jcommon-1.0.17.jar lib/jfreechart-1.0.14-experimental.jar lib/jfreechart-1.0.14-swt.jar lib/jfreechart-1.0.14.jar lib/junit.jar lib/servlet.jar lib/swtgraphics2d.jar"/>
 			</manifest>
 		</jar>
-        <delete dir="${basedir}/build/lib"/>
-		<copy todir="${basedir}/build/lib">
-		    <fileset dir="${basedir}/lib">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/JFreeChat">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/JSON">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/log4j">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/MongoDB">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/MongoDB">
-		        <include name="*.jar"/>
-		    </fileset>
-		    <fileset dir="${basedir}/lib/hbase">
-		    <include name="*.jar"/>
-     		</fileset>
-		</copy>
+		<pathconvert property="mf.classpath" pathsep=" ">
+					      <path refid="classpath" />
+				             <flattenmapper />
+		</pathconvert>
+		<jar destfile="${basedir}/build/TwitterNodes.jar" basedir="${basedir}/build/classes">
+			
+			<manifest>
+				<attribute name="Main-Class" value="com.ict.twitter.CrawlerNode.runTWAjaxNodes"/>
+				<attribute name="Class-Path" value=". . lib/junit.jar lib/jsoup-1.6.1-javadoc.jar lib/jsoup-1.6.1-sources.jar lib/jsoup-1.6.1.jar lib/log4j-1.2.17.jar lib/activemq-all-5.6.0.jar lib/commons-logging-1.1.1.jar lib/commons-codec-1.6.jar lib/lombok.jar lib/fluent-hc-4.2.2.jar lib/httpclient-4.2.2.jar lib/httpclient-cache-4.2.2.jar lib/httpcore-4.2.2.jar lib/httpmime-4.2.2.jar ${lib}"/>
+			</manifest>
+		</jar>
+
 	</target>
 	
 	<target name="obfuscateNode" depends="clean">
+		
+		
+		
 	  <taskdef resource="proguard/ant/task.properties"
 	           classpath="lib/proguard/proguard.jar" />
 

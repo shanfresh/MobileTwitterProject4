@@ -78,9 +78,11 @@ public class TaskReceiver extends Receiver {
 		String MainTypeID_Str=simxml.getFirstValueByTag("MainTypeID");
 		String PageCount_Str=simxml.getFirstValueByTag("PageCount");
 		String TargetTableName_Str=simxml.getFirstValueByTag("TargetTableName");
+		String AddParameter_Str=simxml.getFirstValueByTag("AddParameter");
 		t.setMainType(MainType.valueOf(MainTypeStr));		
 		t.setOwnType(TaskType.fromString(first));
 		t.setTargetString(valuestr);
+		t.setAddParameter(AddParameter_Str);
 		if(isTrack!=null){
 			t.setTrack(Boolean.parseBoolean(isTrack));
 		}else{

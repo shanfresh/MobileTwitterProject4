@@ -32,7 +32,7 @@ public class UserTwitterHbase extends TwitterHbase{
 	}
 	public boolean InsertIntoTable(UserProfile userProfile) throws IOException, InterruptedIOException{
 		
-		Put put=new Put(Bytes.toBytes(userProfile.getUser_id()));
+		Put put=new Put(Bytes.toBytes(userProfile.getUser_name()));
 		for(int j=0;j<familyNames.length;j++){
 			byte[] familyName=Bytes.toBytes(familyNames[j]);
 			if(!columnsmap.containsKey(familyNames[j])){//可以二次优化
@@ -56,7 +56,7 @@ public class UserTwitterHbase extends TwitterHbase{
 		String result="";
 		switch(currentFamilyName){
 			case "user_aliasname":
-				result=userProfile.getUser_screen_name();
+				result=userProfile.getUser_aliasname();
 				break;
 			case "user_id":
 				result=userProfile.getUser_id();

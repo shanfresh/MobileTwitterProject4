@@ -32,6 +32,7 @@ public  class Task implements Serializable{
 	public int taskTrackID;
 	public int pageCount;
 	public String targetTableName;
+	public String addParameter;
 
 	public Task(TaskType ownType, String targetString) {
 		super();
@@ -100,6 +101,9 @@ public  class Task implements Serializable{
 		sb.append("<TargetTableName>");
 		sb.append(this.getTargetTableName());
 		sb.append("</TargetTableName>");
+		sb.append("<AddParameter>");
+		sb.append(this.getAddParameter());
+		sb.append("</AddParameter>");
 		return sb.toString();		
 	}
 	public void StringToTask(String src){
@@ -141,6 +145,12 @@ public  class Task implements Serializable{
 	}
 	public void setTargetTableName(String targetTableName) {
 		this.targetTableName = targetTableName;
+	}
+	public String getAddParameter() {
+		return addParameter;
+	}
+	public void setAddParameter(String addParameter) {
+		this.addParameter = addParameter;
 	}
 
 	

@@ -2,7 +2,16 @@ package com.ict.twitter.analyser.beans;
 
 public class UserProfile {
 	private String User_id;
-	private String user_screen_name;
+	private String User_name;
+	private String user_aliasname;
+	public String getUser_aliasname() {
+		return user_aliasname;
+	}
+
+	public void setUser_aliasname(String user_aliasname) {
+		this.user_aliasname = user_aliasname;
+	}
+
 	private String picture_url;
 	private byte[] picturedata;
 	
@@ -13,8 +22,8 @@ public class UserProfile {
 	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
-		sb.append("UserID:"+User_id+" \t");
-		sb.append("user_screen:"+user_screen_name+" \r\n");
+		sb.append("UserID:"+User_id+" \t"+"UserName:"+User_name+" \t");
+		sb.append("user_screen:"+user_aliasname+" \r\n");
 		sb.append("PIC:"+picture_url+" \r\n");
 		sb.append("selfintroduction:"+selfintroduction+" \t");
 		sb.append("Location:"+location+"\r\n");
@@ -30,12 +39,14 @@ public class UserProfile {
 		User_id = user_id;
 	}
 
-	public String getUser_screen_name() {
-		return user_screen_name;
+
+
+	public String getUser_name() {
+		return User_name;
 	}
 
-	public void setUser_screen_name(String user_screen_name) {
-		this.user_screen_name = user_screen_name;
+	public void setUser_name(String user_name) {
+		User_name = user_name;
 	}
 
 	public String getPicture_url() {

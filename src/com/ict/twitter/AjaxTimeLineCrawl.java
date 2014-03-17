@@ -56,8 +56,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		Task task=new Task(TaskType.TimeLine,"wenyunchao");
-		task.setTargetTableName("message_wenyunchao");
+		Task task=new Task(TaskType.TimeLine,"AtqiorlinCH");
+		task.setTargetTableName("message_for_li");
 		task.setPageCount(-1);
 		at.doCrawl(task,dbo,users,new ReportData());
 		//at.doCrawl(new Task(TaskType.TimeLine,"mynamexu"),dbo,users,new ReportData());

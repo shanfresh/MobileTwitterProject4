@@ -40,7 +40,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 	public enum ServerStep{
 		init,searchStart,searchEnd,keyuserCaijiStart,keyuserCaijiEnd,normalCaijiStart,normalCaijiEnd
 	}
-	protected static enum OP {START, STOP, DUMP, RESTART, CUSTORM, REFRESH};
+	protected static enum OP {START, STOP, DUMP, RESTART, CUSTORM, REFRESH, SAMPLE};
 	public com.ict.twitter.CrawlerServer.CrawlerServer.ServerStep currentstep=ServerStep.init;
 	public int Normal_User_Deepth = 20;
 	
@@ -134,6 +134,11 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 			System.err.println("此处需要修复");
 			System.exit(-1);
 			//StopCrawlServer();
+		}else if(op==OP.SAMPLE){
+			LogSys.crawlerServLogger.info("正在进入随机抽样采集");
+			Initiallize();
+			this.StartSampleServer();
+			
 		}
 		
 	}
@@ -161,6 +166,9 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 					}
 				}else if(command.equals("Refresh")){
 					op=OP.REFRESH;
+				}else if(command.equalsIgnoreCase("Sample")){
+					op=OP.SAMPLE;
+					StartSampleServer();
 				}
 			}else if(args[i].equals("-Deepth")){
 				deepth=Integer.parseInt(args[++i]);
@@ -276,6 +284,36 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		
 		return true;
 	}
+	
+	private boolean StartSampleServer(){
+		LogSys.crawlerServLogger.info("采集器总控端[随机用户Profile]启动");
+		currentstep=ServerStep.searchStart;
+		try{
+			CollectionNodes();
+			//只取第一页的用户信息
+			sb.InitSample(this, "RandomUser_2.txt", "user_profile_sample_2", TaskType.About);
+			sendNewStep(NodeStep.search_start);
+			while(currentstep!=ServerStep.searchEnd){
+				CollectNodesStatus();
+				SleepWithCount(60000);				
+				if(nodeManager.canNextStepByTaskBusName(MessageBusNames.KeyUserTask)){
+					currentstep=ServerStep.searchEnd;
+					nodeManager.show();
+				}else{
+					LogSys.crawlerServLogger.debug("不能进入下一个采集状态");
+					
+				}
+			}
+			
+			LogSys.crawlerServLogger.info("采集器总控端[随机用户Profile]FINISH");
+		}catch(Exception ex){
+			ex.printStackTrace();
+			LogSys.crawlerServLogger.error("crawlServer exit with error");
+		}
+		
+		return true;
+	}
+		
 	
 	/*Try To Stop Current CrawlServer~~
 	 * 1:TellNodeToPause (don't get Task from MessageBus);

@@ -14,6 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.ict.twitter.Report.ReportData;
+import com.ict.twitter.analyser.beans.TimeLine;
 import com.ict.twitter.analyser.beans.TwiUser;
 import com.ict.twitter.analyser.beans.UserProfile;
 import com.ict.twitter.hbase.UserTwitterHbase;
@@ -26,8 +27,8 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxProfileCrawl extends AjaxCrawl {
 
-	//private String BASE_URL="/i/profiles/popup?async_social_proof=false&user_id=95112124&_=1362725282347";
-	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&screen_name=%s&_=%s";
+	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&user_id=%s&_=%s";
+	//private String TEMP_URL="/i/profiles/popup?async_social_proof=false&screen_name=%s&_=%s";
 	private DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
 	private boolean IS_ADD_MESSAGE_ANA=true;
@@ -44,7 +45,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		String UserID=task.getTargetString();
 		UserProfile profile = new UserProfile();
 		AjaxProfileAnalyser profileana = new AjaxProfileAnalyser(dbo,task);
-		
+		AjaxProfileAnalyserExtend profileanaext=new AjaxProfileAnalyserExtend();
 		
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
@@ -75,30 +76,42 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			LogSys.nodeLogger.error("AjaxProfile——Error:"+URL);
 			return false;
 		}
+		Vector<TimeLine> profileTimeline=new Vector<TimeLine>();
 		try{
-			profile.setUser_id(UserID);
-			profile.setUser_screen_name(user_screen_name);
+			profile.setUser_id(user_number_id);
+			profile.setUser_name(user_screen_name);
 			profileana.doAnylyze(htmlContent, profile);
-			byte[] result=new byte[1];
-			System.out.println("时间问题，暂时不采集用户的profile中的图片内容");
-			//byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
+			profileanaext.doAnylyze(htmlContent, profileTimeline);
+			//byte[] result=new byte[1];
+			//System.out.println("时间问题，暂时不采集用户的profile中的图片内容");
+			byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
 			profile.setPicturedata(result);
 			//对Hbase进行插入操作
 			SaveToHbase(profile);
-			dbo.insertIntoUserProfile(profile);
+			dbo.insertIntoUserProfile(profile,task.getTargetTableName());
+			
 			System.out.println("insert into profile");
 			System.out.println(profile.toString());
-			return true;
+			
 		}catch(AllHasInsertedException ex){
 			System.out.println("正在更新");
-			dbo.UpdateUserProfile(profile);
+			dbo.UpdateUserProfileByName(profile);
 			
 		}catch(Exception exe){
 			exe.printStackTrace();
 			LogSys.crawlerServLogger.error("ErrorIn AjaxProfileCrawl", exe.fillInStackTrace());
+			return false;
+		}
+		TimeLine[] allTimeline=profileTimeline.toArray(new TimeLine[profileTimeline.size()]);
+		try {
+			dbo.insertIntoMessage(allTimeline, "profile_message_sample_2");
+		} catch (AllHasInsertedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("当前用户全部Profile推文已经被插入");
 			
 		}
-		return false;
+		return true;
 	}
 	public void SaveToHbase(UserProfile profile) throws IOException{
 		if(this.Hbase_Enable){
@@ -116,7 +129,8 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
 		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
-		Task task=new Task(TaskType.About,"wenyunchao");
+		Task task=new Task(TaskType.About,"Rongfuduchunqiu");
+		task.setTargetTableName("user_profile_for_li");
 		UserTwitterHbase userhbase=new UserTwitterHbase("user");
 		profilecrawl.SetHabae(userhbase, true);
 		profilecrawl.doCrawl(task,dbo, users,new ReportData());
