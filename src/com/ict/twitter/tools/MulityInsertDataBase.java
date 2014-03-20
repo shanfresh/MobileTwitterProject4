@@ -113,7 +113,7 @@ public class MulityInsertDataBase {
 		int errorcount=0;
 		try {
 			con.setAutoCommit(false);
-			insertWithTarget = con.prepareStatement("insert into"+" "+targetTableName+"(channel_id,message_id,title,user_id,create_time,crawl_time,other1,other2,is_reteet,origin_user_name) values(?,?,?,?,?,?,?,?,?,?)");
+			insertWithTarget = con.prepareStatement("insert into"+" "+targetTableName+"(channel_id,message_id,title,user_id,create_time,crawl_time,other1,other2,is_reteet,origin_user_name,origin_message_id) values(?,?,?,?,?,?,?,?,?,?,?)");
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			insertWithTarget.clearBatch();
 			for(int i=0;i<timeline.length;i++){
@@ -127,6 +127,7 @@ public class MulityInsertDataBase {
 				insertWithTarget.setString(8, Integer.toString(timeline[i].getMainTypeID()));//other1设置为TaskTrackerID,other2设置为MainTypeID
 				insertWithTarget.setBoolean(9, timeline[i].isIs_reteet());
 				insertWithTarget.setString(10, timeline[i].getOrigin_user_name());
+				insertWithTarget.setString(11, timeline[i].getOrigin_tweet_id());
 				insertWithTarget.addBatch();				
 			}
 			insertWithTarget.executeBatch();
@@ -216,12 +217,12 @@ public class MulityInsertDataBase {
 			con.commit();	
 		} catch( BatchUpdateException ex){
 			int[] res = ex.getUpdateCounts();
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			try {
 				checkBatch(res);
 			} catch (AllHasInsertedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -360,7 +361,7 @@ public class MulityInsertDataBase {
 		Connection con=this.getConnection();
 		
 		try {
-			userprofile=con.prepareStatement("INSERT INTO "+tableName+"(user_id,user_name,user_aliasname,profile_url,profile_image,tweet,following,follower,crawl_time,location,intruduction) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+			userprofile=con.prepareStatement("INSERT INTO "+tableName+"(user_id,user_name,user_aliasname,profile_url,profile_image,tweet,following,follower,crawl_time,location,intruduction,is_alive) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			userprofile.setString(1, profile.getUser_id());
 			userprofile.setString(2, profile.getUser_name());
@@ -373,6 +374,7 @@ public class MulityInsertDataBase {
 			userprofile.setTimestamp(9, time);
 			userprofile.setString(10, profile.getLocation());
 			userprofile.setString(11,profile.getSelfintroduction());
+			userprofile.setBoolean(12, profile.isIs_alive());
 			userprofile.executeUpdate();
 			con.commit();
 			userprofile.close();
