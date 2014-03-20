@@ -75,23 +75,19 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 				Element firstDiv=t.children().first();
 				String tweet_id=firstDiv.attr("data-tweet-id");
 				String user_name=firstDiv.attr("data-screen-name");	
-				String user_id=firstDiv.attr("data-user-id");
+				
 				result.lastID=tweet_id;
 				TimeLine timeline=new TimeLine(tweet_id,user_name,content.text(),timeStr);
-				ReTweetCrawl(t,timeline);
-				if(timeline.is_reteet){
-					timeline.setOrigin_user_name(user_name);
-				}else{
-					timeline.setAuthor(user_name);
-				}
-				
+				//分析转发行为：
+				ReTweetCrawl(firstDiv,timeline);
+				//分析转发行为完毕
 				List<String> relUser=getUserID(content,users);
 				String url=GetURL(content);
 				int hashTagCount=GetHashTagCount(content);
 				String PicUrl=GetPicURL(content);
 				if(relUser!=null||url!=null||PicUrl!=null){
 					MessageDetail msgdetail=new MessageDetail();
-					msgdetail.setMessageid(tweet_id);
+					msgdetail.setMessageid(timeline.getId());
 					msgdetail.setWeburl(url);
 					msgdetail.setUsers(relUser);
 					msgdetail.setImgurl(PicUrl);
@@ -153,23 +149,27 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 	private boolean ReTweetCrawl(Element tweet,TimeLine timeline){
 		boolean flag=false;
 		
-		if(tweet.getElementsByAttributeValueStarting("class", "js-retweet-text")!=null){
-			Element t=tweet.select("a[class=pretty-link js-user-profile-link]").first();
-			if(t!=null){
+		if(tweet!=null){
+			if(tweet.attributes().hasKey("data-retweet-id")){
 				flag=true;
+				timeline.setId(tweet.attr("data-retweet-id"));
+				timeline.setOrigin_tweet_id(tweet.attr("data-tweet-id"));
+				timeline.setOrigin_user_name(tweet.attr("data-screen-name"));
 				timeline.setIs_reteet(true);
-				String user_name=t.attr("href");
-				if(user_name.indexOf('/')!=-1){
-					user_name=user_name.substring(user_name.indexOf('/')+1);
-				}
-				timeline.setAuthor(user_name);
+				Element t=tweet.select("a[class=pretty-link js-user-profile-link]").first();
+				if(t!=null){
+					String user_name=t.attr("href");
+					if(user_name.indexOf('/')!=-1){
+						user_name=user_name.substring(user_name.indexOf('/')+1);
+					}
+					timeline.setAuthor(user_name);//此处相当于转发的用户是谁
+				}		
 				
-			}else{
-				flag=false;
 			}
-			
+
 		}else{
 			flag=false;
+			timeline.setIs_reteet(false);
 		}
 		return flag;
 	}
