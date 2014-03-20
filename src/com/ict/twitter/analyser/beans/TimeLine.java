@@ -18,6 +18,9 @@ public class TimeLine {
 	public String date;
 	public String link;
 	
+	public boolean is_reteet=false;
+	public String origin_user_name=null;
+	
 	public int reTWcount;
 	public int replyCount;	
 	public Date strictTime;
@@ -144,6 +147,19 @@ public class TimeLine {
 	public void setMainTypeID(int mainTypeID) {
 		MainTypeID = mainTypeID;
 	}
+	public boolean isIs_reteet() {
+		return is_reteet;
+	}
+	public void setIs_reteet(boolean is_reteet) {
+		this.is_reteet = is_reteet;
+	}
+	public String getOrigin_user_name() {
+		return origin_user_name;
+	}
+	public void setOrigin_user_name(String origin_user_name) {
+		this.origin_user_name = origin_user_name;
+	}
+
 
 
 	

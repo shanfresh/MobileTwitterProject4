@@ -113,7 +113,7 @@ public class MulityInsertDataBase {
 		int errorcount=0;
 		try {
 			con.setAutoCommit(false);
-			insertWithTarget = con.prepareStatement("insert into"+" "+targetTableName+"(channel_id,message_id,title,user_id,create_time,crawl_time,other1,other2) values(?,?,?,?,?,?,?,?)");
+			insertWithTarget = con.prepareStatement("insert into"+" "+targetTableName+"(channel_id,message_id,title,user_id,create_time,crawl_time,other1,other2,is_reteet,origin_user_name) values(?,?,?,?,?,?,?,?,?,?)");
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			insertWithTarget.clearBatch();
 			for(int i=0;i<timeline.length;i++){
@@ -125,6 +125,8 @@ public class MulityInsertDataBase {
 				insertWithTarget.setTimestamp(6, time);
 				insertWithTarget.setString(7, Integer.toString(timeline[i].getTaskTrackID()));//timeline没有加入对应的
 				insertWithTarget.setString(8, Integer.toString(timeline[i].getMainTypeID()));//other1设置为TaskTrackerID,other2设置为MainTypeID
+				insertWithTarget.setBoolean(9, timeline[i].isIs_reteet());
+				insertWithTarget.setString(10, timeline[i].getOrigin_user_name());
 				insertWithTarget.addBatch();				
 			}
 			insertWithTarget.executeBatch();
@@ -186,7 +188,7 @@ public class MulityInsertDataBase {
 			con.setAutoCommit(false);
 			
 			if(messagdetailps==null){
-				messagdetailps = con.prepareStatement("insert into message_detail(`message_id`,`rel_ids`,`web_url`,`img_url`) values(?,?,?,?)");
+				messagdetailps = con.prepareStatement("insert into message_detail(`message_id`,`rel_ids`,`hash_tag_count`,`web_url`,`img_url`) values(?,?,?,?,?)");
 			}
 			messagdetailps.clearBatch();
 			for(int i=0;i<MessageDetail.length;i++){
@@ -204,8 +206,9 @@ public class MulityInsertDataBase {
 				}else{
 					messagdetailps.setString(2, null);
 				}
-				messagdetailps.setString(3,MessageDetail[i].getWeburl());
-				messagdetailps.setString(4,MessageDetail[i].getImgurl());
+				messagdetailps.setInt(3, MessageDetail[i].getHash_tag_count());
+				messagdetailps.setString(4,MessageDetail[i].getWeburl());
+				messagdetailps.setString(5,MessageDetail[i].getImgurl());
 				messagdetailps.addBatch();
 				
 			}

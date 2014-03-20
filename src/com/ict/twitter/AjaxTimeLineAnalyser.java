@@ -77,9 +77,17 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 				String user_name=firstDiv.attr("data-screen-name");	
 				String user_id=firstDiv.attr("data-user-id");
 				result.lastID=tweet_id;
+				TimeLine timeline=new TimeLine(tweet_id,user_name,content.text(),timeStr);
+				ReTweetCrawl(t,timeline);
+				if(timeline.is_reteet){
+					timeline.setOrigin_user_name(user_name);
+				}else{
+					timeline.setAuthor(user_name);
+				}
 				
 				List<String> relUser=getUserID(content,users);
 				String url=GetURL(content);
+				int hashTagCount=GetHashTagCount(content);
 				String PicUrl=GetPicURL(content);
 				if(relUser!=null||url!=null||PicUrl!=null){
 					MessageDetail msgdetail=new MessageDetail();
@@ -87,10 +95,11 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 					msgdetail.setWeburl(url);
 					msgdetail.setUsers(relUser);
 					msgdetail.setImgurl(PicUrl);
+					msgdetail.setHash_tag_count(hashTagCount);
 					msgdetailvector.add(msgdetail);
 					
 				}
-				vector.add(new TimeLine(tweet_id,user_name,content.text(),timeStr));
+				vector.add(timeline);
 			}catch(NullPointerException ex){
 				ex.printStackTrace();
 			}			
@@ -139,6 +148,32 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		}
 		return res;
 	}
+	//加入对非原创推文的判断
+	//<span class="js-retweet-text">由 <a class="pretty-link js-user-profile-link" href="/Kyry4enkoKatia" data-user-id="2304882066"><b>Kateryna Kyrychenko</b></a> 转推</span>
+	private boolean ReTweetCrawl(Element tweet,TimeLine timeline){
+		boolean flag=false;
+		
+		if(tweet.getElementsByAttributeValueStarting("class", "js-retweet-text")!=null){
+			Element t=tweet.select("a[class=pretty-link js-user-profile-link]").first();
+			if(t!=null){
+				flag=true;
+				timeline.setIs_reteet(true);
+				String user_name=t.attr("href");
+				if(user_name.indexOf('/')!=-1){
+					user_name=user_name.substring(user_name.indexOf('/')+1);
+				}
+				timeline.setAuthor(user_name);
+				
+			}else{
+				flag=false;
+			}
+			
+		}else{
+			flag=false;
+		}
+		return flag;
+	}
+	
 	private String GetURL(Element content){
 		if(content==null){
 			return null;
@@ -159,6 +194,13 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		}else{
 			return null;
 		}
+	}
+	public int GetHashTagCount(Element content){
+		Elements HashTags=content.getElementsByAttributeValueStarting("class", "twitter-hashtag");
+		if(HashTags!=null){
+			return HashTags.size();
+		}
+		return 0;
 	}
 	
 }

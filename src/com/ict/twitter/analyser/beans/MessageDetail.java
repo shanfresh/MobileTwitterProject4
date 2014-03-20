@@ -5,6 +5,13 @@ public class MessageDetail {
 	List<String> users;
 	String weburl;
 	String imgurl;
+	int hash_tag_count;
+	public int getHash_tag_count() {
+		return hash_tag_count;
+	}
+	public void setHash_tag_count(int hash_tag_count) {
+		this.hash_tag_count = hash_tag_count;
+	}
 	public String getMessageid() {
 		return messageid;
 	}
