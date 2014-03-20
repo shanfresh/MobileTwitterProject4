@@ -131,7 +131,7 @@ public class MulityInsertDataBase {
 			insertWithTarget.close();
 			con.commit();	
 		} catch( BatchUpdateException ex){
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			int[] res = ex.getUpdateCounts();
 			checkBatch(res);
 		}catch (SQLException e) {

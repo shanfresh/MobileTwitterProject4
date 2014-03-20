@@ -49,7 +49,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
-		String ajaxContent=super.openLink(httpclient, URL,task,1);
+		String ajaxContent=super.openLink(httpclient, URL,task,0);
 		if(ajaxContent==null){
 			LogSys.nodeLogger.error("ProfileÕ¯¬Á«Î«Û ß∞‹:"+UserID);
 			super.SaveWebOpStatus(task, URL, 1, WebOperationResult.Fail, dbo);

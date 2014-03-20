@@ -65,20 +65,22 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 	public boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData){
 		String keyWords=task.getTargetString();
 		boolean has_next=false;
-		String next_max_id="445034735127912449";
+		String next_max_id="TWEET-439958720299032576-445494797835333632";
 		AjaxSearchAnalyser ana=new AjaxSearchAnalyser(dbo,task);
 		if(this.Hbase_Enable){
 			ana.SetHabae(hbase,true);
 		}
 		String URL;
-		int count=1;
+		int count=0;
 		do{
+			
+			int re_trycount=0;
 			if(next_max_id==null||next_max_id.equals("")){
 				URL=String.format(baseURL,keyWords,"");
 			}else{
 				URL=String.format(baseURL+max_id_str,keyWords,next_max_id);
 			}
-			String content=super.openLink(httpclient, URL,task,count);
+			String content=super.openLink(httpclient, URL,task,re_trycount);
 			
 			Map map=null;
 			if(content==null){
@@ -87,6 +89,8 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 				System.out.println("Content:"+content);
 				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, dbo);
 				break;
+			}else{
+				count++;	
 			}
 			super.SaveWebOpStatus(task, URL, count, WebOperationResult.Success, dbo);
 			try {
@@ -121,9 +125,13 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			}else{
 				has_next=false;
 			}
-			if(has_next){
+			if(map.get("scroll_cursor")!=null){
+				has_next=true;
 				next_max_id=(String)map.get("scroll_cursor");
-			}	
+			}else{
+				has_next=false;
+			}
+				
 			
 		}while(has_next==true);
 		return true;

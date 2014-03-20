@@ -102,7 +102,7 @@ public class WebOperationAjax {
 		BasicHttpContext localcontext = new BasicHttpContext();
 		httpclient.getParams().setParameter(HTTP.CONTENT_ENCODING, "utf-8");
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
-		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);		
+		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 20000);		
 		StringBuffer sb=new StringBuffer();
 		HttpResponse response = null;
 		try {
