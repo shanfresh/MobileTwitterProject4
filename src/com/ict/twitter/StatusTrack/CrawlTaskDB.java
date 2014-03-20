@@ -71,22 +71,23 @@ public class CrawlTaskDB {
 		return result;
 		
 	}
-	public boolean FinishTask(String task,CrawlTaskType type,boolean isOK){
+	public boolean FinishTask(String task,CrawlTaskType type,boolean isOK,String ErrorMsg){
 		if(isOK)
-			return this.SetTaskStatus(task, type, "Success");
+			return this.SetTaskStatus(task, type, "Success",ErrorMsg);
 		else
-			return this.SetTaskStatus(task, type, "Fail");
+			return this.SetTaskStatus(task, type, "Fail",ErrorMsg);
 		
 	}
 	
-	private boolean SetTaskStatus(String task,CrawlTaskType type,String status){
+	private boolean SetTaskStatus(String task,CrawlTaskType type,String status,String ErrorMsg){
 		Timestamp date=new Timestamp(System.currentTimeMillis());
 		try{
-			pstUpdateStatus=con.prepareStatement("update `crawlstatus` SET `FinTime`=?,`Status`=? WHERE taskStr=? AND taskType=?");
+			pstUpdateStatus=con.prepareStatement("update `crawlstatus` SET `FinTime`=?,`Status`=?,`ErrorMsg`=? WHERE taskStr=? AND taskType=?");
 			pstUpdateStatus.setTimestamp(1, date);
 			pstUpdateStatus.setString(2, status);
-			pstUpdateStatus.setString(3,task);
-			pstUpdateStatus.setInt(4, type.ordinal()+1);
+			pstUpdateStatus.setString(3,ErrorMsg);
+			pstUpdateStatus.setString(4, task);
+			pstUpdateStatus.setInt(5, type.ordinal()+1);
 			pstUpdateStatus.executeUpdate();
 			
 			return true;
@@ -108,11 +109,7 @@ public class CrawlTaskDB {
 		db=new CrawlTaskDB();
 	}
 	
-	@Test
-	@Ignore
-	public void testUpdate(){
-		db.SetTaskStatus("shanjixi", CrawlTaskType.Search,"Fail");
-	}
+	
 	
 	@After
 	public void after(){

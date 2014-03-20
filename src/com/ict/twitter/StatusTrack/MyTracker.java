@@ -25,15 +25,15 @@ public class MyTracker extends BaseTracker {
 
 
 	@Override
-	public void FinishTask(Task task) {
-		statusdb.FinishTask(task.getTargetString(), TaskType2CrawlTaskType(task.ownType),true);
+	public void FinishTask(Task task,String ErrorMsg) {
+		statusdb.FinishTask(task.getTargetString(), TaskType2CrawlTaskType(task.ownType),true,"OK");
 		
 	}
 
 	@Override
-	public void FailTask(Task task) {
+	public void FailTask(Task task,String ErrorMsg) {
 		// TODO Auto-generated method stub
-		statusdb.FinishTask(task.getTargetString(), TaskType2CrawlTaskType(task.ownType),false);
+		statusdb.FinishTask(task.getTargetString(), TaskType2CrawlTaskType(task.ownType),false,ErrorMsg);
 	}
 
 	private CrawlTaskType TaskType2CrawlTaskType(TaskType tasktype){
@@ -63,7 +63,7 @@ public class MyTracker extends BaseTracker {
 	public void test(){
 		Task t=new Task(TaskType.TimeLine, "BigBang");
 		track.AddTask(t);
-		track.FailTask(t);
+		track.FailTask(t,"~~");
 		
 	}
 }
