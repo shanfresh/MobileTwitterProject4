@@ -29,6 +29,8 @@ public abstract class AjaxCrawl {
 	protected boolean Hbase_Enable=false;
 	protected TwitterHbase hbase=null; 
 	//////////////////////////////////////////////////////////////////////////////
+	String ErrorMsg;
+	/////////////////////////////////////////////////////////////////////////////
 	public void SetHabae(TwitterHbase hbase,boolean IsEnable){
 		Hbase_Enable=IsEnable;
 		this.hbase=hbase;

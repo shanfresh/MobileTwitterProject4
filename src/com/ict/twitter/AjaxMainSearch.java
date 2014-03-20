@@ -91,6 +91,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 				Vector<TwiUser> users=new Vector<TwiUser>(30);
 				ReportData reportData=new ReportData();
 				boolean flag=false;
+				String ErrorMsg="";
 				switch(task.ownType){
 					case Search:{
 						flag=searchCrawl.doCrawl(task,batchdb,users,reportData);
@@ -110,6 +111,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 					case TimeLine:{
 						flag=timelineCrawl.doCrawl(task,batchdb,users,reportData);
 						sentKeyUsers(users);
+						ErrorMsg=timelineCrawl.ErrorMsg;
 						break;
 					}
 					case About:{
@@ -132,9 +134,9 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 				}
 
 				if(flag){
-					tracker.FinishTask(task);
+					tracker.FinishTask(task,ErrorMsg);
 				}else{
-					tracker.FailTask(task);
+					tracker.FailTask(task,ErrorMsg);
 				}
 				//节点中的汇报数据进行累加，累加后MainSearch中数据清零。
 				LogSys.nodeLogger.debug(String.format("Nodename:[%s] message:%d,user:%d,userrel%d",this.node.NodeName,reportData.message_increment,reportData.user_increment,reportData.message_rel_increment));
