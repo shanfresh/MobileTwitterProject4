@@ -84,6 +84,11 @@ public class AjaxProfileAnalyser extends AjaxAnalyser {
 				float flo=Float.parseFloat(count);
 				flo=flo*10000;
 				res=(int)flo;
+			}else if(count.contains("K")){				
+				count=count.replaceAll("K", "");
+				float flo=Float.parseFloat(count);
+				flo=flo*1000;
+				res=(int)flo;
 			}else{
 				res=Integer.parseInt(count);
 			}

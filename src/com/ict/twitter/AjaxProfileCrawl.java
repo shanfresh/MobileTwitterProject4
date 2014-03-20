@@ -27,8 +27,8 @@ import com.ict.twitter.tools.MulityInsertDataBase;
 
 public class AjaxProfileCrawl extends AjaxCrawl {
 
-	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&user_id=%s&_=%s";
-	//private String TEMP_URL="/i/profiles/popup?async_social_proof=false&screen_name=%s&_=%s";
+	//private String TEMP_URL="/i/profiles/popup?async_social_proof=false&user_id=%s&_=%s";
+	private String TEMP_URL="/i/profiles/popup?async_social_proof=false&screen_name=%s&_=%s";
 	private DefaultHttpClient httpclient;
 	private JSONParser parser = new JSONParser();
 	private boolean IS_ADD_MESSAGE_ANA=true;
@@ -50,11 +50,26 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
 		String ajaxContent=super.openLink(httpclient, URL,task,0);
+		
+
+		if(!this.CheckValidation(ajaxContent)){
+			LogSys.nodeLogger.error("Profile网络请求失败:"+UserID);
+			LogSys.nodeLogger.error("AjaxProfile——Resson:"+this.ErrorMsg+"["+URL);
+			profile.setUser_name(task.getTargetString());
+			profile.setIs_alive(false);
+			//Hbase没有写入啊
+			try {
+				dbo.insertIntoUserProfile(profile,task.getTargetTableName());
+			} catch (AllHasInsertedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
 		if(ajaxContent==null){
 			LogSys.nodeLogger.error("Profile网络请求失败:"+UserID);
 			super.SaveWebOpStatus(task, URL, 1, WebOperationResult.Fail, dbo);
-			return false;
-			
+			return false;			
 		}
 		super.SaveWebOpStatus(task, URL, 1, WebOperationResult.Success, dbo);
 		String user_screen_name="";
@@ -73,15 +88,13 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			LogSys.nodeLogger.error(e.getLocalizedMessage());
-			LogSys.nodeLogger.error("AjaxProfile——Error:"+URL);
+			LogSys.nodeLogger.error("AjaxProfile——Resson:"+this.ErrorMsg+"["+URL);
 			return false;
 		}
-		Vector<TimeLine> profileTimeline=new Vector<TimeLine>();
 		try{
 			profile.setUser_id(user_number_id);
 			profile.setUser_name(user_screen_name);
 			profileana.doAnylyze(htmlContent, profile);
-			profileanaext.doAnylyze(htmlContent, profileTimeline);
 			//byte[] result=new byte[1];
 			//System.out.println("时间问题，暂时不采集用户的profile中的图片内容");
 			byte[] result = WebOperationAjax.getSource(httpclient, profile.getPicture_url());
@@ -89,8 +102,6 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			//对Hbase进行插入操作
 			SaveToHbase(profile);
 			dbo.insertIntoUserProfile(profile,task.getTargetTableName());
-			
-			System.out.println("insert into profile");
 			System.out.println(profile.toString());
 			
 		}catch(AllHasInsertedException ex){
@@ -102,14 +113,19 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			LogSys.crawlerServLogger.error("ErrorIn AjaxProfileCrawl", exe.fillInStackTrace());
 			return false;
 		}
-		TimeLine[] allTimeline=profileTimeline.toArray(new TimeLine[profileTimeline.size()]);
+		Vector<TimeLine> profileTimeline=new Vector<TimeLine>();
+		
 		try {
-			dbo.insertIntoMessage(allTimeline, "profile_message_sample_2");
+			profileanaext.doAnylyze(htmlContent, profileTimeline);
+			TimeLine[] allTimeline=profileTimeline.toArray(new TimeLine[profileTimeline.size()]);
+			dbo.insertIntoMessage(allTimeline, "message");
 		} catch (AllHasInsertedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("当前用户全部Profile推文已经被插入");
 			
+		} catch(Exception ex){
+			System.out.println("当前账户没有推文信息");
 		}
 		return true;
 	}
@@ -129,10 +145,10 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
 		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
-		Task task=new Task(TaskType.About,"Rongfuduchunqiu");
-		task.setTargetTableName("user_profile_for_li");
-		UserTwitterHbase userhbase=new UserTwitterHbase("user");
-		profilecrawl.SetHabae(userhbase, true);
+		Task task=new Task(TaskType.About,"usherxupeng");
+		task.setTargetTableName("user_profile");
+		//UserTwitterHbase userhbase=new UserTwitterHbase("user");
+		//profilecrawl.SetHabae(userhbase, true);
 		profilecrawl.doCrawl(task,dbo, users,new ReportData());
 		httpclient.getConnectionManager().shutdown();
 		profilecrawl.service.shutdown();
@@ -162,6 +178,13 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		dbo.getConnection();
 		dbo.getDatafromprofile();
 		
+	}
+	private boolean CheckValidation(String content){
+		if(content==null||content.length()<=1||content.contains("Sorry, that page doesn’t exist")){
+			this.ErrorMsg="Profile采集_账户被冻结";
+			return false;
+		}
+		return true;
 	}
 	
 	
