@@ -241,7 +241,6 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		LogSys.crawlerServLogger.info("采集器总控端[自定义模式]启动");
 		try{
 			CollectionNodes();
-			System.err.println("FileName not typed");
 			sb.InitCustomerByFile(this,this.CustomTaskFolderDir);
 			sendNewStep(NodeStep.search_start);
 			SleepWithCount(5000);			

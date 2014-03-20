@@ -56,8 +56,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
-		Task task=new Task(TaskType.TimeLine,"wenyunchao");
-		task.setTargetTableName("message");
+		Task task=new Task(TaskType.TimeLine,"zerg0571");
+		task.setTargetTableName("message_test");
 		task.setPageCount(5);
 		at.doCrawl(task,dbo,users,new ReportData());
 		//at.doCrawl(new Task(TaskType.TimeLine,"mynamexu"),dbo,users,new ReportData());
@@ -92,8 +92,16 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 			}
 			
 			String content=openLink(httpclient, URL,task,retryCount);
+			if(!(this.CheckValidation(content))){
+				flag=false;
+				ErrorMsg="页面被冻结";
+				LogSys.nodeLogger.error("错误发生时当前采集的用户是--"+userID+"Reason:"+ErrorMsg);
+				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, dbo);
+				break;
+			}
 			if(content==null||(content.length())<=20){
 				System.err.println("web opreation error content is null");
+				ErrorMsg="网络错误，返回长度不足";
 				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, dbo);
 				has_more_items=false;
 				flag=false;
@@ -142,6 +150,12 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		return flag;
 		
 		
+	}
+	private boolean CheckValidation(String content){
+		if(content==null||content.contains("flex-module error-page clearfix")||content.contains("你试图查看的个人资料已被冻结")){
+			return false;
+		}
+		return true;
 	}
 
 }

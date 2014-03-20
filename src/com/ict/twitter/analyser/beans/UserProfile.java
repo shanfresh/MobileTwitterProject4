@@ -4,6 +4,7 @@ public class UserProfile {
 	private String User_id;
 	private String User_name;
 	private String user_aliasname;
+	private boolean is_alive=true;
 	public String getUser_aliasname() {
 		return user_aliasname;
 	}
@@ -103,6 +104,14 @@ public class UserProfile {
 
 	public void setFollower(int follower) {
 		this.follower = follower;
+	}
+
+	public boolean isIs_alive() {
+		return is_alive;
+	}
+
+	public void setIs_alive(boolean is_alive) {
+		this.is_alive = is_alive;
 	}
 	
 

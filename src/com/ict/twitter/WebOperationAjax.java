@@ -52,7 +52,7 @@ public class WebOperationAjax {
 			if(debug){
 				SaveToTextFile(res);	
 			}
-			if(res!=null){
+			if(res!=null&&res.length()>=1){
 				return res;
 			}else{
 				return openLink(httpclient,linkAddress,count+1);

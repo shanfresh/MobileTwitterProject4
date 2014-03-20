@@ -19,6 +19,7 @@ public class TimeLine {
 	public String link;
 	
 	public boolean is_reteet=false;
+	public String origin_tweet_id=null;
 	public String origin_user_name=null;
 	
 	public int reTWcount;
@@ -158,6 +159,12 @@ public class TimeLine {
 	}
 	public void setOrigin_user_name(String origin_user_name) {
 		this.origin_user_name = origin_user_name;
+	}
+	public String getOrigin_tweet_id() {
+		return origin_tweet_id;
+	}
+	public void setOrigin_tweet_id(String origin_tweet_id) {
+		this.origin_tweet_id = origin_tweet_id;
 	}
 
 
