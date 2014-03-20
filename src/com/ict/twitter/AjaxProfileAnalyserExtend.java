@@ -20,7 +20,7 @@ public class AjaxProfileAnalyserExtend {
 	public void doAnylyze(String content,Vector<TimeLine> vectTime) throws Exception{
 		Document doc=Jsoup.parse(content, "/");
 		Elements allTweet=doc.getElementsByAttributeValueStarting("class", "recent-tweets clearfix");
-		if(allTweet==null){
+		if(allTweet==null||allTweet.size()==0){
 			throw new Exception("主要的OL没有找到");
 		}
 		Element root=allTweet.first();
