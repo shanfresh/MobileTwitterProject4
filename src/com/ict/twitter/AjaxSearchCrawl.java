@@ -72,6 +72,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		}
 		String URL;
 		int count=0;
+		String lastCursor="";
 		do{
 			
 			int re_trycount=0;
@@ -127,8 +128,14 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 				has_next=false;
 			}
 			if(map.get("scroll_cursor")!=null){
-				has_next=true;
-				next_max_id=(String)map.get("scroll_cursor");
+				String currentCursor=(String)map.get("scroll_cursor");
+				if(lastCursor.equals(currentCursor)){
+					has_next=false;
+				}else{
+					has_next=true;
+					next_max_id=(String)map.get("scroll_cursor");
+					lastCursor=currentCursor;
+				}
 			}else{
 				has_next=false;
 			}
