@@ -50,7 +50,9 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
 		String ajaxContent=super.openLink(httpclient, URL,task,0);
-		
+		if(task.getTargetTableName().equalsIgnoreCase("null")){
+			task.setTargetTableName("user_profile");
+		}
 
 		if(!this.CheckValidation(ajaxContent)){
 			LogSys.nodeLogger.error("ProfileÕ¯¬Á«Î«Û ß∞‹:"+UserID);

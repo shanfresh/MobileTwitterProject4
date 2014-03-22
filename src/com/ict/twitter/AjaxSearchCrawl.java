@@ -110,6 +110,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 			} catch (AllHasInsertedException e) {
 				//系统发现重复采集故停止当前采集任务；
 				has_next=true;
+				e.printStackTrace();
 				LogSys.nodeLogger.debug("当前Search采集已经入库，继续采集["+keyWords+"]");
 				
 				//LogSys.nodeLogger.debug("当前Search采集完成["+keyWords+"]");

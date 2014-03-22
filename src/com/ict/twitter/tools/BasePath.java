@@ -14,7 +14,6 @@ public class BasePath {
 	
 	public static String getBase(){
 		String dir=System.getProperty("user.dir");
-		LogSys.nodeLogger.debug("工程路径是："+dir);
 		return dir;
 	}
 

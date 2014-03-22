@@ -112,7 +112,7 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		}
 		MessageDetail[] ss=msgdetailvector.toArray(new MessageDetail[msgdetailvector.size()]);
 		super.batchdb.insertIntoMessageDetail(ss);
-		if(task.getTargetTableName()!=null){
+		if(task.getTargetTableName()!=null&&!(task.getTargetTableName().equalsIgnoreCase("null"))){
 			super.batchdb.insertIntoMessage(timelines,task.getTargetTableName());
 		}else{
 			super.batchdb.insertIntoMessage(timelines,"message");
