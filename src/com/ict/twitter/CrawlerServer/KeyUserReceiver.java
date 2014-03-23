@@ -25,7 +25,7 @@ public class KeyUserReceiver extends Receiver {
 					if(str==null||str.equals("")){
 						return;
 					}else{
-						//LogSys.crawlerServLogger.debug("【Server】接收KeyUser" + str);
+						LogSys.crawlerServLogger.debug("【Server】接收KeyUser" + str);
 					}
 					SimpleXmlAnalyser simxml = new SimpleXmlAnalyser(str);
 					String[] users = simxml.getValueByTag("name");					

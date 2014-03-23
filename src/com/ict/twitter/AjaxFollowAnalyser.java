@@ -74,14 +74,13 @@ public class AjaxFollowAnalyser extends AjaxAnalyser {
 				String userScreenName=ele2.attr("data-name");
 				TwiUser user=new TwiUser(userID,userScreenName,0,0);
 				users.add(user);
-				user.show();
 				userrels.add(new UserRelationship(currentUser,userID,isFollowing+""));
 			}
 			
 		}
 		UserRelationship[] rels = new  UserRelationship[userrels.size()];
 		userrels.toArray(rels);
-		if(task.getTargetTableName()!=null){
+		if(task.getTargetTableName()!=null&&!task.getTargetTableName().equalsIgnoreCase("null")){
 			super.batchdb.insertIntoUserRel(rels,task.getTargetTableName());
 		}else{
 			super.batchdb.insertIntoUserRel(rels,"user_relationship");

@@ -90,6 +90,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 				String items_html=(String)map.get("items_html");
 				Vector<TwiUser> needTosave=new Vector<TwiUser>();				
 				index=aa.doAnalyse(userID,isFollowing,items_html,needTosave);
+				//保存用户到用户表
 				SaveToDataBase(task,batchdb,needTosave);
 				
 				if(hasmore!=null){
@@ -123,7 +124,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		RelateUsers.toArray(userArray);
 		try{
 			if(RelateUsers.size()>0){
-				dbo.insertIntoUser(userArray,"user_wenyunchao");
+				dbo.insertIntoUser(userArray,"user");
 			}
 		}catch(AllHasInsertedException ex){
 			LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");
