@@ -13,7 +13,10 @@ public class LogSys {
 	 */
 
 	static{
-		PropertyConfigurator.configure ("config/log4j_Main.properties" ) ;
+		PropertyConfigurator.configure ("config/log4j_Main.properties" );
+		Logger.getLogger("org.apache.zookeeper").setLevel(Level.WARN);
+		Logger.getLogger("org.apache.hadoop.hbase.zookeeper").setLevel(Level.WARN);
+		Logger.getLogger("org.apache.hadoop.hbase.client").setLevel(Level.WARN);
 	}
 	public static Logger debugLogger=Logger.getLogger("E");
 	public static Logger nodeLogger=Logger.getLogger("NODELOGER");
