@@ -123,11 +123,10 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			dbo.insertIntoMessage(allTimeline, "message");
 		} catch (AllHasInsertedException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("当前用户全部Profile推文已经被插入");
+			System.err.println("当前用户全部推文已经被插入");
 			
 		} catch(Exception ex){
-			System.out.println("当前账户没有推文信息");
+			System.err.println("当前账户没有推文信息");
 		}
 		return true;
 	}

@@ -137,8 +137,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		}else if(op==OP.SAMPLE){
 			LogSys.crawlerServLogger.info("正在进入随机抽样采集");
 			Initiallize();
-			this.StartSampleServer();
-			
+			this.StartSampleServer();			
 		}
 		
 	}
@@ -222,6 +221,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		StartSchedulTimer();//启动调度器
 		StartKeyUserSchedulTimer();//启动对KeyUser的定时采集
 		StartKeyWordSchedulTimer();//启动对KeyWords的定时采集
+		StartPlantSchedulerTimer();//启动普通任务定时器（包含对InputTask的刷新）
 		try{
 			CollectionNodes();
 			KeyWordSearch(false);		
@@ -675,7 +675,16 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		time.schedule(keyword, 10*60000, day);//每天干完keyUser10min后感Keywords
 		System.out.println("启动KeyUserSchedul成功");
 	}
-	
+	//InputTask 调度器
+	private void StartPlantSchedulerTimer(){
+		Timer time=new Timer();
+		KeyWordsScheduler keyword=new KeyWordsScheduler(this);
+		long minute=60000;
+		long hour=60*minute;
+		long day=hour*12;
+		time.schedule(keyword, 10*60000, 4*hour);//每天干完keyUser10min后感Keywords
+		System.out.println("启动PlantScheduler成功");
+	}
 	
 	public void ShowAndLog(String msg){
 		LogSys.crawlerServLogger.info("【CRAWLERSERVER】"+msg);

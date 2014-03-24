@@ -127,7 +127,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 				users.toArray(userArray);
 				try{
 					if(users.size()>0){
-						batchdb.insertIntoUser(userArray,"users");
+						batchdb.insertIntoUser(userArray,"user");
 					}
 				}catch(AllHasInsertedException ex){
 					LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");
@@ -153,7 +153,11 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 		StringBuffer sb=new StringBuffer();
 		for(TwiUser t:users){
 			sb.append("<name>");
-			sb.append(t.name);
+			String name=t.getName();
+			if(name.contains("@")){
+				name=name.replaceAll("@", "");
+			}
+			sb.append(name);
 			sb.append("</name>");
 		}
 		node.addKeyUserIDs(sb.toString());

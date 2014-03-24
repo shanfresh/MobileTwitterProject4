@@ -134,7 +134,7 @@ public class MulityInsertDataBase {
 			insertWithTarget.close();
 			con.commit();	
 		} catch( BatchUpdateException ex){
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			int[] res = ex.getUpdateCounts();
 			checkBatch(res);
 		}catch (SQLException e) {
@@ -274,7 +274,7 @@ public class MulityInsertDataBase {
 		Connection con=this.getConnection();
 		try {
 			
-			PreparedStatement userps = con.prepareStatement("insert into "+usertable+"(channel_id,user_id,real_name,crawl_time,fans_num,friends_num,location,description,profile_image_url,url) values(?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement userps = con.prepareStatement("insert into "+usertable+"(channel_id,user_id,real_name,crawl_time) values(?,?,?,?)");
 			
 			java.sql.Timestamp time = new Timestamp(System.currentTimeMillis());
 			userps.clearBatch();
@@ -282,22 +282,17 @@ public class MulityInsertDataBase {
 				userps.setInt(1, 6);
 				userps.setString(2,users[i].getName());
 				userps.setString(3, users[i].getAliasName());
-				userps.setTimestamp(4, time);
-				userps.setInt(5, 0);
-				userps.setInt(6, 0);
-				userps.setString(7, users[i].getLocation());
-				userps.setString(8, users[i].getSummarized());
-				userps.setString(9, users[i].getProfileImageUrl());
-				userps.setString(10, users[i].getWebpageLink());				
+				userps.setTimestamp(4, time);		
 				userps.addBatch();
 				
 			}
 			userps.executeBatch();
 			con.commit();
 		}catch( BatchUpdateException ex){
+			//ex.printStackTrace();
 			int[] res = ex.getUpdateCounts();
 			checkBatch(res);
-			ex.printStackTrace();
+			
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -324,7 +319,7 @@ public class MulityInsertDataBase {
 			con.commit();
 		}catch(BatchUpdateException ex){
 			int[] res = ex.getUpdateCounts();
-			ex.printStackTrace();
+			//ex.printStackTrace();
 			checkBatch(res);			
 		}catch (SQLException e) {
 			e.printStackTrace();

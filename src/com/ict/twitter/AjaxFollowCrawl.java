@@ -119,7 +119,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		return true;
 	}
 	
-	private void SaveToDataBase(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers){
+	private void SaveToDataBase(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers) throws AllHasInsertedException{
 		TwiUser[] userArray=new TwiUser[RelateUsers.size()];
 		RelateUsers.toArray(userArray);
 		try{
@@ -128,6 +128,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 			}
 		}catch(AllHasInsertedException ex){
 			LogSys.nodeLogger.debug("所有用户均已经插入：Task:["+task.toString()+"]");
+			throw ex;
 		}
 	}
 	

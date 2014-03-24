@@ -110,12 +110,12 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 				res = ana.doAnalyse(html,RelateUsers,reportData);
 			} catch (AllHasInsertedException e) {
 				//系统发现重复采集故停止当前采集任务；
-				has_next=true;
+				has_next=false;
 				e.printStackTrace();
-				LogSys.nodeLogger.debug("当前Search采集已经入库，继续采集["+keyWords+"]");
+				//LogSys.nodeLogger.debug("当前Search采集已经入库，继续采集["+keyWords+"]");
 				
-				//LogSys.nodeLogger.debug("当前Search采集完成["+keyWords+"]");
-				//break;
+				LogSys.nodeLogger.debug("当前Search采集完成,停止采集["+keyWords+"]");
+				break;
 			}catch (Exception ex){
 				has_next=false;
 				LogSys.nodeLogger.debug("当前SearchAnalyse解析发生错误["+keyWords+"]");

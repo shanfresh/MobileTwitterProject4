@@ -21,12 +21,12 @@ public class NormalUserReceiver extends Receiver {
 		if (isNode) {
 			LogSys.crawlerServLogger.debug("【NODE】接收到消息" + resmsg.toString());
 		} else {
-			LogSys.crawlerServLogger.debug("【Server】接收到新NormalUserID消息" + resmsg.toString());
 			//<count>20</count><name>rying_yuqing</name><sum>1000</sum><name>1101860417</name><sum>1000</sum><name>szstupidcool</name><sum>1000</sum><name>zhang1605</name><sum>1000</sum><name>gongyaobin</name><sum>1000</sum><name>duijiudangge</name><sum>1000</sum><name>cmsky1</name><sum>1000</sum><name>_0886608866842</name><sum>1000</sum><name>yf_sky</name><sum>1000</sum><name>xmmksj</name><sum>1000</sum><name>qinlang616</name><sum>1000</sum><name>sble250</name><sum>1000</sum><name>dante1029</name><sum>1000</sum><name>MrNine2012</name><sum>1000</sum><name>onlychujian</name><sum>1000</sum><name>lxl88</name><sum>1000</sum><name>zhangliang2</name><sum>1000</sum><name>fengzhigu</name><sum>1000</sum><name>victorhooo</name><sum>1000</sum><name>shanxizhouyang</name><sum>1000</sum>
 			if (resmsg instanceof TextMessage) {
 				String str = null;
 				try {
 					str = ((TextMessage) resmsg).getText();
+					LogSys.crawlerServLogger.debug("【Server】接收到新NormalUserID消息" + str);
 					if (str.startsWith("<count>")) {
 						SimpleXmlAnalyser simxml = new SimpleXmlAnalyser(str);
 						String count = simxml.getFirstValueByTag("count");
