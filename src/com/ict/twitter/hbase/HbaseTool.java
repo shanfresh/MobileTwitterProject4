@@ -74,7 +74,7 @@ public class HbaseTool {
     		Result result=table.get(get);
     		List<KeyValue> values=result.list();
     		for(KeyValue t:values){
-    			System.out.println(Bytes.toString(t.getFamilyArray())+"_"+Bytes.toString(t.getQualifier())+"_"+Bytes.toString(t.getValue()));
+    			System.out.println(Bytes.toString(t.getFamily())+"_"+Bytes.toString(t.getQualifier())+"_"+Bytes.toString(t.getValue()));
     		}
     		table.close();
     		return result;

@@ -92,7 +92,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 				index=aa.doAnalyse(userID,isFollowing,items_html,needTosave);
 				//保存用户到用户表
 				SaveToDataBase(task,batchdb,needTosave);
-				
+				RelateUsers.addAll(needTosave);
 				if(hasmore!=null){
 					hasMoreItems=(Boolean)hasmore;
 					if(hasMoreItems)

@@ -24,16 +24,16 @@
 <configuration>
 <property>
 	<name>hbase.rootdir</name>
-	<value>hdfs://192.168.120.67:9000/hbase</value>
+	<value>hdfs://192.168.120.64:9000/hbase</value>
 </property>
 
 <property>
 	<name>hbase.zookeeper.quorum</name>
-	<value>192.168.120.67</value>
+	<value>192.168.120.64</value>
 </property>
 <property>
 <name>hbase.master</name>
-    <value>192.168.120.67:60000</value>
+    <value>192.168.120.64:60000</value>
 </property>
 <property>
 	<name>hbase.cluster.distributed</name>

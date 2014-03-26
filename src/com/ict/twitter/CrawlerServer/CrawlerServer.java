@@ -661,7 +661,7 @@ public class CrawlerServer extends MessageBusComponent implements Runnable,Messa
 		KeyUserScheduler kuser=new KeyUserScheduler(this);
 		long minute=60000;
 		long hour=60*minute;
-		long day=hour*12;
+		long day=hour*24;
 		time.schedule(kuser, 10000,day);
 		System.out.println("Æô¶¯KeyUserSchedul³É¹¦");
 	}

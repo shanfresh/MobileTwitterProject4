@@ -102,7 +102,7 @@ public class WebOp {
 			e.printStackTrace();
 			System.out.println("IOException e");
 		}finally{
-			httpget.releaseConnection();
+			httpget.reset();
 		}		
 		return sb.toString();           
 

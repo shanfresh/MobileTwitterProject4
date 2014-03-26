@@ -135,6 +135,14 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			((UserTwitterHbase)hbase).InsertIntoTable(profile);
 		}
 	}
+	public void SaveToHbase(Vector<TimeLine> timelines){
+		if(this.Hbase_Enable){
+			for(int i=0;i<timelines.size();i++){
+				
+			}
+		}
+		
+	}
 	public static void main(String[] args){
 		TwitterClientManager cm=new TwitterClientManager();
 		DefaultHttpClient httpclient = cm.getClientByIpAndPort("192.168.120.67", 8087);

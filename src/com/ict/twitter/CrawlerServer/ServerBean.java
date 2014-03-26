@@ -17,6 +17,7 @@ import java.util.Properties;
 import java.util.Vector;
 import java.sql.*;
 
+import com.ict.twitter.DAO.DBKeyUserDAO;
 import com.ict.twitter.StatusTrack.CrawlUserDB;
 import com.ict.twitter.plantform.LogSys;
 import com.ict.twitter.task.beans.Task;
@@ -29,6 +30,7 @@ public class ServerBean implements Serializable{
 	public static String aname="~~~~";
 	public static boolean isFirstChuizhi=true;
 	CrawlUserDB crawluser=new CrawlUserDB();
+	DBKeyUserDAO dbkeyuser=new DBKeyUserDAO();
 	List<NormalUser> normalUserList=Collections.synchronizedList(new UserList<NormalUser>());
 	List<NormalUser> keyUsers=Collections.synchronizedList(new UserList<NormalUser>());		
 	//初始化关键词搜索
@@ -300,9 +302,16 @@ public class ServerBean implements Serializable{
 	
 	public void addKeyUser(NormalUser user){
 		//如果种子用户列表中已经存在。
+		try {
+			dbkeyuser.CheckAndInsert(user.getUserID());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(keyUsers.contains(user)){
 			return ;
 		}
+		
 		crawluser.insertUserItem(user.userID, -1, true, null, 0);	
 		keyUsers.add(user);
 	} 

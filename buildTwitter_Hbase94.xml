@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     2013-03-25 上午10:22分                                                             
+     ====================================================================== -->
+<project name="project" default="compile">
+    <description>
+            MobileTwitterProject4
+    </description>
+
+    <!-- ================================= 
+          target: default              
+         ================================= -->
+    <target name="compile" depends="TwitterJars" description="make TwitterProject4">
+          	
+    </target>
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="depends">
+    	<delete dir="${basedir}/build/classes"/>
+    	<delete failonerror="false" >
+    		<fileset dir="${basedir}/build/lib">
+		    	<include name="*.jar"/>
+		    </fileset>
+    		<fileset dir="${basedir}/build/config">    			
+    		</fileset>
+    		<fileset dir="${basedir}/build/UsefulFile">    			
+    		</fileset>
+    		<fileset dir="${basedir}/build/Output">
+    		</fileset>
+    		<fileset dir="${basedir}/build/mainlog">
+    		</fileset>
+    	</delete>    	    	
+    	<echo message="Clean build Start Build"/>
+    	<mkdir dir="${basedir}/build/classes"/>
+    	<mkdir dir="${basedir}/build/mainlog"/>    	
+    	<copydir dest="${basedir}/build/config" src="${basedir}/config"></copydir>
+    	<copydir dest="${basedir}/build/UsefulFile" src="${basedir}/UsefulFile"></copydir>
+    	<copydir dest="${basedir}/build/Output" src="${basedir}/Output"></copydir>
+    	    	
+    	<copy file="${basedir}/runNodes.bat" tofile="${basedir}/build/runNodes.bat" />
+    	<copy file="${basedir}/runServer.bat" tofile="${basedir}/build/runServer.bat" />
+ 		<copy todir="${basedir}/build/">
+ 		    <fileset dir="${basedir}/">
+ 		      <include name="*.sh"/>
+ 		    </fileset>
+ 		</copy>   	
+    </target>
+	<target name="build">
+		<javac srcdir="${basedir}/src" destdir="${basedir}/build/classes" debug="yes">
+			<classpath>
+			 	 	<fileset dir="${basedir}/lib">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/JFreeChat">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/JSON">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/log4j">
+				    <include name="*.jar"/>
+				    </fileset>
+				    <fileset dir="${basedir}/lib/MongoDB">
+				    <include name="*.jar"/>
+		     		</fileset>
+				    <fileset dir="${basedir}/lib/JUnit">
+				    <include name="*.jar"/>
+		     		</fileset>
+				    <fileset dir="${basedir}/lib/hbase94">
+				    <include name="*.jar"/>
+		     		</fileset>
+					<filelist>
+						<file name="${basedir}/src/hbase-site.xml"/>
+					</filelist>
+			</classpath>			
+		</javac>
+		<copy todir="${basedir}/build/">
+			<fileset dir="${basedir}/src">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		
+    </target>
+	
+	
+	<target name="TwitterJars" depends="depends,build">
+		    <delete dir="${basedir}/build/lib"/>
+			<copy todir="${basedir}/build/lib">
+			    <fileset dir="${basedir}/lib">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/JFreeChat">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/JSON">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/log4j">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/JUnit">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/MongoDB">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/proguard">
+			        <include name="*.jar"/>
+			    </fileset>
+			    <fileset dir="${basedir}/lib/hbase94">
+			    	<include name="*.jar"/>
+		 		</fileset>
+			</copy>
+		<path id="classpath">
+		       <fileset  dir="${basedir}/build/lib">
+		       		<include  name="*.jar" />	
+		       </fileset>
+		 </path>
+	    <pathconvert property="lib" pathsep=" ">  
+	        <!--mapper,对路径组合方式进行控制-->  
+	        <mapper>  
+	            <!--chainedmapper 作用是联合多个mapper-->  
+	            <chainedmapper>  
+	                <!--过滤文件，将路径去掉，只保留文件名-->  
+	                <flattenmapper />  
+	                <!--过滤+转换器，将所有的文件名前面都加上一个lib，我们知道lib目录下面有jar包，  
+	                    lib/*的作用其实是将jar包名与路径进行组合形成如：lib/google.jar这样的相对路径  
+	                 -->  
+	                <globmapper from="*" to="lib/*" />  
+	            </chainedmapper>  
+	        </mapper>  
+	        <!--按照mapper定义的格式组合lib目录下面的所有jar文件，形成诸如lib/jar1.jar lib/jar2.jar的字符串-->  
+	        <fileset dir="${basedir}/build/lib" >  
+	            <include name="*.jar" />
+	        	<exclude name="hbase/*">
+	        	</exclude>
+	        </fileset>  
+	    </pathconvert> 
+		
+		
+		<jar destfile="${basedir}/build/TwitterCrawlerServer.jar" basedir="${basedir}/build/classes">
+			<manifest>
+				<attribute name="Main-Class" value="com.ict.twitter.CrawlerServer.CrawlerServer"/>
+				<attribute name="Class-Path" value=". lib/junit.jar lib/jsoup-1.6.1-javadoc.jar lib/jsoup-1.6.1-sources.jar lib/jsoup-1.6.1.jar lib/log4j-1.2.17.jar lib/activemq-all-5.6.0.jar lib/commons-logging-1.1.1.jar lib/commons-codec-1.6.jar lib/lombok.jar lib/fluent-hc-4.2.2.jar lib/httpclient-4.2.2.jar lib/httpclient-cache-4.2.2.jar lib/httpcore-4.2.2.jar lib/httpmime-4.2.2.jar lib/mysql-connector-java-5.1.22-bin.jar lib/json-simple-1.1.1.jar lib/mongo-2.10.1.jar lib/gnujaxp.jar lib/iText-2.1.5.jar lib/jcommon-1.0.17.jar lib/jfreechart-1.0.14-experimental.jar lib/jfreechart-1.0.14-swt.jar lib/jfreechart-1.0.14.jar lib/junit.jar lib/servlet.jar lib/swtgraphics2d.jar"/>
+			</manifest>
+		</jar>
+		<pathconvert property="mf.classpath" pathsep=" ">
+					      <path refid="classpath" />
+				             <flattenmapper />
+		</pathconvert>
+		<jar destfile="${basedir}/build/TwitterNodes.jar" basedir="${basedir}/build/classes">
+			
+			<manifest>
+				<attribute name="Main-Class" value="com.ict.twitter.CrawlerNode.runTWAjaxNodes"/>
+				<attribute name="Class-Path" value=". . lib/junit.jar lib/jsoup-1.6.1-javadoc.jar lib/jsoup-1.6.1-sources.jar lib/jsoup-1.6.1.jar lib/log4j-1.2.17.jar lib/activemq-all-5.6.0.jar lib/commons-logging-1.1.1.jar lib/commons-codec-1.6.jar lib/lombok.jar lib/fluent-hc-4.2.2.jar lib/httpclient-4.2.2.jar lib/httpclient-cache-4.2.2.jar lib/httpcore-4.2.2.jar lib/httpmime-4.2.2.jar ${lib}"/>
+			</manifest>
+		</jar>
+
+	</target>
+	
+	
+
+	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<target name="obfuscate">
+	  <taskdef resource="proguard/ant/task.properties"
+	           classpath="lib/proguard/proguard.jar" />
+
+	  <proguard printseeds="on"
+	            printmapping="out.map"
+	            renamesourcefileattribute="SourceFile" optimize="false">
+
+	    <!-- Specify the input jars, output jars, and library jars. -->
+
+	    <injar  file="build/TwitterNodes.jar" />
+	    <outjar file="build/TwitterNodes2.jar" />
+	    <injar  file="build/TwitterCrawlerServer.jar" />
+	    <outjar file="build/TwitterCrawlerServer2.jar" />
+
+	    <libraryjar file="${java.home}/lib/rt.jar" />
+	  	<libraryjar dir="${basedir}/build/lib" filter="" />
+	  		
+	  	<libraryjar/>
+
+	    <keepattribute name="LineNumberTable" />
+	    <keepattribute name="SourceFile" />
+
+	    <!-- Preserve all annotations. -->
+
+	    <keepattribute name="*Annotation*" />
+
+	    <!-- Preserve all public applications. -->
+
+	    <keepclasseswithmembers access="public">
+	      <method access    ="public static"
+	              type      ="void"
+	              name      ="main"
+	              parameters="java.lang.String[]" />
+	    </keepclasseswithmembers>
+
+	    <!-- Preserve all native method names and the names of their classes. -->
+
+	    <keepclasseswithmembernames>
+	      <method access="native" />
+	    </keepclasseswithmembernames>
+
+	    <!-- Preserve the methods that are required in all enumeration classes. -->
+
+	    <keepclassmembers allowoptimization="true" type="enum">
+	      <method access="public static"
+	              type="**[]"
+	              name="values"
+	              parameters="" />
+	      <method access="public static"
+	              type="**"
+	              name="valueOf"
+	              parameters="java.lang.String" />
+	    </keepclassmembers>
+
+	    <!-- Explicitly preserve all serialization members. The Serializable
+	         interface is only a marker interface, so it wouldn't save them.
+	         You can comment this out if your library doesn't use serialization.
+	         If your code contains serializable classes that have to be backward
+	         compatible, please refer to the manual. -->
+
+	    <keepclasseswithmembers implements="java.io.Serializable">
+	      <field  access    ="static final"
+	              type      ="long"
+	              name      ="serialVersionUID" />
+	      <field  access    ="static final"
+	              type      ="java.io.ObjectStreamField[]"
+	              name      ="serialPersistentFields" />
+	      <method access    ="private"
+	              type      ="void"
+	              name      ="writeObject"
+	              parameters="java.io.ObjectOutputStream" />
+	      <method access    ="private"
+	              type      ="void"
+	              name      ="readObject"
+	              parameters="java.io.ObjectInputStream" />
+	      <method type      ="java.lang.Object"
+	              name      ="writeReplace"
+	              parameters="" />
+	      <method type      ="java.lang.Object"
+	              name      ="readResolve"
+	              parameters="" />
+	    </keepclasseswithmembers>
+
+	  	<keepnames implements="java.io.Serializable" >
+	  		 <field  access    ="static final"
+	  			              type      ="long"
+	  			              name      ="serialVersionUID" />
+	  			      <field  access    ="static final"
+	  			              type      ="java.io.ObjectStreamField[]"
+	  			              name      ="serialPersistentFields" />
+	  			      <method access    ="private"
+	  			              type      ="void"
+	  			              name      ="writeObject"
+	  			              parameters="java.io.ObjectOutputStream" />
+	  			      <method access    ="private"
+	  			              type      ="void"
+	  			              name      ="readObject"
+	  			              parameters="java.io.ObjectInputStream" />
+	  			      <method type      ="java.lang.Object"
+	  			              name      ="writeReplace"
+	  			              parameters="" />
+	  			      <method type      ="java.lang.Object"
+	  			              name      ="readResolve"
+	  			              parameters="" />
+	  	</keepnames>
+	  	
+	    <!-- Your application may contain more items that need to be preserved;
+	         typically classes that are dynamically created using Class.forName -->
+
+	  </proguard>
+	</target>
+	
+	
+	
+	  <target name = "clean">
+	    <delete file="${basedir}/build/TwitterNodes2.jar" />
+	    <delete file="${basedir}/build/TwitterCrawlerServer2.jar"/>
+	  </target>
+	
+	
+</project>

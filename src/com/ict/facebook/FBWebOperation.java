@@ -85,7 +85,7 @@ public class FBWebOperation {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally{
-			httpget.releaseConnection();
+			httpget.reset();
 			
 		}
 		/*
