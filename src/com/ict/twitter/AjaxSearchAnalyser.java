@@ -3,6 +3,7 @@ package com.ict.twitter;
 import java.io.IOException;
 import java.util.Vector;
 
+import org.apache.hadoop.hbase.generated.master.table_jsp;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -85,7 +86,7 @@ public class AjaxSearchAnalyser extends AjaxAnalyser {
 		if(super.HbaseEnable){
 			((MessageTwitterHbase)hbase).InsertIntoTable(TimeLineArray);
 		}
-		if(task.getTargetTableName().equalsIgnoreCase("null")){
+		if(task.getTargetTableName()==null||task.getTargetTableName().equalsIgnoreCase("null")){
 			task.setTargetTableName("message");
 		}
 		super.batchdb.insertIntoMessage(TimeLineArray,task.getTargetTableName());
