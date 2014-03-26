@@ -50,9 +50,9 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		Task task=new Task(TaskType.Search,"wenyunchao");
-		task.setTargetTableName("message_search_wenyunchao");
 		ReportData reportData=new ReportData();
-		
+		MessageTwitterHbase msghbase=new MessageTwitterHbase("message");
+		test.SetHabae(msghbase, true);
 		test.doCrawl(task, dbo, users, reportData);
 		
 		
