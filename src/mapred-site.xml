@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more       -->
+<!-- contributor license agreements.  See the NOTICE file distributed with    -->
+<!-- this work for additional information regarding copyright ownership.      -->
+<!-- The ASF licenses this file to You under the Apache License, Version 2.0  -->
+<!-- (the "License"); you may not use this file except in compliance with     -->
+<!-- the License.  You may obtain a copy of the License at                    -->
+<!--                                                                          -->
+<!--     http://www.apache.org/licenses/LICENSE-2.0                           -->
+<!--                                                                          -->
+<!-- Unless required by applicable law or agreed to in writing, software      -->
+<!-- distributed under the License is distributed on an "AS IS" BASIS,        -->
+<!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. -->
+<!-- See the License for the specific language governing permissions and      -->
+<!-- limitations under the License.                                           -->
+
+<configuration>
+
+  <property>
+    <name>mapred.job.tracker</name>
+    <value>192.168.5.131:54311</value>
+  </property>
+
+
+  <property>
+    <name>mapred.reduce.tasks</name>
+    <!-- set to numnodes * mapred.tasktracker.reduce.tasks.maximum  * 0.99-->
+    <value>9</value>
+  </property>
+
+  <property>
+    <name>mapred.tasktracker.map.tasks.maximum</name>
+    <!-- see other kb entry about this one. -->
+    <value>5</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>mapred.tasktracker.reduce.tasks.maximum</name>
+    <!-- see other kb entry about this one. -->
+    <value>2</value>
+    <final>true</final>
+  </property>
+
+  <property>
+    <name>mapred.reduce.parallel.copies</name>
+    <!-- set this to somewhere between sqrt(nodes) and nodes/2.  for <20 nodes, set == |nodes| -->
+    <value>20</value>
+  </property>
+
+  <property>
+    <name>mapred.child.java.opts</name>
+    <value>-Xmx512m -XX:+UseConcMarkSweepGC -XX:ParallelCMSThreads=1 -XX:ParallelGCThreads=1</value>
+  </property>
+
+<!-- specify JobTracker TaskScheduler -->
+  <property>
+    <name>mapred.jobtracker.taskScheduler</name>
+    <value>org.apache.hadoop.mapred.FairScheduler</value>
+  </property>
+  <property>
+     <name>mapred.fairscheduler.allocation.file</name>
+     <value>/etc/hadoop/conf/fair-scheduler.xml</value>
+  </property>
+
+
+
+  <property>
+    <name>mapred.child.ulimit</name>
+    <value>unlimited</value>
+  </property>
+  <property>
+    <name>mapred.compress.map.output</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>mapred.fairscheduler.assignmultiple</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>mapred.fairscheduler.sizebasedweight</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>mapred.job.tracker.handler.count</name>
+    <value>60</value>
+  </property>
+  <property>
+    <name>mapred.local.dir</name>
+    <value>/mnt/disk1/hadoop/mapred</value>
+  </property>
+  <property>
+    <name>mapred.map.max.attempts</name>
+    <value>4</value>
+  </property>
+  <property>
+    <name>mapred.map.output.compression.codec</name>
+    <value>org.apache.hadoop.io.compress.SnappyCodec</value>
+  </property>
+  <property>
+    <name>mapred.map.tasks.speculative.execution</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>mapred.output.compression.type</name>
+    <value>BLOCK</value>
+  </property>
+  <property>
+    <name>mapred.profiling</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>mapred.reduce.max.attempts</name>
+    <value>4</value>
+  </property>
+  <property>
+    <name>mapred.reduce.tasks.speculative.execution</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>mapred.task.timeout</name>
+    <value>180000</value>
+  </property>
+  <property>
+    <name>mapred.tasktracker.expiry.interval</name>
+    <value>180000</value>
+  </property>
+  <property>
+    <name>tasktracker.http.threads</name>
+    <value>40</value>
+  </property>
+
+</configuration>

@@ -1198,17 +1198,22 @@ com.ict.twitter.analyser.beans.UserRelationship -> com.ict.twitter.analyser.bean
 com.ict.twitter.analyser.filter.TimeTransformer -> com.ict.twitter.analyser.filter.TimeTransformer:
     15:15:void main(java.lang.String[]) -> main
     59:67:java.lang.String Convert(java.lang.String) -> a
+com.ict.twitter.hbase.ConvertTest -> com.ict.twitter.hbase.ConvertTest:
+    9:13:java.lang.String Convert(java.lang.String) -> a
+    16:19:void main(java.lang.String[]) -> main
 com.ict.twitter.hbase.HbaseFactory -> com.ict.twitter.hbase.a:
     org.apache.hadoop.conf.Configuration conf -> a
 com.ict.twitter.hbase.HbaseTool -> com.ict.twitter.hbase.HbaseTool:
     org.apache.hadoop.conf.Configuration conf -> a
     21:49:boolean CreateTable(java.lang.String,java.lang.String[]) -> a
     91:114:void main(java.lang.String[]) -> main
-com.ict.twitter.hbase.MessageTwitterHbase -> com.ict.twitter.hbase.b:
-    26:48:boolean InsertIntoTable(com.ict.twitter.analyser.beans.TimeLine[]) -> a
-    52:100:byte[] Exchange(com.ict.twitter.analyser.beans.TimeLine,java.lang.String,java.lang.String) -> a
-    104:110:void SetFamilyNameAndColumns() -> a
-com.ict.twitter.hbase.TwitterHbase -> com.ict.twitter.hbase.c:
+com.ict.twitter.hbase.MessageTwitterHbase -> com.ict.twitter.hbase.MessageTwitterHbase:
+    27:44:boolean InsertIntoTable(com.ict.twitter.analyser.beans.TimeLine[]) -> a
+    48:97:byte[] Exchange(com.ict.twitter.analyser.beans.TimeLine,java.lang.String,java.lang.String) -> a
+    101:107:void SetFamilyNameAndColumns() -> a
+    110:114:java.lang.String Convert(java.lang.String) -> c
+    117:119:void main(java.lang.String[]) -> main
+com.ict.twitter.hbase.TwitterHbase -> com.ict.twitter.hbase.b:
     org.apache.hadoop.conf.Configuration conf -> a
     org.apache.hadoop.hbase.client.HTable table -> b
     java.lang.String tableName -> c
@@ -1218,12 +1223,12 @@ com.ict.twitter.hbase.TwitterHbase -> com.ict.twitter.hbase.c:
     48:58:boolean CheckTableExists(java.lang.String) -> a
     72:107:boolean CreateTable(java.lang.String) -> b
     void SetFamilyNameAndColumns() -> a
-com.ict.twitter.hbase.UserRelTwitterHbase -> com.ict.twitter.hbase.d:
+com.ict.twitter.hbase.UserRelTwitterHbase -> com.ict.twitter.hbase.c:
     22:35:void InsertIntoTable(com.ict.twitter.analyser.beans.UserRelationship[]) -> a
     37:37:java.lang.String GenerateCompositeKey(com.ict.twitter.analyser.beans.UserRelationship) -> a
     41:49:java.lang.String Exchange(java.lang.String,java.lang.String,com.ict.twitter.analyser.beans.UserRelationship) -> a
     55:57:void SetFamilyNameAndColumns() -> a
-com.ict.twitter.hbase.UserTwitterHbase -> com.ict.twitter.hbase.e:
+com.ict.twitter.hbase.UserTwitterHbase -> com.ict.twitter.hbase.d:
     35:50:boolean InsertIntoTable(com.ict.twitter.analyser.beans.UserProfile) -> a
     56:92:byte[] Exchange(com.ict.twitter.analyser.beans.UserProfile,java.lang.String,java.lang.String) -> a
     96:100:void SetFamilyNameAndColumns() -> a

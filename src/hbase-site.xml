@@ -22,21 +22,109 @@
  */
 -->
 <configuration>
-<property>
-	<name>hbase.rootdir</name>
-	<value>hdfs://192.168.120.64:9000/hbase</value>
-</property>
+
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>gold4,gold5,gold6</value>
+  </property>
+
+  <property>
+    <name>hbase.rootdir</name>
+    <value>hdfs://192.168.5.131:8020/hbase</value>
+  </property>
+
+  <property>
+    <name>dfs.support.append</name>
+    <value>true</value>
+  </property>
+
+
 
 <property>
-	<name>hbase.zookeeper.quorum</name>
-	<value>192.168.120.64</value>
+  <name>hbase.rpc.engine</name>
+  <value>org.apache.hadoop.hbase.ipc.SecureRpcEngine</value>
 </property>
-<property>
-<name>hbase.master</name>
-    <value>192.168.120.64:60000</value>
-</property>
-<property>
-	<name>hbase.cluster.distributed</name>
-	<value>true</value>
-</property>
+
+  <property>
+    <name>dfs.client.read.shortcircuit</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hbase.abort.disconected.batchmutate</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hbase.coprocessor.master.classes</name>
+    <value>org.apache.hadoop.hbase.search.LuceneMasterCoprocessor</value>
+  </property>
+  <property>
+    <name>hbase.coprocessor.region.classes</name>
+    <value>org.apache.hadoop.hbase.coprocessor.AggregateImplementation,org.apache.hadoop.hbase.coprocessor.GroupByImplementation,org.apache.hadoop.hbase.coprocessor.search.IndexSearcherEndpoint,org.apache.hadoop.hbase.blobstore.compactions.BlobStoreCompactionCoprocessor</value>
+  </property>
+  <property>
+    <name>hbase.hregion.majorcompaction.cron</name>
+    <value>0 0 1 * * ?</value>
+  </property>
+  <property>
+    <name>hbase.hregion.max.filesize</name>
+    <value>3758096384</value>
+  </property>
+  <property>
+    <name>hbase.hregion.memstore.flush.size</name>
+    <value>67108864</value>
+  </property>
+  <property>
+    <name>hbase.hregion.memstore.mslab.enabled</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>hbase.partition.ignore.unavailable.clusters</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hbase.regions.slop</name>
+    <value>0</value>
+  </property>
+  <property>
+    <name>hbase.regionserver.coprocessorhandler.count</name>
+    <value>100</value>
+  </property>
+  <property>
+    <name>hbase.regionserver.handler.count</name>
+    <value>100</value>
+  </property>
+  <property>
+    <name>hbase.regionserver.lease.period</name>
+    <value>600000</value>
+  </property>
+  <property>
+    <name>hbase.rpc.timeout</name>
+    <value>120000</value>
+  </property>
+  <property>
+    <name>hbase.use.partition.table</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.property.maxClientCnxns</name>
+    <value>2000</value>
+  </property>
+  <property>
+    <name>hfile.block.cache.size</name>
+    <value>0.1</value>
+  </property>
+  <property>
+    <name>hregion.index.path</name>
+    <value>hdfs:////regionsIndex</value>
+  </property>
+  <property>
+    <name>zookeeper.session.timeout</name>
+    <value>180000</value>
+  </property>
+
+
 </configuration>
