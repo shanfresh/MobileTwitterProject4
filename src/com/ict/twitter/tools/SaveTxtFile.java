@@ -1,6 +1,7 @@
 package com.ict.twitter.tools;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -20,10 +21,26 @@ public class SaveTxtFile implements Serializable{
 	BufferedWriter bw;
 	public SaveTxtFile(String fileName,boolean isAppend){
 		try {
+			CheckAndCreatePath(fileName);
 			bw=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName,isAppend),"utf8"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+		
+	}
+	private boolean CheckAndCreatePath(String filename){
+		
+		int FilePathEnd=filename.lastIndexOf('/');
+		String fileDir=filename.substring(0, FilePathEnd);
+		File f=new File(fileDir);
+		if(f.exists()){
+			return true;
+		}else{
+			f.mkdirs();
+			//创建文件夹啊啊啊
+			return true;
 		}
 		
 		

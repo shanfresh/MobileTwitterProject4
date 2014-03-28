@@ -106,6 +106,18 @@ public  class Task implements Serializable{
 		sb.append("</AddParameter>");
 		return sb.toString();		
 	}
+	public String TaskToFileName(){
+		StringBuffer sb=new StringBuffer();
+		sb.append(this.getTargetString());
+		sb.append("-");
+		sb.append(this.getOwnType());
+		sb.append("-");
+		sb.append(this.getTaskTrackID());
+		sb.append("-");
+		sb.append(this.getMainTypeID());
+		return sb.toString();		
+	}
+	
 	public void StringToTask(String src){
 		
 		
