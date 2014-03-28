@@ -28,6 +28,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.log4j.net.SyslogAppender;
 
 import com.ict.twitter.plantform.LogSys;
+import com.ict.twitter.task.beans.Task;
 import com.ict.twitter.tools.BasePath;
 import com.ict.twitter.tools.SaveTxtFile;
 
@@ -41,32 +42,35 @@ public class WebOperationAjax {
 	 */
 	
 	public static String logFile="TwitterOpenLog.html";
-	public static String base=BasePath.getBase();	
+	public static String base=BasePath.GetWebOpLogDir();	
 	public static boolean debug=true;
 	
 	//"/searches?page=1&q='"+targetString+"'";
-	public static String openLink(DefaultHttpClient httpclient,String linkAddress,int count) throws RuntimeException{
+	public static String openLink(DefaultHttpClient httpclient,Task task, String linkAddress,int count) throws RuntimeException{
 		if(count<=2){
 			LogSys.nodeLogger.debug("The Retry["+count+"] OpenLink with Address:"+linkAddress);
 			String res=openLink(httpclient,linkAddress);
 			if(debug){
-				SaveToTextFile(res);	
+				SaveToTextFile(res,task);	
 			}
 			if(res!=null&&res.length()>=1){
 				return res;
 			}else{
-				return openLink(httpclient,linkAddress,count+1);
+				return openLink(httpclient,task,linkAddress,count+1);
 			}
 		}else{
 			return null;
 		}
 	}
-	private static void SaveToTextFile(String Content){
+	private static void SaveToTextFile(String Content,Task currentTask){
 		Date date=new Date();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-		String filename=sdf.format(date);
-		SaveTxtFile sxf=new SaveTxtFile("Output/"+filename, false);
-		System.out.println("保存的文件名是："+filename);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
+		SimpleDateFormat sdfDate=new SimpleDateFormat("yyyy-MM-dd");
+		String dayStr=sdfDate.format(date);
+		String DateTimeStr=sdf.format(date);
+		String TaskStr=currentTask.TaskToFileName();
+		String FileSaveName=base+"/"+dayStr+"/"+DateTimeStr+"["+TaskStr+"]"+".txt";
+		SaveTxtFile sxf=new SaveTxtFile(FileSaveName, false);
 		sxf.Append(Content);
 		sxf.close();
 	}

@@ -51,8 +51,8 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		TwitterLoginManager lgtest=new TwitterLoginManager(httpclient);
 		lgtest.doLogin();
 		AjaxTimeLineCrawl at=new AjaxTimeLineCrawl(httpclient,null);
-		MessageTwitterHbase msghbase=new MessageTwitterHbase("message");
-		at.SetHabae(msghbase, true);
+		//MessageTwitterHbase msghbase=new MessageTwitterHbase("message");
+		//at.SetHabae(msghbase, false);
 		
 		Vector<TwiUser> users=new Vector<TwiUser>();
 		MulityInsertDataBase dbo=new MulityInsertDataBase();
@@ -81,7 +81,7 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 		
 		boolean flag=true;
 		AnalyserCursor result;
-		int count=1;
+		int count=0;
 		int targetPageCount=task.getPageCount();
 		do{
 			int retryCount=0;
@@ -138,12 +138,13 @@ public class AjaxTimeLineCrawl extends AjaxCrawl{
 				flag=false;
 				break;
 			}
-			count++;
+			count++;//正确执行完毕了Count++;
 			reportData.message_increment+=result.size;
 			if(targetPageCount!=-1&&count>targetPageCount){
 				System.out.println("受限深度的采集，跳出"+targetPageCount+"/"+count);
 				break;
 			}
+			
 			
 		}while(has_more_items);
 		System.out.println("共分析了"+count+"次 (20twi)");
