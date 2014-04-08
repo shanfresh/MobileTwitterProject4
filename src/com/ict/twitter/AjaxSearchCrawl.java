@@ -49,7 +49,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		AjaxSearchCrawl test=new AjaxSearchCrawl(httpclient,null);
 		MulityInsertDataBase dbo = new MulityInsertDataBase();
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
-		Task task=new Task(TaskType.Search,"¹×²ÄµÛ");
+		Task task=new Task(TaskType.Search,"ÎÂÔÆ³¬");
 		ReportData reportData=new ReportData();
 		//MessageTwitterHbase msghbase=new MessageTwitterHbase("message");
 		//test.SetHabae(msghbase, true);
@@ -65,7 +65,7 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 	public boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData){
 		String keyWords=task.getTargetString();
 		boolean has_next=false;
-		String next_max_id="TWEET-439958720299032576-445494797835333632";
+		String next_max_id="";
 		AjaxSearchAnalyser ana=new AjaxSearchAnalyser(dbo,task);
 		if(this.Hbase_Enable){
 			ana.SetHabae(hbase,true);
