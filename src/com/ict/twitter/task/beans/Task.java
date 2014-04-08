@@ -35,13 +35,14 @@ public  class Task implements Serializable{
 	public String addParameter;
 
 	public Task(TaskType ownType, String targetString) {
-		super();
+		this();
 		this.ownType = ownType;
 		this.mainType=MainType.Normal;
 		this.targetString = targetString;
 	}
 	public Task(){
 		super();
+		this.pageCount=-1;
 	}
 
 	public String getURL(){
