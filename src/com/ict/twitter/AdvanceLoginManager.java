@@ -278,7 +278,7 @@ public class AdvanceLoginManager {
 		java.sql.Connection con=dbo.GetConnection();
 		java.sql.Statement sta;
 		try {
-			PreparedStatement pst=con.prepareStatement("update set status='frozen',health=false,where username=?");
+			PreparedStatement pst=con.prepareStatement("update set status='frozen',health=false where username=?");
 			pst.setString(1, username);
 			pst.executeUpdate();
 			pst.close();

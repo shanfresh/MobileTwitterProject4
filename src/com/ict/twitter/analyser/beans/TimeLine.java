@@ -23,7 +23,8 @@ public class TimeLine {
 	public String origin_user_name=null;
 	
 	public int reTWcount;
-	public int replyCount;	
+	public int replyCount;
+	public int favoriteCount;
 	public Date strictTime;
 	
 	public int TaskTrackID;
@@ -165,6 +166,12 @@ public class TimeLine {
 	}
 	public void setOrigin_tweet_id(String origin_tweet_id) {
 		this.origin_tweet_id = origin_tweet_id;
+	}
+	public int getFavoriteCount() {
+		return favoriteCount;
+	}
+	public void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
 	}
 
 

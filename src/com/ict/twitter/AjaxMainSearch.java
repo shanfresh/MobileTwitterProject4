@@ -2,6 +2,8 @@ package com.ict.twitter;
 
 import java.util.Vector;
 
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
 
@@ -37,6 +39,7 @@ public class AjaxMainSearch extends AjaxMainSearchFrameWork {
 		}else{
 			httpclient= cm.getClientNoProxy();
 		}
+		httpclient.getParams().setParameter(ClientPNames.COOKIE_POLICY, CookiePolicy.BROWSER_COMPATIBILITY);
 		httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);
 		httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000); 
 		this.httpclient=httpclient;

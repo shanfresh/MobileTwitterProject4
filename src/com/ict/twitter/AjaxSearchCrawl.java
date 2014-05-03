@@ -74,14 +74,14 @@ public class AjaxSearchCrawl extends AjaxCrawl{
 		int count=0;
 		String lastCursor="";
 		do{
-			
+			WebOperationResult webres=WebOperationResult.Success;
 			int re_trycount=0;
 			if(next_max_id==null||next_max_id.equals("")){
 				URL=String.format(baseURL,keyWords,"");
 			}else{
 				URL=String.format(baseURL+max_id_str,keyWords,next_max_id);
 			}
-			String content=super.openLink(httpclient, URL,task,re_trycount);
+			String content=super.openLink(httpclient, URL,task,re_trycount,webres);
 			
 			Map map=null;
 			if(content==null){

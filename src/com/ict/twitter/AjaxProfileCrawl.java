@@ -44,12 +44,13 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 			Vector<TwiUser> RelatUsers,ReportData reportData) {
 		String UserID=task.getTargetString();
 		UserProfile profile = new UserProfile();
+		WebOperationResult webres= WebOperationResult.Success;
 		AjaxProfileAnalyser profileana = new AjaxProfileAnalyser(dbo,task);
 		AjaxProfileAnalyserExtend profileanaext=new AjaxProfileAnalyserExtend();
 		
 		String CurrentTime=Long.toString(System.currentTimeMillis());
 		String URL=String.format(TEMP_URL, UserID,CurrentTime);
-		String ajaxContent=super.openLink(httpclient, URL,task,0);
+		String ajaxContent=super.openLink(httpclient, URL,task,0,webres);
 		if(task.getTargetTableName().equalsIgnoreCase("null")){
 			task.setTargetTableName("user_profile");
 		}
@@ -154,7 +155,7 @@ public class AjaxProfileCrawl extends AjaxCrawl {
 		Vector<TwiUser> users=new Vector<TwiUser>(20);
 		
 		AjaxProfileCrawl profilecrawl = new AjaxProfileCrawl(httpclient,null);
-		Task task=new Task(TaskType.About,"usherxupeng");
+		Task task=new Task(TaskType.About,"idratherbeshort");
 		task.setTargetTableName("user_profile");
 		//UserTwitterHbase userhbase=new UserTwitterHbase("user");
 		//profilecrawl.SetHabae(userhbase, true);

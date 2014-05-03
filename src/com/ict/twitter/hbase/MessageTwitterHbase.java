@@ -110,7 +110,7 @@ public class MessageTwitterHbase extends TwitterHbase{
 		SimpleDateFormat sdf=new SimpleDateFormat("YYYYMMddHHmmss");
 		String date=sdf.format(new Date());
 		Long longId=Long.parseLong(id);
-		String t=String.format("%14s-%018d-www.twitter.com00000000000",date,longId);
+		String t=String.format("%14s-%018d-00000000000www.twitter.com",date,longId);
 		return t;
 	}
 	public static void main(String[] args){

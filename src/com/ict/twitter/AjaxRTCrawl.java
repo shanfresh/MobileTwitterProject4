@@ -23,6 +23,7 @@ public class AjaxRTCrawl extends AjaxCrawl {
 	String messageid;
 	String baseUrl="";
 	private DefaultHttpClient httpclient;
+	
 	public AjaxRTCrawl(DefaultHttpClient httpclient,DbOperation dboperation){
 		super.dboperation=dboperation;
 		baseUrl="/i/expanded/batch/$?facepile_max=50&include%5B%5D=social_proof&include%5B%5D=ancestors&include%5B%5D=descendants&page_context=profile&section_context=profile";
@@ -44,7 +45,8 @@ public class AjaxRTCrawl extends AjaxCrawl {
 		}
 		
 		int count=0;
-		String content=openLink(httpclient, URL,task,count);
+		WebOperationResult webres=WebOperationResult.Success;
+		String content=openLink(httpclient, URL,task,count,webres);
 		if(content==null||(content.length())<=20){
 			System.out.println("网页返回为空 采集结束");
 			super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, dbo);

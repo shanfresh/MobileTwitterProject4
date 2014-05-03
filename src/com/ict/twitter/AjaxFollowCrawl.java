@@ -60,6 +60,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 		String nextCursor="";
 		int count=0;
 		do{
+			WebOperationResult webres=WebOperationResult.Success;
 			count++;
 			int retryCount=0;
 			hasMoreItems=false;
@@ -68,7 +69,7 @@ public class AjaxFollowCrawl extends AjaxCrawl{
 			}else{
 				URL=String.format(baseUrl, userID,cursor+nextCursor);
 			}
-			String content=openLink(httpclient, URL,task,retryCount);
+			String content=openLink(httpclient, URL,task,retryCount,webres);
 			if(content==null||(content.length())<=20){
 				System.out.println("网页返回为空 采集结束");
 				super.SaveWebOpStatus(task, URL, count, WebOperationResult.Fail, batchdb);

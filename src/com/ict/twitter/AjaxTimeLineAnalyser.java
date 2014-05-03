@@ -68,7 +68,7 @@ public class AjaxTimeLineAnalyser extends AjaxAnalyser{
 		Vector<MessageDetail> msgdetailvector=new Vector<MessageDetail>();
 		for(Element t:twitterMessages){
 			try{
-				Element content=t.getElementsByAttributeValue("class", "js-tweet-text tweet-text").first();
+				Element content=t.getElementsByAttributeValueStarting("class", "js-tweet-text tweet-text").first();
 				Element time=t.getElementsByAttributeValueStarting("class", "_timestamp js-short-timestamp").first();
 				String timeStr=time.attr("data-time");
 				timeStr=timeTrans.Convert(timeStr);

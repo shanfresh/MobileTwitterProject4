@@ -40,7 +40,7 @@ public abstract class AjaxCrawl {
 	
 	public abstract boolean doCrawl(Task task,MulityInsertDataBase dbo,Vector<TwiUser> RelateUsers,ReportData reportData);
 	
-	public String openLink(final DefaultHttpClient httpclient,final String targetUrl,final Task task,final int count) {
+	public String openLink(final DefaultHttpClient httpclient,final String targetUrl,final Task task,final int count,WebOperationResult webres) {
 		String WebPageContent = null;
 		Future<String> future = service.submit(new Callable<String>() {
 			public String call() throws Exception {
@@ -57,11 +57,12 @@ public abstract class AjaxCrawl {
 			WebPageContent = (String) future.get(20000, TimeUnit.MILLISECONDS);			
 		}catch(TimeoutException ex){
 			LogSys.nodeLogger.error("OpenURL TimeOut(20s):" + targetUrl);
-		}
-		catch (Exception e) {
+			webres=WebOperationResult.TimeOut;
+		}catch (Exception e) {
 			e.printStackTrace();
 			LogSys.nodeLogger.error(e.getMessage());
 			LogSys.nodeLogger.error("OpenURL Error URL:" + targetUrl);
+			webres=WebOperationResult.Fail;
 			WebPageContent = null;
 		}
 		if(WebPageContent == null){
